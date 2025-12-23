@@ -35,15 +35,15 @@ export default function Home() {
 
         <div className="relative max-w-5xl mx-auto text-center">
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-gray-900 leading-[1.1] tracking-tight">
-            Stop Chasing Leads.
+            Probate Isn&apos;t About Being Early.
             <br />
             <span className="bg-gradient-to-r from-[#5EEADC] to-[#A855F7] bg-clip-text text-transparent">
-              Start Closing Deals.
+              It&apos;s About Being On Time.
             </span>
           </h1>
 
           <p className="mt-8 text-xl sm:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            The AI-powered probate lead system that delivers consistent off-market deals to your dashboard—so you can focus on what matters: making offers and closing.
+            Other vendors sell you static lists. Homeflip.ai tracks the probate timeline—so you call when it actually matters.
           </p>
 
           {/* Inline Email Capture */}
@@ -97,18 +97,18 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-black text-gray-900">
-              The Old Way vs. The Homeflip Way
+              Static Lists vs. Timeline Intelligence
             </h2>
             <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
-              See why investors are switching to AI-powered probate leads.
+              Probate has stages: filing, inventory, delays, listings, resolution. Most vendors give you a snapshot. We track the whole timeline.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8">
-            {/* Before - The Old Way */}
+            {/* Before - Static Lists */}
             <div className="bg-gray-100 p-8 md:p-10 rounded-3xl border-2 border-gray-200 relative">
               <div className="absolute -top-4 left-8 bg-gray-900 text-white px-4 py-1 rounded-full text-sm font-bold">
-                THE OLD WAY
+                STATIC LISTS
               </div>
               <div className="space-y-6 mt-4">
                 <div className="flex items-start gap-4">
@@ -116,8 +116,8 @@ export default function Home() {
                     <span className="text-red-500 font-bold">✗</span>
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900">Hours at the courthouse</h4>
-                    <p className="text-gray-600">Manually pulling records, photocopying files, entering data into spreadsheets</p>
+                    <h4 className="font-bold text-gray-900">Filing date only</h4>
+                    <p className="text-gray-600">You get a date and a name. No context for where the case actually stands.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -125,8 +125,8 @@ export default function Home() {
                     <span className="text-red-500 font-bold">✗</span>
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900">Stale, shared lists</h4>
-                    <p className="text-gray-600">Buying leads that 10 other investors already received weeks ago</p>
+                    <h4 className="font-bold text-gray-900">Already cold</h4>
+                    <p className="text-gray-600">Lists are weeks or months old. You&apos;re calling cases too early—or too late.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -134,8 +134,8 @@ export default function Home() {
                     <span className="text-red-500 font-bold">✗</span>
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900">No prioritization</h4>
-                    <p className="text-gray-600">Guessing which leads are worth your time, missing the best opportunities</p>
+                    <h4 className="font-bold text-gray-900">No lifecycle tracking</h4>
+                    <p className="text-gray-600">Inventory filed? Property listed? Case delayed? You&apos;ll never know.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -143,8 +143,8 @@ export default function Home() {
                     <span className="text-red-500 font-bold">✗</span>
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900">Scattered tools</h4>
-                    <p className="text-gray-600">Juggling spreadsheets, CRMs, skip tracing services, and property data sites</p>
+                    <h4 className="font-bold text-gray-900">Shared with everyone</h4>
+                    <p className="text-gray-600">Same CSV sold to 10+ investors. You&apos;re competing before you even dial.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -152,17 +152,17 @@ export default function Home() {
                     <span className="text-red-500 font-bold">✗</span>
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900">Feast or famine</h4>
-                    <p className="text-gray-600">Inconsistent deal flow—great months followed by nothing</p>
+                    <h4 className="font-bold text-gray-900">No guidance</h4>
+                    <p className="text-gray-600">Which cases should you call today? Vendors don&apos;t answer that.</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* After - The Homeflip Way */}
+            {/* After - Timeline Intelligence */}
             <div className="bg-gradient-to-br from-[#5EEADC]/10 to-[#A855F7]/10 p-8 md:p-10 rounded-3xl border-2 border-[#5EEADC]/30 relative">
               <div className="absolute -top-4 left-8 bg-gradient-to-r from-[#5EEADC] to-[#A855F7] text-gray-900 px-4 py-1 rounded-full text-sm font-bold">
-                THE HOMEFLIP WAY
+                TIMELINE INTELLIGENCE
               </div>
               <div className="space-y-6 mt-4">
                 <div className="flex items-start gap-4">
@@ -170,8 +170,8 @@ export default function Home() {
                     <span className="text-[#2DD4BF] font-bold">✓</span>
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900">Fresh leads daily</h4>
-                    <p className="text-gray-600">AI scrapes court records and delivers new probate leads to your dashboard automatically</p>
+                    <h4 className="font-bold text-gray-900">Full case lifecycle</h4>
+                    <p className="text-gray-600">Track every stage: filing, inventory, delays, property listings, resolution.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -179,8 +179,8 @@ export default function Home() {
                     <span className="text-[#2DD4BF] font-bold">✓</span>
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900">Exclusive access</h4>
-                    <p className="text-gray-600">Direct from public records—no middleman, no sharing with competitors</p>
+                    <h4 className="font-bold text-gray-900">Status change alerts</h4>
+                    <p className="text-gray-600">Know when a case moves closer to sale—not weeks after it happened.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -188,8 +188,8 @@ export default function Home() {
                     <span className="text-[#2DD4BF] font-bold">✓</span>
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900">Smart scoring</h4>
-                    <p className="text-gray-600">AI prioritizes leads by property value, equity, and motivation signals</p>
+                    <h4 className="font-bold text-gray-900">Timing-based priority</h4>
+                    <p className="text-gray-600">We surface cases that are ready now, not just cases that exist.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -197,8 +197,8 @@ export default function Home() {
                     <span className="text-[#2DD4BF] font-bold">✓</span>
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900">All-in-one system</h4>
-                    <p className="text-gray-600">Leads, property data, contacts, workflows, and follow-ups in one place</p>
+                    <h4 className="font-bold text-gray-900">Court-synced updates</h4>
+                    <p className="text-gray-600">Continuous monitoring, not monthly dumps. Data stays fresh.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -206,8 +206,8 @@ export default function Home() {
                     <span className="text-[#2DD4BF] font-bold">✓</span>
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900">Predictable pipeline</h4>
-                    <p className="text-gray-600">Consistent lead flow month after month—build a real business</p>
+                    <h4 className="font-bold text-gray-900">Actionable answers</h4>
+                    <p className="text-gray-600">Who should you call today? We tell you—based on timing, not just volume.</p>
                   </div>
                 </div>
               </div>
@@ -264,7 +264,7 @@ export default function Home() {
 
           <div className="mt-16 text-center">
             <p className="text-2xl text-gray-300 font-medium">
-              Probate is the fuel. <span className="text-[#5EEADC] font-bold">Homeflip.ai is the vehicle.</span>
+              Probate leads are not records—<span className="text-[#5EEADC] font-bold">they&apos;re evolving situations.</span>
             </p>
           </div>
         </div>
