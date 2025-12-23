@@ -1,6 +1,6 @@
-# homeflip-web - Marketing Website for homeflip.ai
+# homeflip-web-site - Marketing Website for homeflip.ai
 
-**Status:** 💡 **IDEAS**
+**Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
 **Last Updated:** 2025-12-22
 **Claude Code Version:** Opus 4.5
@@ -18,74 +18,108 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 💡 IDEAS - Initial project setup, planning website structure and content
+**Current Status:** 🚧 IN PROGRESS - Landing page deployed, iterating on content and design
 
 ---
 
 ## 👋 Welcome Back!
 
-You're working on **homeflip-web** - the marketing website for homeflip.ai, a probate real estate lead intelligence platform.
+You're working on **homeflip-web-site** - the marketing website for homeflip.ai, a probate real estate lead intelligence platform.
+
+**Live URL:** https://homeflip-web.vercel.app
+**GitHub Repo:** https://github.com/wbxprops/homeflip-web
 
 ---
 
 ## 🎯 What I Need to Know
 
 ### Current Focus
-**Active Work:** Initial planning and setup
+**Active Work:** Landing page content and design refinement
 
 **Next Session Goals:**
-- [ ] Define site structure and key pages
-- [ ] Plan content strategy and messaging
-- [ ] Design hero section and value proposition
-- [ ] Set up page templates in Elementor
-- [ ] Create landing page for lead capture
+- [ ] Add remaining pages (How It Works, Pricing, About, FAQ, Contact)
+- [ ] Connect custom domain (homeflip.ai via GoDaddy)
+- [ ] Add waitlist form with Supabase backend
+- [ ] Refine visual design and animations
+- [ ] Add navigation component
 
 ### Recent Accomplishments
 - ✅ Project created (2025-12-22)
+- ✅ Next.js + TypeScript + TailwindCSS setup
+- ✅ Connected to GitHub (wbxprops/homeflip-web)
+- ✅ Deployed to Vercel with auto-deploy
+- ✅ Brand colors from Aura Design System applied
+- ✅ Long-form educational content about probate investing
 
 ---
 
 ## 📚 Essential Documentation
 
-### Platform Details
-- **Hosting:** WPMU DEV (WordPress managed hosting)
-- **Builder:** Elementor
-- **Domain:** homeflip.ai (assumed)
+### Key Files
+- **docs/guide-website-overview.md** - Source of truth for content strategy, tone/voice, page structure
+- **src/app/page.tsx** - Main landing page (all content)
+- **src/app/globals.css** - Brand colors and utility classes
+- **src/app/layout.tsx** - SEO metadata and layout
 
-### Quick Links by Task
+### Brand Colors (from Aura Design System)
+```css
+--primary: #5EEADC;      /* Teal */
+--primary-dark: #2DD4BF;
+--secondary: #A855F7;    /* Purple */
+--secondary-dark: #7C3AED;
+```
 
-**Working on page design?**
-- Reference: homeflip-crm for branding/colors
-- See homeflip-funnel for sales strategy ideas
+### Gradient CTAs
+```css
+background: linear-gradient(to right, #5EEADC, #A855F7);
+```
 
 ---
 
 ## 🏗️ Project Architecture Quick Reference
 
 ### Tech Stack
-- **Platform:** WordPress
-- **Hosting:** WPMU DEV
-- **Page Builder:** Elementor
-- **Forms:** (TBD - Elementor Forms, WPForms, etc.)
-- **Analytics:** (TBD - Google Analytics, etc.)
+- **Framework:** Next.js 16 (App Router) + TypeScript
+- **Styling:** TailwindCSS
+- **Hosting:** Vercel (free tier, auto-deploy from GitHub)
+- **Database:** Supabase (for waitlist form, shared with homeflip-crm)
+- **Font:** Inter (Google Fonts)
+- **Version Control:** GitHub
 
 ### Key Patterns
-- Use Elementor templates for consistency
+- Light theme for marketing (dark glassmorphic theme for CRM)
+- Gradient buttons (teal → purple) for primary CTAs
 - Mobile-first responsive design
-- Lead capture integrated with CRM pipeline
+- Long-form educational content with icons and bullet points
+
+### Deployment
+- Push to `main` branch auto-deploys to Vercel
+- No build command needed - Vercel auto-detects Next.js
 
 ---
 
 ## ⚠️ Critical Things to Remember
 
+### Architecture Decision (2025-12-22)
+**PIVOTED from WordPress/Elementor to Next.js/Vercel** because:
+- Claude Code can write the code directly - no CMS needed
+- Better developer experience and version control
+- Easier integration with Supabase for forms
+- Free hosting on Vercel
+- Future vision: Multi-tenant user website system
+
 ### DO NOT:
-- ❌ Forget mobile responsiveness
-- ❌ Ignore page load speed (optimize images)
+- ❌ Use dark theme (that's for CRM)
+- ❌ Be hypey or "guru" vibe
+- ❌ Get too technical about probate law
+- ❌ Make it "black + neon SaaS" cliché
 
 ### ALWAYS:
+- ✅ Keep messaging consistent with guide-website-overview.md
+- ✅ Tone: Clear, confident, outcome-driven, practical
+- ✅ Include clear CTAs on every section
 - ✅ Test on mobile devices
-- ✅ Include clear CTAs on every page
-- ✅ Keep messaging consistent with product
+- ✅ Use brand gradient for primary buttons
 
 ---
 
@@ -95,7 +129,20 @@ You're working on **homeflip-web** - the marketing website for homeflip.ai, a pr
 
 Just say:
 ```
-"Read homeflip-web/CLAUDE_CONTEXT.md and let's work on [what you want to do]"
+"Read homeflip-web-site/CLAUDE_CONTEXT.md and let's work on [what you want to do]"
+```
+
+### Common Commands
+```bash
+# Development
+npm run dev          # Start dev server at localhost:3000
+
+# Build/Deploy
+git add . && git commit -m "message" && git push
+# Vercel auto-deploys on push to main
+
+# Type check
+npx tsc --noEmit
 ```
 
 ---
@@ -103,10 +150,19 @@ Just say:
 ## 📂 Project Structure
 
 ```
-homeflip-web/
-├── CLAUDE_CONTEXT.md    ⭐ THIS FILE
-├── docs/                📚 Documentation (content, wireframes, etc.)
-└── assets/              🎨 Design assets, images
+homeflip-web-site/
+├── CLAUDE_CONTEXT.md     ⭐ THIS FILE
+├── docs/
+│   └── guide-website-overview.md   📚 Content strategy & requirements
+├── src/
+│   └── app/
+│       ├── page.tsx      🏠 Main landing page
+│       ├── layout.tsx    📐 Root layout + SEO
+│       └── globals.css   🎨 Brand colors + utilities
+├── public/               🖼️ Static assets
+├── package.json
+├── tailwind.config.ts
+└── tsconfig.json
 ```
 
 ---
@@ -114,7 +170,8 @@ homeflip-web/
 ## 🔗 Related Projects
 
 **homeflip-crm:** `../homeflip-crm/`
-- Main CRM application - source for branding, features to highlight
+- Main CRM application - source for branding (Aura Design System)
+- Dark glassmorphic theme (vs light for marketing site)
 
 **homeflip-funnel:** `../homeflip-funnel/`
 - Sales funnel strategy - may integrate with website
@@ -126,32 +183,28 @@ homeflip-web/
 
 ## 📊 Current Status
 
-**Build Status:** Not applicable (WordPress/Elementor)
-**Deployment:** Development (WPMU DEV)
+**Build Status:** Passing (Vercel)
+**Deployment:** Production (https://homeflip-web.vercel.app)
 
-**Ready to Start:** Site structure planning
+**Ready to Work On:** Additional pages, custom domain, form integration
 **Blocked By:** Nothing
 
 ---
 
-## 💡 Initial Ideas
+## 📝 Content Sections (Currently on page.tsx)
 
-### Potential Pages
-- **Home** - Hero, value prop, features overview, testimonials, CTA
-- **Features** - Detailed feature breakdown
-- **Pricing** - Subscription tiers
-- **About** - Company story, team
-- **Blog** - SEO content, industry insights
-- **Contact** - Lead capture form
-- **Demo/Trial** - Sign-up flow
-
-### Key Messaging Points
-- Probate lead intelligence
-- AI-powered property matching
-- Automated court scraping
-- Real-time notifications
-- Property valuation insights
+1. **Hero** - Value prop + dual CTAs
+2. **Why Most Investors Struggle** - 4 traditional lead sources compared
+3. **Why Probate Is Different** - 4 advantages with icons
+4. **Common Objections** - 4 rebuttals (dark section)
+5. **Types of Properties** - Grid of property types
+6. **Product Value** - 3 core features
+7. **How It Works** - 3-step flow
+8. **Features Grid** - 6 feature cards
+9. **FAQ** - 4 questions with accordions
+10. **Final CTA** - Waitlist signup
+11. **Footer** - Links and copyright
 
 ---
 
-**Remember:** Just start with "Read homeflip-web/CLAUDE_CONTEXT.md" and I'll take it from there!
+**Remember:** Just start with "Read homeflip-web-site/CLAUDE_CONTEXT.md" and I'll take it from there!
