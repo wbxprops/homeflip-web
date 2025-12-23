@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 export const FinalCTA = () => {
@@ -14,7 +16,13 @@ export const FinalCTA = () => {
           Join 500+ investors who are getting early access to Homeflip.ai. Be among the first to transform your business with AI-powered probate lead intelligence.
         </p>
 
-        <form className="mt-12 max-w-xl mx-auto" onSubmit={(e) => e.preventDefault()}>
+        <form 
+          className="mt-12 max-w-xl mx-auto" 
+          onSubmit={(e: React.FormEvent) => {
+            e.preventDefault();
+            window.location.href = '/waitlist';
+          }}
+        >
           <div className="flex flex-col sm:flex-row gap-3 p-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
             <input
               type="email"
