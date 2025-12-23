@@ -30,11 +30,13 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-6xl sm:text-8xl lg:text-9xl font-[800] font-['futura-pt-condensed'] text-white leading-[0.9] tracking-tight mb-10 uppercase italic"
+            className="font-hero text-[14vw] sm:text-[10rem] lg:text-[13rem] font-[800] text-white leading-[0.8] tracking-[-0.05em] mb-12 uppercase italic"
           >
-            Probate Isn&apos;t About <br className="hidden md:block" /> 
-            <span className="text-white/30">Being Early.</span> <br /> 
-            It&apos;s About <br className="hidden md:block" />
+            Probate <br />
+            Isn&apos;t <br />
+            About <br />
+            <span className="text-white/20">Being Early.</span> <br /> 
+            It&apos;s About <br />
             <span className="bg-gradient-to-r from-[#22d3ee] via-[#2DD4BF] to-[#a855f7] bg-clip-text text-transparent">
               Being On Time.
             </span>
