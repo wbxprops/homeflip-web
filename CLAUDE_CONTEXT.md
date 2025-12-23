@@ -2,7 +2,7 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2025-12-22
+**Last Updated:** 2025-12-22 (Evening)
 **Claude Code Version:** Opus 4.5
 
 ---
@@ -49,7 +49,9 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 - ✅ Connected to GitHub (wbxprops/homeflip-web)
 - ✅ Deployed to Vercel with auto-deploy
 - ✅ Brand colors from Aura Design System applied
-- ✅ Long-form educational content about probate investing
+- ✅ King Kong-inspired redesign (stats bar, inline email, comparison)
+- ✅ Competitor-driven positioning: "Timeline Intelligence vs Static Lists"
+- ✅ New hero: "Probate Isn't About Being Early. It's About Being On Time."
 
 ---
 
