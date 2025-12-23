@@ -30,7 +30,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-5xl sm:text-7xl lg:text-8xl font-black text-white leading-[1.05] tracking-tight mb-8"
+            className="text-5xl sm:text-7xl lg:text-8xl font-black text-white leading-[1.05] tracking-tight mb-8 font-[futura-pt-condensed] uppercase"
           >
             Probate Isn&apos;t About <br className="hidden md:block" /> 
             <span className="text-white/40">Being Early.</span> It&apos;s About <br className="hidden md:block" />

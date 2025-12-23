@@ -13,7 +13,7 @@ import { StatsBar } from "@/components/StatsBar";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white selection:bg-[#5EEADC]/30">
+    <div className="min-h-screen bg-[#0a0118] selection:bg-[#22d3ee]/30">
       <Navbar />
       <main>
         <Hero />
