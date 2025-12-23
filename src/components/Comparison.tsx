@@ -108,8 +108,8 @@ export const Comparison = () => {
                 isDark
               />
               <ComparisonItem
-                title="Verified Lead Scoring"
-                description="Our AI ranks leads by motivation and equity so you only talk to the best deals."
+                title="Timeline Intelligence"
+                description="Know exactly where each case is in the probate process so you reach out at the right moment."
                 isDark
               />
             </div>

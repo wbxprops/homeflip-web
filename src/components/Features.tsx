@@ -12,10 +12,10 @@ export const Features = () => {
       title: "Automated discovery", 
       desc: "Fresh probate leads delivered daily. No courthouse visits, no manual entry." 
     },
-    { 
-      icon: <Zap className="w-6 h-6" />, 
-      title: "AI Lead Scoring", 
-      desc: "Our models rank leads by motivation, equity, and timing so you work the best deals." 
+    {
+      icon: <Zap className="w-6 h-6" />,
+      title: "Timeline Intelligence",
+      desc: "Know exactly where each case is in the probate process so you reach out at the right moment."
     },
     { 
       icon: <Home className="w-6 h-6" />, 
@@ -50,7 +50,7 @@ export const Features = () => {
         >
           THE TOOLKIT
         </motion.div>
-        <h2 className="text-4xl sm:text-6xl font-black text-white mb-6 tracking-tight">
+        <h2 className="text-5xl sm:text-7xl lg:text-8xl font-black text-white mb-6 tracking-tight">
           Everything You Need <br />
           <span className="text-white/40">to Close More Deals.</span>
         </h2>

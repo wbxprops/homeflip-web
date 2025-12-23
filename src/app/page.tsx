@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
-import { SocialProof } from "@/components/SocialProof";
+// import { SocialProof } from "@/components/SocialProof";
 import { Problem } from "@/components/Problem";
 import { Comparison } from "@/components/Comparison";
 import { WhyProbate } from "@/components/WhyProbate";
@@ -10,6 +10,7 @@ import { Features } from "@/components/Features";
 import { Objections } from "@/components/Objections";
 import { FinalCTA } from "@/components/FinalCTA";
 import { StatsBar } from "@/components/StatsBar";
+import { CTABlock } from "@/components/CTABlock";
 
 export default function Home() {
   return (
@@ -17,12 +18,14 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <SocialProof />
+        {/* <SocialProof /> */}
         <Problem />
         <StatsBar />
         <Comparison />
+        <CTABlock headline="Stop chasing cold leads." />
         <WhyProbate />
         <HowItWorks />
+        <CTABlock headline="Get started in minutes." />
         <Features />
         <Objections />
         <FinalCTA />

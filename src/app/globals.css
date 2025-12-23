@@ -37,7 +37,7 @@
   /* Adobe Fonts Implementation */
   --font-sans: "proxima-nova", var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: "neue-haas-grotesk-display", sans-serif;
-  --font-hero: "futura-pt-condensed", sans-serif;
+  --font-hero: "futura-pt", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {

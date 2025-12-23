@@ -45,7 +45,7 @@ export default function PricingPage() {
         "Custom API Access",
         "Team Collaboration Tools",
         "Dedicated Account Manager",
-        "Custom Lead Scoring",
+        "Advanced Analytics",
         "White-Glove Onboarding"
       ],
       cta: "Contact Sales",

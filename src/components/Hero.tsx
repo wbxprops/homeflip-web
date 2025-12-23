@@ -16,39 +16,22 @@ export const Hero = () => {
 
       <div className="relative max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm font-medium mb-8"
-          >
-            <span className="flex h-2 w-2 rounded-full bg-[#22d3ee] animate-pulse" />
-            Join 500+ investors in the private beta
-          </motion.div>
-
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-hero text-[14vw] sm:text-[10rem] lg:text-[13rem] font-[800] text-white leading-[0.8] tracking-[-0.05em] mb-12 uppercase italic"
+            className="font-hero text-[11vw] sm:text-[8rem] lg:text-[10rem] font-[800] text-white leading-[0.85] tracking-[-0.03em] mb-12 uppercase"
           >
-            Probate <br />
-            Isn&apos;t <br />
-            About <br />
-            <span className="text-white/20">Being Early.</span> <br /> 
-            It&apos;s About <br />
-            <span className="bg-gradient-to-r from-[#22d3ee] via-[#2DD4BF] to-[#a855f7] bg-clip-text text-transparent">
-              Being On Time.
-            </span>
+            The AI Probate Platform for Investors.
           </motion.h1>
 
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-xl sm:text-2xl text-white/60 max-w-3xl mx-auto leading-relaxed mb-12 font-medium"
+            className="text-2xl sm:text-3xl lg:text-4xl text-white/60 max-w-4xl mx-auto leading-snug mb-12 font-normal"
           >
-            Stop fighting over cold leads. Homeflip.ai uses <strong>Timeline Intelligence</strong> to track the probate lifecycle—so you reach heirs exactly when they&apos;re ready to sell.
+            Probate leads are hiding in plain sight. Homeflip.ai puts them in front of you daily.
           </motion.p>
 
           <motion.div 
@@ -67,7 +50,7 @@ export const Hero = () => {
                 <span className="text-[#22d3ee]">✓</span> Daily Updates
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[#22d3ee]">✓</span> AI Lead Scoring
+                <span className="text-[#22d3ee]">✓</span> Timeline Tracking
               </div>
             </div>
           </motion.div>
