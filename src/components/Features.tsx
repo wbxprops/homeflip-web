@@ -40,19 +40,19 @@ export const Features = () => {
   ];
 
   return (
-    <Section id="features" className="bg-gray-50/50">
+    <Section id="features" className="bg-[#0a0118]">
       <div className="text-center mb-20">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="inline-block px-4 py-1 rounded-full bg-gray-100 text-gray-400 text-sm font-bold mb-6 tracking-widest uppercase"
+          className="inline-block px-4 py-1 rounded-full bg-white/5 text-white/40 text-sm font-bold mb-6 tracking-widest uppercase border border-white/10"
         >
           THE TOOLKIT
         </motion.div>
-        <h2 className="text-4xl sm:text-6xl font-black text-gray-900 mb-6 tracking-tight">
+        <h2 className="text-4xl sm:text-6xl font-black text-white mb-6 tracking-tight">
           Everything You Need <br />
-          <span className="text-gray-400">to Close More Deals.</span>
+          <span className="text-white/40">to Close More Deals.</span>
         </h2>
       </div>
 
@@ -64,13 +64,13 @@ export const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="group bg-white p-8 rounded-[2rem] border border-gray-100 hover:border-[#5EEADC]/30 hover:shadow-2xl hover:shadow-[#5EEADC]/5 transition-all duration-500"
+            className="group bg-white/[0.03] p-8 rounded-[2.5rem] border border-white/5 hover:bg-white/[0.05] hover:border-[#22d3ee]/30 transition-all duration-500"
           >
-            <div className="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center text-[#5EEADC] mb-8 group-hover:bg-[#5EEADC] group-hover:text-white transition-all duration-300">
+            <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-[#22d3ee] mb-8 group-hover:bg-[#22d3ee] group-hover:text-black transition-all duration-300">
               {feature.icon}
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-            <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
+            <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{feature.title}</h3>
+            <p className="text-white/40 leading-relaxed text-sm">{feature.desc}</p>
           </motion.div>
         ))}
       </div>

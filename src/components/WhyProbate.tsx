@@ -30,9 +30,9 @@ export const WhyProbate = () => {
   ];
 
   return (
-    <Section id="why-probate" className="bg-gray-900 text-white relative overflow-hidden">
+    <Section id="why-probate" className="bg-[#0a0118] text-white relative overflow-hidden">
       {/* Subtle Grid Background */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
            style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       
       <div className="relative">
@@ -41,15 +41,15 @@ export const WhyProbate = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-1 rounded-full bg-white/10 text-[#5EEADC] text-sm font-bold mb-6 tracking-widest uppercase"
+            className="inline-block px-4 py-1 rounded-full bg-white/5 text-[#22d3ee] text-sm font-bold mb-6 tracking-widest uppercase border border-white/10"
           >
             THE PROBATE ADVANTAGE
           </motion.div>
           <h2 className="text-4xl sm:text-6xl font-black mb-6 tracking-tight">
             It&apos;s Not Just Real Estate. <br />
-            <span className="text-[#5EEADC]">It&apos;s Simple Math.</span>
+            <span className="text-[#22d3ee]">It&apos;s Simple Math.</span>
           </h2>
-          <p className="mt-6 text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="mt-6 text-xl text-white/60 max-w-3xl mx-auto leading-relaxed">
             While other investors fight over the same stale lists, you&apos;ll be working a market that rewards systems over hustle.
           </p>
         </div>
@@ -62,14 +62,14 @@ export const WhyProbate = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white/5 border border-white/10 p-8 rounded-[2rem] hover:bg-white/10 transition-all group relative overflow-hidden"
+              className="bg-white/[0.03] border border-white/5 p-8 rounded-[2rem] hover:bg-white/5 hover:border-white/10 transition-all group relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#5EEADC]/10 to-transparent -mr-12 -mt-12 rounded-full group-hover:scale-150 transition-transform duration-700" />
-              <div className="text-[#5EEADC] mb-8 p-3 bg-white/5 inline-block rounded-2xl group-hover:scale-110 group-hover:bg-[#5EEADC] group-hover:text-gray-900 transition-all duration-300">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#22d3ee]/10 to-transparent -mr-12 -mt-12 rounded-full group-hover:scale-150 transition-transform duration-700" />
+              <div className="text-[#22d3ee] mb-8 p-3 bg-[#22d3ee]/10 inline-block rounded-2xl group-hover:scale-110 group-hover:bg-[#22d3ee] group-hover:text-black transition-all duration-300">
                 {benefit.icon}
               </div>
-              <h3 className="text-xl font-bold text-white mb-4 group-hover:text-[#5EEADC] transition-colors">{benefit.title}</h3>
-              <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">{benefit.desc}</p>
+              <h3 className="text-xl font-bold text-white mb-4 group-hover:text-[#22d3ee] transition-colors tracking-tight">{benefit.title}</h3>
+              <p className="text-white/40 leading-relaxed group-hover:text-white/60 transition-colors text-sm">{benefit.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -81,8 +81,8 @@ export const WhyProbate = () => {
           className="mt-20 text-center"
         >
           <div className="inline-block p-1 rounded-full bg-white/5 border border-white/10">
-            <div className="px-8 py-4 rounded-full bg-gray-900 text-2xl text-gray-300 font-medium">
-              Probate leads are not records—<span className="text-[#5EEADC] font-black">they&apos;re evolving situations.</span>
+            <div className="px-8 py-4 rounded-full bg-black/40 backdrop-blur-xl text-xl text-white/60 font-medium">
+              Probate leads are not records—<span className="text-[#22d3ee] font-black italic">they&apos;re evolving situations.</span>
             </div>
           </div>
         </motion.div>

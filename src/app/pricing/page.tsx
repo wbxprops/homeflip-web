@@ -54,19 +54,19 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#0a0118]">
       <Navbar />
       <main className="pt-24">
         <Section className="!pb-20">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-block px-4 py-1 rounded-full bg-gray-50 text-gray-400 text-sm font-bold mb-6 tracking-widest uppercase">
+            <div className="inline-block px-4 py-1 rounded-full bg-white/5 text-white/40 text-sm font-bold mb-6 tracking-widest uppercase border border-white/10">
               PRICING PLANS
             </div>
-            <h1 className="text-5xl sm:text-7xl font-black text-gray-900 mb-8 tracking-tight">
+            <h1 className="text-5xl sm:text-7xl font-black text-white mb-8 tracking-tight">
               Simple, Transparent <br />
-              <span className="text-[#5EEADC]">Pricing.</span>
+              <span className="text-[#22d3ee] italic">Pricing.</span>
             </h1>
-            <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xl sm:text-2xl text-white/60 leading-relaxed max-w-2xl mx-auto">
               We&apos;re currently in private beta. Join the waitlist to be notified when we open up new spots and lock in early-bird pricing.
             </p>
           </div>
@@ -79,38 +79,38 @@ export default function PricingPage() {
                 key={i} 
                 className={`relative p-10 rounded-[3rem] border transition-all duration-500 flex flex-col ${
                   plan.popular 
-                    ? 'border-[#5EEADC] bg-gray-900 text-white shadow-2xl shadow-[#5EEADC]/20 scale-105 z-10' 
-                    : 'border-gray-100 bg-white text-gray-900 hover:border-gray-300 shadow-xl shadow-gray-200/50'
+                    ? 'border-[#22d3ee] bg-white/[0.08] backdrop-blur-3xl text-white shadow-2xl shadow-[#22d3ee]/10 scale-105 z-10' 
+                    : 'border-white/5 bg-black/20 text-white hover:border-white/10 shadow-xl'
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-[#5EEADC] text-gray-900 px-6 py-1.5 rounded-full text-xs font-black uppercase tracking-widest shadow-xl">
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-[#22d3ee] text-black px-6 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-xl">
                     Most Popular
                   </div>
                 )}
                 
                 <div className="mb-8">
-                  <h3 className={`text-2xl font-black mb-2 ${plan.popular ? 'text-white' : 'text-gray-900'}`}>{plan.name}</h3>
-                  <p className={`text-sm font-medium ${plan.popular ? 'text-gray-400' : 'text-gray-500'}`}>{plan.desc}</p>
+                  <h3 className="text-2xl font-black mb-2 tracking-tight">{plan.name}</h3>
+                  <p className="text-sm font-medium text-white/40">{plan.desc}</p>
                 </div>
                 
                 <div className="mb-10">
-                  <span className={`text-4xl sm:text-5xl font-black ${plan.popular ? 'text-white' : 'text-gray-900'}`}>{plan.price}</span>
+                  <span className="text-4xl sm:text-5xl font-black tracking-tighter">{plan.price}</span>
                 </div>
 
                 <div className="flex-1">
-                  <div className={`text-xs font-black uppercase tracking-widest mb-6 ${plan.popular ? 'text-[#5EEADC]' : 'text-gray-400'}`}>
+                  <div className={`text-[10px] font-black uppercase tracking-[0.3em] mb-6 ${plan.popular ? 'text-[#22d3ee]' : 'text-white/20'}`}>
                     What&apos;s Included:
                   </div>
                   <ul className="space-y-5 mb-12">
                     {plan.features.map((feature, j) => (
                       <li key={j} className="flex items-start gap-4">
                         <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${
-                          plan.popular ? 'bg-[#5EEADC]/20 text-[#5EEADC]' : 'bg-[#5EEADC]/10 text-[#2DD4BF]'
+                          plan.popular ? 'bg-[#22d3ee]/20 text-[#22d3ee]' : 'bg-white/10 text-white/40'
                         }`}>
                           <CheckCircle2 className="w-4 h-4" />
                         </div>
-                        <span className={`text-sm font-bold ${plan.popular ? 'text-gray-300' : 'text-gray-700'}`}>{feature}</span>
+                        <span className="text-sm font-bold text-white/70">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -118,10 +118,10 @@ export default function PricingPage() {
 
                 <Link
                   href="/waitlist"
-                  className={`block w-full text-center py-5 rounded-full font-black text-sm uppercase tracking-widest transition-all ${
+                  className={`block w-full text-center py-5 rounded-full font-black text-[10px] uppercase tracking-[0.3em] transition-all ${
                     plan.popular
-                      ? 'btn-gradient shadow-xl shadow-[#5EEADC]/30 hover:scale-105 active:scale-95'
-                      : 'bg-gray-900 text-white hover:bg-gray-800 active:scale-95'
+                      ? 'btn-gradient shadow-xl shadow-[#22d3ee]/20 hover:scale-105 active:scale-95'
+                      : 'bg-white text-black hover:bg-white/90 active:scale-95'
                   }`}
                 >
                   {plan.cta}
@@ -132,15 +132,15 @@ export default function PricingPage() {
         </Section>
 
         {/* Comparison CTA */}
-        <Section className="bg-gray-50/50">
+        <Section className="bg-white/[0.02]">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-black text-gray-900 mb-6 tracking-tight">Need a custom plan?</h2>
-            <p className="text-gray-600 text-lg mb-10 leading-relaxed">
+            <h2 className="text-3xl font-black text-white mb-6 tracking-tight">Need a custom plan?</h2>
+            <p className="text-white/60 text-lg mb-10 leading-relaxed">
               If you&apos;re an institutional buyer or a high-volume team looking for a custom integration, let&apos;s talk.
             </p>
             <Link 
               href="/contact" 
-              className="inline-flex items-center gap-2 text-[#5EEADC] font-black uppercase tracking-widest hover:text-[#2DD4BF] transition-colors"
+              className="inline-flex items-center gap-2 text-[#22d3ee] font-black uppercase text-[10px] tracking-[0.3em] hover:text-[#2DD4BF] transition-colors"
             >
               Contact Sales <ArrowRight className="w-4 h-4" />
             </Link>

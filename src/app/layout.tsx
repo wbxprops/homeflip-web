@@ -31,7 +31,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <head>
+        <link rel="stylesheet" href="https://use.typekit.net/brb7iad.css" />
+      </head>
+      <body className={`${inter.variable} font-sans antialiased bg-[#0a0118] text-white/95 selection:bg-[#22d3ee]/30`}>
         {children}
       </body>
     </html>

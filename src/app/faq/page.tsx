@@ -2,7 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Section } from "@/components/Section";
-import { HelpCircle, ChevronRight } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 
 export default function FAQPage() {
   const faqCategories = [
@@ -32,7 +32,7 @@ export default function FAQPage() {
         },
         {
           q: "Do I need to be a lawyer to use this?",
-          a: "No. You are an investor looking to buy property. The legal aspects of probate are handled by attorneys and the court. Your job is to build relationships and make offers, just like any other real estate deal."
+          a: "No. You are an investor looking to buy property. The legal aspects of probate are handled by attorneys and the court. Your job is to build relationships with heirs and make offers, just like any other real estate deal."
         }
       ]
     },
@@ -52,19 +52,19 @@ export default function FAQPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#0a0118]">
       <Navbar />
       <main className="pt-24">
         <Section className="!pb-20">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-block px-4 py-1 rounded-full bg-gray-50 text-gray-400 text-sm font-bold mb-6 tracking-widest uppercase">
+            <div className="inline-block px-4 py-1 rounded-full bg-white/5 text-white/40 text-sm font-bold mb-6 tracking-widest uppercase border border-white/10">
               RESOURCES
             </div>
-            <h1 className="text-5xl sm:text-7xl font-black text-gray-900 mb-8 tracking-tight">
+            <h1 className="text-5xl sm:text-7xl font-black text-white mb-8 tracking-tight">
               Frequently Asked <br />
-              <span className="text-[#5EEADC]">Questions.</span>
+              <span className="text-[#22d3ee] italic">Questions.</span>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xl text-white/60 leading-relaxed max-w-2xl mx-auto">
               Everything you need to know about Homeflip.ai and the science of probate real estate investing.
             </p>
           </div>
@@ -75,23 +75,23 @@ export default function FAQPage() {
             {faqCategories.map((category, i) => (
               <div key={i}>
                 <div className="flex items-center gap-4 mb-12">
-                  <div className="h-px flex-1 bg-gray-100" />
-                  <h2 className="text-sm font-black text-[#5EEADC] uppercase tracking-[0.3em]">
+                  <div className="h-px flex-1 bg-white/5" />
+                  <h2 className="text-[10px] font-black text-[#22d3ee] uppercase tracking-[0.4em]">
                     {category.name}
                   </h2>
-                  <div className="h-px flex-1 bg-gray-100" />
+                  <div className="h-px flex-1 bg-white/5" />
                 </div>
                 
                 <div className="grid md:grid-cols-2 gap-8">
                   {category.items.map((item, j) => (
-                    <div key={j} className="group p-10 rounded-[2.5rem] bg-gray-50 border border-transparent hover:bg-white hover:border-[#5EEADC]/30 hover:shadow-2xl transition-all duration-500">
-                      <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center text-[#5EEADC] mb-6 group-hover:scale-110 transition-transform">
+                    <div key={j} className="group p-10 rounded-[2.5rem] bg-white/[0.02] border border-transparent hover:bg-white/[0.05] hover:border-[#22d3ee]/30 hover:shadow-2xl transition-all duration-500">
+                      <div className="w-12 h-12 rounded-2xl bg-white/5 shadow-sm flex items-center justify-center text-[#22d3ee] mb-6 group-hover:scale-110 transition-transform">
                         <HelpCircle className="w-6 h-6" />
                       </div>
-                      <h3 className="text-xl font-black text-gray-900 mb-4 tracking-tight group-hover:text-[#5EEADC] transition-colors">
+                      <h3 className="text-xl font-black text-white mb-4 tracking-tight group-hover:text-[#22d3ee] transition-colors">
                         {item.q}
                       </h3>
-                      <p className="text-gray-600 leading-relaxed font-medium">
+                      <p className="text-white/40 leading-relaxed font-medium text-sm">
                         {item.a}
                       </p>
                     </div>
