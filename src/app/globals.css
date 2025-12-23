@@ -33,11 +33,14 @@
   --color-secondary-dark: var(--secondary-dark);
   --color-card: var(--card-bg);
   --color-border-glass: var(--card-border);
-  /* 
-     ADOBE FONTS: Update 'your-adobe-font' with the font-family 
-     name from your Adobe Fonts project.
-  */
-  --font-sans: "your-adobe-font", var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  
+  /* Adobe Fonts Implementation */
+  --font-sans: "proxima-nova", var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: "neue-haas-grotesk-display", "futura-pt", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
 }
 
 body {
