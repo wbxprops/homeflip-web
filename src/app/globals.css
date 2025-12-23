@@ -1,26 +1,45 @@
 @import "tailwindcss";
 
+/*
+  Homeflip.ai Brand Colors (from Aura Design System)
+  Primary: #5EEADC (Teal)
+  Secondary: #A855F7 (Purple)
+  Gradient: Teal → Purple for primary CTAs
+*/
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Brand Colors */
+  --primary: #5EEADC;
+  --primary-dark: #2DD4BF;
+  --secondary: #A855F7;
+  --secondary-dark: #7C3AED;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-secondary: var(--secondary);
+  --color-secondary-dark: var(--secondary-dark);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Gradient button utility */
+.btn-gradient {
+  background: linear-gradient(to right, #5EEADC, #A855F7);
+  color: #0f172a;
+}
+
+.btn-gradient:hover {
+  opacity: 0.95;
 }
