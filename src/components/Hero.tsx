@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 export const Hero = () => {
   return (
-    <section className="relative pt-32 pb-24 px-6 overflow-hidden">
+    <section className="relative pt-32 pb-24 px-6 overflow-hidden bg-[#0a0118]">
       {/* Background Decor */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-[#22d3ee]/10 via-transparent to-transparent" />
       <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-[#22d3ee]/15 rounded-full blur-[120px] pointer-events-none" />
@@ -30,10 +30,11 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-5xl sm:text-7xl lg:text-8xl font-black text-white leading-[1.05] tracking-tight mb-8 font-[futura-pt-condensed] uppercase"
+            className="text-6xl sm:text-8xl lg:text-9xl font-[800] font-['futura-pt-condensed'] text-white leading-[0.9] tracking-tight mb-10 uppercase italic"
           >
             Probate Isn&apos;t About <br className="hidden md:block" /> 
-            <span className="text-white/40">Being Early.</span> It&apos;s About <br className="hidden md:block" />
+            <span className="text-white/30">Being Early.</span> <br /> 
+            It&apos;s About <br className="hidden md:block" />
             <span className="bg-gradient-to-r from-[#22d3ee] via-[#2DD4BF] to-[#a855f7] bg-clip-text text-transparent">
               Being On Time.
             </span>
@@ -43,7 +44,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-xl sm:text-2xl text-white/60 max-w-3xl mx-auto leading-relaxed mb-12"
+            className="text-xl sm:text-2xl text-white/60 max-w-3xl mx-auto leading-relaxed mb-12 font-medium"
           >
             Stop fighting over cold leads. Homeflip.ai uses <strong>Timeline Intelligence</strong> to track the probate lifecycle—so you reach heirs exactly when they&apos;re ready to sell.
           </motion.p>
