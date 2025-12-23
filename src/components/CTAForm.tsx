@@ -52,6 +52,8 @@ export const CTAForm = ({
           onChange={(e) => setEmail(e.target.value)}
           placeholder={placeholder}
           required
+          autoComplete="email"
+          data-lpignore="true"
           className="w-full px-6 py-4 rounded-full bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-[#22d3ee]/30 focus:border-[#22d3ee] transition-all text-white shadow-sm group-hover:border-white/20"
         />
       </div>

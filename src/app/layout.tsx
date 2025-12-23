@@ -34,7 +34,10 @@ export default function RootLayout({
       <head>
         <link rel="stylesheet" href="https://use.typekit.net/brb7iad.css" />
       </head>
-      <body className={`${inter.variable} font-sans antialiased bg-[#0a0118] text-white/95 selection:bg-[#22d3ee]/30`}>
+      <body 
+        className={`${inter.variable} font-sans antialiased bg-[#0a0118] text-white/95 selection:bg-[#22d3ee]/30`}
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>
