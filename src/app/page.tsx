@@ -1,20 +1,24 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
-import { StatsBar } from "@/components/StatsBar";
+import { SocialProof } from "@/components/SocialProof";
+import { Problem } from "@/components/Problem";
 import { Comparison } from "@/components/Comparison";
 import { WhyProbate } from "@/components/WhyProbate";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Features } from "@/components/Features";
 import { Objections } from "@/components/Objections";
 import { FinalCTA } from "@/components/FinalCTA";
+import { StatsBar } from "@/components/StatsBar";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white overflow-hidden">
+    <div className="min-h-screen bg-white selection:bg-[#5EEADC]/30">
       <Navbar />
       <main>
         <Hero />
+        <SocialProof />
+        <Problem />
         <StatsBar />
         <Comparison />
         <WhyProbate />

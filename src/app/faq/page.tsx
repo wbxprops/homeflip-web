@@ -2,41 +2,42 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Section } from "@/components/Section";
+import { HelpCircle, ChevronRight } from "lucide-react";
 
 export default function FAQPage() {
   const faqCategories = [
     {
-      name: "The Basics",
+      name: "Product & Strategy",
       items: [
         {
           q: "What exactly is Homeflip.ai?",
           a: "Homeflip.ai is a lead intelligence platform for real estate investors. We specialize in probate real estate, providing court-synced data, timeline tracking, and AI-powered prioritization to help you find off-market deals consistently."
         },
         {
-          q: "Is Homeflip.ai a CRM?",
-          a: "We include basic CRM functionality to manage your probate leads, but we are primarily a lead intelligence and discovery platform. We are designed to work alongside your existing tools or as a standalone system for your probate marketing."
+          q: "How is this different from buying a lead list?",
+          a: "Lead lists are static snapshots. Homeflip.ai is a live monitor. We track the entire probate lifecycle—filing, inventory, delays, property listings—so you know the status of a case today, not just the day it was filed."
         },
         {
-          q: "How is this different from buying a lead list?",
-          a: "Lead lists are static snapshots in time. Homeflip.ai is a live monitor. We track the entire probate lifecycle—filing, inventory, delays, property listings—so you know the status of a case today, not just the day it was filed."
+          q: "Is Homeflip.ai a CRM?",
+          a: "We include basic CRM functionality to manage your probate leads, but we are primarily a lead intelligence and discovery platform. We are designed to work alongside your existing tools or as a standalone system."
         }
       ]
     },
     {
-      name: "Ethical & Legal",
+      name: "Ethics & Compliance",
       items: [
         {
           q: "Isn't contacting probate families unethical?",
-          a: "We advocate for respectful, professional outreach. By the time a case is filed, families are dealing with practical matters. Many heirs are relieved to find a solution for a property they cannot manage. Our systems are built to facilitate helpful, not high-pressure, conversations."
+          a: "We advocate for respectful, professional outreach. By the time a case is filed, families are dealing with practical matters. Many heirs are relieved to find a solution for a property they cannot manage. Our systems are built to facilitate helpful conversations."
         },
         {
           q: "Do I need to be a lawyer to use this?",
-          a: "No. You are an investor looking to buy property. The legal aspects of probate are handled by attorneys and the court. Your job is to build relationships with heirs and make offers, just like any other real estate deal."
+          a: "No. You are an investor looking to buy property. The legal aspects of probate are handled by attorneys and the court. Your job is to build relationships and make offers, just like any other real estate deal."
         }
       ]
     },
     {
-      name: "Data & Coverage",
+      name: "Data Coverage",
       items: [
         {
           q: "What counties do you cover?",
@@ -44,7 +45,7 @@ export default function FAQPage() {
         },
         {
           q: "How fresh is the data?",
-          a: "Our systems sync with court records daily. While some jurisdictions have different reporting speeds, we aim to provide the most current information available, often within 24-48 hours of a court filing or status change."
+          a: "Our systems sync with court records daily. While jurisdictions vary, we aim to provide the most current information available, often within 24-48 hours of a court filing or status change."
         }
       ]
     }
@@ -54,31 +55,43 @@ export default function FAQPage() {
     <div className="min-h-screen bg-white">
       <Navbar />
       <main className="pt-24">
-        <Section className="!pb-12">
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl font-black text-gray-900 mb-6">
-              Frequently Asked <span className="text-[#5EEADC]">Questions</span>
+        <Section className="!pb-20">
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="inline-block px-4 py-1 rounded-full bg-gray-50 text-gray-400 text-sm font-bold mb-6 tracking-widest uppercase">
+              RESOURCES
+            </div>
+            <h1 className="text-5xl sm:text-7xl font-black text-gray-900 mb-8 tracking-tight">
+              Frequently Asked <br />
+              <span className="text-[#5EEADC]">Questions.</span>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              Everything you need to know about Homeflip.ai and probate real estate investing.
+            <p className="text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
+              Everything you need to know about Homeflip.ai and the science of probate real estate investing.
             </p>
           </div>
         </Section>
 
         <Section className="!pt-0">
-          <div className="max-w-4xl mx-auto space-y-16">
+          <div className="max-w-5xl mx-auto space-y-24">
             {faqCategories.map((category, i) => (
               <div key={i}>
-                <h2 className="text-2xl font-bold text-gray-900 mb-8 pb-4 border-b border-gray-100">
-                  {category.name}
-                </h2>
-                <div className="space-y-8">
+                <div className="flex items-center gap-4 mb-12">
+                  <div className="h-px flex-1 bg-gray-100" />
+                  <h2 className="text-sm font-black text-[#5EEADC] uppercase tracking-[0.3em]">
+                    {category.name}
+                  </h2>
+                  <div className="h-px flex-1 bg-gray-100" />
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-8">
                   {category.items.map((item, j) => (
-                    <div key={j} className="group">
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#5EEADC] transition-colors">
+                    <div key={j} className="group p-10 rounded-[2.5rem] bg-gray-50 border border-transparent hover:bg-white hover:border-[#5EEADC]/30 hover:shadow-2xl transition-all duration-500">
+                      <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center text-[#5EEADC] mb-6 group-hover:scale-110 transition-transform">
+                        <HelpCircle className="w-6 h-6" />
+                      </div>
+                      <h3 className="text-xl font-black text-gray-900 mb-4 tracking-tight group-hover:text-[#5EEADC] transition-colors">
                         {item.q}
                       </h3>
-                      <p className="text-gray-600 leading-relaxed">
+                      <p className="text-gray-600 leading-relaxed font-medium">
                         {item.a}
                       </p>
                     </div>
@@ -95,4 +108,3 @@ export default function FAQPage() {
     </div>
   );
 }
-

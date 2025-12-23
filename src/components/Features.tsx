@@ -8,46 +8,52 @@ import { motion } from 'framer-motion';
 export const Features = () => {
   const features = [
     { 
-      icon: <Search className="w-8 h-8" />, 
-      title: "Automated Lead Discovery", 
-      desc: "Fresh probate leads delivered to your dashboard daily. No manual searching, no courthouse visits, no clunky public records." 
+      icon: <Search className="w-6 h-6" />, 
+      title: "Automated discovery", 
+      desc: "Fresh probate leads delivered daily. No courthouse visits, no manual entry." 
     },
     { 
-      icon: <Zap className="w-8 h-8" />, 
-      title: "AI-Powered Prioritization", 
-      desc: "Smart scoring tells you which leads to work first based on property value, equity, timing, and motivation signals." 
+      icon: <Zap className="w-6 h-6" />, 
+      title: "AI Lead Scoring", 
+      desc: "Our models rank leads by motivation, equity, and timing so you work the best deals." 
     },
     { 
-      icon: <Home className="w-8 h-8" />, 
-      title: "Property Intelligence", 
-      desc: "Instant access to valuation estimates, ownership history, tax records, and property characteristics." 
+      icon: <Home className="w-6 h-6" />, 
+      title: "Property Intel", 
+      desc: "Instant access to valuations, ownership history, and local tax records." 
     },
     { 
-      icon: <ClipboardList className="w-8 h-8" />, 
+      icon: <ClipboardList className="w-6 h-6" />, 
       title: "Guided Workflows", 
-      desc: "Step-by-step processes for outreach, follow-up, offer presentation, and closing. Nothing falls through the cracks." 
+      desc: "Step-by-step processes for outreach, follow-up, and closing." 
     },
     { 
-      icon: <Users className="w-8 h-8" />, 
-      title: "Contact Management", 
-      desc: "Track attorneys, personal representatives, fiduciaries, and heirs. All your relationships in one place." 
+      icon: <Users className="w-6 h-6" />, 
+      title: "Contact Manager", 
+      desc: "Track attorneys, personal reps, and heirs in one dedicated system." 
     },
     { 
-      icon: <Bell className="w-8 h-8" />, 
-      title: "Real-Time Notifications", 
-      desc: "Get instant alerts when new cases match your criteria or when it's time to follow up on a lead." 
+      icon: <Bell className="w-6 h-6" />, 
+      title: "Real-Time Alerts", 
+      desc: "Get notified the moment a case moves to the next stage of the timeline." 
     },
   ];
 
   return (
-    <Section id="features" className="bg-gray-50">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl sm:text-5xl font-black text-gray-900">
-          Everything You Need to Close More Deals
+    <Section id="features" className="bg-gray-50/50">
+      <div className="text-center mb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="inline-block px-4 py-1 rounded-full bg-gray-100 text-gray-400 text-sm font-bold mb-6 tracking-widest uppercase"
+        >
+          THE TOOLKIT
+        </motion.div>
+        <h2 className="text-4xl sm:text-6xl font-black text-gray-900 mb-6 tracking-tight">
+          Everything You Need <br />
+          <span className="text-gray-400">to Close More Deals.</span>
         </h2>
-        <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
-          A complete toolkit for probate real estate investing.
-        </p>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -58,13 +64,13 @@ export const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="group bg-white hover:bg-gradient-to-br hover:from-[#5EEADC]/5 hover:to-[#A855F7]/5 p-8 rounded-3xl border border-gray-200 hover:border-[#5EEADC]/30 hover:shadow-xl transition-all duration-300"
+            className="group bg-white p-8 rounded-[2rem] border border-gray-100 hover:border-[#5EEADC]/30 hover:shadow-2xl hover:shadow-[#5EEADC]/5 transition-all duration-500"
           >
-            <div className="text-[#5EEADC] mb-6 group-hover:scale-110 transition-transform">
+            <div className="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center text-[#5EEADC] mb-8 group-hover:bg-[#5EEADC] group-hover:text-white transition-all duration-300">
               {feature.icon}
             </div>
-            <h3 className="text-xl font-bold text-gray-900">{feature.title}</h3>
-            <p className="mt-3 text-gray-600 leading-relaxed">{feature.desc}</p>
+            <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
+            <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
           </motion.div>
         ))}
       </div>
