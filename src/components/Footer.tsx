@@ -23,8 +23,8 @@ export const Footer = () => {
           <div>
             <h4 className="text-slate-900 font-black uppercase text-xs tracking-[0.2em] mb-6">Navigation</h4>
             <div className="flex flex-col gap-4 text-sm font-bold">
-              <Link href="/#why-probate" className="hover:text-[#0891b2] transition-colors">Why Probate</Link>
-              <Link href="/how-it-works" className="hover:text-[#0891b2] transition-colors">How It Works</Link>
+              <Link href="/#probate-investing" className="hover:text-[#0891b2] transition-colors">Why Probate</Link>
+              <Link href="/#features" className="hover:text-[#0891b2] transition-colors">How It Works</Link>
               <Link href="/pricing" className="hover:text-[#0891b2] transition-colors">Pricing</Link>
               <Link href="/waitlist" className="hover:text-[#83d4c0] transition-colors uppercase tracking-tighter font-hero font-[900] text-lg">Claim Your County</Link>
             </div>

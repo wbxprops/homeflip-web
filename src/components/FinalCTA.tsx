@@ -17,9 +17,17 @@ export const FinalCTA = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
         >
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-block px-4 py-1 rounded-full bg-slate-50 text-slate-500 text-sm font-bold mb-8 tracking-widest uppercase border border-slate-200"
+          >
+            GET STARTED
+          </motion.div>
           <h2 className="text-5xl sm:text-7xl lg:text-8xl font-black mb-10 tracking-tight leading-[1.05] text-slate-900">
             Ready to Build a <br />
-            <span className="text-[#83d4c0] italic">Predictable</span> Deal Pipeline?
+            <span className="text-slate-400">Predictable Deal Pipeline?</span>
           </h2>
           <p className="mt-10 text-xl sm:text-2xl text-slate-500 leading-relaxed max-w-2xl mx-auto mb-16">
             Join the elite group of investors using <strong>Timeline Intelligence</strong> to dominate the probate market.

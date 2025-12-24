@@ -22,10 +22,10 @@ export const Navbar = () => {
         </Link>
         
         <div className="hidden md:flex items-center gap-10">
-          <Link href="/#why-probate" className="text-sm font-bold text-slate-400 hover:text-[#83d4c0] transition-colors uppercase tracking-tighter">
+          <Link href="/#probate-investing" className="text-sm font-bold text-slate-400 hover:text-[#83d4c0] transition-colors uppercase tracking-tighter">
             Why Probate
           </Link>
-          <Link href="/how-it-works" className="text-sm font-bold text-slate-400 hover:text-[#83d4c0] transition-colors uppercase tracking-tighter">
+          <Link href="/#features" className="text-sm font-bold text-slate-400 hover:text-[#83d4c0] transition-colors uppercase tracking-tighter">
             How It Works
           </Link>
           <Link href="/pricing" className="text-sm font-bold text-slate-400 hover:text-[#83d4c0] transition-colors uppercase tracking-tighter">

@@ -2,11 +2,9 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { LetterSection } from "@/components/LetterSection";
-import { SocialProof } from "@/components/SocialProof";
-import { Problem } from "@/components/Problem";
+import { ProofSection } from "@/components/ProofSection";
+import { LeadSourceTraps } from "@/components/LeadSourceTraps";
 import { Comparison } from "@/components/Comparison";
-import { WhyProbate } from "@/components/WhyProbate";
-import { HowItWorks } from "@/components/HowItWorks";
 import { Features } from "@/components/Features";
 import { Objections } from "@/components/Objections";
 import { FinalCTA } from "@/components/FinalCTA";
@@ -20,14 +18,11 @@ export default function Home() {
       <main>
         <Hero />
         <LetterSection />
-        <SocialProof />
-        <Problem />
+        <ProofSection />
+        <LeadSourceTraps />
         <StatsBar />
         <Comparison />
         <CTABlock headline="Stop chasing cold leads. Start closing hot ones." />
-        <WhyProbate />
-        <HowItWorks />
-        <CTABlock headline="Your market is moving. Don't let it pass you by." />
         <Features />
         <Objections />
         <FinalCTA />

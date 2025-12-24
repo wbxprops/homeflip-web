@@ -406,7 +406,7 @@ export const LetterSection = () => {
           </div>
 
           <p>
-            This isn't a CRM. This isn't just data.
+            This is more than a CRM. More than just data.
           </p>
 
           <p className="font-bold text-slate-900 italic">
