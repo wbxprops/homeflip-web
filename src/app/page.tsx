@@ -1,7 +1,8 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
-// import { SocialProof } from "@/components/SocialProof";
+import { LetterSection } from "@/components/LetterSection";
+import { SocialProof } from "@/components/SocialProof";
 import { Problem } from "@/components/Problem";
 import { Comparison } from "@/components/Comparison";
 import { WhyProbate } from "@/components/WhyProbate";
@@ -14,18 +15,19 @@ import { CTABlock } from "@/components/CTABlock";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#0a0118] selection:bg-[#22d3ee]/30">
+    <div className="min-h-screen bg-white selection:bg-[#83d4c0]/20">
       <Navbar />
       <main>
         <Hero />
-        {/* <SocialProof /> */}
+        <LetterSection />
+        <SocialProof />
         <Problem />
         <StatsBar />
         <Comparison />
-        <CTABlock headline="Stop chasing cold leads." />
+        <CTABlock headline="Stop chasing cold leads. Start closing hot ones." />
         <WhyProbate />
         <HowItWorks />
-        <CTABlock headline="Get started in minutes." />
+        <CTABlock headline="Your market is moving. Don't let it pass you by." />
         <Features />
         <Objections />
         <FinalCTA />

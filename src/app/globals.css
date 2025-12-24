@@ -1,27 +1,28 @@
 @import "tailwindcss";
 
 /*
-  Homeflip.ai Brand Colors (Adapted from CRM AuraDark Theme)
-  Primary: #22d3ee (Cyan)
-  Secondary: #a855f7 (Purple)
-  Background: #0a0118 (Deep Purple-Black)
+  Homeflip.ai Brand Colors (Adapted for AuraLight Theme)
+  Primary: #0891b2 (Cyan 600) - Darkened for light background contrast
+  Secondary: #7c3aed (Purple 600)
+  Background: #ffffff (Pure White)
 */
 
 :root {
-  --background: #0a0118;
-  --foreground: rgba(255, 255, 255, 0.95);
+  --background: #ffffff;
+  --foreground: #0f172a;
   
-  /* Brand Colors */
-  --primary: #22d3ee;
-  --primary-dark: #0891b2;
-  --secondary: #a855f7;
-  --secondary-dark: #7c3aed;
+  /* Brand Colors - Matched to CRM Image (No Purple) */
+  --primary: #83d4c0;
+  --primary-dark: #155e75;
+  --secondary: #0891b2;     /* Deeper Teal/Cyan instead of Purple */
+  --secondary-dark: #155e75;
+  --accent: #83d4c0;
   
-  /* Glassmorphism Variables */
-  --card-bg: rgba(255, 255, 255, 0.08);
-  --card-border: rgba(255, 255, 255, 0.15);
-  --divider: rgba(255, 255, 255, 0.15);
-  --text-secondary: rgba(255, 255, 255, 0.7);
+  /* AuraLight Design Tokens */
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(15, 23, 42, 0.08);
+  --divider: rgba(15, 23, 42, 0.05);
+  --text-secondary: #475569;
 }
 
 @theme inline {
@@ -36,6 +37,7 @@
   
   /* Adobe Fonts Implementation */
   --font-sans: "proxima-nova", var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-lora), Georgia, serif;
   --font-display: "neue-haas-grotesk-display", sans-serif;
   --font-hero: "futura-pt-condensed", sans-serif;
 }
@@ -46,6 +48,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .font-hero {
   font-family: var(--font-hero);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
 }
 
 body {
@@ -66,20 +72,20 @@ body {
 
 /* Gradient button utility */
 .btn-gradient {
-  background: linear-gradient(to right, #22d3ee, #a855f7);
-  color: #000000;
+  background: linear-gradient(135deg, #83d4c0 0%, #0891b2 100%);
+  color: #0a1421;
   transition: all 0.3s ease;
 }
 
 .btn-gradient:hover {
-  opacity: 0.9;
+  opacity: 0.95;
   transform: translateY(-1px);
-  box-shadow: 0 10px 20px -5px rgba(34, 211, 238, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(131, 212, 192, 0.5);
 }
 
 /* Text Gradients */
 .text-gradient {
-  background: linear-gradient(to right, #22d3ee, #a855f7);
+  background: linear-gradient(to right, #83d4c0, #0891b2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

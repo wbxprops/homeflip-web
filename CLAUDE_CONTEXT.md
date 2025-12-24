@@ -87,8 +87,10 @@ background: linear-gradient(to right, #5EEADC, #A855F7);
 - **Version Control:** GitHub
 
 ### Key Patterns
-- Light theme for marketing (dark glassmorphic theme for CRM)
-- Gradient buttons (teal → purple) for primary CTAs
+- Light theme for marketing (AuraLight)
+- Pure white backgrounds with plenty of white space
+- High-contrast slate text for readability
+- Gradient buttons (dark cyan → deep purple) for primary CTAs
 - Mobile-first responsive design
 - Long-form educational content with icons and bullet points
 

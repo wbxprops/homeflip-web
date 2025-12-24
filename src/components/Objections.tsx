@@ -26,22 +26,22 @@ export const Objections = () => {
   ];
 
   return (
-    <Section className="bg-[#0a0118]">
+    <Section className="bg-white">
       <div className="grid lg:grid-cols-3 gap-16">
         <div className="lg:col-span-1">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-1 rounded-full bg-white/5 text-white/40 text-sm font-bold mb-6 tracking-widest uppercase border border-white/10"
+            className="inline-block px-4 py-1 rounded-full bg-slate-50 text-slate-500 text-sm font-bold mb-6 tracking-widest uppercase border border-slate-200"
           >
             FAQ
           </motion.div>
-          <h2 className="text-4xl sm:text-6xl font-black text-white mb-8 tracking-tight">
+          <h2 className="text-4xl sm:text-6xl font-black text-slate-900 mb-8 tracking-tight">
             Common <br />
-            <span className="text-white/40 italic">Questions.</span>
+            <span className="text-slate-400 italic">Questions.</span>
           </h2>
-          <p className="text-xl text-white/60 leading-relaxed">
+          <p className="text-xl text-slate-500 leading-relaxed">
             Everything you need to know about the system and the strategy.
           </p>
         </div>
@@ -54,13 +54,13 @@ export const Objections = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group bg-white/[0.02] p-8 rounded-[2rem] border border-white/5 hover:bg-white/[0.05] hover:border-[#22d3ee]/30 transition-all duration-300"
+              className="group bg-slate-50 p-8 rounded-[2rem] border border-slate-100 hover:bg-white hover:border-[#0891b2]/30 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-300"
             >
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-3">
-                <HelpCircle className="w-5 h-5 text-[#22d3ee]" />
+              <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                <HelpCircle className="w-5 h-5 text-[#0891b2]" />
                 {item.q}
               </h3>
-              <p className="text-white/50 leading-relaxed text-sm">
+              <p className="text-slate-500 leading-relaxed text-base">
                 {item.a}
               </p>
             </motion.div>

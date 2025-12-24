@@ -40,19 +40,19 @@ export const Features = () => {
   ];
 
   return (
-    <Section id="features" className="bg-[#0a0118]">
+    <Section id="features" className="bg-white">
       <div className="text-center mb-20">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="inline-block px-4 py-1 rounded-full bg-white/5 text-white/40 text-sm font-bold mb-6 tracking-widest uppercase border border-white/10"
+          className="inline-block px-4 py-1 rounded-full bg-slate-50 text-slate-500 text-sm font-bold mb-6 tracking-widest uppercase border border-slate-200"
         >
           THE TOOLKIT
         </motion.div>
-        <h2 className="text-5xl sm:text-7xl lg:text-8xl font-black text-white mb-6 tracking-tight">
+        <h2 className="text-5xl sm:text-7xl lg:text-8xl font-black text-slate-900 mb-6 tracking-tight">
           Everything You Need <br />
-          <span className="text-white/40">to Close More Deals.</span>
+          <span className="text-slate-400">to Close More Deals.</span>
         </h2>
       </div>
 
@@ -64,13 +64,13 @@ export const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="group bg-white/[0.03] p-8 rounded-[2.5rem] border border-white/5 hover:bg-white/[0.05] hover:border-[#22d3ee]/30 transition-all duration-500"
+            className="group bg-slate-50 p-8 rounded-[2.5rem] border border-slate-100 hover:bg-white hover:border-[#0891b2]/30 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500"
           >
-            <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-[#22d3ee] mb-8 group-hover:bg-[#22d3ee] group-hover:text-black transition-all duration-300">
+            <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-[#0891b2] mb-8 group-hover:bg-[#0891b2] group-hover:text-white transition-all duration-300">
               {feature.icon}
             </div>
-            <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{feature.title}</h3>
-            <p className="text-white/40 leading-relaxed text-sm">{feature.desc}</p>
+            <h3 className="text-xl font-bold text-slate-900 mb-3 tracking-tight">{feature.title}</h3>
+            <p className="text-slate-500 leading-relaxed text-base">{feature.desc}</p>
           </motion.div>
         ))}
       </div>

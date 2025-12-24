@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { supabase } from '@/lib/supabase';
 
 interface CTAFormProps {
   buttonText?: string;
@@ -14,20 +15,31 @@ export const CTAForm = ({
   className = "",
   onSuccess
 }: CTAFormProps) => {
-  const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
 
-    // In a real app, this would call your waitlist API/Supabase
-    console.log('Waitlist submission:', { firstName, email });
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const { error } = await supabase
+        .from('waitlist')
+        .insert([
+          { 
+            email: email, 
+            source: 'cta_form'
+          }
+        ]);
 
-    setStatus('success');
-    if (onSuccess) onSuccess();
+      if (error) throw error;
+      
+      setStatus('success');
+      if (onSuccess) onSuccess();
+    } catch (error) {
+      console.error('Waitlist submission error:', error);
+      setStatus('error');
+    }
   };
 
   if (status === 'success') {
@@ -35,7 +47,7 @@ export const CTAForm = ({
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="text-[#22d3ee] font-bold py-4 px-6 bg-[#22d3ee]/10 rounded-full border border-[#22d3ee]/20 inline-block"
+        className="text-[#83d4c0] font-hero font-[900] py-4 px-10 bg-[#83d4c0]/10 rounded-2xl border border-[#83d4c0]/20 inline-block uppercase tracking-tighter text-2xl"
       >
         You&apos;re in! Check your inbox.
       </motion.div>
@@ -43,38 +55,32 @@ export const CTAForm = ({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`relative flex flex-col sm:flex-row gap-3 ${className}`}>
-      <div className="relative group">
-        <input
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          placeholder="First name"
-          required
-          autoComplete="given-name"
-          data-lpignore="true"
-          className="w-full sm:w-40 px-6 py-4 rounded-full bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-[#22d3ee]/30 focus:border-[#22d3ee] transition-all text-white shadow-sm group-hover:border-white/20"
-        />
-      </div>
-      <div className="relative flex-1 group">
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email address"
-          required
-          autoComplete="email"
-          data-lpignore="true"
-          className="w-full px-6 py-4 rounded-full bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-[#22d3ee]/30 focus:border-[#22d3ee] transition-all text-white shadow-sm group-hover:border-white/20"
-        />
-      </div>
+    <form 
+      onSubmit={handleSubmit} 
+      className={`relative flex items-center bg-white rounded-2xl border border-slate-200 p-1.5 shadow-xl focus-within:ring-2 focus-within:ring-[#83d4c0]/30 focus-within:border-[#83d4c0] transition-all dark:bg-white/5 dark:border-white/10 ${className}`}
+    >
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Enter your email address"
+        required
+        autoComplete="email"
+        data-lpignore="true"
+        className="flex-1 bg-transparent px-8 py-4 focus:outline-none text-slate-900 dark:text-white text-lg placeholder:text-slate-400"
+      />
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="btn-gradient px-8 py-4 rounded-full font-bold text-lg transition-all hover:shadow-xl hover:shadow-[#22d3ee]/30 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 whitespace-nowrap"
+        className="btn-gradient px-10 py-4 rounded-xl font-hero font-[900] text-3xl uppercase tracking-tighter shadow-lg shadow-[#83d4c0]/20 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 whitespace-nowrap"
       >
         {status === 'submitting' ? 'Joining...' : buttonText}
       </button>
+      {status === 'error' && (
+        <p className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-red-500 text-xs font-bold whitespace-nowrap">
+          Something went wrong. Please try again.
+        </p>
+      )}
     </form>
   );
 };

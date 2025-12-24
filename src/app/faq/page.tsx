@@ -52,19 +52,19 @@ export default function FAQPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0118]">
+    <div className="min-h-screen bg-white">
       <Navbar />
       <main className="pt-24">
         <Section className="!pb-20">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-block px-4 py-1 rounded-full bg-white/5 text-white/40 text-sm font-bold mb-6 tracking-widest uppercase border border-white/10">
+            <div className="inline-block px-4 py-1 rounded-full bg-slate-50 text-slate-500 text-sm font-bold mb-6 tracking-widest uppercase border border-slate-200">
               RESOURCES
             </div>
-            <h1 className="text-5xl sm:text-7xl font-black text-white mb-8 tracking-tight">
+            <h1 className="text-5xl sm:text-7xl font-black text-slate-900 mb-8 tracking-tight">
               Frequently Asked <br />
-              <span className="text-[#22d3ee] italic">Questions.</span>
+              <span className="text-[#0891b2] italic">Questions.</span>
             </h1>
-            <p className="text-xl text-white/60 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xl text-slate-500 leading-relaxed max-w-2xl mx-auto">
               Everything you need to know about Homeflip.ai and the science of probate real estate investing.
             </p>
           </div>
@@ -75,23 +75,23 @@ export default function FAQPage() {
             {faqCategories.map((category, i) => (
               <div key={i}>
                 <div className="flex items-center gap-4 mb-12">
-                  <div className="h-px flex-1 bg-white/5" />
-                  <h2 className="text-[10px] font-black text-[#22d3ee] uppercase tracking-[0.4em]">
+                  <div className="h-px flex-1 bg-slate-100" />
+                  <h2 className="text-[10px] font-black text-[#0891b2] uppercase tracking-[0.4em]">
                     {category.name}
                   </h2>
-                  <div className="h-px flex-1 bg-white/5" />
+                  <div className="h-px flex-1 bg-slate-100" />
                 </div>
                 
                 <div className="grid md:grid-cols-2 gap-8">
                   {category.items.map((item, j) => (
-                    <div key={j} className="group p-10 rounded-[2.5rem] bg-white/[0.02] border border-transparent hover:bg-white/[0.05] hover:border-[#22d3ee]/30 hover:shadow-2xl transition-all duration-500">
-                      <div className="w-12 h-12 rounded-2xl bg-white/5 shadow-sm flex items-center justify-center text-[#22d3ee] mb-6 group-hover:scale-110 transition-transform">
+                    <div key={j} className="group p-10 rounded-[2.5rem] bg-slate-50 border border-transparent hover:bg-white hover:border-[#0891b2]/30 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500">
+                      <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center text-[#0891b2] mb-6 group-hover:scale-110 transition-transform">
                         <HelpCircle className="w-6 h-6" />
                       </div>
-                      <h3 className="text-xl font-black text-white mb-4 tracking-tight group-hover:text-[#22d3ee] transition-colors">
+                      <h3 className="text-xl font-black text-slate-900 mb-4 tracking-tight group-hover:text-[#0891b2] transition-colors">
                         {item.q}
                       </h3>
-                      <p className="text-white/40 leading-relaxed font-medium text-sm">
+                      <p className="text-slate-500 leading-relaxed font-medium text-sm">
                         {item.a}
                       </p>
                     </div>
