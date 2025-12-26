@@ -15,7 +15,7 @@ export const LetterSection = () => {
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -400]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -300]);
   const y3 = useTransform(scrollYProgress, [0, 1], [0, -500]);
-  
+
   const xLeft = useTransform(scrollYProgress, [0, 0.5, 1], [-100, 50, -100]);
   const xRight = useTransform(scrollYProgress, [0, 0.5, 1], [100, -50, 100]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
@@ -23,34 +23,32 @@ export const LetterSection = () => {
   return (
     <section ref={containerRef} className="relative bg-white py-16 sm:py-24 md:py-32 border-y border-slate-100 overflow-hidden">
       {/* Background Decor - Floating Blobs */}
-      <motion.div 
+      <motion.div
         style={{ y: y1 }}
-        className="absolute top-0 -left-64 w-[800px] h-[800px] bg-[#83d4c0]/5 rounded-full blur-[120px] pointer-events-none" 
+        className="absolute top-0 -left-64 w-[800px] h-[800px] bg-[#83d4c0]/5 rounded-full blur-[120px] pointer-events-none"
       />
-      <motion.div 
+      <motion.div
         style={{ y: y2 }}
-        className="absolute top-1/2 -right-64 w-[700px] h-[700px] bg-[#0891b2]/5 rounded-full blur-[120px] pointer-events-none" 
+        className="absolute top-1/2 -right-64 w-[700px] h-[700px] bg-[#0891b2]/5 rounded-full blur-[120px] pointer-events-none"
       />
-      <motion.div 
+      <motion.div
         style={{ y: y3 }}
-        className="absolute bottom-0 -left-64 w-[600px] h-[600px] bg-[#83d4c0]/5 rounded-full blur-[120px] pointer-events-none" 
+        className="absolute bottom-0 -left-64 w-[600px] h-[600px] bg-[#83d4c0]/5 rounded-full blur-[120px] pointer-events-none"
       />
 
       {/* Floating Icons - Left Side */}
       <div className="absolute left-0 top-0 bottom-0 w-1/4 pointer-events-none hidden xl:block">
         <motion.div style={{ x: xLeft, y: '15vh', opacity }} className="absolute text-slate-100"><Home size={120} /></motion.div>
         <motion.div style={{ x: xLeft, y: '45vh', opacity }} className="absolute text-slate-100"><TrendingUp size={100} /></motion.div>
-        <motion.div style={{ x: xLeft, y: '75vh', opacity }} className="absolute text-slate-100"><Mail size={140} /></motion.div>
       </div>
 
       {/* Floating Icons - Right Side */}
       <div className="absolute right-0 top-0 bottom-0 w-1/4 pointer-events-none hidden xl:block">
         <motion.div style={{ x: xRight, y: '30vh', opacity }} className="absolute text-slate-100"><Key size={110} /></motion.div>
         <motion.div style={{ x: xRight, y: '60vh', opacity }} className="absolute text-slate-100"><ShieldCheck size={130} /></motion.div>
-        <motion.div style={{ x: xRight, y: '90vh', opacity }} className="absolute text-slate-100"><Zap size={90} /></motion.div>
       </div>
 
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none" 
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
            style={{ backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
 
       <div className="relative max-w-3xl mx-auto px-6">
@@ -82,27 +80,11 @@ export const LetterSection = () => {
           </p>
 
           <p>
-            Listings are down 45% from pre-pandemic levels, and you're fighting tooth and nail for the scraps that do hit the market.
+            Listings are down 45% from pre-pandemic levels. You're competing against 50 other investors on every halfway-decent property. Hedge funds are outbidding you before you can run your numbers.
           </p>
 
           <p>
-            You're competing against 50 other investors on every halfway-decent property.
-          </p>
-
-          <p>
-            Hedge funds with billions in capital are outbidding you before you even get a chance to run your numbers.
-          </p>
-
-          <p>
-            And wholesalers? They're charging $30,000+ in assignment fees for deals with zero margin.
-          </p>
-
-          <p>
-            If you're an active investor doing 4-5 deals a year, that's $150,000 going into someone else's pocket instead of yours.
-          </p>
-
-          <p>
-            Do the math on that over 5 years. Over 10 years.
+            And wholesalers? They're charging $30,000+ in assignment fees for deals with zero margin. If you're doing 4-5 deals a year, that's $150,000 going into someone else's pocket instead of yours.
           </p>
 
           <p>
@@ -114,363 +96,69 @@ export const LetterSection = () => {
           </p>
 
           <p>
-            Properties with insane margins that 95% of investors don't know exist.
+            Properties with insane margins that 95% of investors don't know exist. Properties where you might be the ONLY investor reaching out. No bidding wars. No wholesale fees. No competing against institutional capital.
           </p>
 
-          <p>
-            Properties where you might be the ONLY investor reaching out.
-          </p>
-
-          <p>
-            No bidding wars. No wholesale fees. No competing against institutional capital.
-          </p>
-
-          <p>
-            I'm talking about a proven, consistent source of off-market deals that's been working for smart investors for decades...
-          </p>
-
-          <p>
-            But here's the problem: most investors who try to work this source do it completely wrong.
-          </p>
-
-          <p>
-            They buy a list from one of those real estate CRMs advertised all over Facebook. Start making cold calls or blasting text messages that go straight to spam.
-          </p>
-
-          <p>
-            Sound familiar?
-          </p>
-
-          <p className="font-bold text-slate-900">
-            What if I told you there's a better way?
-          </p>
-
-          <p>
-            A way to access fresh properties the moment they become available...
-          </p>
-
-          <p>
-            To know EXACTLY when each seller is ready to have a conversation (not just when they show up on a list)...
-          </p>
-
-          <p>
-            And to follow the exact system we've used for 15 years to buy tens of millions in properties ourselves, and that we're now releasing to investors for the first time?
-          </p>
-
-          <p>
-            <span className="relative inline-block">
-              <span className="relative z-10">That's exactly what we've built.</span>
-              <span className="absolute inset-0 bg-gradient-to-b from-[#83d4c0]/40 to-transparent -rotate-1 translate-y-1 scale-x-105" />
-            </span>
-          </p>
-
-          <p>
-            But before I tell you how it works, you need to understand something critical about the source itself...
-          </p>
-
-          <p className="font-bold text-slate-900 pt-8">
+          <p className="font-bold text-slate-900 pt-4">
             The Hidden Goldmine 95% of Investors Ignore
           </p>
 
           <p>
-            When someone passes away, many properties go through something called probate.
+            When someone passes away, their properties often go through probate. And here's what makes these properties absolute goldmines:
           </p>
 
-          <p>
-            Probate is the legal process that kicks in when there's no clear will, the paperwork is a mess, or the court needs to sort out the estate.
-          </p>
-
-          <p>
-            And here's what makes probate properties absolute goldmines for investors who know how to work them:
-          </p>
-
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div className="flex gap-6">
               <span className="text-[#83d4c0] font-bold flex-shrink-0">01</span>
               <p>
-                <strong className="text-slate-900">The heirs don't want the property.</strong> They inherited a house they can't manage, don't need, and often live hundreds of miles away from. They value speed and certainty over top dollar.
+                <strong className="text-slate-900">The heirs don't want the property.</strong> They inherited a house they can't manage, don't need, and often live hundreds of miles away from. They value speed over top dollar.
               </p>
             </div>
             <div className="flex gap-6">
               <span className="text-[#83d4c0] font-bold flex-shrink-0">02</span>
               <p>
-                <strong className="text-slate-900">You're not competing.</strong> While 50 investors are fighting over one foreclosure listing, you might be the only person offering a solution to a probate family. Less than 5% of investors work this niche correctly.
+                <strong className="text-slate-900">You're not competing.</strong> While 50 investors fight over one foreclosure, you might be the only person offering a solution to a probate family.
               </p>
             </div>
             <div className="flex gap-6">
               <span className="text-[#83d4c0] font-bold flex-shrink-0">03</span>
               <p>
-                <strong className="text-slate-900">It's recession-proof.</strong> Courts file new probate cases every single week, year-round. It doesn't matter if interest rates are at 3% or 8%. People keep passing away, and their properties keep entering probate.
+                <strong className="text-slate-900">It's recession-proof.</strong> Courts file new probate cases every week, year-round. It doesn't matter if rates are 3% or 8%.
               </p>
             </div>
             <div className="flex gap-6">
               <span className="text-[#83d4c0] font-bold flex-shrink-0">04</span>
               <p>
-                <strong className="text-slate-900">It's a service, not a scam.</strong> You're helping families solve a real problem during a difficult transition. They get a hassle-free sale, you get a deal. True win-win.
+                <strong className="text-slate-900">It's a service, not a scam.</strong> You're helping families solve a real problem. They get a hassle-free sale, you get a deal. True win-win.
               </p>
             </div>
           </div>
 
-          <p>
-            The numbers don't lie: over 2.5 million people die in the US each year, and many owned real estate.
-          </p>
-
-          <p>
-            Even in small counties, dozens of new probate cases are filed monthly.
-          </p>
-
-          <p className="font-bold text-slate-900">
+          <p className="font-bold text-slate-900 pt-4">
             So why isn't everyone doing this?
           </p>
 
           <p>
-            Because most investors don't understand the probate process. It's not as simple as calling attorneys to ask if they have any cases. The leads are hard to find, the timing is tricky, and there's a right way and a wrong way to approach families.
+            Because the leads are hard to find, the timing is tricky, and there's a right way and a wrong way to approach families. Most investors who try probate do it completely wrong.
+          </p>
+
+          <p>
+            <span className="relative inline-block">
+              <span className="relative z-10">That's exactly why we built Homeflip.ai.</span>
+              <span className="absolute inset-0 bg-gradient-to-b from-[#83d4c0]/40 to-transparent -rotate-1 translate-y-1 scale-x-105" />
+            </span>
           </p>
 
           <p>
             Our team has been working probate for 15 years. This is the same platform we use for our own real estate business, and now we're making it available for the first time.
           </p>
 
-          <div className="py-8 sm:py-12 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 border-y border-slate-50">
-            <span className="font-hero font-[900] text-xl sm:text-2xl md:text-3xl text-slate-400 uppercase tracking-tighter italic text-center">Ready to get started?</span>
-            <Link
-              href="/waitlist"
-              className="btn-gradient inline-block px-8 sm:px-12 py-4 sm:py-6 rounded-2xl font-hero font-[900] text-2xl sm:text-3xl md:text-4xl uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all"
-            >
-              Claim Your County
-            </Link>
-          </div>
-
-          <p className="font-bold text-slate-900 pt-8">
-            Why Most Probate Strategies Fail (And How We Fixed It)
-          </p>
-
-          <p>
-            Here's how most investors approach probate:
-          </p>
-
-          <div className="pl-4 sm:pl-8 space-y-4 font-bold text-slate-900">
-            <div className="flex gap-3 sm:gap-4">
-              <span>💀</span>
-              <p>Buy a stale list of probate leads</p>
-            </div>
-            <div className="flex gap-3 sm:gap-4">
-              <span>💀</span>
-              <p>Cold call or blast texts to everyone on it</p>
-            </div>
-            <div className="flex gap-3 sm:gap-4">
-              <span>💀</span>
-              <p>Wait for the phone to ring (it won't)</p>
-            </div>
-          </div>
-
-          <p className="font-bold text-slate-900 mt-12">
-            Here's what they don't tell you:
-          </p>
-
-          <p>
-            That list they sold you? It's the same list they sold to 100 other investors in your market.
-          </p>
-
-          <p>
-            By the time you mail your letter, the heir has already gotten dozens of letters from other investors who bought the same list.
-          </p>
-
-          <p>
-            You're not calling them first. You're calling them 51st.
-          </p>
-
-          <p>
-            Oh, and the do-not-call list? Good luck with that.
-          </p>
-
-          <p>
-            And worse, you have no idea where the case actually stands. Did they just file yesterday? Did they already list the property with an agent two months ago? Is the case stalled indefinitely?
-          </p>
-
-          <p className="font-bold text-slate-900 italic underline decoration-[#0891b2]/30 underline-offset-8">
-            You're flying blind.
-          </p>
-
-          <p>
-            That's why we built something different.
-          </p>
-
-          <p className="font-bold text-slate-900 pt-8">
-            Timeline Intelligence: The Unfair Advantage
-          </p>
-
-          <p>
-            Most vendors sell you snapshots. A filing date and a name.
-          </p>
-
-          <p>
-            We track the entire lifecycle of each probate case in real-time.
-          </p>
-
-          <p>
-            Our AI monitors county court records around the clock. When a new case is filed with real estate assets, it hits your dashboard in hours, not weeks.
-          </p>
-
-          <p>
-            But here's where it gets interesting...
-          </p>
-
-          <p>
-            We don't just tell you a case was filed. We track EVERYTHING that happens next:
-          </p>
-
-          <div className="pl-4 sm:pl-8 space-y-4 font-bold text-slate-900">
-            <div className="flex gap-3 sm:gap-4">
-              <span>⚡</span>
-              <p>When the inventory is submitted</p>
-            </div>
-            <div className="flex gap-3 sm:gap-4">
-              <span>⚡</span>
-              <p>When property addresses are revealed</p>
-            </div>
-            <div className="flex gap-3 sm:gap-4">
-              <span>⚡</span>
-              <p>When the case moves toward resolution</p>
-            </div>
-            <div className="flex gap-3 sm:gap-4">
-              <span>⚡</span>
-              <p>When it stalls out</p>
-            </div>
-            <div className="flex gap-3 sm:gap-4">
-              <span>⚡</span>
-              <p>When the property gets listed</p>
-            </div>
-          </div>
-
-          <p>
-            Your AI agent analyzes thousands of past cases in your county, predicting which properties will sell and when. Once it's set up, it's working for you around the clock.
-          </p>
-
-          <p className="font-bold text-slate-900 text-center py-4">
-            We tell you exactly when to reach out.
-          </p>
-
-          <p>
-            Not just "hey, someone filed a case." But "this case just moved to the next stage. NOW is the time to make contact."
-          </p>
-
-          <p>
-            While other investors are marketing to static lists at random times, you're reaching out at the exact moment when families are actively dealing with the property.
-          </p>
-
-          <p>
-            That's the difference between being call #51... and being the ONLY call that matters.
-          </p>
-
-          <div className="py-8 sm:py-12 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 border-y border-slate-50">
-            <span className="font-hero font-[900] text-xl sm:text-2xl md:text-3xl text-slate-400 uppercase tracking-tighter italic text-center">Ready to get started?</span>
-            <Link
-              href="/waitlist"
-              className="btn-gradient inline-block px-8 sm:px-12 py-4 sm:py-6 rounded-2xl font-hero font-[900] text-2xl sm:text-3xl md:text-4xl uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all"
-            >
-              Claim Your County
-            </Link>
-          </div>
-
-          <p className="font-bold text-slate-900 pt-8">
-            But Data Alone Isn't Enough
-          </p>
-
-          <p>
-            Look, we could just give you the leads and send you on your way.
-          </p>
-
-          <p>
-            But that would be like handing you a fighter jet without teaching you how to fly it.
-          </p>
-
-          <p>
-            The leads are incredible. But knowing HOW to work them? That's where the real money is made.
-          </p>
-
-          <p>
-            That's why we don't just give you probate leads.
-          </p>
-
-          <p className="font-bold text-slate-900">
-            We give you the complete system:
-          </p>
-
-          <div className="space-y-4">
-            <p><span className="text-[#83d4c0] font-bold">✓</span> <strong className="text-slate-900">Fresh leads delivered daily:</strong> No courthouse visits, no manual searching</p>
-            <p><span className="text-[#83d4c0] font-bold">✓</span> <strong className="text-slate-900">Timeline tracking:</strong> Know exactly where each case stands and when to reach out</p>
-            <p><span className="text-[#83d4c0] font-bold">✓</span> <strong className="text-slate-900">Proven outreach workflows:</strong> Step-by-step guidance designed specifically for probate</p>
-            <p><span className="text-[#83d4c0] font-bold">✓</span> <strong className="text-slate-900">Coaching and support:</strong> Learn from investors who've closed hundreds of probate deals</p>
-            <p><span className="text-[#83d4c0] font-bold">✓</span> <strong className="text-slate-900">All-in-one platform:</strong> Manage contacts, track follow-ups, never lose a lead</p>
-          </div>
-
-          <p>
-            This is more than a CRM. More than just data.
-          </p>
-
-          <p className="font-bold text-slate-900 italic">
-            This is a complete probate system designed to help you reach your real estate investing goals.
-          </p>
-
-          <p className="font-bold text-slate-900 pt-8">
-            What This Means For Your Business
-          </p>
-
-          <p>
-            Imagine waking up to fresh probate leads in your dashboard every single morning.
-          </p>
-
-          <p>
-            Leads that other investors in your market don't have access to.
-          </p>
-
-          <p>
-            Leads with timeline intelligence that tells you EXACTLY when to reach out.
-          </p>
-
-          <p>
-            And a proven system that shows you exactly what to say, how to follow up, and how to close the deal.
-          </p>
-
-          <p>
-            No more fighting over the same stale lists as everyone else.
-          </p>
-
-          <p>
-            No more paying $30,000 wholesale fees.
-          </p>
-
-          <p>
-            No more wondering where your next deal is coming from.
-          </p>
-
-          <p>
-            Just a consistent, predictable pipeline of off-market properties.
-          </p>
-
-          <p className="font-bold text-slate-900">
-            That's what real financial freedom looks like.
-          </p>
-
-          <p>
-            The ability to control your own deal flow. To build generational wealth on YOUR terms. To finally get off the hamster wheel of chasing deals and start building a real business.
-          </p>
-
-          <p className="font-bold text-slate-900 pt-8">
+          <p className="font-bold text-slate-900 pt-4">
             This Is Your Moment
           </p>
 
           <p>
-            Right now, while most investors are paralyzed by the inventory crisis...
-          </p>
-
-          <p>
-            While others are fighting over scraps on the MLS...
-          </p>
-
-          <p>
-            While the rest are paying ridiculous wholesale fees just to get a shot at a deal...
+            Right now, while most investors are paralyzed by the inventory crisis, fighting over scraps on the MLS, or paying ridiculous wholesale fees just to get a shot at a deal...
           </p>
 
           <p className="font-bold text-slate-900">
@@ -478,30 +166,18 @@ export const LetterSection = () => {
           </p>
 
           <p>
-            But here's the thing: we're in private beta, and we're limiting it to less than five investors per county.
+            We're in private beta, and we're limiting it to less than five investors per county to ensure everyone gets real results.
           </p>
 
           <p>
-            We keep it this tight to ensure everyone gets real results.
+            So if you're serious about taking control of your deal flow and building real wealth through real estate...
           </p>
 
-          <p>
-            So if you're serious about taking control of your deal flow...
-          </p>
-
-          <p>
-            If you're ready to stop competing and start dominating...
-          </p>
-
-          <p>
-            If you want to build real wealth through real estate...
-          </p>
-
-          <p className="font-bold text-slate-900 mb-12">
+          <p className="font-bold text-slate-900">
             Join the beta before your county fills up.
           </p>
 
-          <div className="mt-12 sm:mt-16 text-center">
+          <div className="mt-8 sm:mt-12 text-center">
             <Link
               href="/waitlist"
               className="btn-gradient inline-block px-8 sm:px-12 py-5 sm:py-7 rounded-2xl sm:rounded-[2rem] font-hero font-[900] text-3xl sm:text-4xl md:text-5xl shadow-2xl shadow-[#83d4c0]/30 hover:scale-105 active:scale-95 transition-all uppercase tracking-tighter"
