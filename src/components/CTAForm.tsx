@@ -55,9 +55,9 @@ export const CTAForm = ({
   }
 
   return (
-    <form 
-      onSubmit={handleSubmit} 
-      className={`relative flex items-center bg-white rounded-2xl border border-slate-200 p-1.5 shadow-xl focus-within:ring-2 focus-within:ring-[#83d4c0]/30 focus-within:border-[#83d4c0] transition-all dark:bg-white/5 dark:border-white/10 ${className}`}
+    <form
+      onSubmit={handleSubmit}
+      className={`relative flex flex-col sm:flex-row items-stretch sm:items-center bg-white rounded-2xl sm:rounded-2xl border border-slate-200 p-3 sm:p-1.5 shadow-xl focus-within:ring-2 focus-within:ring-[#83d4c0]/30 focus-within:border-[#83d4c0] transition-all dark:bg-white/5 dark:border-white/10 gap-3 sm:gap-0 ${className}`}
     >
       <input
         type="email"
@@ -67,12 +67,12 @@ export const CTAForm = ({
         required
         autoComplete="email"
         data-lpignore="true"
-        className="flex-1 bg-transparent px-8 py-4 focus:outline-none text-slate-900 dark:text-white text-lg placeholder:text-slate-400"
+        className="flex-1 bg-transparent px-4 sm:px-8 py-3 sm:py-4 focus:outline-none text-slate-900 dark:text-white text-base sm:text-lg placeholder:text-slate-400 rounded-xl sm:rounded-none"
       />
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="btn-gradient px-10 py-4 rounded-xl font-hero font-[900] text-3xl uppercase tracking-tighter shadow-lg shadow-[#83d4c0]/20 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 whitespace-nowrap"
+        className="btn-gradient px-6 sm:px-10 py-4 rounded-xl font-hero font-[900] text-xl sm:text-2xl md:text-3xl uppercase tracking-tighter shadow-lg shadow-[#83d4c0]/20 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 whitespace-nowrap w-full sm:w-auto"
       >
         {status === 'submitting' ? 'Joining...' : buttonText}
       </button>

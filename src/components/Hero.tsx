@@ -29,7 +29,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-hero text-[11vw] sm:text-[8rem] lg:text-[10rem] font-[800] text-white leading-[0.85] tracking-[-0.03em] mb-12 uppercase"
+            className="font-hero text-[14vw] sm:text-[8rem] lg:text-[10rem] font-[800] text-white leading-[0.85] tracking-[-0.03em] mb-8 sm:mb-12 uppercase"
           >
             The AI-Powered <br />
             Probate Lead Platform
