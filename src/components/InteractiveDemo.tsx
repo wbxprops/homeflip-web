@@ -4,49 +4,41 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Home, MapPin, ChevronLeft, ChevronRight, Check, Sparkles } from 'lucide-react';
 
-// Mock data for demo cases
-const DEMO_CASES = [
-  {
-    id: 1,
-    caseNumber: '2025005337',
-    decedentName: 'Eckerle',
-    propertyAddress: '4521 Vine St, Cincinnati',
-    estimatedValue: 285000,
-    equity: 92,
-    daysOnMarket: 0,
-    caseType: 'Full Administration',
-  },
-  {
-    id: 2,
-    caseNumber: '2025005339',
-    decedentName: 'Moore',
-    propertyAddress: '1847 Oak Ave, Hamilton',
-    estimatedValue: 195000,
-    equity: 100,
-    daysOnMarket: 0,
-    caseType: 'Release from Admin',
-  },
-  {
-    id: 3,
-    caseNumber: '2025005341',
-    decedentName: 'Richardson',
-    propertyAddress: '892 Elm Dr, Fairfield',
-    estimatedValue: 342000,
-    equity: 78,
-    daysOnMarket: 0,
-    caseType: 'Full Administration',
-  },
-  {
-    id: 4,
-    caseNumber: '2025005344',
-    decedentName: 'Thompson',
-    propertyAddress: '2156 Main St, Mason',
-    estimatedValue: 415000,
-    equity: 85,
-    daysOnMarket: 0,
-    caseType: 'Summary Release',
-  },
+// Large pool of mock cases for variety
+const ALL_DEMO_CASES = [
+  { id: 1, caseNumber: '2025005337', decedentName: 'Eckerle', propertyAddress: '4521 Vine St, Cincinnati', estimatedValue: 285000, equity: 92, caseType: 'Full Administration' },
+  { id: 2, caseNumber: '2025005339', decedentName: 'Moore', propertyAddress: '1847 Oak Ave, Hamilton', estimatedValue: 195000, equity: 100, caseType: 'Release from Admin' },
+  { id: 3, caseNumber: '2025005341', decedentName: 'Richardson', propertyAddress: '892 Elm Dr, Fairfield', estimatedValue: 342000, equity: 78, caseType: 'Full Administration' },
+  { id: 4, caseNumber: '2025005344', decedentName: 'Thompson', propertyAddress: '2156 Main St, Mason', estimatedValue: 415000, equity: 85, caseType: 'Summary Release' },
+  { id: 5, caseNumber: '2025005348', decedentName: 'Williams', propertyAddress: '723 Walnut Ln, Loveland', estimatedValue: 268000, equity: 88, caseType: 'Full Administration' },
+  { id: 6, caseNumber: '2025005351', decedentName: 'Anderson', propertyAddress: '1456 Cherry St, Norwood', estimatedValue: 175000, equity: 100, caseType: 'Summary Release' },
+  { id: 7, caseNumber: '2025005355', decedentName: 'Martinez', propertyAddress: '3892 Beech Ave, Blue Ash', estimatedValue: 389000, equity: 72, caseType: 'Full Administration' },
+  { id: 8, caseNumber: '2025005359', decedentName: 'Taylor', propertyAddress: '567 Maple Dr, Sharonville', estimatedValue: 225000, equity: 95, caseType: 'Release from Admin' },
+  { id: 9, caseNumber: '2025005362', decedentName: 'Johnson', propertyAddress: '2341 Pine Rd, West Chester', estimatedValue: 445000, equity: 81, caseType: 'Full Administration' },
+  { id: 10, caseNumber: '2025005366', decedentName: 'Brown', propertyAddress: '891 Cedar Ct, Liberty Twp', estimatedValue: 312000, equity: 100, caseType: 'Summary Release' },
+  { id: 11, caseNumber: '2025005370', decedentName: 'Davis', propertyAddress: '1678 Spruce Way, Madeira', estimatedValue: 278000, equity: 67, caseType: 'Full Administration' },
+  { id: 12, caseNumber: '2025005374', decedentName: 'Wilson', propertyAddress: '4523 Birch Blvd, Montgomery', estimatedValue: 525000, equity: 90, caseType: 'Release from Admin' },
+  { id: 13, caseNumber: '2025005378', decedentName: 'Garcia', propertyAddress: '789 Ash St, Deer Park', estimatedValue: 165000, equity: 100, caseType: 'Summary Release' },
+  { id: 14, caseNumber: '2025005382', decedentName: 'Miller', propertyAddress: '2156 Hickory Ln, Reading', estimatedValue: 198000, equity: 84, caseType: 'Full Administration' },
+  { id: 15, caseNumber: '2025005386', decedentName: 'Jones', propertyAddress: '3467 Willow Dr, Springdale', estimatedValue: 289000, equity: 76, caseType: 'Release from Admin' },
 ];
+
+// Function to get cases for a specific day (deterministic based on day number)
+const getCasesForDay = (day: number, count: number) => {
+  // Use day as seed for deterministic "random" selection
+  const startIndex = (day * 3) % ALL_DEMO_CASES.length;
+  const cases = [];
+  for (let i = 0; i < count; i++) {
+    const index = (startIndex + i) % ALL_DEMO_CASES.length;
+    cases.push({
+      ...ALL_DEMO_CASES[index],
+      // Make case numbers unique per day
+      id: day * 100 + i,
+      caseNumber: `2025${String(day).padStart(2, '0')}${String(5300 + i).padStart(4, '0')}`,
+    });
+  }
+  return cases;
+};
 
 // Calendar data showing which days have leads
 const CALENDAR_DATA: Record<number, number> = {
@@ -61,7 +53,8 @@ export const InteractiveDemo = () => {
   const [claimedCases, setClaimedCases] = useState<Set<number>>(new Set());
   const [showCelebration, setShowCelebration] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [visibleCases, setVisibleCases] = useState<typeof DEMO_CASES>([]);
+  const [visibleCases, setVisibleCases] = useState<typeof ALL_DEMO_CASES>([]);
+  const [currentDayCases, setCurrentDayCases] = useState<typeof ALL_DEMO_CASES>([]);
 
   // Get current date info
   const now = new Date();
@@ -72,17 +65,22 @@ export const InteractiveDemo = () => {
   const firstDayOfMonth = new Date(currentYear, now.getMonth(), 1).getDay(); // 0 = Sunday
 
   const handleDateClick = (day: number) => {
-    if (CALENDAR_DATA[day]) {
+    const caseCount = CALENDAR_DATA[day];
+    if (caseCount) {
       setSelectedDate(day);
       setIsLoading(true);
       setVisibleCases([]);
 
+      // Get unique cases for this day
+      const dayCases = getCasesForDay(day, caseCount);
+      setCurrentDayCases(dayCases);
+
       // Simulate loading then reveal cases one by one
       setTimeout(() => {
         setIsLoading(false);
-        DEMO_CASES.forEach((_, index) => {
+        dayCases.forEach((_, index) => {
           setTimeout(() => {
-            setVisibleCases(prev => [...prev, DEMO_CASES[index]]);
+            setVisibleCases(prev => [...prev, dayCases[index]]);
           }, index * 300);
         });
       }, 800);
@@ -276,7 +274,7 @@ export const InteractiveDemo = () => {
                         Cases Filed {currentMonth.slice(0, 3)} {selectedDate}, {currentYear}
                       </h4>
                       <span className="px-3 py-1 rounded-full bg-[#83d4c0]/20 text-[#83d4c0] text-sm font-bold">
-                        {DEMO_CASES.length} Available
+                        {currentDayCases.length} Available
                       </span>
                     </div>
 
