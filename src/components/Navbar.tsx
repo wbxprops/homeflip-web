@@ -11,6 +11,7 @@ export const Navbar = () => {
     { href: '/#probate-investing', label: 'Why Probate' },
     { href: '/#features', label: 'How It Works' },
     { href: '/#faq', label: 'FAQs' },
+    { href: '/claim-your-county', label: 'Claim Your County', highlight: true },
   ];
 
   const closeMenu = () => setIsOpen(false);
@@ -33,15 +34,25 @@ export const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-bold text-slate-400 hover:text-[#83d4c0] transition-colors uppercase tracking-tighter"
-              >
-                {link.label}
-              </Link>
+              'highlight' in link && link.highlight ? (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="btn-gradient px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-tighter shadow-lg shadow-[#83d4c0]/20 hover:scale-105 transition-transform"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-bold text-slate-400 hover:text-[#83d4c0] transition-colors uppercase tracking-tighter"
+                >
+                  {link.label}
+                </Link>
+              )
             ))}
           </div>
 
@@ -126,7 +137,7 @@ export const Navbar = () => {
                 {/* CTA in mobile menu */}
                 <div className="p-4 pt-2 border-t border-white/5">
                   <Link
-                    href="/waitlist"
+                    href="/claim-your-county"
                     onClick={closeMenu}
                     className="block w-full btn-gradient py-4 rounded-xl font-hero font-[900] text-xl uppercase tracking-tighter text-center shadow-lg shadow-[#83d4c0]/20"
                   >
