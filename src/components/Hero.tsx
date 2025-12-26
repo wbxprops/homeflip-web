@@ -31,8 +31,8 @@ export const Hero = () => {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="font-hero text-[11vw] sm:text-[8rem] lg:text-[10rem] font-[800] text-white leading-[0.85] tracking-[-0.03em] mb-12 uppercase"
           >
-            The AI Probate Platform <br />
-            For Investors
+            The AI-Powered <br />
+            Probate Lead Platform
           </motion.h1>
 
           <motion.p 
@@ -41,7 +41,7 @@ export const Hero = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-2xl sm:text-3xl lg:text-4xl text-slate-400 max-w-4xl mx-auto leading-snug mb-12 font-normal"
           >
-            The AI-powered intelligence platform that uncovers high-equity probate deals <span className="text-[#83d4c0] italic">before your competition even knows they exist.</span>
+            Built for real estate investors who want consistent off-market deals with <span className="text-[#83d4c0] italic">high equity and motivated sellers.</span>
           </motion.p>
 
           <motion.div 
@@ -68,6 +68,9 @@ export const Hero = () => {
 
         {/* Visual Teaser Removed for Letter-First Layout */}
       </div>
+
+      {/* Bottom Border Line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#83d4c0]/50 to-transparent" />
     </section>
   );
 };

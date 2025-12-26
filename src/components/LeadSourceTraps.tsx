@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Zap, ArrowRight, Check, X, Target, Trophy, TrendingUp, Handshake } from 'lucide-react';
+import { Zap, Check, X, Target, Trophy, TrendingUp, Handshake } from 'lucide-react';
 
 /* =============================================================================
    LEAD SOURCE TRAPS SECTION
@@ -31,12 +31,12 @@ export const LeadSourceTraps = () => {
             KNOW YOUR OPTIONS
           </motion.div>
           <h2 className="text-5xl sm:text-7xl lg:text-8xl font-black text-slate-900 mb-8 tracking-tight">
-            Where Most Investors <br />
-            <span className="text-slate-400">Find Their Deals.</span>
+            How Do Most Investors <br />
+            <span className="text-slate-400">Find Deals?</span>
           </h2>
           <p className="text-xl sm:text-2xl text-slate-500 leading-relaxed max-w-3xl mx-auto">
             Every lead source has trade-offs. Here's an honest look at the most common ways
-            investors find off-market properties—and what you should consider before diving in.
+            investors find off-market properties, and what you should consider before diving in.
           </p>
         </motion.div>
 
@@ -59,7 +59,7 @@ export const LeadSourceTraps = () => {
 
           <div className="space-y-6 text-xl sm:text-2xl text-slate-600 leading-relaxed mb-10">
             <p>
-              Homeowners behind on payments can be motivated sellers—but the timing is tricky.
+              Homeowners behind on payments can be motivated sellers, but the timing is tricky.
               Most are in denial until the last moment, and banks can approve loan modifications
               that kill your deal after weeks of work.
             </p>
@@ -120,13 +120,6 @@ export const LeadSourceTraps = () => {
             </motion.div>
           </div>
 
-          <a
-            href="/resources/pre-foreclosures"
-            className="inline-flex items-center gap-2 text-lg font-bold text-[#0891b2] hover:text-slate-900 transition-colors group"
-          >
-            Compare Pre-Foreclosures vs. Probate
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </a>
         </motion.div>
 
         {/* =====================================================================
@@ -149,7 +142,7 @@ export const LeadSourceTraps = () => {
           <div className="space-y-6 text-xl sm:text-2xl text-slate-600 leading-relaxed mb-10">
             <p>
               Wholesalers do the legwork of finding deals and assign them to you for a fee.
-              It's convenient—but assignment fees of $10K-$30K can eat into your margins quickly.
+              It's convenient, but assignment fees of $10K-$30K can eat into your margins quickly.
             </p>
 
             <p>
@@ -177,7 +170,7 @@ export const LeadSourceTraps = () => {
                 </div>
                 <div className="space-y-4">
                   <ProConItem type="pro" text="Someone else does the marketing and lead generation" />
-                  <ProConItem type="pro" text="Deals are already under contract—ready to close" />
+                  <ProConItem type="pro" text="Deals are already under contract and ready to close" />
                   <ProConItem type="pro" text="Can scale quickly without building your own pipeline" />
                 </div>
               </div>
@@ -208,13 +201,6 @@ export const LeadSourceTraps = () => {
             </motion.div>
           </div>
 
-          <a
-            href="/resources/wholesalers"
-            className="inline-flex items-center gap-2 text-lg font-bold text-[#0891b2] hover:text-slate-900 transition-colors group"
-          >
-            Compare Wholesalers vs. Probate
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </a>
         </motion.div>
 
         {/* =====================================================================
@@ -237,7 +223,7 @@ export const LeadSourceTraps = () => {
           <div className="space-y-6 text-xl sm:text-2xl text-slate-600 leading-relaxed mb-10">
             <p>
               Driving neighborhoods looking for distressed properties is a classic approach.
-              It's low-cost to start, but the time investment is significant—hours of driving,
+              It's low-cost to start, but the time investment is significant: hours of driving,
               plus skip tracing fees to find owner contact info.
             </p>
 
@@ -265,7 +251,7 @@ export const LeadSourceTraps = () => {
                   <h4 className="text-xl font-black text-slate-900 uppercase tracking-wider">Advantages</h4>
                 </div>
                 <div className="space-y-4">
-                  <ProConItem type="pro" text="Low startup cost—just gas and your time" />
+                  <ProConItem type="pro" text="Low startup cost: just gas and your time" />
                   <ProConItem type="pro" text="Builds deep local market knowledge" />
                   <ProConItem type="pro" text="Find properties others might miss" />
                   <ProConItem type="pro" text="Direct contact with property owners" />
@@ -298,13 +284,6 @@ export const LeadSourceTraps = () => {
             </motion.div>
           </div>
 
-          <a
-            href="/resources/driving-for-dollars"
-            className="inline-flex items-center gap-2 text-lg font-bold text-[#0891b2] hover:text-slate-900 transition-colors group"
-          >
-            Compare Driving for Dollars vs. Probate
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </a>
         </motion.div>
 
         {/* =====================================================================
@@ -327,7 +306,7 @@ export const LeadSourceTraps = () => {
           <div className="space-y-6 text-xl sm:text-2xl text-slate-600 leading-relaxed mb-10">
             <p>
               The MLS gives you access to a large inventory of properties, and working with agents
-              can streamline the transaction process. But by definition, these are on-market properties—
+              can streamline the transaction process. But by definition, these are on-market properties:
               every investor in your area sees the same listings.
             </p>
 
@@ -358,7 +337,7 @@ export const LeadSourceTraps = () => {
                   <ProConItem type="pro" text="Large inventory of available properties" />
                   <ProConItem type="pro" text="Professional agents streamline the transaction" />
                   <ProConItem type="pro" text="Clear pricing and property disclosures" />
-                  <ProConItem type="pro" text="Financing-friendly—easy to get loans" />
+                  <ProConItem type="pro" text="Financing-friendly and easy to get loans" />
                 </div>
               </div>
             </motion.div>
@@ -388,13 +367,6 @@ export const LeadSourceTraps = () => {
             </motion.div>
           </div>
 
-          <a
-            href="/resources/mls-properties"
-            className="inline-flex items-center gap-2 text-lg font-bold text-[#0891b2] hover:text-slate-900 transition-colors group"
-          >
-            Compare MLS vs. Probate
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </a>
         </motion.div>
 
         {/* =====================================================================
@@ -417,7 +389,7 @@ export const LeadSourceTraps = () => {
           <div className="space-y-6 text-xl sm:text-2xl text-slate-600 leading-relaxed mb-16">
             <p>
               When someone passes away, their estate often includes real property.
-              The heirs—frequently out-of-state adult children—inherit a home they don't want to manage
+              The heirs (frequently out-of-state adult children) inherit a home they don't want to manage
               and often prefer a quick, simple sale over maximizing price.
             </p>
 
@@ -486,7 +458,7 @@ export const LeadSourceTraps = () => {
             </div>
 
             <p className="text-xl sm:text-2xl text-slate-600 leading-relaxed mb-8">
-              We track the entire lifecycle of each probate case—so you know which estates
+              We track the entire lifecycle of each probate case so you know which estates
               are ready to sell <strong className="text-slate-900">right now</strong>,
               not just which ones were filed months ago.
             </p>
@@ -497,10 +469,9 @@ export const LeadSourceTraps = () => {
 
             <a
               href="/waitlist"
-              className="btn-gradient inline-flex items-center gap-3 px-10 py-5 rounded-full text-lg font-black uppercase tracking-widest group"
+              className="btn-gradient inline-block px-12 py-6 rounded-2xl font-hero font-[900] text-4xl uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all"
             >
               Claim Your County
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         </motion.div>

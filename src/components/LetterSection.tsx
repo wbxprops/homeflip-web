@@ -224,18 +224,18 @@ export const LetterSection = () => {
           </p>
 
           <p>
-            Because there's a right way and a wrong way.
+            Because most investors don't understand the probate process. It's not as simple as calling attorneys to ask if they have any cases. The leads are hard to find, the timing is tricky, and there's a right way and a wrong way to approach families.
           </p>
 
           <p>
-            And most investors, even the ones who've heard about probate, are doing it the wrong way.
+            Our team has been working probate for 15 years. This is the same platform we use for our own real estate business, and now we're making it available for the first time.
           </p>
 
           <div className="py-12 flex flex-col sm:flex-row items-center justify-center gap-8 border-y border-slate-50">
             <span className="font-hero font-[900] text-2xl sm:text-3xl text-slate-400 uppercase tracking-tighter italic">Ready to get started?</span>
             <Link 
               href="/waitlist"
-              className="btn-gradient inline-block px-10 py-5 rounded-2xl font-hero font-[900] text-3xl uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all"
+              className="btn-gradient inline-block px-12 py-6 rounded-2xl font-hero font-[900] text-4xl uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all"
             >
               Claim Your County
             </Link>
@@ -246,7 +246,7 @@ export const LetterSection = () => {
           </p>
 
           <p>
-            Here's how the "gurus" tell you to do probate:
+            Here's how most investors approach probate:
           </p>
 
           <div className="pl-8 space-y-4 font-bold text-slate-900">
@@ -273,7 +273,7 @@ export const LetterSection = () => {
           </p>
 
           <p>
-            By the time you mail your letter, the heir has already gotten 47 other letters from investors who went through the same "guru" course.
+            By the time you mail your letter, the heir has already gotten dozens of letters from other investors who bought the same list.
           </p>
 
           <p>
@@ -309,7 +309,7 @@ export const LetterSection = () => {
           </p>
 
           <p>
-            Our AI monitors county court records 24/7. The moment a new case is filed with real estate assets, it hits your dashboard.
+            Our AI monitors county court records around the clock. When a new case is filed with real estate assets, it hits your dashboard in hours, not weeks.
           </p>
 
           <p>
@@ -356,7 +356,7 @@ export const LetterSection = () => {
           </p>
 
           <p>
-            While other investors are mailing static lists at random times, you're reaching out at the exact moment when families are actively dealing with the property.
+            While other investors are marketing to static lists at random times, you're reaching out at the exact moment when families are actively dealing with the property.
           </p>
 
           <p>
@@ -367,7 +367,7 @@ export const LetterSection = () => {
             <span className="font-hero font-[900] text-2xl sm:text-3xl text-slate-400 uppercase tracking-tighter italic">Ready to get started?</span>
             <Link 
               href="/waitlist"
-              className="btn-gradient inline-block px-10 py-5 rounded-2xl font-hero font-[900] text-3xl uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all"
+              className="btn-gradient inline-block px-12 py-6 rounded-2xl font-hero font-[900] text-4xl uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all"
             >
               Claim Your County
             </Link>
@@ -398,11 +398,11 @@ export const LetterSection = () => {
           </p>
 
           <div className="space-y-4">
-            <p><span className="text-[#83d4c0] font-bold">✓</span> <strong className="text-slate-900">Fresh leads delivered daily</strong> — No courthouse visits, no manual searching</p>
-            <p><span className="text-[#83d4c0] font-bold">✓</span> <strong className="text-slate-900">Timeline tracking</strong> — Know exactly where each case stands and when to reach out</p>
-            <p><span className="text-[#83d4c0] font-bold">✓</span> <strong className="text-slate-900">Proven outreach workflows</strong> — Step-by-step guidance designed specifically for probate</p>
-            <p><span className="text-[#83d4c0] font-bold">✓</span> <strong className="text-slate-900">Coaching and support</strong> — Learn from investors who've closed hundreds of probate deals</p>
-            <p><span className="text-[#83d4c0] font-bold">✓</span> <strong className="text-slate-900">All-in-one platform</strong> — Manage contacts, track follow-ups, never lose a lead</p>
+            <p><span className="text-[#83d4c0] font-bold">✓</span> <strong className="text-slate-900">Fresh leads delivered daily:</strong> No courthouse visits, no manual searching</p>
+            <p><span className="text-[#83d4c0] font-bold">✓</span> <strong className="text-slate-900">Timeline tracking:</strong> Know exactly where each case stands and when to reach out</p>
+            <p><span className="text-[#83d4c0] font-bold">✓</span> <strong className="text-slate-900">Proven outreach workflows:</strong> Step-by-step guidance designed specifically for probate</p>
+            <p><span className="text-[#83d4c0] font-bold">✓</span> <strong className="text-slate-900">Coaching and support:</strong> Learn from investors who've closed hundreds of probate deals</p>
+            <p><span className="text-[#83d4c0] font-bold">✓</span> <strong className="text-slate-900">All-in-one platform:</strong> Manage contacts, track follow-ups, never lose a lead</p>
           </div>
 
           <p>
@@ -410,7 +410,7 @@ export const LetterSection = () => {
           </p>
 
           <p className="font-bold text-slate-900 italic">
-            This is a complete probate system designed to help you close deals.
+            This is a complete probate system designed to help you reach your real estate investing goals.
           </p>
 
           <p className="font-bold text-slate-900 pt-8">
@@ -504,7 +504,7 @@ export const LetterSection = () => {
           <div className="mt-16 text-center">
             <Link 
               href="/waitlist"
-              className="btn-gradient inline-block px-14 py-8 rounded-[2rem] font-hero font-[900] text-6xl shadow-2xl shadow-[#83d4c0]/30 hover:scale-105 active:scale-95 transition-all uppercase tracking-tighter"
+              className="btn-gradient inline-block px-12 py-7 rounded-[2rem] font-hero font-[900] text-5xl shadow-2xl shadow-[#83d4c0]/30 hover:scale-105 active:scale-95 transition-all uppercase tracking-tighter"
             >
               Claim Your County
             </Link>

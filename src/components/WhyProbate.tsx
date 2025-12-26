@@ -82,7 +82,7 @@ export const WhyProbate = () => {
         >
           <div className="inline-block p-1 rounded-full bg-slate-50 border border-slate-200">
             <div className="px-8 py-4 rounded-full bg-white backdrop-blur-xl text-xl text-slate-500 font-medium shadow-sm">
-              Probate leads are not records—<span className="text-[#0891b2] font-black italic">they&apos;re evolving situations.</span>
+              Probate leads are not records. <span className="text-[#0891b2] font-black italic">They&apos;re evolving situations.</span>
             </div>
           </div>
         </motion.div>

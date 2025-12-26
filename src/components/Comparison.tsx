@@ -28,19 +28,19 @@ export const Comparison = () => {
 
       <div className="grid lg:grid-cols-2 gap-8 items-stretch">
         {/* Before - Static Lists */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="bg-slate-50 p-8 md:p-12 rounded-[2.5rem] border border-slate-100 relative overflow-hidden"
+          className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-slate-200 relative overflow-hidden"
         >
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white -mr-16 -mt-16 rounded-full blur-2xl" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 -mr-16 -mt-16 rounded-full blur-2xl" />
           <div className="relative">
             <div className="flex items-center gap-3 mb-10">
-              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-300 border border-slate-100">
+              <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 border border-slate-200">
                 <XCircle className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-black text-slate-400 tracking-widest uppercase">Static Lists</h3>
+              <h3 className="text-xl font-black text-slate-700 tracking-widest uppercase">Static Lists</h3>
             </div>
             
             <div className="space-y-8">
@@ -51,12 +51,12 @@ export const Comparison = () => {
               />
               <ComparisonItem
                 title="The 'Red Ocean'"
-                description="The same CSV is sold to every 'guru' student. You're call #51 of the day."
+                description="The same CSV is sold to dozens of investors. You're competing with everyone who bought the same list."
                 isNegative
               />
               <ComparisonItem
                 title="Stale Data"
-                description="Lists are often weeks old. By the time you mail, the property is already listed."
+                description="Lists are often weeks old. By the time you reach out, the property is already sold."
                 isNegative
               />
               <ComparisonItem
@@ -79,16 +79,11 @@ export const Comparison = () => {
           <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#22d3ee]/5 rounded-full blur-[100px]" />
           
           <div className="relative">
-            <div className="flex items-center justify-between mb-10">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#0891b2] flex items-center justify-center text-white shadow-lg shadow-[#0891b2]/30">
-                  <CheckCircle2 className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-black text-slate-900 tracking-widest uppercase">Timeline Intelligence</h3>
+            <div className="flex items-center gap-3 mb-10">
+              <div className="w-10 h-10 rounded-xl bg-[#0891b2] flex items-center justify-center text-white shadow-lg shadow-[#0891b2]/30">
+                <CheckCircle2 className="w-6 h-6" />
               </div>
-              <div className="px-3 py-1 rounded-full bg-slate-50 text-[#0891b2] text-xs font-black tracking-[0.15em] uppercase border border-slate-100">
-                Aura Powered
-              </div>
+              <h3 className="text-xl font-black text-slate-900 tracking-widest uppercase">Timeline Intelligence</h3>
             </div>
             
             <div className="space-y-8">
@@ -99,7 +94,7 @@ export const Comparison = () => {
               />
               <ComparisonItem
                 title="Status Change Alerts"
-                description="Know the moment a case moves closer to a sale—often months before anyone else."
+                description="Know the moment a case moves closer to a sale, often months before anyone else."
                 isDark
               />
               <ComparisonItem
@@ -132,14 +127,14 @@ export const Comparison = () => {
   );
 };
 
-const ComparisonItem = ({ 
-  title, 
-  description, 
+const ComparisonItem = ({
+  title,
+  description,
   isNegative = false,
-  isDark = false 
-}: { 
-  title: string; 
-  description: string; 
+  isDark = false
+}: {
+  title: string;
+  description: string;
   isNegative?: boolean;
   isDark?: boolean;
 }) => (
@@ -150,8 +145,8 @@ const ComparisonItem = ({
       {isNegative ? <XCircle className="w-4 h-4" /> : <CheckCircle2 className="w-4 h-4" />}
     </div>
     <div>
-      <h4 className={`font-bold text-lg mb-1 tracking-tight ${isDark ? 'text-slate-900' : 'text-slate-400'}`}>{title}</h4>
-      <p className={`text-base leading-relaxed ${isDark ? 'text-slate-500' : 'text-slate-300'}`}>{description}</p>
+      <h4 className="font-bold text-lg mb-1 tracking-tight text-slate-900">{title}</h4>
+      <p className="text-base leading-relaxed text-slate-500">{description}</p>
     </div>
   </div>
 );

@@ -15,7 +15,7 @@ export const Problem = () => {
     {
       icon: <Clock className="w-6 h-6 text-orange-500" />,
       title: "Wasted Marketing Dollars",
-      desc: "Mailing 1,000 heirs at the wrong time is expensive. You're competing with dozens of other 'guru' students."
+      desc: "Mailing 1,000 heirs at the wrong time is expensive. You're competing with everyone else who bought the same list."
     },
     {
       icon: <AlertCircle className="w-6 h-6 text-amber-500" />,
@@ -79,7 +79,7 @@ export const Problem = () => {
             <div className="absolute top-0 right-0 p-8">
               <div className="w-24 h-24 rounded-full bg-slate-50 flex items-center justify-center text-4xl">📉</div>
             </div>
-            <h3 className="text-3xl font-bold text-slate-900 mb-8 tracking-tight">The &quot;Guru&quot; Cycle</h3>
+            <h3 className="text-3xl font-bold text-slate-900 mb-8 tracking-tight">The Static List Cycle</h3>
             <div className="space-y-10">
               <div className="relative pl-8 border-l-2 border-slate-100">
                 <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white border-4 border-red-500" />

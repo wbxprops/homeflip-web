@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Section } from './Section';
-import { Search, Home, Users, Bell, Target, CheckCircle2 } from 'lucide-react';
+import { Search, Home, Users, Bell, Target, CheckCircle2, ShieldCheck, GraduationCap, Video, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const Features = () => {
@@ -11,14 +11,14 @@ export const Features = () => {
       icon: <Search className="w-10 h-10" />,
       title: "Automated Discovery",
       subtitle: "The Fuel",
-      desc: "Our AI monitors county court records daily. When a new probate case is filed with real estate assets, it hits your dashboard the next day.",
+      desc: "Our AI monitors county court records around the clock. When a new probate case is filed with real estate assets, it hits your dashboard in hours, not weeks.",
       color: "#0891b2"
     },
     {
       icon: <Target className="w-10 h-10" />,
       title: "Timeline Intelligence",
       subtitle: "The Brain",
-      desc: "We track the entire case lifecycle—inventory, delays, listings. We tell you who is ready to sell now, not just who is on a list.",
+      desc: "We track the entire case lifecycle: inventory, delays, listings. We tell you who is ready to sell now, not just who is on a list.",
       color: "#83d4c0"
     },
     {
@@ -33,18 +33,36 @@ export const Features = () => {
   const additionalFeatures = [
     {
       icon: <Home className="w-6 h-6" />,
-      title: "Property Intel",
-      desc: "Instant access to valuations, ownership history, and local tax records."
+      title: "Property Research",
+      desc: "We research each estate for property ownership so you know exactly which cases have real estate worth pursuing."
     },
     {
       icon: <Users className="w-6 h-6" />,
-      title: "Contact Manager",
-      desc: "Track attorneys, personal reps, and heirs in one dedicated system."
+      title: "Enhanced Contacts",
+      desc: "Full data enhancement provides accurate contact info for all parties including fiduciaries, attorneys, and administrators so you can make the most of your time."
     },
     {
       icon: <Bell className="w-6 h-6" />,
-      title: "Real-Time Alerts",
-      desc: "Get notified the moment a case moves to the next stage of the timeline."
+      title: "Case Monitoring",
+      desc: "Your AI agent monitors all active cases and alerts you when something changes, like a property transfer, MLS listing, or case closure."
+    },
+  ];
+
+  const communityFeatures = [
+    {
+      icon: <GraduationCap className="w-6 h-6" />,
+      title: "Course Library",
+      desc: "Access our complete library of courses on real estate financing, wholesaling, and investing strategies to sharpen your skills."
+    },
+    {
+      icon: <Video className="w-6 h-6" />,
+      title: "Live Coaching Calls",
+      desc: "Join live coaching calls multiple times per week where you can get your specific questions answered by experienced investors."
+    },
+    {
+      icon: <MessageCircle className="w-6 h-6" />,
+      title: "Investor Community",
+      desc: "Connect with other investors, share wins, ask questions, and learn from a community that's all working toward the same goals."
     },
   ];
 
@@ -54,7 +72,7 @@ export const Features = () => {
       <div className="text-center mb-24">
         <h2 className="text-5xl sm:text-7xl lg:text-8xl font-black text-slate-900 mb-6 tracking-tight">
           Everything You Need <br />
-          <span className="text-slate-400">to Close More Deals.</span>
+          <span className="text-slate-400">to Close More Deals</span>
         </h2>
       </div>
 
@@ -147,6 +165,93 @@ export const Features = () => {
           ))}
         </div>
       </div>
+
+      {/* THE COMMUNITY - Coaching & Education */}
+      <div className="mt-32">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-6"
+        >
+          <span className="inline-block px-4 py-1 rounded-full bg-slate-50 text-slate-500 text-sm font-bold tracking-widest uppercase border border-slate-200">
+            THE COMMUNITY
+          </span>
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center text-xl text-slate-600 mb-12 max-w-3xl mx-auto"
+        >
+          No need to pay for expensive coaching programs. World-class education and support is included with every Homeflip.ai subscription.
+        </motion.p>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {communityFeatures.map((feature, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="group bg-slate-50 p-8 rounded-[2.5rem] border border-slate-100 hover:bg-white hover:border-[#0891b2]/30 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500"
+            >
+              <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-[#0891b2] mb-8 group-hover:bg-[#0891b2] group-hover:text-white transition-all duration-300">
+                {feature.icon}
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3 tracking-tight">{feature.title}</h3>
+              <p className="text-slate-500 leading-relaxed text-base">{feature.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* ACCURACY GUARANTEE */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mt-16 relative"
+      >
+        <div className="relative bg-gradient-to-br from-[#0891b2]/5 via-white to-[#83d4c0]/5 rounded-[2.5rem] border border-[#0891b2]/20 p-10 md:p-14 overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#0891b2 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+
+          <div className="relative flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            {/* Seal/Badge */}
+            <div className="flex-shrink-0">
+              <div className="relative">
+                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-[#0891b2] to-[#83d4c0] flex items-center justify-center shadow-2xl shadow-[#0891b2]/30">
+                  <div className="w-28 h-28 md:w-36 md:h-36 rounded-full bg-white flex items-center justify-center">
+                    <div className="text-center">
+                      <ShieldCheck className="w-12 h-12 md:w-14 md:h-14 text-[#0891b2] mx-auto mb-1" />
+                      <div className="text-[10px] md:text-xs font-black text-[#0891b2] uppercase tracking-wider">Guaranteed</div>
+                    </div>
+                  </div>
+                </div>
+                {/* Decorative Ring */}
+                <div className="absolute inset-0 rounded-full border-4 border-dashed border-[#83d4c0]/30 animate-spin" style={{ animationDuration: '20s' }} />
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="text-center md:text-left flex-1">
+              <h3 className="text-3xl md:text-4xl font-black text-slate-900 mb-4 tracking-tight">
+                Accuracy Guarantee
+              </h3>
+              <p className="text-xl md:text-2xl text-slate-600 leading-relaxed mb-6">
+                We stand behind our data. If any information is inaccurate for any reason,
+                <span className="text-[#0891b2] font-bold"> request a credit. No questions asked.</span>
+              </p>
+              <p className="text-slate-500 text-base">
+                Your success depends on accurate data. We're committed to providing the most reliable probate intelligence in the industry.
+              </p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </Section>
   );
 };

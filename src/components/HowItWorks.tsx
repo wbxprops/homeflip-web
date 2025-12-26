@@ -19,7 +19,7 @@ export const HowItWorks = () => {
       icon: <Target className="w-10 h-10" />,
       title: "Timeline Intelligence",
       subtitle: "The Brain",
-      desc: "We track the entire case lifecycle—inventory, delays, listings. We tell you who is ready to sell now, not just who is on a list.",
+      desc: "We track the entire case lifecycle: inventory, delays, listings. We tell you who is ready to sell now, not just who is on a list.",
       color: "#83d4c0"
     },
     {

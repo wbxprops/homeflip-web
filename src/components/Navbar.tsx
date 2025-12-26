@@ -28,8 +28,8 @@ export const Navbar = () => {
           <Link href="/#features" className="text-sm font-bold text-slate-400 hover:text-[#83d4c0] transition-colors uppercase tracking-tighter">
             How It Works
           </Link>
-          <Link href="/pricing" className="text-sm font-bold text-slate-400 hover:text-[#83d4c0] transition-colors uppercase tracking-tighter">
-            Pricing
+          <Link href="/#faq" className="text-sm font-bold text-slate-400 hover:text-[#83d4c0] transition-colors uppercase tracking-tighter">
+            FAQs
           </Link>
         </div>
       </div>

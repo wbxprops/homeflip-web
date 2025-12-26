@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** ✅ COMPLETE - Full design overhaul deployed. Premium AuraDark theme with King Kong-inspired typography active.
+**Current Status:** ✅ COMPLETE - Full design overhaul deployed. AuraLight theme with King Kong-inspired typography active. Clean, airy marketing experience.
 
 ---
 
