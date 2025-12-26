@@ -21,7 +21,7 @@ export const LetterSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
-    <section ref={containerRef} className="relative bg-white py-32 border-y border-slate-100 overflow-hidden">
+    <section ref={containerRef} className="relative bg-white py-16 sm:py-24 md:py-32 border-y border-slate-100 overflow-hidden">
       {/* Background Decor - Floating Blobs */}
       <motion.div 
         style={{ y: y1 }}
@@ -59,7 +59,7 @@ export const LetterSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12 text-slate-400 font-serif text-2xl"
+          className="mb-8 sm:mb-12 text-slate-400 font-serif text-lg sm:text-xl md:text-2xl"
         >
           December 24, 2025
         </motion.div>
@@ -68,7 +68,7 @@ export const LetterSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-serif text-2xl leading-[1.6] text-slate-800 space-y-8"
+          className="font-serif text-lg sm:text-xl md:text-2xl leading-[1.6] text-slate-800 space-y-6 sm:space-y-8"
         >
           <p className="font-bold text-slate-900">
             Dear Real Estate Investor,
@@ -109,7 +109,7 @@ export const LetterSection = () => {
             But here's what most investors don't realize...
           </p>
 
-          <p className="font-bold text-slate-900 border-l-2 border-[#0891b2] pl-8 py-2">
+          <p className="font-bold text-slate-900 border-l-2 border-[#0891b2] pl-4 sm:pl-8 py-2">
             While you're fighting in the blood-red ocean against apex predators armed with billions, there's an entire untapped inventory of properties hiding in plain sight.
           </p>
 
@@ -231,11 +231,11 @@ export const LetterSection = () => {
             Our team has been working probate for 15 years. This is the same platform we use for our own real estate business, and now we're making it available for the first time.
           </p>
 
-          <div className="py-12 flex flex-col sm:flex-row items-center justify-center gap-8 border-y border-slate-50">
-            <span className="font-hero font-[900] text-2xl sm:text-3xl text-slate-400 uppercase tracking-tighter italic">Ready to get started?</span>
-            <Link 
+          <div className="py-8 sm:py-12 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 border-y border-slate-50">
+            <span className="font-hero font-[900] text-xl sm:text-2xl md:text-3xl text-slate-400 uppercase tracking-tighter italic text-center">Ready to get started?</span>
+            <Link
               href="/waitlist"
-              className="btn-gradient inline-block px-12 py-6 rounded-2xl font-hero font-[900] text-4xl uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all"
+              className="btn-gradient inline-block px-8 sm:px-12 py-4 sm:py-6 rounded-2xl font-hero font-[900] text-2xl sm:text-3xl md:text-4xl uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all"
             >
               Claim Your County
             </Link>
@@ -249,16 +249,16 @@ export const LetterSection = () => {
             Here's how most investors approach probate:
           </p>
 
-          <div className="pl-8 space-y-4 font-bold text-slate-900">
-            <div className="flex gap-4">
+          <div className="pl-4 sm:pl-8 space-y-4 font-bold text-slate-900">
+            <div className="flex gap-3 sm:gap-4">
               <span>💀</span>
               <p>Buy a stale list of probate leads</p>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-3 sm:gap-4">
               <span>💀</span>
               <p>Cold call or blast texts to everyone on it</p>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-3 sm:gap-4">
               <span>💀</span>
               <p>Wait for the phone to ring (it won't)</p>
             </div>
@@ -320,24 +320,24 @@ export const LetterSection = () => {
             We don't just tell you a case was filed. We track EVERYTHING that happens next:
           </p>
 
-          <div className="pl-8 space-y-4 font-bold text-slate-900">
-            <div className="flex gap-4">
+          <div className="pl-4 sm:pl-8 space-y-4 font-bold text-slate-900">
+            <div className="flex gap-3 sm:gap-4">
               <span>⚡</span>
               <p>When the inventory is submitted</p>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-3 sm:gap-4">
               <span>⚡</span>
               <p>When property addresses are revealed</p>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-3 sm:gap-4">
               <span>⚡</span>
               <p>When the case moves toward resolution</p>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-3 sm:gap-4">
               <span>⚡</span>
               <p>When it stalls out</p>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-3 sm:gap-4">
               <span>⚡</span>
               <p>When the property gets listed</p>
             </div>
@@ -363,11 +363,11 @@ export const LetterSection = () => {
             That's the difference between being call #51... and being the ONLY call that matters.
           </p>
 
-          <div className="py-12 flex flex-col sm:flex-row items-center justify-center gap-8 border-y border-slate-50">
-            <span className="font-hero font-[900] text-2xl sm:text-3xl text-slate-400 uppercase tracking-tighter italic">Ready to get started?</span>
-            <Link 
+          <div className="py-8 sm:py-12 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 border-y border-slate-50">
+            <span className="font-hero font-[900] text-xl sm:text-2xl md:text-3xl text-slate-400 uppercase tracking-tighter italic text-center">Ready to get started?</span>
+            <Link
               href="/waitlist"
-              className="btn-gradient inline-block px-12 py-6 rounded-2xl font-hero font-[900] text-4xl uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all"
+              className="btn-gradient inline-block px-8 sm:px-12 py-4 sm:py-6 rounded-2xl font-hero font-[900] text-2xl sm:text-3xl md:text-4xl uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all"
             >
               Claim Your County
             </Link>
@@ -501,14 +501,14 @@ export const LetterSection = () => {
             Join the beta before your county fills up.
           </p>
 
-          <div className="mt-16 text-center">
-            <Link 
+          <div className="mt-12 sm:mt-16 text-center">
+            <Link
               href="/waitlist"
-              className="btn-gradient inline-block px-12 py-7 rounded-[2rem] font-hero font-[900] text-5xl shadow-2xl shadow-[#83d4c0]/30 hover:scale-105 active:scale-95 transition-all uppercase tracking-tighter"
+              className="btn-gradient inline-block px-8 sm:px-12 py-5 sm:py-7 rounded-2xl sm:rounded-[2rem] font-hero font-[900] text-3xl sm:text-4xl md:text-5xl shadow-2xl shadow-[#83d4c0]/30 hover:scale-105 active:scale-95 transition-all uppercase tracking-tighter"
             >
               Claim Your County
             </Link>
-            <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-[0.1em] mt-8">
+            <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-[0.1em] mt-6 sm:mt-8">
               Private Beta Access • Limited Markets Available
             </p>
           </div>
