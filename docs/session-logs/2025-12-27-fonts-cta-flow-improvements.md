@@ -62,6 +62,12 @@ Upgraded body font to IBM Plex Sans for better credibility/readability, and impr
 
 ---
 
+### 5. Final Fixes (late night)
+- Hero CTA button font size: `text-xl` → `text-2xl` on mobile for consistency
+- Wrapped ClaimCountyForm in Suspense boundary (fixed Vercel build error)
+
+---
+
 ## Next Steps
 
 - [ ] Test full CTA → Claim County → Booking flow end-to-end

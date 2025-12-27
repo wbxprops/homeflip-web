@@ -244,7 +244,11 @@ export const ClaimCountyForm = () => {
           jurisdictions_requested: jurisdictionsRequested
         }]);
 
-      if (error) throw error;
+      // Duplicate email? No problem - continue the flow
+      // ActiveCampaign will handle re-engagement logic
+      if (error && error.code !== '23505') {
+        throw error;
+      }
 
       // Redirect to booking page with pre-filled info
       const bookingParams = new URLSearchParams({
