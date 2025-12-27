@@ -27,7 +27,7 @@ export default function ClaimYourCountyPage() {
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-700 max-w-2xl mx-auto mb-8">
-              We&apos;re accepting a <span className="font-bold text-slate-900">limited number of applications</span> for our beta launch in select markets. Apply now to lock in <span className="text-[#0891b2] font-bold">founder pricing</span> and lifetime discounts.
+              Apply now to lock in <span className="text-[#0891b2] font-bold">founder pricing</span> on jurisdictional licenses and leads&mdash;discounts you&apos;ll keep for life.
             </p>
           </motion.div>
 
