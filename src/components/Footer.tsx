@@ -15,9 +15,14 @@ export const Footer = () => {
                 Homeflip<span className="text-[#83d4c0]">.ai</span>
               </span>
             </Link>
-            <p className="text-slate-500 max-w-sm leading-relaxed font-medium">
+            <p className="text-slate-500 max-w-sm leading-relaxed font-medium mb-4">
               The simplified, guided, AI-powered system for real estate investors who want consistent off-market deals powered by probate.
             </p>
+            <div className="text-xs text-slate-400 leading-relaxed">
+              <p className="font-bold text-slate-500">Whitebox Academy, LLC</p>
+              <p>7800 Cooper Road, Suite 201</p>
+              <p>Cincinnati, OH 45242</p>
+            </div>
           </div>
 
           <div>

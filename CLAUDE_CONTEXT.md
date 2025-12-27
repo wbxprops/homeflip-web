@@ -1,8 +1,8 @@
 # homeflip-web-site - Marketing Website for homeflip.ai
 
-**Status:** ✅ **COMPLETE**
+**Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2025-12-23 (Afternoon)
+**Last Updated:** 2025-12-26
 **Claude Code Version:** Sonnet 4.5 / Gemini 3.5
 
 ---
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** ✅ COMPLETE - Full design overhaul deployed. AuraLight theme with King Kong-inspired typography active. Clean, airy marketing experience.
+**Current Status:** 🚧 IN PROGRESS - Claim Your County funnel complete with Calendly booking. FAQ synced across site. Jurisdictions table populated.
 
 ---
 
@@ -37,6 +37,19 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 **Active Work:** Maintenance and content refinement.
 
 ### Session History
+#### 2025-12-26
+- ✅ Fixed SQL scripts for jurisdictions table (added monthly_license_fee)
+- ✅ Created booking page with Calendly embed (`/claim-your-county/book`)
+- ✅ ClaimCountyForm redirects to booking after submission
+- ✅ Calendly pre-populates with user's name (first/last split), email, phone
+- ✅ Synced /faq page with homepage FAQ content (16 questions, 6 categories)
+
+#### 2025-12-24
+- ✅ AuraLight theme pivot (white backgrounds, clean aesthetic)
+- ✅ Claim Your County page with multi-step form
+- ✅ County autocomplete from Supabase jurisdictions table
+- ✅ Prospects table and form submission
+
 #### 2025-12-23
 - ✅ Complete Design Overhaul
 - ✅ Modularized into reusable components
@@ -47,7 +60,8 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 - ✅ Fixed hydration issues & local dev setup
 
 ### Next Session Goals
-- [ ] Connect waitlist form to Supabase backend
+- [ ] Add remaining states to jurisdictions table (LA through WY)
+- [ ] Test full claim-your-county → booking flow end-to-end
 - [ ] Connect custom domain (homeflip.ai)
 - [ ] Add real dashboard visuals and social proof logos
 
