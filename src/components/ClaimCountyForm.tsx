@@ -175,22 +175,40 @@ export const ClaimCountyForm = () => {
 
   if (status === 'success') {
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="text-center p-8 bg-gradient-to-br from-[#0891b2]/10 to-[#7c3aed]/10 rounded-3xl border border-[#0891b2]/30"
-      >
-        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] flex items-center justify-center">
-          <Check className="w-8 h-8 text-white" />
+      <div>
+        {/* Progress indicator at step 3 */}
+        <div className="flex items-center justify-center mb-8">
+          <div className="relative flex items-center w-48">
+            <div className="absolute left-0 right-0 h-1 bg-slate-200 rounded-full" />
+            <div className="absolute left-0 h-1 bg-gradient-to-r from-[#0891b2] to-[#7c3aed] rounded-full w-full" />
+            <div className="relative flex justify-between w-full">
+              {[1, 2, 3].map((dotStep) => (
+                <div
+                  key={dotStep}
+                  className="w-5 h-5 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] border-2 border-transparent"
+                />
+              ))}
+            </div>
+          </div>
         </div>
-        <h3 className="text-2xl font-bold text-slate-900 mb-2">You&apos;re In.</h3>
-        <p className="text-slate-600 mb-4">
-          Your spot is locked. We&apos;ll reach out within 48 hours to activate your account and get you set up.
-        </p>
-        <p className="text-sm text-slate-500">
-          Check your inbox&mdash;your welcome email is on the way.
-        </p>
-      </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center p-8 bg-gradient-to-br from-[#0891b2]/10 to-[#7c3aed]/10 rounded-3xl border border-[#0891b2]/30"
+        >
+          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] flex items-center justify-center">
+            <Check className="w-8 h-8 text-white" />
+          </div>
+          <h3 className="text-2xl font-bold text-slate-900 mb-2">You&apos;re In.</h3>
+          <p className="text-slate-600 mb-4">
+            Your spot is locked. We&apos;ll reach out within 48 hours to activate your account and get you set up.
+          </p>
+          <p className="text-sm text-slate-500">
+            Check your inbox&mdash;your welcome email is on the way.
+          </p>
+        </motion.div>
+      </div>
     );
   }
 
@@ -204,8 +222,38 @@ export const ClaimCountyForm = () => {
 
   const inputStyles = "w-full px-5 py-4 rounded-xl border-2 border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all text-lg placeholder:text-slate-400";
 
+  // Progress indicator component
+  const ProgressIndicator = ({ currentStep }: { currentStep: 1 | 2 | 3 }) => (
+    <div className="flex items-center justify-center mb-8">
+      <div className="relative flex items-center w-48">
+        {/* Background line */}
+        <div className="absolute left-0 right-0 h-1 bg-slate-200 rounded-full" />
+        {/* Progress line */}
+        <div
+          className="absolute left-0 h-1 bg-gradient-to-r from-[#0891b2] to-[#7c3aed] rounded-full transition-all duration-300"
+          style={{ width: currentStep === 1 ? '0%' : currentStep === 2 ? '50%' : '100%' }}
+        />
+        {/* Dots */}
+        <div className="relative flex justify-between w-full">
+          {[1, 2, 3].map((dotStep) => (
+            <div
+              key={dotStep}
+              className={`w-5 h-5 rounded-full border-2 transition-all duration-300 ${
+                dotStep <= currentStep
+                  ? 'bg-gradient-to-r from-[#0891b2] to-[#7c3aed] border-transparent'
+                  : 'bg-white border-slate-300'
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      <ProgressIndicator currentStep={step} />
+
       {status === 'error' && (
         <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm">
           {errorMessage}
