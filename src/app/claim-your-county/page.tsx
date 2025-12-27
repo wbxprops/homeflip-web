@@ -12,7 +12,7 @@ export default function ClaimYourCountyPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 px-6">
+      <section className="pt-32 pb-6 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -25,7 +25,7 @@ export default function ClaimYourCountyPage() {
                 County
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-slate-700 max-w-2xl mx-auto mb-8">
+            <p className="text-xl md:text-2xl text-slate-700 max-w-2xl mx-auto mb-4">
               Apply now to lock in <span className="text-[#0891b2] font-bold">founder pricing</span> on jurisdictional licenses and leads&mdash;discounts you&apos;ll keep for life.
             </p>
           </motion.div>
