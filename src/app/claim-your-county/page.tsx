@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ClaimCountyForm } from '@/components/ClaimCountyForm';
-import { MapPin, Bot, Clock, Shield } from 'lucide-react';
+import { MapPin, Bot, Clock } from 'lucide-react';
 
 export default function ClaimYourCountyPage() {
   return (
@@ -36,7 +36,7 @@ export default function ClaimYourCountyPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 max-w-3xl mx-auto"
           >
             <div className="p-6 bg-slate-50 rounded-2xl">
               <MapPin className="w-8 h-8 text-[#0891b2] mx-auto mb-3" />
@@ -46,17 +46,12 @@ export default function ClaimYourCountyPage() {
             <div className="p-6 bg-slate-50 rounded-2xl">
               <Bot className="w-8 h-8 text-[#0891b2] mx-auto mb-3" />
               <p className="text-base font-medium text-slate-700">Personalized AI Agent</p>
-              <p className="text-sm text-slate-500">Trained on your criteria</p>
+              <p className="text-sm text-slate-500">Trained on your specific buying criteria</p>
             </div>
             <div className="p-6 bg-slate-50 rounded-2xl">
               <Clock className="w-8 h-8 text-[#0891b2] mx-auto mb-3" />
               <p className="text-base font-medium text-slate-700">Lifetime Access</p>
-              <p className="text-sm text-slate-500">Discounted for founders</p>
-            </div>
-            <div className="p-6 bg-slate-50 rounded-2xl">
-              <Shield className="w-8 h-8 text-[#0891b2] mx-auto mb-3" />
-              <p className="text-base font-medium text-slate-700">First Mover Edge</p>
-              <p className="text-sm text-slate-500">While others wait</p>
+              <p className="text-sm text-slate-500">Discounted for founding members</p>
             </div>
           </motion.div>
         </div>
