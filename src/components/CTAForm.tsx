@@ -25,33 +25,31 @@ export const CTAForm = ({
     setStatus('submitting');
 
     try {
+      // Always log the response (tracks every interaction)
+      await supabase
+        .from('prospect_responses')
+        .insert([{
+          email: email,
+          source: 'hero_cta'
+        }]);
+
+      // Try to create prospect (ignore if exists)
       const { error } = await supabase
         .from('prospects')
-        .insert([
-          {
-            email: email,
-            source: 'hero_cta'
-          }
-        ]);
+        .insert([{
+          email: email,
+          source: 'hero_cta'
+        }]);
 
-      // Redirect to Claim Your County page with email pre-filled
-      const redirectWithEmail = () => {
-        router.push(`/claim-your-county?email=${encodeURIComponent(email)}`);
-      };
-
-      if (error) {
-        // Duplicate email - still redirect them to continue the flow
-        if (error.code === '23505') {
-          redirectWithEmail();
-          return;
-        }
+      // Ignore duplicate error - prospect already exists
+      if (error && error.code !== '23505') {
         throw error;
       }
 
       if (onSuccess) onSuccess();
-      redirectWithEmail();
+      router.push(`/claim-your-county?email=${encodeURIComponent(email)}`);
     } catch (error) {
-      console.error('Prospect submission error:', error);
+      console.error('Submission error:', error);
       setStatus('error');
     }
   };

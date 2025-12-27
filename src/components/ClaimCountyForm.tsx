@@ -234,6 +234,18 @@ export const ClaimCountyForm = () => {
     }
 
     try {
+      // Always log the response (tracks every interaction)
+      await supabase
+        .from('prospect_responses')
+        .insert([{
+          email: formData.email,
+          name: formData.name,
+          phone: formData.phone,
+          source: 'claim_county_page',
+          jurisdictions_requested: jurisdictionsRequested
+        }]);
+
+      // Try to create/update prospect (ignore if exists)
       const { error } = await supabase
         .from('prospects')
         .insert([{
@@ -244,8 +256,7 @@ export const ClaimCountyForm = () => {
           jurisdictions_requested: jurisdictionsRequested
         }]);
 
-      // Duplicate email? No problem - continue the flow
-      // ActiveCampaign will handle re-engagement logic
+      // Ignore duplicate error - prospect already exists
       if (error && error.code !== '23505') {
         throw error;
       }
