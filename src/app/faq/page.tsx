@@ -1,17 +1,13 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Section } from "@/components/Section";
-import { ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function FAQPage() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-
   const faqCategories = [
     {
       name: "Pricing & Value",
@@ -165,25 +161,6 @@ Here's the truth every successful investor knows: you make your money when you b
     }
   ];
 
-  // Flatten all items for index tracking
-  const allItems = faqCategories.flatMap(cat => cat.items);
-
-  const toggleItem = (index: number) => {
-    const isOpening = openIndex !== index;
-    setOpenIndex(openIndex === index ? null : index);
-
-    if (isOpening && itemRefs.current[index]) {
-      setTimeout(() => {
-        itemRefs.current[index]?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        });
-      }, 50);
-    }
-  };
-
-  let globalIndex = -1;
-
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -236,46 +213,21 @@ Here's the truth every successful investor knows: you make your money when you b
                   <div className="h-px flex-1 bg-slate-200" />
                 </div>
 
-                {/* FAQ Items */}
-                <div className="space-y-4">
-                  {category.items.map((item, itemIndex) => {
-                    globalIndex++;
-                    const currentIndex = globalIndex;
-                    return (
-                      <div
-                        key={itemIndex}
-                        ref={(el) => { itemRefs.current[currentIndex] = el; }}
-                        className="border border-slate-200 rounded-2xl overflow-hidden scroll-mt-24"
-                      >
-                        <button
-                          onClick={() => toggleItem(currentIndex)}
-                          className="w-full px-6 py-5 flex items-center justify-between text-left bg-white hover:bg-slate-50 transition-colors"
-                        >
-                          <span className="text-lg font-bold text-slate-900 pr-4">{item.q}</span>
-                          <ChevronDown
-                            className={`w-5 h-5 text-slate-400 flex-shrink-0 transition-transform duration-300 ${
-                              openIndex === currentIndex ? 'rotate-180' : ''
-                            }`}
-                          />
-                        </button>
-                        <AnimatePresence>
-                          {openIndex === currentIndex && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: 'auto', opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.3 }}
-                              className="overflow-hidden"
-                            >
-                              <div className="px-6 pb-6 text-slate-600 leading-relaxed whitespace-pre-line">
-                                {item.a}
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                {/* FAQ Items - All Expanded */}
+                <div className="space-y-6">
+                  {category.items.map((item, itemIndex) => (
+                    <div
+                      key={itemIndex}
+                      className="border border-slate-200 rounded-2xl overflow-hidden"
+                    >
+                      <div className="px-6 py-5 bg-slate-50 border-b border-slate-200">
+                        <h3 className="text-lg font-bold text-slate-900">{item.q}</h3>
                       </div>
-                    );
-                  })}
+                      <div className="px-6 py-5 text-slate-600 leading-relaxed whitespace-pre-line">
+                        {item.a}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             ))}
