@@ -3,7 +3,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 import { ClaimCountyForm } from '@/components/ClaimCountyForm';
 import { MapPin, Bot, Clock } from 'lucide-react';
 
@@ -71,45 +70,6 @@ export default function ClaimYourCountyPage() {
         </motion.div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-16 px-6 bg-slate-50">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="font-hero font-[900] text-5xl md:text-6xl lg:text-7xl text-slate-900 uppercase tracking-tighter text-center leading-[0.9] mb-12">
-            How It Works
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-8 bg-white rounded-3xl shadow-sm">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] text-white font-bold text-2xl flex items-center justify-center mx-auto mb-6">
-                1
-              </div>
-              <h3 className="font-bold text-xl text-slate-900 mb-3">Claim Your Counties</h3>
-              <p className="text-slate-600 text-base">
-                Pick up to 3 counties where you invest. If spots are available, you&apos;re in. If not, you&apos;ll join the waitlist.
-              </p>
-            </div>
-            <div className="text-center p-8 bg-white rounded-3xl shadow-sm">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] text-white font-bold text-2xl flex items-center justify-center mx-auto mb-6">
-                2
-              </div>
-              <h3 className="font-bold text-xl text-slate-900 mb-3">Book Your Strategy Call</h3>
-              <p className="text-slate-600 text-base">
-                After you apply, you&apos;ll get a link to schedule a one-on-one roadmap session with our team.
-              </p>
-            </div>
-            <div className="text-center p-8 bg-white rounded-3xl shadow-sm">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] text-white font-bold text-2xl flex items-center justify-center mx-auto mb-6">
-                3
-              </div>
-              <h3 className="font-bold text-xl text-slate-900 mb-3">Start Closing</h3>
-              <p className="text-slate-600 text-base">
-                Fresh probate leads hit your dashboard daily. Our AI watches the courts 24/7&mdash;you just work the deals.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
     </main>
   );
 }
