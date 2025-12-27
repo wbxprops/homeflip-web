@@ -74,7 +74,7 @@ export default function ClaimYourCountyPage() {
       {/* How It Works */}
       <section className="py-16 px-6 bg-slate-50">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-hero font-[900] text-3xl md:text-4xl text-slate-900 uppercase tracking-tighter text-center mb-12">
+          <h2 className="font-hero font-[900] text-5xl md:text-6xl lg:text-7xl text-slate-900 uppercase tracking-tighter text-center leading-[0.9] mb-12">
             How It Works
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -91,9 +91,9 @@ export default function ClaimYourCountyPage() {
               <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] text-white font-bold text-xl flex items-center justify-center mx-auto mb-4">
                 2
               </div>
-              <h3 className="font-bold text-lg text-slate-900 mb-2">Get Set Up</h3>
+              <h3 className="font-bold text-lg text-slate-900 mb-2">Book Your Strategy Call</h3>
               <p className="text-slate-600 text-sm">
-                We&apos;ll reach out within 48 hours to activate your account and walk you through everything. No tech skills needed.
+                After you apply, you&apos;ll get a link to schedule a one-on-one roadmap session with our team.
               </p>
             </div>
             <div className="text-center">
