@@ -36,22 +36,22 @@ export default function ClaimYourCountyPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 max-w-3xl mx-auto"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto"
           >
-            <div className="p-6 bg-slate-50 rounded-2xl">
-              <MapPin className="w-8 h-8 text-[#0891b2] mx-auto mb-3" />
-              <p className="text-base font-medium text-slate-700">Your Territory</p>
-              <p className="text-sm text-slate-500">Probate leads in up to 3 markets</p>
+            <div className="p-8 bg-slate-50 rounded-3xl text-center">
+              <MapPin className="w-12 h-12 text-[#0891b2] mx-auto mb-4" />
+              <p className="text-lg font-bold text-slate-800 mb-1">Your Territory</p>
+              <p className="text-base text-slate-500">Probate leads in up to 3 markets</p>
             </div>
-            <div className="p-6 bg-slate-50 rounded-2xl">
-              <Bot className="w-8 h-8 text-[#0891b2] mx-auto mb-3" />
-              <p className="text-base font-medium text-slate-700">Personalized AI Agent</p>
-              <p className="text-sm text-slate-500">Trained on your specific buying criteria</p>
+            <div className="p-8 bg-slate-50 rounded-3xl text-center">
+              <Bot className="w-12 h-12 text-[#0891b2] mx-auto mb-4" />
+              <p className="text-lg font-bold text-slate-800 mb-1">Personalized AI Agent</p>
+              <p className="text-base text-slate-500">Trained on your specific buying criteria</p>
             </div>
-            <div className="p-6 bg-slate-50 rounded-2xl">
-              <Clock className="w-8 h-8 text-[#0891b2] mx-auto mb-3" />
-              <p className="text-base font-medium text-slate-700">Lifetime Access</p>
-              <p className="text-sm text-slate-500">Discounted for founding members</p>
+            <div className="p-8 bg-slate-50 rounded-3xl text-center">
+              <Clock className="w-12 h-12 text-[#0891b2] mx-auto mb-4" />
+              <p className="text-lg font-bold text-slate-800 mb-1">Lifetime Access</p>
+              <p className="text-base text-slate-500">Discounted for founding members</p>
             </div>
           </motion.div>
         </div>
