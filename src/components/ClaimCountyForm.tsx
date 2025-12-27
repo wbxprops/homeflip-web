@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, X, MapPin, ArrowRight, ArrowLeft } from 'lucide-react';
@@ -24,11 +24,12 @@ interface StateSelection {
 
 export const ClaimCountyForm = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [jurisdictions, setJurisdictions] = useState<Jurisdiction[]>([]);
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
+    email: searchParams.get('email') || '',
     phone: '',
   });
   const [stateSelections, setStateSelections] = useState<StateSelection[]>([

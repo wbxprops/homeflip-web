@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
 
@@ -15,6 +16,7 @@ export const CTAForm = ({
   className = "",
   onSuccess
 }: CTAFormProps) => {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
@@ -24,35 +26,35 @@ export const CTAForm = ({
 
     try {
       const { error } = await supabase
-        .from('waitlist')
+        .from('prospects')
         .insert([
-          { 
-            email: email, 
-            source: 'cta_form'
+          {
+            email: email,
+            source: 'hero_cta'
           }
         ]);
 
-      if (error) throw error;
-      
-      setStatus('success');
+      // Redirect to Claim Your County page with email pre-filled
+      const redirectWithEmail = () => {
+        router.push(`/claim-your-county?email=${encodeURIComponent(email)}`);
+      };
+
+      if (error) {
+        // Duplicate email - still redirect them to continue the flow
+        if (error.code === '23505') {
+          redirectWithEmail();
+          return;
+        }
+        throw error;
+      }
+
       if (onSuccess) onSuccess();
+      redirectWithEmail();
     } catch (error) {
-      console.error('Waitlist submission error:', error);
+      console.error('Prospect submission error:', error);
       setStatus('error');
     }
   };
-
-  if (status === 'success') {
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="text-[#83d4c0] font-hero font-[900] py-4 px-10 bg-[#83d4c0]/10 rounded-2xl border border-[#83d4c0]/20 inline-block uppercase tracking-tighter text-2xl"
-      >
-        You&apos;re in! Check your inbox.
-      </motion.div>
-    );
-  }
 
   return (
     <form
@@ -67,7 +69,7 @@ export const CTAForm = ({
         required
         autoComplete="email"
         data-lpignore="true"
-        className="flex-1 bg-transparent px-4 sm:px-8 py-3 sm:py-4 focus:outline-none text-slate-900 dark:text-white text-base sm:text-lg placeholder:text-slate-400 rounded-xl sm:rounded-none"
+        className="flex-1 bg-transparent px-4 sm:px-8 py-3 sm:py-4 focus:outline-none text-slate-900 [.dark_&]:text-white text-lg sm:text-xl md:text-2xl placeholder:text-slate-400 [.dark_&]:placeholder:text-slate-300 rounded-xl sm:rounded-none"
       />
       <button
         type="submit"

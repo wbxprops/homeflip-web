@@ -51,8 +51,10 @@ export const Hero = () => {
             className="flex flex-col items-center gap-6"
           >
             <CTAForm className="w-full max-w-2xl bg-white/5 border-white/10" />
-            
-            <div className="flex flex-wrap justify-center gap-8 text-sm font-semibold text-slate-500 uppercase tracking-tighter mt-4">
+
+            <p className="text-slate-400 text-sm">(No CC required)</p>
+
+            <div className="flex flex-wrap justify-center gap-8 text-sm font-semibold text-slate-500 uppercase tracking-tighter mt-2">
               <div className="flex items-center gap-2">
                 <span className="text-[#83d4c0]">✓</span> Verified Records
               </div>
