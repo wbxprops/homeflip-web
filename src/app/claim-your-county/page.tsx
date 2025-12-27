@@ -38,25 +38,25 @@ export default function ClaimYourCountyPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
           >
-            <div className="p-4 bg-slate-50 rounded-xl">
-              <MapPin className="w-6 h-6 text-[#0891b2] mx-auto mb-2" />
-              <p className="text-sm font-medium text-slate-700">Your Territory</p>
-              <p className="text-xs text-slate-500">Leads in your market</p>
+            <div className="p-6 bg-slate-50 rounded-2xl">
+              <MapPin className="w-8 h-8 text-[#0891b2] mx-auto mb-3" />
+              <p className="text-base font-medium text-slate-700">Your Territory</p>
+              <p className="text-sm text-slate-500">Leads in your market</p>
             </div>
-            <div className="p-4 bg-slate-50 rounded-xl">
-              <Bot className="w-6 h-6 text-[#0891b2] mx-auto mb-2" />
-              <p className="text-sm font-medium text-slate-700">Personalized AI Agent</p>
-              <p className="text-xs text-slate-500">Trained on your criteria</p>
+            <div className="p-6 bg-slate-50 rounded-2xl">
+              <Bot className="w-8 h-8 text-[#0891b2] mx-auto mb-3" />
+              <p className="text-base font-medium text-slate-700">Personalized AI Agent</p>
+              <p className="text-sm text-slate-500">Trained on your criteria</p>
             </div>
-            <div className="p-4 bg-slate-50 rounded-xl">
-              <Clock className="w-6 h-6 text-[#0891b2] mx-auto mb-2" />
-              <p className="text-sm font-medium text-slate-700">Lifetime Access</p>
-              <p className="text-xs text-slate-500">Discounted for founders</p>
+            <div className="p-6 bg-slate-50 rounded-2xl">
+              <Clock className="w-8 h-8 text-[#0891b2] mx-auto mb-3" />
+              <p className="text-base font-medium text-slate-700">Lifetime Access</p>
+              <p className="text-sm text-slate-500">Discounted for founders</p>
             </div>
-            <div className="p-4 bg-slate-50 rounded-xl">
-              <Shield className="w-6 h-6 text-[#0891b2] mx-auto mb-2" />
-              <p className="text-sm font-medium text-slate-700">First Mover Edge</p>
-              <p className="text-xs text-slate-500">While others wait</p>
+            <div className="p-6 bg-slate-50 rounded-2xl">
+              <Shield className="w-8 h-8 text-[#0891b2] mx-auto mb-3" />
+              <p className="text-base font-medium text-slate-700">First Mover Edge</p>
+              <p className="text-sm text-slate-500">While others wait</p>
             </div>
           </motion.div>
         </div>
