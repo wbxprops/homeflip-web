@@ -57,23 +57,30 @@ export const ClaimCountyForm = () => {
     setFormData({ ...formData, phone: formatted });
   };
 
-  // Fetch jurisdictions on mount
-  useEffect(() => {
-    async function fetchJurisdictions() {
-      const { data, error } = await supabase
-        .from('jurisdictions')
-        .select('id, jurisdiction_code, state_code, county_name, display_name, status')
-        .order('state_code')
-        .order('county_name');
+  // Fetch counties when a state is selected
+  const fetchCountiesForState = async (stateCode: string) => {
+    if (!stateCode) return;
 
-      if (error) {
-        console.error('Error fetching jurisdictions:', error);
-      } else {
-        setJurisdictions(data || []);
-      }
-      setLoading(false);
+    const { data, error } = await supabase
+      .from('jurisdictions')
+      .select('id, jurisdiction_code, state_code, county_name, display_name, status')
+      .eq('state_code', stateCode)
+      .order('county_name');
+
+    if (error) {
+      console.error('Error fetching counties:', error);
+    } else {
+      // Merge with existing jurisdictions (for other states already loaded)
+      setJurisdictions(prev => {
+        const otherStates = prev.filter(j => j.state_code !== stateCode);
+        return [...otherStates, ...(data || [])];
+      });
     }
-    fetchJurisdictions();
+  };
+
+  // No upfront loading needed
+  useEffect(() => {
+    setLoading(false);
   }, []);
 
   // All 50 US states
@@ -121,6 +128,8 @@ export const ClaimCountyForm = () => {
         ? { ...sel, stateCode, counties: [], searchQuery: '' }
         : sel
     ));
+    // Fetch counties for this state
+    fetchCountiesForState(stateCode);
   };
 
   // Handle search query change
@@ -200,6 +209,13 @@ export const ClaimCountyForm = () => {
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // If on step 1, go to step 2 instead of submitting
+    if (step === 1) {
+      handleNextStep();
+      return;
+    }
+
     setStatus('submitting');
     setErrorMessage('');
 
@@ -323,8 +339,7 @@ export const ClaimCountyForm = () => {
             />
 
             <button
-              type="button"
-              onClick={handleNextStep}
+              type="submit"
               className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-2xl uppercase tracking-tighter shadow-lg shadow-[#0891b2]/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-3"
             >
               Select Your Markets
@@ -380,7 +395,7 @@ export const ClaimCountyForm = () => {
                     <select
                       value={selection.stateCode}
                       onChange={(e) => handleStateChange(selection.id, e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all bg-white mb-3"
+                      className={`w-full px-4 py-3 rounded-xl border-2 border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all bg-white mb-3 ${selection.stateCode ? 'appearance-none' : ''}`}
                     >
                       <option value="">Select a state...</option>
                       {states.map(state => (
@@ -424,7 +439,7 @@ export const ClaimCountyForm = () => {
                               onChange={(e) => handleSearchChange(selection.id, e.target.value)}
                               onFocus={() => setActiveDropdown(selection.id)}
                               onBlur={() => setTimeout(() => setActiveDropdown(null), 200)}
-                              placeholder={`Search counties (${selection.counties.length}/3)...`}
+                              placeholder={selection.counties.length === 0 ? 'Select up to 3 counties...' : `${3 - selection.counties.length} remaining...`}
                               className="w-full px-4 py-2 rounded-lg border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all bg-white text-sm"
                             />
 

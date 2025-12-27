@@ -35,8 +35,8 @@
   --color-card: var(--card-bg);
   --color-border-glass: var(--card-border);
   
-  /* Adobe Fonts Implementation */
-  --font-sans: "proxima-nova", var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* IBM Plex Sans - Primary body font */
+  --font-sans: var(--font-ibm-plex), "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-lora), Georgia, serif;
   --font-display: "neue-haas-grotesk-display", sans-serif;
   --font-hero: "futura-pt-condensed", sans-serif;
@@ -60,6 +60,15 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure forms use IBM Plex Sans */
+input, textarea, select, button {
+  font-family: inherit;
+}
+
+input::placeholder, textarea::placeholder {
+  font-family: inherit;
 }
 
 /* Glassmorphic card utility */

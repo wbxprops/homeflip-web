@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Lora } from "next/font/google";
+import { IBM_Plex_Sans, Lora } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const ibmPlexSans = IBM_Plex_Sans({
+  variable: "--font-ibm-plex",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const lora = Lora({
@@ -39,8 +40,8 @@ export default function RootLayout({
       <head>
         <link rel="stylesheet" href="https://use.typekit.net/brb7iad.css" />
       </head>
-      <body 
-        className={`${inter.variable} ${lora.variable} font-sans antialiased bg-white text-slate-900 selection:bg-[#0891b2]/20`}
+      <body
+        className={`${ibmPlexSans.variable} ${lora.variable} font-sans antialiased bg-white text-slate-900 selection:bg-[#0891b2]/20`}
         suppressHydrationWarning
       >
         {children}
