@@ -27,10 +27,10 @@ export default function ClaimYourCountyPage() {
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto mb-4">
-              Get exclusive access to probate leads in your market.
+              Exclusive probate leads in your market. No competition. No bidding wars.
             </p>
             <p className="text-lg md:text-xl text-slate-700 max-w-2xl mx-auto mb-8 font-medium">
-              We&apos;re accepting beta users <span className="text-[#0891b2] font-bold">right now</span>. Get in on the ground floor, lock in founding member pricing, and help us build the probate lead platform you&apos;ve always wanted.
+              We&apos;re onboarding beta users <span className="text-[#0891b2] font-bold">now</span>&mdash;but we cap every county at 50 investors. Once your county fills up, you&apos;re on the waitlist. Lock in founder pricing before it doubles at launch.
             </p>
           </motion.div>
 
@@ -43,23 +43,23 @@ export default function ClaimYourCountyPage() {
           >
             <div className="p-4 bg-slate-50 rounded-xl">
               <MapPin className="w-6 h-6 text-[#0891b2] mx-auto mb-2" />
-              <p className="text-sm font-medium text-slate-700">Your Market</p>
-              <p className="text-xs text-slate-500">Hyper-local leads</p>
+              <p className="text-sm font-medium text-slate-700">Your Territory</p>
+              <p className="text-xs text-slate-500">Leads in your backyard</p>
             </div>
             <div className="p-4 bg-slate-50 rounded-xl">
               <Users className="w-6 h-6 text-[#0891b2] mx-auto mb-2" />
-              <p className="text-sm font-medium text-slate-700">Beta Access</p>
-              <p className="text-xs text-slate-500">Limited spots open</p>
+              <p className="text-sm font-medium text-slate-700">50 Per County</p>
+              <p className="text-xs text-slate-500">Then the door closes</p>
             </div>
             <div className="p-4 bg-slate-50 rounded-xl">
               <Clock className="w-6 h-6 text-[#0891b2] mx-auto mb-2" />
               <p className="text-sm font-medium text-slate-700">Founder Pricing</p>
-              <p className="text-xs text-slate-500">Locked in forever</p>
+              <p className="text-xs text-slate-500">Doubles at launch</p>
             </div>
             <div className="p-4 bg-slate-50 rounded-xl">
               <Shield className="w-6 h-6 text-[#0891b2] mx-auto mb-2" />
-              <p className="text-sm font-medium text-slate-700">Shape the Product</p>
-              <p className="text-xs text-slate-500">Your feedback matters</p>
+              <p className="text-sm font-medium text-slate-700">First Mover Edge</p>
+              <p className="text-xs text-slate-500">While others wait</p>
             </div>
           </motion.div>
         </div>
@@ -90,27 +90,27 @@ export default function ClaimYourCountyPage() {
               <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] text-white font-bold text-xl flex items-center justify-center mx-auto mb-4">
                 1
               </div>
-              <h3 className="font-bold text-lg text-slate-900 mb-2">Select Your Counties</h3>
+              <h3 className="font-bold text-lg text-slate-900 mb-2">Claim Your Counties</h3>
               <p className="text-slate-600 text-sm">
-                Tell us where you invest. We&apos;re expanding fast and your county could be next.
+                Pick up to 3 counties where you invest. If spots are available, you&apos;re in. If not, you&apos;ll join the waitlist.
               </p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] text-white font-bold text-xl flex items-center justify-center mx-auto mb-4">
                 2
               </div>
-              <h3 className="font-bold text-lg text-slate-900 mb-2">Join the Beta</h3>
+              <h3 className="font-bold text-lg text-slate-900 mb-2">Get Set Up</h3>
               <p className="text-slate-600 text-sm">
-                We&apos;ll reach out personally to get you set up. Beta users get white-glove onboarding and direct access to the founders.
+                We&apos;ll reach out within 48 hours to activate your account and walk you through everything. No tech skills needed.
               </p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] text-white font-bold text-xl flex items-center justify-center mx-auto mb-4">
                 3
               </div>
-              <h3 className="font-bold text-lg text-slate-900 mb-2">Start Finding Deals</h3>
+              <h3 className="font-bold text-lg text-slate-900 mb-2">Start Closing</h3>
               <p className="text-slate-600 text-sm">
-                Fresh probate leads delivered daily. Our AI agent monitors the courts 24/7 so you can focus on closing.
+                Fresh probate leads hit your dashboard daily. Our AI watches the courts 24/7&mdash;you just work the deals.
               </p>
             </div>
           </div>

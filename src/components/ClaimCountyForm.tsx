@@ -170,12 +170,12 @@ export const ClaimCountyForm = () => {
         <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] flex items-center justify-center">
           <Check className="w-8 h-8 text-white" />
         </div>
-        <h3 className="text-2xl font-bold text-slate-900 mb-2">Welcome to the Beta!</h3>
+        <h3 className="text-2xl font-bold text-slate-900 mb-2">You&apos;re In.</h3>
         <p className="text-slate-600 mb-4">
-          You&apos;re in. We&apos;ll be reaching out personally within 24-48 hours to get you set up with your account and walk you through everything.
+          Your spot is locked. We&apos;ll reach out within 48 hours to activate your account and get you set up.
         </p>
         <p className="text-sm text-slate-500">
-          Check your inbox for a welcome email from our team.
+          Check your inbox&mdash;your welcome email is on the way.
         </p>
       </motion.div>
     );
