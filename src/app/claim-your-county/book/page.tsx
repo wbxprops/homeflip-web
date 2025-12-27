@@ -28,7 +28,7 @@ function BookCallContent() {
     ...(firstName && { first_name: firstName }),
     ...(lastName && { last_name: lastName }),
     ...(email && { email }),
-    ...(phone && { phone_number: phone }),
+    ...(phone && { a1: phone }),
   });
   const calendlyUrl = `${calendlyBaseUrl}?${calendlyParams.toString()}`;
 
