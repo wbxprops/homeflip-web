@@ -130,16 +130,18 @@ export const InteractiveDemo = () => {
           className="bg-[#111] rounded-3xl border border-white/10 overflow-hidden shadow-2xl"
         >
           {/* Demo Header Bar */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#0d0d0d]">
+          <div className="flex flex-col sm:flex-row items-center justify-between px-4 sm:px-6 py-3 sm:py-4 gap-2 sm:gap-0 border-b border-white/10 bg-[#0d0d0d]">
             <div className="flex items-center gap-3">
               <div className="w-3 h-3 rounded-full bg-red-500/80" />
               <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
               <div className="w-3 h-3 rounded-full bg-green-500/80" />
             </div>
-            <div className="text-sm text-slate-500 font-mono">app.homeflip.ai/leads</div>
-            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#83d4c0]/10 border border-[#83d4c0]/30">
-              <Sparkles className="w-4 h-4 text-[#83d4c0]" />
-              <span className="text-sm font-bold text-[#83d4c0]">47 Credits</span>
+            <div className="flex items-center gap-3 sm:gap-6">
+              <div className="text-xs sm:text-sm text-slate-500 font-mono">app.homeflip.ai/leads</div>
+              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#83d4c0]/10 border border-[#83d4c0]/30">
+                <Sparkles className="w-4 h-4 text-[#83d4c0]" />
+                <span className="text-sm font-bold text-[#83d4c0]">47 Credits</span>
+              </div>
             </div>
           </div>
 
@@ -151,7 +153,7 @@ export const InteractiveDemo = () => {
           {/* Demo Content */}
           <div className="grid lg:grid-cols-2 gap-0">
             {/* Calendar Panel */}
-            <div className="p-8 border-r border-white/10">
+            <div className="p-4 sm:p-8 border-b lg:border-b-0 lg:border-r border-white/10">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-xl font-bold text-white">{currentMonth} {currentYear}</h3>
                 <div className="flex gap-2">
@@ -235,7 +237,7 @@ export const InteractiveDemo = () => {
             </div>
 
             {/* Cases Panel */}
-            <div className="p-8 bg-[#0d0d0d] min-h-[500px]">
+            <div className="p-4 sm:p-8 bg-[#0d0d0d] min-h-[400px] sm:min-h-[500px]">
               <AnimatePresence mode="wait">
                 {!selectedDate ? (
                   <motion.div
@@ -296,9 +298,9 @@ export const InteractiveDemo = () => {
                               }
                             `}
                           >
-                            <div className="flex items-start justify-between mb-3">
+                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
                               <div>
-                                <div className="flex items-center gap-2 mb-1">
+                                <div className="flex items-center gap-2 mb-1 flex-wrap">
                                   <Home className="w-4 h-4 text-[#83d4c0]" />
                                   <span className="text-sm font-bold text-white">
                                     Case #{caseItem.caseNumber}
@@ -308,27 +310,28 @@ export const InteractiveDemo = () => {
                                   </span>
                                 </div>
                                 <div className="flex items-center gap-1 text-sm text-slate-400">
-                                  <MapPin className="w-3 h-3" />
-                                  {caseItem.propertyAddress}
+                                  <MapPin className="w-3 h-3 flex-shrink-0" />
+                                  <span className="truncate">{caseItem.propertyAddress}</span>
                                 </div>
                               </div>
 
                               {isClaimed ? (
-                                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#83d4c0] text-[#0a1421]">
+                                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#83d4c0] text-[#0a1421] self-start">
                                   <Check className="w-4 h-4" />
                                   <span className="text-sm font-bold">Claimed</span>
                                 </div>
                               ) : (
                                 <button
                                   onClick={() => handleClaimCase(caseItem.id)}
-                                  className="px-4 py-2 rounded-xl bg-[#83d4c0] text-[#0a1421] font-bold text-sm hover:bg-[#83d4c0]/90 transition-colors"
+                                  className="px-3 sm:px-4 py-2 rounded-xl bg-[#83d4c0] text-[#0a1421] font-bold text-sm hover:bg-[#83d4c0]/90 transition-colors whitespace-nowrap self-start"
                                 >
-                                  Claim (1 credit)
+                                  <span className="sm:hidden">Claim</span>
+                                  <span className="hidden sm:inline">Claim (1 credit)</span>
                                 </button>
                               )}
                             </div>
 
-                            <div className="flex items-center gap-4 text-sm">
+                            <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-sm">
                               <div className="flex items-center gap-1">
                                 <span className="text-white font-bold">
                                   {formatCurrency(caseItem.estimatedValue)}
@@ -337,7 +340,7 @@ export const InteractiveDemo = () => {
                               <div className="px-2 py-0.5 rounded bg-green-500/20 text-green-400 text-xs font-bold">
                                 {caseItem.equity}% Equity
                               </div>
-                              <div className="text-slate-500 text-xs">
+                              <div className="text-slate-500 text-xs hidden sm:block">
                                 {caseItem.caseType}
                               </div>
                             </div>

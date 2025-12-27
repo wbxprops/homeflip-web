@@ -1,41 +1,49 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, X, Check, MapPin, ArrowRight, ArrowLeft } from 'lucide-react';
+
+interface Jurisdiction {
+  id: number;
+  jurisdiction_code: string;
+  state_code: string;
+  county_name: string;
+  display_name: string;
+  status: string;
+}
 
 interface StateSelection {
   id: string;
   stateCode: string;
   counties: string[];
+  searchQuery: string;
 }
 
 export const ClaimCountyForm = () => {
+  const [jurisdictions, setJurisdictions] = useState<Jurisdiction[]>([]);
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
   });
   const [stateSelections, setStateSelections] = useState<StateSelection[]>([
-    { id: '1', stateCode: '', counties: [''] }
+    { id: '1', stateCode: '', counties: [], searchQuery: '' }
   ]);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [step, setStep] = useState<1 | 2>(1);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
 
   // Format phone number as +1 (XXX) XXX-XXXX
   const formatPhoneNumber = (value: string) => {
-    // Strip all non-numeric characters
     const numbers = value.replace(/\D/g, '');
-
-    // Remove leading 1 if present (we'll add it back formatted)
     const digits = numbers.startsWith('1') ? numbers.slice(1) : numbers;
-
-    // Limit to 10 digits
     const limited = digits.slice(0, 10);
 
-    // Format based on length
     if (limited.length === 0) return '';
     if (limited.length <= 3) return `+1 (${limited}`;
     if (limited.length <= 6) return `+1 (${limited.slice(0, 3)}) ${limited.slice(3)}`;
@@ -46,6 +54,25 @@ export const ClaimCountyForm = () => {
     const formatted = formatPhoneNumber(e.target.value);
     setFormData({ ...formData, phone: formatted });
   };
+
+  // Fetch jurisdictions on mount
+  useEffect(() => {
+    async function fetchJurisdictions() {
+      const { data, error } = await supabase
+        .from('jurisdictions')
+        .select('id, jurisdiction_code, state_code, county_name, display_name, status')
+        .order('state_code')
+        .order('county_name');
+
+      if (error) {
+        console.error('Error fetching jurisdictions:', error);
+      } else {
+        setJurisdictions(data || []);
+      }
+      setLoading(false);
+    }
+    fetchJurisdictions();
+  }, []);
 
   // All 50 US states
   const states = [
@@ -68,45 +95,61 @@ export const ClaimCountyForm = () => {
     { code: 'WI', name: 'Wisconsin' }, { code: 'WY', name: 'Wyoming' }
   ];
 
+  // Get counties for a state from database
+  const getCountiesForState = (stateCode: string) => {
+    return jurisdictions.filter(j => j.state_code === stateCode);
+  };
+
+  // Filter counties based on search query
+  const getFilteredCounties = (stateCode: string, query: string, selectedCounties: string[]) => {
+    const stateCounties = getCountiesForState(stateCode);
+    if (!query.trim()) return stateCounties.filter(c => !selectedCounties.includes(c.county_name)).slice(0, 8);
+    return stateCounties
+      .filter(c =>
+        c.county_name.toLowerCase().includes(query.toLowerCase()) &&
+        !selectedCounties.includes(c.county_name)
+      )
+      .slice(0, 8);
+  };
+
   // Handle state selection change
   const handleStateChange = (selectionId: string, stateCode: string) => {
     setStateSelections(prev => prev.map(sel =>
       sel.id === selectionId
-        ? { ...sel, stateCode, counties: [''] }
+        ? { ...sel, stateCode, counties: [], searchQuery: '' }
         : sel
     ));
   };
 
-  // Handle county text input change
-  const handleCountyChange = (selectionId: string, countyIndex: number, value: string) => {
-    setStateSelections(prev => prev.map(sel => {
-      if (sel.id !== selectionId) return sel;
-      const newCounties = [...sel.counties];
-      newCounties[countyIndex] = value;
-      return { ...sel, counties: newCounties };
-    }));
+  // Handle search query change
+  const handleSearchChange = (selectionId: string, query: string) => {
+    setStateSelections(prev => prev.map(sel =>
+      sel.id === selectionId
+        ? { ...sel, searchQuery: query }
+        : sel
+    ));
+    setActiveDropdown(selectionId);
   };
 
-  // Add another county input
-  const addCountyInput = (selectionId: string) => {
+  // Add county as tag
+  const addCounty = (selectionId: string, countyName: string) => {
     setStateSelections(prev => prev.map(sel => {
       if (sel.id !== selectionId) return sel;
-      if (sel.counties.length < 3) {
-        return { ...sel, counties: [...sel.counties, ''] };
-      }
-      return sel;
+      if (sel.counties.length >= 3) return sel;
+      if (sel.counties.includes(countyName)) return sel;
+      return { ...sel, counties: [...sel.counties, countyName], searchQuery: '' };
     }));
+    // Keep focus on input
+    setTimeout(() => {
+      inputRefs.current[selectionId]?.focus();
+    }, 0);
   };
 
-  // Remove a county input
-  const removeCountyInput = (selectionId: string, countyIndex: number) => {
+  // Remove county tag
+  const removeCounty = (selectionId: string, countyName: string) => {
     setStateSelections(prev => prev.map(sel => {
       if (sel.id !== selectionId) return sel;
-      if (sel.counties.length > 1) {
-        const newCounties = sel.counties.filter((_, i) => i !== countyIndex);
-        return { ...sel, counties: newCounties };
-      }
-      return sel;
+      return { ...sel, counties: sel.counties.filter(c => c !== countyName) };
     }));
   };
 
@@ -116,7 +159,8 @@ export const ClaimCountyForm = () => {
       setStateSelections(prev => [...prev, {
         id: Date.now().toString(),
         stateCode: '',
-        counties: ['']
+        counties: [],
+        searchQuery: ''
       }]);
     }
   };
@@ -157,17 +201,16 @@ export const ClaimCountyForm = () => {
     setStatus('submitting');
     setErrorMessage('');
 
-    // Build jurisdictions_requested JSON, filtering out empty county strings
     const jurisdictionsRequested = stateSelections
-      .filter(sel => sel.stateCode && sel.counties.some(c => c.trim() !== ''))
+      .filter(sel => sel.stateCode && sel.counties.length > 0)
       .map(sel => ({
         state: sel.stateCode,
-        counties: sel.counties.filter(c => c.trim() !== '').map(c => c.trim())
+        counties: sel.counties
       }));
 
     if (jurisdictionsRequested.length === 0) {
       setStatus('error');
-      setErrorMessage('Please select a state and enter at least one county.');
+      setErrorMessage('Please select a state and at least one county.');
       return;
     }
 
@@ -230,20 +273,25 @@ export const ClaimCountyForm = () => {
     );
   }
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#0891b2]"></div>
+      </div>
+    );
+  }
+
   const inputStyles = "w-full px-5 py-4 rounded-xl border-2 border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all text-lg placeholder:text-slate-400";
 
   // Progress indicator component
   const ProgressIndicator = ({ currentStep }: { currentStep: 1 | 2 | 3 }) => (
     <div className="flex items-center justify-center mb-8">
       <div className="relative flex items-center w-48">
-        {/* Background line */}
         <div className="absolute left-0 right-0 h-1 bg-slate-200 rounded-full" />
-        {/* Progress line */}
         <div
           className="absolute left-0 h-1 bg-gradient-to-r from-[#0891b2] to-[#7c3aed] rounded-full transition-all duration-300"
           style={{ width: currentStep === 1 ? '0%' : currentStep === 2 ? '50%' : '100%' }}
         />
-        {/* Dots */}
         <div className="relative flex justify-between w-full">
           {[1, 2, 3].map((dotStep) => (
             <div
@@ -279,7 +327,6 @@ export const ClaimCountyForm = () => {
             exit={{ opacity: 0, x: -20 }}
             className="space-y-4"
           >
-            {/* Contact Info - Step 1 */}
             <input
               type="text"
               required
@@ -305,7 +352,6 @@ export const ClaimCountyForm = () => {
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             />
 
-            {/* Next Step Button */}
             <button
               type="button"
               onClick={handleNextStep}
@@ -323,7 +369,6 @@ export const ClaimCountyForm = () => {
             exit={{ opacity: 0, x: 20 }}
             className="space-y-4"
           >
-            {/* Back button */}
             <button
               type="button"
               onClick={() => setStep(1)}
@@ -333,7 +378,6 @@ export const ClaimCountyForm = () => {
               Back to contact info
             </button>
 
-            {/* State/County Selections - Step 2 */}
             <div className="space-y-4">
               <label className="block text-sm font-bold text-slate-700 ml-1">
                 <MapPin className="w-4 h-4 inline mr-1" />
@@ -376,41 +420,73 @@ export const ClaimCountyForm = () => {
                       ))}
                     </select>
 
-                    {/* County Text Inputs */}
+                    {/* County Tag Input */}
                     {selection.stateCode && (
-                      <div className="space-y-3">
-                        <p className="text-xs text-slate-500">
-                          Enter up to 3 counties ({selection.counties.filter(c => c.trim()).length}/3)
-                        </p>
-                        {selection.counties.map((county, countyIndex) => (
-                          <div key={countyIndex} className="flex items-center gap-2">
-                            <input
-                              type="text"
-                              value={county}
-                              onChange={(e) => handleCountyChange(selection.id, countyIndex, e.target.value)}
-                              placeholder={`County ${countyIndex + 1}`}
-                              className="flex-1 px-4 py-2 rounded-lg border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all bg-white text-sm"
-                            />
-                            {selection.counties.length > 1 && (
-                              <button
-                                type="button"
-                                onClick={() => removeCountyInput(selection.id, countyIndex)}
-                                className="text-slate-400 hover:text-red-500 transition-colors p-1"
+                      <div className="space-y-2">
+                        {/* Selected counties as tags */}
+                        {selection.counties.length > 0 && (
+                          <div className="flex flex-wrap gap-2 mb-2">
+                            {selection.counties.map(county => (
+                              <span
+                                key={county}
+                                className="inline-flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-[#0891b2]/10 to-[#7c3aed]/10 border border-[#0891b2]/30 rounded-full text-sm text-slate-700"
                               >
-                                <X className="w-4 h-4" />
-                              </button>
+                                {county}
+                                <button
+                                  type="button"
+                                  onClick={() => removeCounty(selection.id, county)}
+                                  className="text-slate-400 hover:text-red-500 transition-colors ml-1"
+                                >
+                                  <X className="w-3.5 h-3.5" />
+                                </button>
+                              </span>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Search input */}
+                        {selection.counties.length < 3 && (
+                          <div className="relative">
+                            <input
+                              ref={(el) => { inputRefs.current[selection.id] = el; }}
+                              type="text"
+                              value={selection.searchQuery}
+                              onChange={(e) => handleSearchChange(selection.id, e.target.value)}
+                              onFocus={() => setActiveDropdown(selection.id)}
+                              onBlur={() => setTimeout(() => setActiveDropdown(null), 200)}
+                              placeholder={`Search counties (${selection.counties.length}/3)...`}
+                              className="w-full px-4 py-2 rounded-lg border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all bg-white text-sm"
+                            />
+
+                            {/* Dropdown */}
+                            {activeDropdown === selection.id && (
+                              <div className="absolute z-10 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg max-h-48 overflow-y-auto">
+                                {getFilteredCounties(selection.stateCode, selection.searchQuery, selection.counties).length > 0 ? (
+                                  getFilteredCounties(selection.stateCode, selection.searchQuery, selection.counties).map(jurisdiction => (
+                                    <button
+                                      key={jurisdiction.id}
+                                      type="button"
+                                      onMouseDown={(e) => e.preventDefault()}
+                                      onClick={() => addCounty(selection.id, jurisdiction.county_name)}
+                                      className="w-full px-4 py-2 text-left text-sm hover:bg-slate-50 flex items-center justify-between transition-colors"
+                                    >
+                                      <span>{jurisdiction.county_name}</span>
+                                      {jurisdiction.status === 'active' && (
+                                        <span className="text-xs px-2 py-0.5 bg-green-100 text-green-700 rounded-full">Live</span>
+                                      )}
+                                    </button>
+                                  ))
+                                ) : (
+                                  <div className="px-4 py-3 text-sm text-slate-500">
+                                    {getCountiesForState(selection.stateCode).length === 0
+                                      ? 'No counties available for this state yet'
+                                      : 'No matching counties found'
+                                    }
+                                  </div>
+                                )}
+                              </div>
                             )}
                           </div>
-                        ))}
-                        {selection.counties.length < 3 && (
-                          <button
-                            type="button"
-                            onClick={() => addCountyInput(selection.id)}
-                            className="text-sm text-[#0891b2] hover:text-[#0891b2]/80 transition-colors flex items-center gap-1"
-                          >
-                            <Plus className="w-4 h-4" />
-                            Add another county
-                          </button>
                         )}
                       </div>
                     )}
@@ -418,7 +494,6 @@ export const ClaimCountyForm = () => {
                 ))}
               </AnimatePresence>
 
-              {/* Add Another State Button */}
               {stateSelections.length < 3 && (
                 <button
                   type="button"
@@ -431,7 +506,6 @@ export const ClaimCountyForm = () => {
               )}
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={status === 'submitting'}
