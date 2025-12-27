@@ -146,7 +146,7 @@ export const ClaimCountyForm = () => {
         .insert([{
           name: formData.name,
           email: formData.email,
-          phone: formData.phone || null,
+          phone: formData.phone,
           source: 'claim_county_page',
           jurisdictions_requested: jurisdictionsRequested
         }]);
@@ -224,9 +224,10 @@ export const ClaimCountyForm = () => {
       </div>
 
       <div>
-        <label className="block text-sm font-bold text-slate-700 mb-1 ml-1">Phone (optional)</label>
+        <label className="block text-sm font-bold text-slate-700 mb-1 ml-1">Phone *</label>
         <input
           type="tel"
+          required
           placeholder="(555) 123-4567"
           className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all"
           value={formData.phone}

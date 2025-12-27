@@ -26,11 +26,8 @@ export default function ClaimYourCountyPage() {
                 County
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto mb-4">
-              Exclusive probate leads in your market. No competition. No bidding wars.
-            </p>
-            <p className="text-lg md:text-xl text-slate-700 max-w-2xl mx-auto mb-8 font-medium">
-              We&apos;re onboarding beta users <span className="text-[#0891b2] font-bold">now</span>&mdash;but we cap every county at 50 investors. Once your county fills up, you&apos;re on the waitlist. Lock in founder pricing before it doubles at launch.
+            <p className="text-xl md:text-2xl text-slate-700 max-w-2xl mx-auto mb-8">
+              We&apos;re accepting a <span className="font-bold text-slate-900">limited number of applications</span> for our beta launch in select markets. Apply now to lock in <span className="text-[#0891b2] font-bold">founder pricing</span> and lifetime discounts&mdash;available exclusively to early adopters who help us prove what&apos;s possible.
             </p>
           </motion.div>
 
@@ -44,17 +41,17 @@ export default function ClaimYourCountyPage() {
             <div className="p-4 bg-slate-50 rounded-xl">
               <MapPin className="w-6 h-6 text-[#0891b2] mx-auto mb-2" />
               <p className="text-sm font-medium text-slate-700">Your Territory</p>
-              <p className="text-xs text-slate-500">Leads in your backyard</p>
+              <p className="text-xs text-slate-500">Leads in your market</p>
             </div>
             <div className="p-4 bg-slate-50 rounded-xl">
               <Users className="w-6 h-6 text-[#0891b2] mx-auto mb-2" />
-              <p className="text-sm font-medium text-slate-700">50 Per County</p>
-              <p className="text-xs text-slate-500">Then the door closes</p>
+              <p className="text-sm font-medium text-slate-700">Personalized AI Agent</p>
+              <p className="text-xs text-slate-500">Trained on your criteria</p>
             </div>
             <div className="p-4 bg-slate-50 rounded-xl">
               <Clock className="w-6 h-6 text-[#0891b2] mx-auto mb-2" />
-              <p className="text-sm font-medium text-slate-700">Founder Pricing</p>
-              <p className="text-xs text-slate-500">Doubles at launch</p>
+              <p className="text-sm font-medium text-slate-700">Lifetime Access</p>
+              <p className="text-xs text-slate-500">Discounted for founders</p>
             </div>
             <div className="p-4 bg-slate-50 rounded-xl">
               <Shield className="w-6 h-6 text-[#0891b2] mx-auto mb-2" />
