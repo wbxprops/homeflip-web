@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Navbar } from '@/components/Navbar';
 import { ClaimCountyForm } from '@/components/ClaimCountyForm';
@@ -42,7 +42,9 @@ export default function ClaimYourCountyPage() {
           className="max-w-2xl mx-auto"
         >
           <div className="bg-white rounded-3xl border border-slate-200 shadow-xl p-8">
-            <ClaimCountyForm />
+            <Suspense fallback={<div className="flex items-center justify-center p-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#0891b2]"></div></div>}>
+              <ClaimCountyForm />
+            </Suspense>
           </div>
         </motion.div>
       </section>
