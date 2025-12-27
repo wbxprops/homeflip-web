@@ -381,7 +381,7 @@ export const InteractiveDemo = () => {
             Ready to start finding deals like these in your market?
           </p>
           <a
-            href="/waitlist"
+            href="/claim-your-county"
             className="btn-gradient inline-block px-8 sm:px-12 py-4 sm:py-6 rounded-2xl font-hero font-[900] text-2xl sm:text-3xl md:text-4xl uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all"
           >
             Claim Your County

@@ -167,7 +167,7 @@ export const ProofSection = () => {
             Ready to find deals like these in your market?
           </p>
           <a
-            href="/waitlist"
+            href="/claim-your-county"
             className="btn-gradient inline-block px-10 py-5 rounded-full text-lg font-black uppercase tracking-widest"
           >
             Claim Your County

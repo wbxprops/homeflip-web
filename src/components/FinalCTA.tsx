@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import { CTAForm } from './CTAForm';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export const FinalCTA = () => {
   return (
-    <section id="waitlist" className="px-6 py-32 bg-white text-slate-900 relative overflow-hidden border-t border-slate-100">
+    <section id="final-cta" className="px-6 py-32 bg-white text-slate-900 relative overflow-hidden border-t border-slate-100">
       {/* Dynamic Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#83d4c0]/5 via-transparent to-[#0891b2]/5 opacity-40" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[#83d4c0]/5 rounded-full blur-[150px] animate-pulse pointer-events-none" />
@@ -33,7 +33,12 @@ export const FinalCTA = () => {
             Join the elite group of investors using <strong>Timeline Intelligence</strong> to dominate the probate market.
           </p>
 
-          <CTAForm className="max-w-2xl mx-auto" />
+          <Link
+            href="/claim-your-county"
+            className="btn-gradient inline-block px-10 sm:px-16 py-5 sm:py-7 rounded-2xl font-hero font-[900] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tighter shadow-2xl shadow-[#83d4c0]/30 hover:scale-105 active:scale-95 transition-all"
+          >
+            Claim Your County
+          </Link>
 
           <p className="mt-8 text-[10px] text-slate-400 font-black tracking-[0.3em] uppercase">
             Private Beta Access • Limited Markets Available

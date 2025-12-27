@@ -6,6 +6,7 @@ import { LeadSourceTraps } from "@/components/LeadSourceTraps";
 import { Comparison } from "@/components/Comparison";
 import { Features } from "@/components/Features";
 import { InteractiveDemo } from "@/components/InteractiveDemo";
+import { CTABlock } from "@/components/CTABlock";
 import { Objections } from "@/components/Objections";
 import { FinalCTA } from "@/components/FinalCTA";
 
@@ -20,6 +21,7 @@ export default function Home() {
         <Comparison />
         <InteractiveDemo />
         <Features />
+        <CTABlock />
         <Objections />
         <FinalCTA />
       </main>
