@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ClaimCountyForm } from '@/components/ClaimCountyForm';
-import { MapPin, Users, Clock, Shield } from 'lucide-react';
+import { MapPin, Bot, Clock, Shield } from 'lucide-react';
 
 export default function ClaimYourCountyPage() {
   return (
@@ -27,7 +27,7 @@ export default function ClaimYourCountyPage() {
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-700 max-w-2xl mx-auto mb-8">
-              We&apos;re accepting a <span className="font-bold text-slate-900">limited number of applications</span> for our beta launch in select markets. Apply now to lock in <span className="text-[#0891b2] font-bold">founder pricing</span> and lifetime discounts&mdash;available exclusively to early adopters who help us prove what&apos;s possible.
+              We&apos;re accepting a <span className="font-bold text-slate-900">limited number of applications</span> for our beta launch in select markets. Apply now to lock in <span className="text-[#0891b2] font-bold">founder pricing</span> and lifetime discounts.
             </p>
           </motion.div>
 
@@ -44,7 +44,7 @@ export default function ClaimYourCountyPage() {
               <p className="text-xs text-slate-500">Leads in your market</p>
             </div>
             <div className="p-4 bg-slate-50 rounded-xl">
-              <Users className="w-6 h-6 text-[#0891b2] mx-auto mb-2" />
+              <Bot className="w-6 h-6 text-[#0891b2] mx-auto mb-2" />
               <p className="text-sm font-medium text-slate-700">Personalized AI Agent</p>
               <p className="text-xs text-slate-500">Trained on your criteria</p>
             </div>
