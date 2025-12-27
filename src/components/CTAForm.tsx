@@ -74,7 +74,7 @@ export const CTAForm = ({
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="btn-gradient px-6 sm:px-10 py-4 rounded-xl font-hero font-[900] text-xl sm:text-2xl md:text-3xl uppercase tracking-tighter shadow-lg shadow-[#83d4c0]/20 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 whitespace-nowrap w-full sm:w-auto"
+        className="btn-gradient px-6 sm:px-10 py-4 rounded-xl font-hero font-[900] text-2xl sm:text-2xl md:text-3xl uppercase tracking-tighter shadow-lg shadow-[#83d4c0]/20 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 whitespace-nowrap w-full sm:w-auto"
       >
         {status === 'submitting' ? 'Joining...' : buttonText}
       </button>

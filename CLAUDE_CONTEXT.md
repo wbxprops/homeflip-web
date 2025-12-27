@@ -2,7 +2,7 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2025-12-26
+**Last Updated:** 2025-12-27
 **Claude Code Version:** Sonnet 4.5 / Gemini 3.5
 
 ---
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Claim Your County funnel complete with Calendly booking. FAQ synced across site. Jurisdictions table populated.
+**Current Status:** 🚧 IN PROGRESS - IBM Plex Sans body font, CTA redirects to Claim County funnel, No CC required messaging added.
 
 ---
 
@@ -37,6 +37,13 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 **Active Work:** Maintenance and content refinement.
 
 ### Session History
+#### 2025-12-27
+- ✅ Upgraded body font to IBM Plex Sans (more professional/credible)
+- ✅ CTAForm now saves to prospects table, redirects to /claim-your-county
+- ✅ ClaimCountyForm pre-fills email from URL params
+- ✅ Fixed dark mode input visibility on hero CTA
+- ✅ Added "(No CC required)" to hero and claim-your-county pages
+
 #### 2025-12-26
 - ✅ Fixed SQL scripts for jurisdictions table (added monthly_license_fee)
 - ✅ Created booking page with Calendly embed (`/claim-your-county/book`)
@@ -97,7 +104,7 @@ background: linear-gradient(to right, #5EEADC, #A855F7);
 - **Styling:** TailwindCSS
 - **Hosting:** Vercel (free tier, auto-deploy from GitHub)
 - **Database:** Supabase (for waitlist form, shared with homeflip-crm)
-- **Font:** Inter (Google Fonts)
+- **Font:** IBM Plex Sans (body), Adobe Fonts (headlines)
 - **Version Control:** GitHub
 
 ### Key Patterns
