@@ -35,6 +35,29 @@ export const ClaimCountyForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [step, setStep] = useState<1 | 2>(1);
 
+  // Format phone number as +1 (XXX) XXX-XXXX
+  const formatPhoneNumber = (value: string) => {
+    // Strip all non-numeric characters
+    const numbers = value.replace(/\D/g, '');
+
+    // Remove leading 1 if present (we'll add it back formatted)
+    const digits = numbers.startsWith('1') ? numbers.slice(1) : numbers;
+
+    // Limit to 10 digits
+    const limited = digits.slice(0, 10);
+
+    // Format based on length
+    if (limited.length === 0) return '';
+    if (limited.length <= 3) return `+1 (${limited}`;
+    if (limited.length <= 6) return `+1 (${limited.slice(0, 3)}) ${limited.slice(3)}`;
+    return `+1 (${limited.slice(0, 3)}) ${limited.slice(3, 6)}-${limited.slice(6)}`;
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setFormData({ ...formData, phone: formatted });
+  };
+
   // Fetch jurisdictions on mount
   useEffect(() => {
     async function fetchJurisdictions() {
@@ -281,10 +304,10 @@ export const ClaimCountyForm = () => {
             <input
               type="tel"
               required
-              placeholder="Phone *"
+              placeholder="Phone * +1 (555) 555-1212"
               className={inputStyles}
               value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              onChange={handlePhoneChange}
             />
             <input
               type="email"
