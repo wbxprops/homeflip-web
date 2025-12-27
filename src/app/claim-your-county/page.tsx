@@ -78,30 +78,30 @@ export default function ClaimYourCountyPage() {
             How It Works
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] text-white font-bold text-xl flex items-center justify-center mx-auto mb-4">
+            <div className="text-center p-8 bg-white rounded-3xl shadow-sm">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] text-white font-bold text-2xl flex items-center justify-center mx-auto mb-6">
                 1
               </div>
-              <h3 className="font-bold text-lg text-slate-900 mb-2">Claim Your Counties</h3>
-              <p className="text-slate-600 text-sm">
+              <h3 className="font-bold text-xl text-slate-900 mb-3">Claim Your Counties</h3>
+              <p className="text-slate-600 text-base">
                 Pick up to 3 counties where you invest. If spots are available, you&apos;re in. If not, you&apos;ll join the waitlist.
               </p>
             </div>
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] text-white font-bold text-xl flex items-center justify-center mx-auto mb-4">
+            <div className="text-center p-8 bg-white rounded-3xl shadow-sm">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] text-white font-bold text-2xl flex items-center justify-center mx-auto mb-6">
                 2
               </div>
-              <h3 className="font-bold text-lg text-slate-900 mb-2">Book Your Strategy Call</h3>
-              <p className="text-slate-600 text-sm">
+              <h3 className="font-bold text-xl text-slate-900 mb-3">Book Your Strategy Call</h3>
+              <p className="text-slate-600 text-base">
                 After you apply, you&apos;ll get a link to schedule a one-on-one roadmap session with our team.
               </p>
             </div>
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] text-white font-bold text-xl flex items-center justify-center mx-auto mb-4">
+            <div className="text-center p-8 bg-white rounded-3xl shadow-sm">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] text-white font-bold text-2xl flex items-center justify-center mx-auto mb-6">
                 3
               </div>
-              <h3 className="font-bold text-lg text-slate-900 mb-2">Start Closing</h3>
-              <p className="text-slate-600 text-sm">
+              <h3 className="font-bold text-xl text-slate-900 mb-3">Start Closing</h3>
+              <p className="text-slate-600 text-base">
                 Fresh probate leads hit your dashboard daily. Our AI watches the courts 24/7&mdash;you just work the deals.
               </p>
             </div>
