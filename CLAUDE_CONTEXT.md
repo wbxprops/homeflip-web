@@ -43,6 +43,9 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 - ✅ ClaimCountyForm pre-fills email from URL params
 - ✅ Fixed dark mode input visibility on hero CTA
 - ✅ Added "(No CC required)" to hero and claim-your-county pages
+- ✅ Fixed mobile button size consistency
+- ✅ Fixed Suspense boundary for useSearchParams (Vercel build)
+- ✅ **NEW: prospect_responses table** - tracks every form submission for lead scoring/engagement
 
 #### 2025-12-26
 - ✅ Fixed SQL scripts for jurisdictions table (added monthly_license_fee)

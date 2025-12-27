@@ -66,6 +66,27 @@ Upgraded body font to IBM Plex Sans for better credibility/readability, and impr
 - Hero CTA button font size: `text-xl` → `text-2xl` on mobile for consistency
 - Wrapped ClaimCountyForm in Suspense boundary (fixed Vercel build error)
 
+### 6. Prospect Responses Table (CRM architecture)
+**Key addition:** Created `prospect_responses` table for proper CRM lead tracking.
+
+**Architecture:**
+- `prospects` = single source of truth per lead (one row per email)
+- `prospect_responses` = every form interaction (tracks engagement over time)
+
+**Benefits:**
+- Track all phone numbers a prospect has used
+- Count submissions for lead scoring (5+ responses = hot lead)
+- See engagement span (first response → last response)
+- Route high-engagement leads to different funnels
+
+**SQL script:** `scripts/create-prospect-responses-table.sql`
+
+**View created:** `prospect_engagement` - rolls up response_count, first/last response, sources_used
+
+**Code updated:** Both CTAForm and ClaimCountyForm now:
+1. Always insert to `prospect_responses` (full history)
+2. Try insert to `prospects` (ignore duplicate error if exists)
+
 ---
 
 ## Next Steps
