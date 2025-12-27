@@ -30,15 +30,15 @@ export const Footer = () => {
             <div className="flex flex-col gap-4 text-sm font-bold">
               <Link href="/#probate-investing" className="hover:text-[#0891b2] transition-colors">Why Probate</Link>
               <Link href="/#features" className="hover:text-[#0891b2] transition-colors">How It Works</Link>
-              <Link href="/pricing" className="hover:text-[#0891b2] transition-colors">Pricing</Link>
               <Link href="/waitlist" className="hover:text-[#83d4c0] transition-colors uppercase tracking-tighter font-hero font-[900] text-lg">Claim Your County</Link>
             </div>
           </div>
 
           <div>
-            <h4 className="text-slate-900 font-black uppercase text-xs tracking-[0.2em] mb-6">Legal</h4>
+            <h4 className="text-slate-900 font-black uppercase text-xs tracking-[0.2em] mb-6">Company</h4>
             <div className="flex flex-col gap-4 text-sm font-bold">
               <Link href="/about" className="hover:text-[#0891b2] transition-colors">About Us</Link>
+              <Link href="/values" className="hover:text-[#0891b2] transition-colors">Our Values</Link>
               <Link href="/faq" className="hover:text-[#0891b2] transition-colors">FAQ</Link>
               <Link href="/privacy" className="hover:text-[#0891b2] transition-colors">Privacy Policy</Link>
               <Link href="/terms" className="hover:text-[#0891b2] transition-colors">Terms of Service</Link>
