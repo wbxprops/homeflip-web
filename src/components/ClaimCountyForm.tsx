@@ -198,40 +198,30 @@ export const ClaimCountyForm = () => {
       )}
 
       {/* Contact Info */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-bold text-slate-700 mb-1 ml-1">Full Name *</label>
-          <input
-            type="text"
-            required
-            placeholder="John Doe"
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-bold text-slate-700 mb-1 ml-1">Email Address *</label>
-          <input
-            type="email"
-            required
-            placeholder="john@example.com"
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all"
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          />
-        </div>
-      </div>
-
-      <div>
-        <label className="block text-sm font-bold text-slate-700 mb-1 ml-1">Phone *</label>
+      <div className="space-y-4">
+        <input
+          type="text"
+          required
+          placeholder="Full name"
+          className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all"
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+        />
         <input
           type="tel"
           required
-          placeholder="(555) 123-4567"
+          placeholder="Phone"
           className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all"
           value={formData.phone}
           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+        />
+        <input
+          type="email"
+          required
+          placeholder="Enter email"
+          className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
       </div>
 
