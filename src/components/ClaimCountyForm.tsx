@@ -1,18 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, X, Check, MapPin, ArrowRight, ArrowLeft } from 'lucide-react';
-
-interface Jurisdiction {
-  id: number;
-  jurisdiction_code: string;
-  state_code: string;
-  county_name: string;
-  display_name: string;
-  status: string;
-}
 
 interface StateSelection {
   id: string;
@@ -21,15 +12,13 @@ interface StateSelection {
 }
 
 export const ClaimCountyForm = () => {
-  const [jurisdictions, setJurisdictions] = useState<Jurisdiction[]>([]);
-  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
   });
   const [stateSelections, setStateSelections] = useState<StateSelection[]>([
-    { id: '1', stateCode: '', counties: [] }
+    { id: '1', stateCode: '', counties: [''] }
   ]);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -58,69 +47,64 @@ export const ClaimCountyForm = () => {
     setFormData({ ...formData, phone: formatted });
   };
 
-  // Fetch jurisdictions on mount
-  useEffect(() => {
-    async function fetchJurisdictions() {
-      const { data, error } = await supabase
-        .from('jurisdictions')
-        .select('id, jurisdiction_code, state_code, county_name, display_name, status')
-        .order('state_code')
-        .order('county_name');
-
-      if (error) {
-        console.error('Error fetching jurisdictions:', error);
-      } else {
-        setJurisdictions(data || []);
-      }
-      setLoading(false);
-    }
-    fetchJurisdictions();
-  }, []);
-
-  // Get unique states from jurisdictions
-  const states = [...new Set(jurisdictions.map(j => j.state_code))].sort();
-
-  // Get counties for a given state
-  const getCountiesForState = (stateCode: string) => {
-    return jurisdictions.filter(j => j.state_code === stateCode);
-  };
-
-  // Get state name from code
-  const getStateName = (code: string) => {
-    const stateNames: Record<string, string> = {
-      'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas', 'CA': 'California',
-      'CO': 'Colorado', 'CT': 'Connecticut', 'DE': 'Delaware', 'FL': 'Florida', 'GA': 'Georgia',
-      'HI': 'Hawaii', 'ID': 'Idaho', 'IL': 'Illinois', 'IN': 'Indiana', 'IA': 'Iowa',
-      'KS': 'Kansas', 'KY': 'Kentucky', 'LA': 'Louisiana', 'ME': 'Maine', 'MD': 'Maryland',
-      'MA': 'Massachusetts', 'MI': 'Michigan', 'MN': 'Minnesota', 'MS': 'Mississippi', 'MO': 'Missouri',
-      'MT': 'Montana', 'NE': 'Nebraska', 'NV': 'Nevada', 'NH': 'New Hampshire', 'NJ': 'New Jersey',
-      'NM': 'New Mexico', 'NY': 'New York', 'NC': 'North Carolina', 'ND': 'North Dakota', 'OH': 'Ohio',
-      'OK': 'Oklahoma', 'OR': 'Oregon', 'PA': 'Pennsylvania', 'RI': 'Rhode Island', 'SC': 'South Carolina',
-      'SD': 'South Dakota', 'TN': 'Tennessee', 'TX': 'Texas', 'UT': 'Utah', 'VT': 'Vermont',
-      'VA': 'Virginia', 'WA': 'Washington', 'WV': 'West Virginia', 'WI': 'Wisconsin', 'WY': 'Wyoming'
-    };
-    return stateNames[code] || code;
-  };
+  // All 50 US states
+  const states = [
+    { code: 'AL', name: 'Alabama' }, { code: 'AK', name: 'Alaska' }, { code: 'AZ', name: 'Arizona' },
+    { code: 'AR', name: 'Arkansas' }, { code: 'CA', name: 'California' }, { code: 'CO', name: 'Colorado' },
+    { code: 'CT', name: 'Connecticut' }, { code: 'DE', name: 'Delaware' }, { code: 'FL', name: 'Florida' },
+    { code: 'GA', name: 'Georgia' }, { code: 'HI', name: 'Hawaii' }, { code: 'ID', name: 'Idaho' },
+    { code: 'IL', name: 'Illinois' }, { code: 'IN', name: 'Indiana' }, { code: 'IA', name: 'Iowa' },
+    { code: 'KS', name: 'Kansas' }, { code: 'KY', name: 'Kentucky' }, { code: 'LA', name: 'Louisiana' },
+    { code: 'ME', name: 'Maine' }, { code: 'MD', name: 'Maryland' }, { code: 'MA', name: 'Massachusetts' },
+    { code: 'MI', name: 'Michigan' }, { code: 'MN', name: 'Minnesota' }, { code: 'MS', name: 'Mississippi' },
+    { code: 'MO', name: 'Missouri' }, { code: 'MT', name: 'Montana' }, { code: 'NE', name: 'Nebraska' },
+    { code: 'NV', name: 'Nevada' }, { code: 'NH', name: 'New Hampshire' }, { code: 'NJ', name: 'New Jersey' },
+    { code: 'NM', name: 'New Mexico' }, { code: 'NY', name: 'New York' }, { code: 'NC', name: 'North Carolina' },
+    { code: 'ND', name: 'North Dakota' }, { code: 'OH', name: 'Ohio' }, { code: 'OK', name: 'Oklahoma' },
+    { code: 'OR', name: 'Oregon' }, { code: 'PA', name: 'Pennsylvania' }, { code: 'RI', name: 'Rhode Island' },
+    { code: 'SC', name: 'South Carolina' }, { code: 'SD', name: 'South Dakota' }, { code: 'TN', name: 'Tennessee' },
+    { code: 'TX', name: 'Texas' }, { code: 'UT', name: 'Utah' }, { code: 'VT', name: 'Vermont' },
+    { code: 'VA', name: 'Virginia' }, { code: 'WA', name: 'Washington' }, { code: 'WV', name: 'West Virginia' },
+    { code: 'WI', name: 'Wisconsin' }, { code: 'WY', name: 'Wyoming' }
+  ];
 
   // Handle state selection change
   const handleStateChange = (selectionId: string, stateCode: string) => {
     setStateSelections(prev => prev.map(sel =>
       sel.id === selectionId
-        ? { ...sel, stateCode, counties: [] }
+        ? { ...sel, stateCode, counties: [''] }
         : sel
     ));
   };
 
-  // Handle county toggle
-  const handleCountyToggle = (selectionId: string, countyName: string) => {
+  // Handle county text input change
+  const handleCountyChange = (selectionId: string, countyIndex: number, value: string) => {
     setStateSelections(prev => prev.map(sel => {
       if (sel.id !== selectionId) return sel;
+      const newCounties = [...sel.counties];
+      newCounties[countyIndex] = value;
+      return { ...sel, counties: newCounties };
+    }));
+  };
 
-      const isSelected = sel.counties.includes(countyName);
-      if (isSelected) {
-        return { ...sel, counties: sel.counties.filter(c => c !== countyName) };
-      } else if (sel.counties.length < 3) {
-        return { ...sel, counties: [...sel.counties, countyName] };
+  // Add another county input
+  const addCountyInput = (selectionId: string) => {
+    setStateSelections(prev => prev.map(sel => {
+      if (sel.id !== selectionId) return sel;
+      if (sel.counties.length < 3) {
+        return { ...sel, counties: [...sel.counties, ''] };
+      }
+      return sel;
+    }));
+  };
+
+  // Remove a county input
+  const removeCountyInput = (selectionId: string, countyIndex: number) => {
+    setStateSelections(prev => prev.map(sel => {
+      if (sel.id !== selectionId) return sel;
+      if (sel.counties.length > 1) {
+        const newCounties = sel.counties.filter((_, i) => i !== countyIndex);
+        return { ...sel, counties: newCounties };
       }
       return sel;
     }));
@@ -132,7 +116,7 @@ export const ClaimCountyForm = () => {
       setStateSelections(prev => [...prev, {
         id: Date.now().toString(),
         stateCode: '',
-        counties: []
+        counties: ['']
       }]);
     }
   };
@@ -144,11 +128,22 @@ export const ClaimCountyForm = () => {
     }
   };
 
+  // Validate email format
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    return emailRegex.test(email);
+  };
+
   // Handle step 1 to step 2 transition
   const handleNextStep = () => {
     if (!formData.name || !formData.phone || !formData.email) {
       setStatus('error');
       setErrorMessage('Please fill in all required fields.');
+      return;
+    }
+    if (!isValidEmail(formData.email)) {
+      setStatus('error');
+      setErrorMessage('Please enter a valid email address.');
       return;
     }
     setStatus('idle');
@@ -162,17 +157,17 @@ export const ClaimCountyForm = () => {
     setStatus('submitting');
     setErrorMessage('');
 
-    // Build jurisdictions_requested JSON
+    // Build jurisdictions_requested JSON, filtering out empty county strings
     const jurisdictionsRequested = stateSelections
-      .filter(sel => sel.stateCode && sel.counties.length > 0)
+      .filter(sel => sel.stateCode && sel.counties.some(c => c.trim() !== ''))
       .map(sel => ({
         state: sel.stateCode,
-        counties: sel.counties
+        counties: sel.counties.filter(c => c.trim() !== '').map(c => c.trim())
       }));
 
     if (jurisdictionsRequested.length === 0) {
       setStatus('error');
-      setErrorMessage('Please select at least one state and county.');
+      setErrorMessage('Please select a state and enter at least one county.');
       return;
     }
 
@@ -231,14 +226,6 @@ export const ClaimCountyForm = () => {
             Check your inbox&mdash;your welcome email is on the way.
           </p>
         </motion.div>
-      </div>
-    );
-  }
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center p-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#0891b2]"></div>
       </div>
     );
   }
@@ -383,50 +370,48 @@ export const ClaimCountyForm = () => {
                     >
                       <option value="">Select a state...</option>
                       {states.map(state => (
-                        <option key={state} value={state}>
-                          {getStateName(state)} ({state})
+                        <option key={state.code} value={state.code}>
+                          {state.name} ({state.code})
                         </option>
                       ))}
                     </select>
 
-                    {/* County Checkboxes */}
+                    {/* County Text Inputs */}
                     {selection.stateCode && (
-                      <div className="space-y-2">
+                      <div className="space-y-3">
                         <p className="text-xs text-slate-500">
-                          Select up to 3 counties ({selection.counties.length}/3 selected)
+                          Enter up to 3 counties ({selection.counties.filter(c => c.trim()).length}/3)
                         </p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto">
-                          {getCountiesForState(selection.stateCode).map(jurisdiction => {
-                            const isSelected = selection.counties.includes(jurisdiction.county_name);
-                            const isDisabled = !isSelected && selection.counties.length >= 3;
-
-                            return (
-                              <label
-                                key={jurisdiction.id}
-                                className={`
-                                  flex items-center gap-2 p-2 rounded-lg cursor-pointer transition-all
-                                  ${isSelected ? 'bg-[#0891b2]/10 border border-[#0891b2]/30' : 'bg-white border border-slate-100 hover:border-slate-200'}
-                                  ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}
-                                `}
+                        {selection.counties.map((county, countyIndex) => (
+                          <div key={countyIndex} className="flex items-center gap-2">
+                            <input
+                              type="text"
+                              value={county}
+                              onChange={(e) => handleCountyChange(selection.id, countyIndex, e.target.value)}
+                              placeholder={`County ${countyIndex + 1}`}
+                              className="flex-1 px-4 py-2 rounded-lg border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all bg-white text-sm"
+                            />
+                            {selection.counties.length > 1 && (
+                              <button
+                                type="button"
+                                onClick={() => removeCountyInput(selection.id, countyIndex)}
+                                className="text-slate-400 hover:text-red-500 transition-colors p-1"
                               >
-                                <input
-                                  type="checkbox"
-                                  checked={isSelected}
-                                  disabled={isDisabled}
-                                  onChange={() => handleCountyToggle(selection.id, jurisdiction.county_name)}
-                                  className="w-4 h-4 rounded border-slate-300 text-[#0891b2] focus:ring-[#0891b2]"
-                                />
-                                <span className="text-sm text-slate-700">{jurisdiction.county_name}</span>
-                                {jurisdiction.status === 'active' && (
-                                  <span className="ml-auto text-xs px-2 py-0.5 bg-green-100 text-green-700 rounded-full">Live</span>
-                                )}
-                                {jurisdiction.status === 'coming_soon' && (
-                                  <span className="ml-auto text-xs px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full">Soon</span>
-                                )}
-                              </label>
-                            );
-                          })}
-                        </div>
+                                <X className="w-4 h-4" />
+                              </button>
+                            )}
+                          </div>
+                        ))}
+                        {selection.counties.length < 3 && (
+                          <button
+                            type="button"
+                            onClick={() => addCountyInput(selection.id)}
+                            className="text-sm text-[#0891b2] hover:text-[#0891b2]/80 transition-colors flex items-center gap-1"
+                          >
+                            <Plus className="w-4 h-4" />
+                            Add another county
+                          </button>
+                        )}
                       </div>
                     )}
                   </motion.div>

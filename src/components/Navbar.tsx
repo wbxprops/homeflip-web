@@ -2,10 +2,17 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft } from 'lucide-react';
 
-export const Navbar = () => {
+interface NavbarProps {
+  minimal?: boolean;
+}
+
+export const Navbar = ({ minimal = false }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const navLinks = [
     { href: '/#probate-investing', label: 'Why Probate' },
@@ -16,6 +23,35 @@ export const Navbar = () => {
 
   const closeMenu = () => setIsOpen(false);
 
+  // Minimal navbar for focused pages (like claim-your-county)
+  if (minimal) {
+    return (
+      <motion.nav
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5 dark"
+      >
+        <div className="flex items-center justify-center px-6 py-4 max-w-7xl mx-auto relative">
+          {/* Back button */}
+          <button
+            onClick={() => router.back()}
+            className="absolute left-6 flex items-center text-slate-400 hover:text-[#83d4c0] transition-colors"
+            aria-label="Go back"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          {/* Centered logo */}
+          <Link href="/" className="flex items-center group">
+            <span className="text-2xl font-black text-white tracking-tight">
+              Homeflip<span className="text-[#83d4c0]">.ai</span>
+            </span>
+          </Link>
+        </div>
+      </motion.nav>
+    );
+  }
+
   return (
     <>
       <motion.nav
@@ -24,10 +60,7 @@ export const Navbar = () => {
         className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5 dark"
       >
         <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-          <Link href="/" className="flex items-center gap-2 group" onClick={closeMenu}>
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#83d4c0] to-[#0891b2] flex items-center justify-center text-[#0a1421] font-black shadow-lg shadow-[#83d4c0]/20 group-hover:scale-110 transition-transform">
-              H
-            </div>
+          <Link href="/" className="flex items-center group" onClick={closeMenu}>
             <span className="text-2xl font-black text-white tracking-tight">
               Homeflip<span className="text-[#83d4c0]">.ai</span>
             </span>

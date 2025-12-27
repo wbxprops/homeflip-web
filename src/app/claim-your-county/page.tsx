@@ -9,7 +9,7 @@ import { MapPin, Bot, Clock } from 'lucide-react';
 export default function ClaimYourCountyPage() {
   return (
     <main className="min-h-screen bg-white">
-      <Navbar />
+      <Navbar minimal />
 
       {/* Hero Section */}
       <section className="pt-32 pb-6 px-6">

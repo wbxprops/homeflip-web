@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Section } from './Section';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
 export const Objections = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const items = [
     // Pricing & Value
@@ -143,7 +144,18 @@ Here's the truth every successful investor knows: you make your money when you b
   ];
 
   const toggleItem = (index: number) => {
+    const isOpening = openIndex !== index;
     setOpenIndex(openIndex === index ? null : index);
+
+    // Scroll to keep the clicked question visible when opening
+    if (isOpening && itemRefs.current[index]) {
+      setTimeout(() => {
+        itemRefs.current[index]?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }, 50);
+    }
   };
 
   return (
@@ -170,11 +182,12 @@ Here's the truth every successful investor knows: you make your money when you b
           {items.map((item, i) => (
             <motion.div
               key={i}
+              ref={(el) => { itemRefs.current[i] = el; }}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.03 }}
-              className="border border-slate-200 rounded-2xl overflow-hidden"
+              className="border border-slate-200 rounded-2xl overflow-hidden scroll-mt-24"
             >
               <button
                 onClick={() => toggleItem(i)}
