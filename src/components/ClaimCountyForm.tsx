@@ -170,9 +170,12 @@ export const ClaimCountyForm = () => {
         <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-[#0891b2] to-[#7c3aed] flex items-center justify-center">
           <Check className="w-8 h-8 text-white" />
         </div>
-        <h3 className="text-2xl font-bold text-slate-900 mb-2">You&apos;re on the list!</h3>
-        <p className="text-slate-600">
-          We&apos;ll notify you as soon as your county becomes available. Keep an eye on your inbox!
+        <h3 className="text-2xl font-bold text-slate-900 mb-2">Welcome to the Beta!</h3>
+        <p className="text-slate-600 mb-4">
+          You&apos;re in. We&apos;ll be reaching out personally within 24-48 hours to get you set up with your account and walk you through everything.
+        </p>
+        <p className="text-sm text-slate-500">
+          Check your inbox for a welcome email from our team.
         </p>
       </motion.div>
     );
@@ -337,7 +340,7 @@ export const ClaimCountyForm = () => {
         disabled={status === 'submitting'}
         className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-3xl uppercase tracking-tighter shadow-lg shadow-[#0891b2]/20 hover:scale-[1.01] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {status === 'submitting' ? 'Submitting...' : 'Claim Your County'}
+        {status === 'submitting' ? 'Joining...' : 'Join the Beta'}
       </button>
 
       <p className="text-center text-sm text-slate-500">
