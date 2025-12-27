@@ -44,9 +44,9 @@ function BookCallContent() {
             transition={{ duration: 0.5 }}
             className="text-center mb-8"
           >
-            <h1 className="font-hero font-[900] text-5xl md:text-6xl lg:text-7xl text-slate-900 uppercase tracking-tighter leading-[0.9] mb-6">
+            <h1 className="font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-slate-900 uppercase tracking-tighter leading-[0.9] mb-6">
               Book Your{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0891b2] to-[#7c3aed] whitespace-nowrap">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0891b2] to-[#7c3aed]">
                 15-Minute Roadmap Call
               </span>
             </h1>
