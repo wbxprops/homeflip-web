@@ -41,7 +41,7 @@ export default function ClaimYourCountyPage() {
             <div className="p-6 bg-slate-50 rounded-2xl">
               <MapPin className="w-8 h-8 text-[#0891b2] mx-auto mb-3" />
               <p className="text-base font-medium text-slate-700">Your Territory</p>
-              <p className="text-sm text-slate-500">Select up to 3 markets</p>
+              <p className="text-sm text-slate-500">Probate leads in up to 3 markets</p>
             </div>
             <div className="p-6 bg-slate-50 rounded-2xl">
               <Bot className="w-8 h-8 text-[#0891b2] mx-auto mb-3" />
