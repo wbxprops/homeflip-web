@@ -48,7 +48,7 @@ function BookCallContent() {
             <h1 className="font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-slate-900 uppercase tracking-tighter leading-[0.9] mb-6">
               Book Your{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0891b2] to-[#7c3aed]">
-                FREE 15-Minute Roadmap Call
+                FREE 15-Minute Roadmap Session
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto">
