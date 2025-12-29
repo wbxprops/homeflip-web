@@ -65,7 +65,7 @@ function BookCallContent() {
             <div
               className="calendly-inline-widget"
               data-url={calendlyUrl}
-              style={{ minWidth: '320px', height: '950px' }}
+              style={{ minWidth: '320px', height: '1150px' }}
             />
           </motion.div>
         </div>
