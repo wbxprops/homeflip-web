@@ -51,7 +51,7 @@ function BookCallContent() {
                 FREE 15-Minute Roadmap Session
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-slate-600 max-w-2xl lg:max-w-3xl mx-auto">
               We&apos;ll review your county&apos;s availability, discuss your goals, and explore how Homeflip.ai could possibly fit into your current investing strategy.
             </p>
           </motion.div>
