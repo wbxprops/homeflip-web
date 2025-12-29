@@ -13,7 +13,10 @@ function BookCallContent() {
   // Get pre-filled data from URL params
   const fullName = searchParams.get('name') || '';
   const email = searchParams.get('email') || '';
-  const phone = searchParams.get('phone') || '';
+  const phoneRaw = searchParams.get('phone') || '';
+
+  // Clean phone to just digits (e.g., "5132900789")
+  const phone = phoneRaw.replace(/\D/g, '').replace(/^1/, ''); // Strip non-digits and leading 1
 
   // Split full name into first and last name
   const nameParts = fullName.trim().split(/\s+/);
@@ -21,6 +24,7 @@ function BookCallContent() {
   const lastName = nameParts.slice(1).join(' ') || '';
 
   // Build Calendly URL with prefilled params
+  // a2 = phone (second custom field in Calendly)
   const calendlyBaseUrl = 'https://calendly.com/wb-props/homeflip-roadmap';
   const calendlyParams = new URLSearchParams({
     hide_event_type_details: '1',
@@ -28,7 +32,7 @@ function BookCallContent() {
     ...(firstName && { first_name: firstName }),
     ...(lastName && { last_name: lastName }),
     ...(email && { email }),
-    ...(phone && { a1: phone }),
+    ...(phone && { a2: phone }),
   });
   const calendlyUrl = `${calendlyBaseUrl}?${calendlyParams.toString()}`;
 
