@@ -86,7 +86,7 @@ function BookCallContent() {
       {/* Calendly Script */}
       <Script
         src="https://assets.calendly.com/assets/external/widget.js"
-        strategy="lazyOnload"
+        strategy="afterInteractive"
       />
     </>
   );
