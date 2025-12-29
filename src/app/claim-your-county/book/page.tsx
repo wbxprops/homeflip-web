@@ -4,7 +4,6 @@ import React, { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Navbar } from '@/components/Navbar';
-import { Calendar } from 'lucide-react';
 import Script from 'next/script';
 
 function BookCallContent() {
@@ -59,21 +58,12 @@ function BookCallContent() {
             </p>
           </motion.div>
 
-          {/* Calendly Section */}
+          {/* Calendly Embed */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden"
           >
-            <div className="bg-gradient-to-r from-[#0891b2]/10 to-[#7c3aed]/10 px-6 py-4 border-b border-slate-200">
-              <div className="flex items-center gap-3">
-                <Calendar className="w-5 h-5 text-[#0891b2]" />
-                <h2 className="font-bold text-slate-800">Pick a Time That Works for You</h2>
-              </div>
-            </div>
-
-            {/* Calendly Embed */}
             <div
               className="calendly-inline-widget"
               data-url={calendlyUrl}
