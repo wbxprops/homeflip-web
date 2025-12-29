@@ -119,11 +119,13 @@ export default function FreeGuidePage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              {/* Book Image Placeholder */}
+              {/* Book Image */}
               <div className="mb-8 flex justify-center lg:justify-start">
-                <div className="w-64 h-80 bg-gradient-to-br from-[#0891b2]/20 to-[#7c3aed]/20 rounded-lg flex items-center justify-center border-2 border-dashed border-slate-300">
-                  <p className="text-slate-500 text-center px-4">Book Cover Image<br />(Replace with actual image)</p>
-                </div>
+                <img
+                  src="/ebook-12-hidden-sources-v8.png"
+                  alt="12 Secrets to Buying Off-Market Properties"
+                  className="w-64 h-auto drop-shadow-2xl"
+                />
               </div>
 
               <h2 className="font-hero font-[900] text-2xl md:text-3xl text-slate-900 uppercase tracking-tight mb-6">
