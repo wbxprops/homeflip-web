@@ -68,16 +68,6 @@ function BookCallContent() {
               style={{ minWidth: '320px', height: '700px' }}
             />
           </motion.div>
-
-          {/* Skip Option */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-center text-sm text-slate-500 mt-6"
-          >
-            Can&apos;t book now? No worries, we&apos;ll email you a link to schedule later.
-          </motion.p>
         </div>
       </section>
 
