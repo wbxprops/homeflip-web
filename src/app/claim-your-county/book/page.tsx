@@ -3,7 +3,6 @@
 import React, { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Navbar } from '@/components/Navbar';
 import Script from 'next/script';
 
 function BookCallContent() {
@@ -49,7 +48,7 @@ function BookCallContent() {
             <h1 className="font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-slate-900 uppercase tracking-tighter leading-[0.9] mb-6">
               Book Your{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0891b2] to-[#7c3aed]">
-                15-Minute Roadmap Call
+                FREE 15-Minute Roadmap Call
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto">
@@ -94,7 +93,6 @@ function BookCallContent() {
 export default function BookCallPage() {
   return (
     <main className="min-h-screen bg-white">
-      <Navbar minimal />
       <Suspense fallback={
         <section className="pt-28 pb-12 px-6">
           <div className="max-w-3xl mx-auto text-center">
