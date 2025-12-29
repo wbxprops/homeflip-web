@@ -43,9 +43,11 @@ export const Navbar = ({ minimal = false }: NavbarProps) => {
 
           {/* Centered logo */}
           <Link href="/" className="flex items-center group">
-            <span className="text-2xl font-black text-white tracking-tight">
-              Homeflip<span className="text-[#83d4c0]">.ai</span>
-            </span>
+            <img
+              src="/logo-wordmark-dark.png"
+              alt="Homeflip.ai"
+              className="h-8"
+            />
           </Link>
         </div>
       </motion.nav>
@@ -61,9 +63,11 @@ export const Navbar = ({ minimal = false }: NavbarProps) => {
       >
         <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
           <Link href="/" className="flex items-center group" onClick={closeMenu}>
-            <span className="text-2xl font-black text-white tracking-tight">
-              Homeflip<span className="text-[#83d4c0]">.ai</span>
-            </span>
+            <img
+              src="/logo-wordmark-dark.png"
+              alt="Homeflip.ai"
+              className="h-8"
+            />
           </Link>
 
           {/* Desktop Navigation */}
