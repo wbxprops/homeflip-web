@@ -113,13 +113,12 @@ export const ClaimCountyForm = () => {
   // Filter counties based on search query
   const getFilteredCounties = (stateCode: string, query: string, selectedCounties: string[]) => {
     const stateCounties = getCountiesForState(stateCode);
-    if (!query.trim()) return stateCounties.filter(c => !selectedCounties.includes(c.county_name)).slice(0, 8);
+    if (!query.trim()) return stateCounties.filter(c => !selectedCounties.includes(c.county_name));
     return stateCounties
       .filter(c =>
         c.county_name.toLowerCase().includes(query.toLowerCase()) &&
         !selectedCounties.includes(c.county_name)
-      )
-      .slice(0, 8);
+      );
   };
 
   // Handle state selection change
@@ -461,7 +460,7 @@ export const ClaimCountyForm = () => {
 
                             {/* Dropdown */}
                             {activeDropdown === selection.id && (
-                              <div className="absolute z-10 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg max-h-48 overflow-y-auto">
+                              <div className="absolute z-10 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg max-h-64 overflow-y-auto">
                                 {getFilteredCounties(selection.stateCode, selection.searchQuery, selection.counties).length > 0 ? (
                                   getFilteredCounties(selection.stateCode, selection.searchQuery, selection.counties).map(jurisdiction => (
                                     <button
