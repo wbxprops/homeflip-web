@@ -23,7 +23,6 @@ function BookCallContent() {
   const lastName = nameParts.slice(1).join(' ') || '';
 
   // Build Calendly URL with prefilled params
-  // a2 = phone (second custom field in Calendly)
   const calendlyBaseUrl = 'https://calendly.com/wb-props/homeflip-roadmap';
   const calendlyParams = new URLSearchParams({
     hide_event_type_details: '1',
@@ -31,7 +30,7 @@ function BookCallContent() {
     ...(firstName && { first_name: firstName }),
     ...(lastName && { last_name: lastName }),
     ...(email && { email }),
-    ...(phone && { a2: phone }),
+    ...(phone && { phone_number: phone }),
   });
   const calendlyUrl = `${calendlyBaseUrl}?${calendlyParams.toString()}`;
 
