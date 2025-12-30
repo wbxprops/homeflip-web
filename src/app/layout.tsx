@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, Lora } from "next/font/google";
 import "./globals.css";
+import { CookieConsentBanner } from "@/components/CookieConsent";
+import { TrackingScripts } from "@/components/TrackingScripts";
 
 const ibmPlexSans = IBM_Plex_Sans({
   variable: "--font-ibm-plex",
@@ -45,6 +47,8 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {children}
+        <CookieConsentBanner />
+        <TrackingScripts />
       </body>
     </html>
   );

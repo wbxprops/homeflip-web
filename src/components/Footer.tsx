@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { CookieSettingsButton } from './CookieConsent';
 
 export const Footer = () => {
   return (
@@ -42,6 +45,7 @@ export const Footer = () => {
               <Link href="/faq" className="text-slate-600/75 hover:text-slate-900 hover:opacity-100 transition-all">FAQ</Link>
               <Link href="/privacy" className="text-slate-600/75 hover:text-slate-900 hover:opacity-100 transition-all">Privacy Policy</Link>
               <Link href="/terms" className="text-slate-600/75 hover:text-slate-900 hover:opacity-100 transition-all">Terms of Service</Link>
+              <CookieSettingsButton />
             </div>
           </div>
         </div>

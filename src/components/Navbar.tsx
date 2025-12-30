@@ -4,24 +4,30 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, Phone } from 'lucide-react';
 
 interface NavbarProps {
   minimal?: boolean;
 }
 
+// Company phone number
+const PHONE_NUMBER = '(513) 986-5440';
+const PHONE_TEL = 'tel:+15139865440';
+
 export const Navbar = ({ minimal = false }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
-  const navLinks = [
+  const menuLinks = [
     { href: '/#probate-investing', label: 'Why Probate' },
     { href: '/#features', label: 'How It Works' },
     { href: '/#faq', label: 'FAQs' },
-    { href: '/claim-your-county', label: 'Claim Your County', highlight: true },
+    { href: '/about', label: 'About Us' },
+    { href: '/contact', label: 'Contact' },
   ];
 
   const closeMenu = () => setIsOpen(false);
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   // Minimal navbar for focused pages (like claim-your-county)
   if (minimal) {
@@ -62,6 +68,7 @@ export const Navbar = ({ minimal = false }: NavbarProps) => {
         className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5 dark"
       >
         <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+          {/* Left: Logo */}
           <Link href="/" className="flex items-center group" onClick={closeMenu}>
             <img
               src="/logo-wordmark-dark.png"
@@ -70,66 +77,60 @@ export const Navbar = ({ minimal = false }: NavbarProps) => {
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              'highlight' in link && link.highlight ? (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="btn-gradient px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-tighter shadow-lg shadow-[#83d4c0]/20 hover:scale-105 transition-transform"
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm font-bold text-slate-400 hover:text-[#83d4c0] transition-colors uppercase tracking-tighter"
-                >
-                  {link.label}
-                </Link>
-              )
-            ))}
-          </div>
+          {/* Right: Phone + CTA + MENU */}
+          <div className="flex items-center gap-4 sm:gap-6">
+            {/* Phone number - calm, clickable, trust signal */}
+            <a
+              href={PHONE_TEL}
+              className="hidden sm:flex items-center gap-2 text-white/60 hover:text-white/100 transition-colors"
+            >
+              <Phone className="w-4 h-4" strokeWidth={1.5} />
+              <span className="text-sm font-normal">{PHONE_NUMBER}</span>
+            </a>
 
-          {/* Mobile Menu Button - Stylish animated icon */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
-            aria-label="Toggle menu"
-          >
-            <div className="w-5 h-4 flex flex-col justify-between">
-              <motion.span
-                animate={{
-                  rotate: isOpen ? 45 : 0,
-                  y: isOpen ? 7 : 0,
-                }}
-                transition={{ duration: 0.2 }}
-                className="block h-0.5 w-full bg-[#83d4c0] rounded-full origin-center"
-              />
-              <motion.span
-                animate={{
-                  opacity: isOpen ? 0 : 1,
-                  x: isOpen ? -10 : 0,
-                }}
-                transition={{ duration: 0.2 }}
-                className="block h-0.5 w-full bg-[#83d4c0] rounded-full"
-              />
-              <motion.span
-                animate={{
-                  rotate: isOpen ? -45 : 0,
-                  y: isOpen ? -7 : 0,
-                }}
-                transition={{ duration: 0.2 }}
-                className="block h-0.5 w-full bg-[#83d4c0] rounded-full origin-center"
-              />
-            </div>
-          </button>
+            {/* Primary CTA - Claim Your County */}
+            <Link
+              href="/claim-your-county"
+              className="btn-gradient px-4 sm:px-5 py-2 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wide shadow-lg shadow-[#83d4c0]/20 hover:scale-105 transition-transform whitespace-nowrap"
+            >
+              Claim Your County
+            </Link>
+
+            {/* MENU button - explicit, deliberate */}
+            <button
+              onClick={toggleMenu}
+              className="flex items-center gap-2 text-white/80 hover:text-white transition-colors px-3 py-2 rounded-lg hover:bg-white/5"
+              aria-label="Toggle menu"
+              aria-expanded={isOpen}
+            >
+              <span className="text-sm font-medium uppercase tracking-[0.1em]">
+                {isOpen ? 'Close' : 'Menu'}
+              </span>
+              {/* Subtle indicator */}
+              <div className="w-5 h-4 flex flex-col justify-center gap-1">
+                <motion.span
+                  animate={{
+                    rotate: isOpen ? 45 : 0,
+                    y: isOpen ? 3 : 0,
+                  }}
+                  transition={{ duration: 0.2 }}
+                  className="block h-0.5 w-full bg-current rounded-full origin-center"
+                />
+                <motion.span
+                  animate={{
+                    rotate: isOpen ? -45 : 0,
+                    y: isOpen ? -3 : 0,
+                  }}
+                  transition={{ duration: 0.2 }}
+                  className="block h-0.5 w-full bg-current rounded-full origin-center"
+                />
+              </div>
+            </button>
+          </div>
         </div>
       </motion.nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Full-screen Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
           <>
@@ -140,7 +141,7 @@ export const Navbar = ({ minimal = false }: NavbarProps) => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={closeMenu}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 bg-black/80 backdrop-blur-md z-40"
             />
 
             {/* Menu Panel */}
@@ -149,21 +150,22 @@ export const Navbar = ({ minimal = false }: NavbarProps) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="fixed top-[73px] left-4 right-4 z-50 md:hidden"
+              className="fixed top-[73px] left-4 right-4 z-50 max-w-xl mx-auto"
             >
               <div className="bg-[#111] border border-white/10 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden">
+                {/* Navigation Links */}
                 <div className="p-2">
-                  {navLinks.map((link, index) => (
+                  {menuLinks.map((link, index) => (
                     <motion.div
                       key={link.href}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
+                      transition={{ delay: index * 0.05 }}
                     >
                       <Link
                         href={link.href}
                         onClick={closeMenu}
-                        className="block px-6 py-4 text-lg font-bold text-white hover:bg-white/5 rounded-xl transition-colors uppercase tracking-tighter"
+                        className="block px-6 py-4 text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
                       >
                         {link.label}
                       </Link>
@@ -171,15 +173,36 @@ export const Navbar = ({ minimal = false }: NavbarProps) => {
                   ))}
                 </div>
 
-                {/* CTA in mobile menu */}
+                {/* Phone number in mobile menu */}
+                <div className="px-6 py-4 border-t border-white/5 sm:hidden">
+                  <a
+                    href={PHONE_TEL}
+                    className="flex items-center gap-3 text-white/60 hover:text-white transition-colors"
+                  >
+                    <Phone className="w-5 h-5" strokeWidth={1.5} />
+                    <span className="text-lg font-normal">{PHONE_NUMBER}</span>
+                  </a>
+                </div>
+
+                {/* CTA in menu */}
                 <div className="p-4 pt-2 border-t border-white/5">
                   <Link
                     href="/claim-your-county"
                     onClick={closeMenu}
-                    className="block w-full btn-gradient py-4 rounded-xl font-hero font-[900] text-xl uppercase tracking-tighter text-center shadow-lg shadow-[#83d4c0]/20"
+                    className="block w-full btn-gradient py-4 rounded-xl font-bold text-lg uppercase tracking-wide text-center shadow-lg shadow-[#83d4c0]/20"
                   >
                     Claim Your County
                   </Link>
+                </div>
+
+                {/* Sign In link */}
+                <div className="px-4 pb-4 text-center">
+                  <a
+                    href="https://app.homeflip.ai"
+                    className="text-sm text-white/50 hover:text-white/80 transition-colors"
+                  >
+                    Already a member? Sign In
+                  </a>
                 </div>
               </div>
             </motion.div>
