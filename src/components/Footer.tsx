@@ -30,6 +30,7 @@ export const Footer = () => {
               <Link href="/#probate-investing" className="hover:text-[#0891b2] transition-colors">Why Probate</Link>
               <Link href="/#features" className="hover:text-[#0891b2] transition-colors">How It Works</Link>
               <Link href="/claim-your-county" className="hover:text-[#83d4c0] transition-colors uppercase tracking-tighter font-hero font-[900] text-lg">Claim Your County</Link>
+              <a href="https://app.homeflip.ai" className="hover:text-[#0891b2] transition-colors">Sign In</a>
             </div>
           </div>
 
