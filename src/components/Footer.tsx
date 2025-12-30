@@ -5,7 +5,7 @@ export const Footer = () => {
   return (
     <footer className="px-6 py-20 bg-white text-slate-400 border-t border-slate-100 relative overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-20 mb-20">
           <div className="col-span-1 lg:col-span-2">
             <Link href="/" className="flex items-center mb-6 group">
               <img
@@ -14,34 +14,34 @@ export const Footer = () => {
                 className="h-10 group-hover:opacity-80 transition-opacity"
               />
             </Link>
-            <p className="text-slate-500 max-w-sm leading-relaxed font-medium mb-4">
+            <p className="text-slate-500/70 max-w-sm leading-relaxed font-normal mb-4">
               The simplified, guided, AI-powered system for real estate investors who want consistent off-market deals powered by probate.
             </p>
-            <div className="text-xs text-slate-400 leading-relaxed">
-              <p className="font-bold text-slate-500">Whitebox Academy, LLC</p>
+            <div className="text-xs text-slate-400/70 leading-relaxed font-normal">
+              <p className="font-medium text-slate-500/80">Whitebox Academy, LLC</p>
               <p>7800 Cooper Road, Suite 201</p>
               <p>Cincinnati, OH 45242</p>
             </div>
           </div>
 
           <div>
-            <h4 className="text-slate-900 font-black uppercase text-xs tracking-[0.2em] mb-6">Navigation</h4>
-            <div className="flex flex-col gap-4 text-sm font-bold">
-              <Link href="/#probate-investing" className="hover:text-[#0891b2] transition-colors">Why Probate</Link>
-              <Link href="/#features" className="hover:text-[#0891b2] transition-colors">How It Works</Link>
-              <Link href="/claim-your-county" className="hover:text-[#83d4c0] transition-colors uppercase tracking-tighter font-hero font-[900] text-lg">Claim Your County</Link>
-              <a href="https://app.homeflip.ai" className="hover:text-[#0891b2] transition-colors">Sign In</a>
+            <h4 className="font-sans text-slate-400 font-medium uppercase text-xs tracking-[0.08em] mb-5">Navigation</h4>
+            <div className="flex flex-col gap-3 font-sans text-sm font-normal leading-[1.8]">
+              <Link href="/#probate-investing" className="text-slate-600/75 hover:text-slate-900 hover:opacity-100 transition-all">Why Probate</Link>
+              <Link href="/#features" className="text-slate-600/75 hover:text-slate-900 hover:opacity-100 transition-all">How It Works</Link>
+              <Link href="/claim-your-county" className="text-slate-600/90 hover:text-slate-900 hover:opacity-100 transition-all">Claim Your County</Link>
+              <a href="https://app.homeflip.ai" className="text-slate-600/75 hover:text-slate-900 hover:opacity-100 transition-all">Sign In</a>
             </div>
           </div>
 
           <div>
-            <h4 className="text-slate-900 font-black uppercase text-xs tracking-[0.2em] mb-6">Company</h4>
-            <div className="flex flex-col gap-4 text-sm font-bold">
-              <Link href="/about" className="hover:text-[#0891b2] transition-colors">About Us</Link>
-              <Link href="/values" className="hover:text-[#0891b2] transition-colors">Our Values</Link>
-              <Link href="/faq" className="hover:text-[#0891b2] transition-colors">FAQ</Link>
-              <Link href="/privacy" className="hover:text-[#0891b2] transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="hover:text-[#0891b2] transition-colors">Terms of Service</Link>
+            <h4 className="font-sans text-slate-400 font-medium uppercase text-xs tracking-[0.08em] mb-5">Company</h4>
+            <div className="flex flex-col gap-3 font-sans text-sm font-normal leading-[1.8]">
+              <Link href="/about" className="text-slate-600/75 hover:text-slate-900 hover:opacity-100 transition-all">About Us</Link>
+              <Link href="/values" className="text-slate-600/75 hover:text-slate-900 hover:opacity-100 transition-all">Our Values</Link>
+              <Link href="/faq" className="text-slate-600/75 hover:text-slate-900 hover:opacity-100 transition-all">FAQ</Link>
+              <Link href="/privacy" className="text-slate-600/75 hover:text-slate-900 hover:opacity-100 transition-all">Privacy Policy</Link>
+              <Link href="/terms" className="text-slate-600/75 hover:text-slate-900 hover:opacity-100 transition-all">Terms of Service</Link>
             </div>
           </div>
         </div>
