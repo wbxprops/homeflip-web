@@ -67,12 +67,12 @@ export const Navbar = ({ minimal = false }: NavbarProps) => {
         animate={{ y: 0, opacity: 1 }}
         className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5 dark"
       >
-        <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+        <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto relative">
           {/* Left: Logo */}
           <Link href="/" className="flex items-center group" onClick={closeMenu}>
-            {/* Icon only on mobile */}
+            {/* Light icon on mobile (dark background) */}
             <img
-              src="/logo-icon-dark.svg"
+              src="/logo-icon-light.svg"
               alt="Homeflip.ai"
               className="h-8 sm:hidden"
             />
@@ -84,7 +84,15 @@ export const Navbar = ({ minimal = false }: NavbarProps) => {
             />
           </Link>
 
-          {/* Right: Phone + CTA + MENU */}
+          {/* Center: CTA on mobile */}
+          <Link
+            href="/claim-your-county"
+            className="absolute left-1/2 -translate-x-1/2 btn-gradient px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wide shadow-lg shadow-[#83d4c0]/20 hover:scale-105 transition-transform whitespace-nowrap sm:hidden"
+          >
+            Claim Your County
+          </Link>
+
+          {/* Right: Phone + CTA (desktop) + MENU */}
           <div className="flex items-center gap-4 sm:gap-6">
             {/* Phone number - calm, clickable, trust signal */}
             <a
@@ -95,10 +103,10 @@ export const Navbar = ({ minimal = false }: NavbarProps) => {
               <span className="text-sm font-normal">{PHONE_NUMBER}</span>
             </a>
 
-            {/* Primary CTA - Claim Your County */}
+            {/* Primary CTA - Claim Your County (desktop only) */}
             <Link
               href="/claim-your-county"
-              className="btn-gradient px-4 sm:px-5 py-2 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wide shadow-lg shadow-[#83d4c0]/20 hover:scale-105 transition-transform whitespace-nowrap"
+              className="hidden sm:block btn-gradient px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wide shadow-lg shadow-[#83d4c0]/20 hover:scale-105 transition-transform whitespace-nowrap"
             >
               Claim Your County
             </Link>
