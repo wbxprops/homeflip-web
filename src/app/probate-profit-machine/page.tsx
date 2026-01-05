@@ -16,8 +16,8 @@ export default function ProbateProfitMachinePage() {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      // Hide header after scrolling down 100px
-      if (currentScrollY > 100) {
+      // Hide header after scrolling down 20px
+      if (currentScrollY > 20) {
         setHeaderVisible(false);
       } else {
         setHeaderVisible(true);
@@ -277,7 +277,7 @@ export default function ProbateProfitMachinePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="font-space text-[#83d4c0] font-bold text-base md:text-lg uppercase tracking-widest mb-6"
+                className="text-[#83d4c0] font-bold text-base md:text-lg uppercase tracking-widest mb-6"
               >
                 Attention Investors Who Want Properties At 47% Of The ARV
               </motion.p>
@@ -286,7 +286,7 @@ export default function ProbateProfitMachinePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
-                className="font-hero text-[8.5vw] sm:text-[3.25rem] lg:text-[4rem] xl:text-[4.5rem] font-[800] text-white leading-[0.9] tracking-[-0.02em] mb-8 uppercase"
+                className="font-hero text-[9vw] sm:text-[3.5rem] lg:text-[4.5rem] xl:text-[5rem] font-[800] text-white leading-[0.9] tracking-[-0.02em] mb-8 uppercase"
               >
                 How Thousands Of Investors Are Using <span className="text-[#83d4c0]">Timeline Intelligence</span> To Uncover Hidden Probate Opportunities
               </motion.h1>
@@ -295,7 +295,7 @@ export default function ProbateProfitMachinePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
-                className="font-space text-xl sm:text-2xl md:text-3xl text-white font-medium uppercase tracking-wide max-w-2xl leading-tight mb-10"
+                className="text-xl sm:text-2xl md:text-3xl text-white font-medium uppercase tracking-wide max-w-2xl leading-tight mb-10"
               >
                 Buy Your Next Deal In 30 Days Or Less
               </motion.p>
