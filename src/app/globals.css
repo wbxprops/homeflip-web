@@ -40,6 +40,7 @@
   --font-serif: var(--font-lora), Georgia, serif;
   --font-display: "neue-haas-grotesk-display", sans-serif;
   --font-hero: "futura-pt-condensed", sans-serif;
+  --font-space: "space-grotesk", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -48,6 +49,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .font-hero {
   font-family: var(--font-hero);
+}
+
+.font-space {
+  font-family: var(--font-space);
 }
 
 .font-serif {

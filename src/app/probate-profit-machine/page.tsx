@@ -277,28 +277,27 @@ export default function ProbateProfitMachinePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-[#83d4c0] font-bold text-sm md:text-base uppercase tracking-widest mb-6"
+                className="font-space text-[#83d4c0] font-bold text-base md:text-lg uppercase tracking-widest mb-6"
               >
-                Free Guide For Real Estate Investors
+                Attention Investors Who Want Properties At 47% Of The ARV
               </motion.p>
 
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
-                className="font-hero text-[10vw] sm:text-6xl lg:text-7xl xl:text-8xl font-[800] text-white leading-[0.9] tracking-[-0.02em] mb-8 uppercase"
+                className="font-hero text-[8.5vw] sm:text-[3.25rem] lg:text-[4rem] xl:text-[4.5rem] font-[800] text-white leading-[0.9] tracking-[-0.02em] mb-8 uppercase"
               >
-                The Probate<br />
-                <span className="text-[#83d4c0]">Profit Machine</span>
+                How Thousands Of Investors Are Using <span className="text-[#83d4c0]">Timeline Intelligence</span> To Uncover Hidden Probate Opportunities
               </motion.h1>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
-                className="text-xl sm:text-2xl text-slate-400 max-w-xl leading-relaxed mb-10"
+                className="font-space text-xl sm:text-2xl md:text-3xl text-white font-medium uppercase tracking-wide max-w-2xl leading-tight mb-10"
               >
-                Discover how thousands of investors are finding <span className="text-white font-semibold">off-market properties at 47% of ARV</span> despite record low inventory.
+                Buy Your Next Deal In 30 Days Or Less
               </motion.p>
 
               {/* Desktop CTA - hidden on mobile (mobile CTA is under ebook) */}
