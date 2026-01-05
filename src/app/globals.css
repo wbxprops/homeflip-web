@@ -98,3 +98,17 @@ input::placeholder, textarea::placeholder {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Pulsing glow animation for CTAs */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(131, 212, 192, 0.4), 0 0 40px rgba(131, 212, 192, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(131, 212, 192, 0.6), 0 0 60px rgba(131, 212, 192, 0.3);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}

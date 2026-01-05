@@ -87,7 +87,7 @@ export const Navbar = ({ minimal = false }: NavbarProps) => {
           {/* Center: CTA on mobile */}
           <Link
             href="/claim-your-county"
-            className="absolute left-1/2 -translate-x-1/2 btn-gradient px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wide shadow-lg shadow-[#83d4c0]/20 hover:scale-105 transition-transform whitespace-nowrap sm:hidden"
+            className="absolute left-1/2 -translate-x-1/2 btn-gradient px-4 py-2 rounded-lg text-sm font-black uppercase tracking-wide shadow-xl shadow-[#83d4c0]/40 hover:scale-105 transition-transform whitespace-nowrap sm:hidden animate-pulse-glow ring-2 ring-white/20"
           >
             Claim Your County
           </Link>
@@ -106,7 +106,7 @@ export const Navbar = ({ minimal = false }: NavbarProps) => {
             {/* Primary CTA - Claim Your County (desktop only) */}
             <Link
               href="/claim-your-county"
-              className="hidden sm:block btn-gradient px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wide shadow-lg shadow-[#83d4c0]/20 hover:scale-105 transition-transform whitespace-nowrap"
+              className="hidden sm:block btn-gradient px-5 py-2 rounded-lg text-sm font-black uppercase tracking-wide shadow-xl shadow-[#83d4c0]/40 hover:scale-105 transition-transform whitespace-nowrap animate-pulse-glow ring-2 ring-white/20"
             >
               Claim Your County
             </Link>
