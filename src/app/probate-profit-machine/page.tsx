@@ -244,8 +244,8 @@ export default function FreeGuidePage() {
         <div className="max-w-md mx-auto text-center">
           <div className="relative">
             <img
-              src="/ebook-12-hidden-sources-v8.png"
-              alt="12 Secrets to Buying Off-Market Properties"
+              src="/ebook-probate-profit-machine.png"
+              alt="The Probate Profit Machine"
               className="w-full max-w-sm mx-auto drop-shadow-2xl"
             />
           </div>
