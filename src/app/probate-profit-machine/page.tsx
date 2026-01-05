@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
-import { Footer } from '@/components/Footer';
 import { X, CheckCircle, Phone } from 'lucide-react';
 
 export default function ProbateProfitMachinePage() {
@@ -240,14 +239,14 @@ export default function ProbateProfitMachinePage() {
         style={{ pointerEvents: headerVisible ? 'auto' : 'none' }}
       >
         <div className="w-full flex items-center justify-center relative">
-          {/* Centered Logo */}
-          <a href="https://homeflip.ai" className="flex items-center">
+          {/* Centered Logo - No link to reduce leakage */}
+          <div className="flex items-center">
             <img
               src="/logo-wordmark-dark.png"
               alt="Homeflip.ai"
               className="h-8"
             />
-          </a>
+          </div>
 
           {/* Phone Number - Far Right */}
           <a
@@ -496,7 +495,16 @@ export default function ProbateProfitMachinePage() {
         </div>
       </section>
 
-      <Footer />
+      {/* Minimal Footer - Landing Page Only */}
+      <footer className="py-6 px-6 bg-[#050505] border-t border-white/10">
+        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-400">
+          <p>&copy; 2026 WhiteBox Academy. All rights reserved.</p>
+          <div className="flex items-center gap-6">
+            <a href="/terms" className="hover:text-white transition-colors">Terms of Use</a>
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
