@@ -105,7 +105,7 @@ export default function FreeGuidePage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#1e293b]">
+    <main className="min-h-screen bg-[#233547]">
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -116,7 +116,7 @@ export default function FreeGuidePage() {
           />
 
           {/* Modal Content */}
-          <div className="relative bg-[#0f172a] rounded-2xl p-8 w-full max-w-md border border-white/10 shadow-2xl">
+          <div className="relative bg-[#1a2836] rounded-2xl p-8 w-full max-w-md border border-white/10 shadow-2xl">
             {/* Close Button */}
             <button
               onClick={closeModal}
@@ -201,7 +201,7 @@ export default function FreeGuidePage() {
       )}
 
       {/* Header */}
-      <header className="bg-[#0f172a] py-3 px-6">
+      <header className="bg-[#1a2836] py-3 px-6">
         <div className="max-w-6xl mx-auto flex items-center justify-center relative">
           {/* Centered Logo */}
           <a href="https://homeflip.ai" className="flex items-center">
@@ -221,7 +221,7 @@ export default function FreeGuidePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-12 md:py-16 px-6 bg-[#0f172a]">
+      <section className="py-12 md:py-16 px-6 bg-[#1a2836]">
         <div className="max-w-5xl mx-auto text-center">
           <p className="text-[#5EEADC] font-bold text-sm md:text-base uppercase tracking-widest mb-6">
             Attention Real Estate Investors Who Want Properties At 47% Of The After Repair Value
@@ -237,7 +237,7 @@ export default function FreeGuidePage() {
       </section>
 
       {/* First CTA Section */}
-      <section className="py-12 px-6 bg-[#1e293b]">
+      <section className="py-12 px-6 bg-[#233547]">
         <div className="max-w-xl mx-auto text-center">
           <h2 className="text-white text-2xl md:text-4xl font-black uppercase mb-4">
             Buy Your Next Deal In 90 Days Or Less!
@@ -250,7 +250,7 @@ export default function FreeGuidePage() {
       </section>
 
       {/* eBook Image Section */}
-      <section className="py-8 px-6 bg-[#0f172a]">
+      <section className="py-8 px-6 bg-[#1a2836]">
         <div className="max-w-md mx-auto text-center">
           <div className="relative">
             <img
@@ -263,7 +263,7 @@ export default function FreeGuidePage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 px-6 bg-[#1e293b]">
+      <section className="py-16 px-6 bg-[#233547]">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-white text-2xl md:text-4xl font-black uppercase text-center mb-6">
             Real Estate Investors Have Waited Decades For These Exact Market Conditions!
@@ -305,7 +305,7 @@ export default function FreeGuidePage() {
       </section>
 
       {/* Preview / Numbered Points Section */}
-      <section className="py-16 px-6 bg-[#0f172a]">
+      <section className="py-16 px-6 bg-[#1a2836]">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-white text-2xl md:text-4xl font-black uppercase text-center mb-12">
             Here&apos;s Another Taste Of What You Can Expect When You Download Your Free Guide...
@@ -315,7 +315,7 @@ export default function FreeGuidePage() {
             {numberedPoints.map((point, index) => (
               <div
                 key={index}
-                className="bg-[#1e293b] rounded-xl p-6 border border-white/10 hover:border-[#5EEADC]/50 transition-all"
+                className="bg-[#233547] rounded-xl p-6 border border-white/10 hover:border-[#5EEADC]/50 transition-all"
               >
                 <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#5EEADC] to-[#A855F7] flex items-center justify-center mb-4">
                   <span className="text-white font-black text-xl">{index + 1}</span>
@@ -337,7 +337,7 @@ export default function FreeGuidePage() {
       </section>
 
       {/* Quote / Authority Section */}
-      <section className="py-16 px-6 bg-[#1e293b]">
+      <section className="py-16 px-6 bg-[#233547]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-white text-xl md:text-3xl font-black uppercase mb-8">
             We Are On The Cusp Of The Most Incredible Opportunity To Create Generational Wealth Through Real Estate
@@ -356,7 +356,7 @@ export default function FreeGuidePage() {
       </section>
 
       {/* Blueprint Section */}
-      <section className="py-16 px-6 bg-[#0f172a]">
+      <section className="py-16 px-6 bg-[#1a2836]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-white text-2xl md:text-4xl font-black uppercase mb-6">
             Take Advantage Of Record High Prices Using Our Proven Blueprint
@@ -373,7 +373,7 @@ export default function FreeGuidePage() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-16 px-6 bg-gradient-to-b from-[#1e293b] to-[#0f172a]">
+      <section className="py-16 px-6 bg-gradient-to-b from-[#233547] to-[#1a2836]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-white text-2xl md:text-4xl font-black uppercase mb-4">
             Download Your Guide Before Your Competitors Do!
@@ -392,7 +392,7 @@ export default function FreeGuidePage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 bg-[#0f172a] border-t border-white/10">
+      <footer className="py-8 px-6 bg-[#1a2836] border-t border-white/10">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-white/40 text-sm">
             &copy; {new Date().getFullYear()} Homeflip.ai. All rights reserved.
