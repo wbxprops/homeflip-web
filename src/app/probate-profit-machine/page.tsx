@@ -57,7 +57,7 @@ export default function FreeGuidePage() {
 
       setStatus('success');
       // Redirect to thank you page with download
-      window.location.href = '/free-guide/thank-you';
+      window.location.href = '/probate-profit-machine/thank-you';
     } catch (error: unknown) {
       console.error('Submission error:', error);
       setStatus('error');
