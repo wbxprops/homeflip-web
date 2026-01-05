@@ -212,7 +212,7 @@ export default function ProbateProfitMachinePage() {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-2xl sm:text-3xl uppercase tracking-tight shadow-lg shadow-[#83d4c0]/20 hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-3xl sm:text-4xl uppercase tracking-tight shadow-lg shadow-[#83d4c0]/20 hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {status === 'submitting' ? 'Sending...' : 'Submit'}
               </button>
