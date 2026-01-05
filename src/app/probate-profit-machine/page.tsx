@@ -288,7 +288,7 @@ export default function ProbateProfitMachinePage() {
               className="lg:col-span-2 flex justify-center"
             >
               <img
-                src="/ebook-probate-profit-machine.png"
+                src="/ebook-cover-probate-profit-machine.png"
                 alt="The Probate Profit Machine"
                 className="w-full max-w-sm lg:max-w-md drop-shadow-2xl"
               />
