@@ -40,7 +40,7 @@
   --font-serif: var(--font-lora), Georgia, serif;
   --font-display: "neue-haas-grotesk-display", sans-serif;
   --font-hero: "futura-pt-condensed", sans-serif;
-  --font-space: "space-grotesk", sans-serif;
+  --font-space: "Space Grotesk", "space-grotesk", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
