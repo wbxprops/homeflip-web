@@ -70,13 +70,12 @@ export default function FreeGuidePage() {
 
   const inputStyles = "w-full px-4 py-4 rounded-lg border-2 border-white/20 bg-white/10 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#5EEADC]/50 focus:border-[#5EEADC] transition-all text-lg";
 
-  // CTA Button Component
+  // CTA Button Component - Green like d2smarketing
   const CTAButton = ({ className = '' }: { className?: string }) => (
     <button
       onClick={openModal}
-      className={`bg-gradient-to-r from-[#5EEADC] to-[#A855F7] hover:from-[#4DD9CB] hover:to-[#9945E6] text-white py-4 px-8 rounded-lg font-bold text-lg uppercase tracking-wide shadow-lg shadow-[#5EEADC]/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 ${className}`}
+      className={`bg-[#22C55E] hover:bg-[#16A34A] text-white py-5 px-10 rounded-lg font-black text-xl uppercase tracking-wide shadow-lg shadow-[#22C55E]/30 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 ${className}`}
     >
-      <Download className="w-5 h-5" />
       DOWNLOAD YOUR FREE GUIDE
     </button>
   );
@@ -200,9 +199,9 @@ export default function FreeGuidePage() {
         </div>
       )}
 
-      {/* Header */}
+      {/* Header - Full Width */}
       <header className="bg-[#1a2836] py-3 px-6">
-        <div className="max-w-6xl mx-auto flex items-center justify-center relative">
+        <div className="w-full flex items-center justify-center relative">
           {/* Centered Logo */}
           <a href="https://homeflip.ai" className="flex items-center">
             <img
@@ -213,51 +212,45 @@ export default function FreeGuidePage() {
           </a>
 
           {/* Phone Number - Far Right */}
-          <a href="tel:5139865440" className="absolute right-0 flex items-center gap-2 text-white hover:text-[#5EEADC] transition-colors">
+          <a href="tel:5139865440" className="absolute right-6 flex items-center gap-2 text-white hover:text-[#5EEADC] transition-colors">
             <Phone className="w-4 h-4" />
             <span className="font-medium hidden sm:inline">(513) 986-5440</span>
           </a>
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="py-12 md:py-16 px-6 bg-[#1a2836]">
-        <div className="max-w-5xl mx-auto text-center">
-          <p className="text-[#5EEADC] font-bold text-sm md:text-base uppercase tracking-widest mb-6">
-            Attention Real Estate Investors Who Want Properties At 47% Of The After Repair Value
-          </p>
-          <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-tight mb-8">
-            How Thousands Of Investors Are Using The New{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5EEADC] to-[#A855F7]">
-              &quot;D2-S Property Magnet&quot;
-            </span>{' '}
-            To Buy Off-Market Properties Despite Record Low Inventory
-          </h1>
-        </div>
-      </section>
+      {/* Hero Section - Two Column Layout */}
+      <section className="py-12 md:py-20 px-6 bg-[#233547]">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-12 items-center">
+            {/* Left Column - 2/3 width */}
+            <div className="lg:col-span-2">
+              <p className="text-white/80 font-medium text-sm md:text-base uppercase tracking-widest mb-6">
+                Attention Real Estate Investors Who Want Properties At 47% Of The After Repair Value
+              </p>
+              <h1 className="text-[#E85A2C] text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black uppercase leading-tight italic mb-8">
+                How Thousands Of Investors Are Using The New{' '}
+                <span className="text-white">
+                  &quot;D2-S Property Magnet&quot;
+                </span>{' '}
+                To Buy Off-Market Properties Despite Record Low Inventory
+              </h1>
 
-      {/* First CTA Section */}
-      <section className="py-12 px-6 bg-[#233547]">
-        <div className="max-w-xl mx-auto text-center">
-          <h2 className="text-white text-2xl md:text-4xl font-black uppercase mb-4">
-            Buy Your Next Deal In 90 Days Or Less!
-          </h2>
-          <p className="text-white/70 text-lg mb-8">
-            Let us know where to send your guide...
-          </p>
-          <CTAButton className="w-full sm:w-auto" />
-        </div>
-      </section>
+              <p className="text-white text-xl md:text-2xl uppercase tracking-wide mb-6">
+                Buy Your Next Deal In 90 Days Or Less!
+              </p>
 
-      {/* eBook Image Section */}
-      <section className="py-8 px-6 bg-[#1a2836]">
-        <div className="max-w-md mx-auto text-center">
-          <div className="relative">
-            <img
-              src="/ebook-probate-profit-machine.png"
-              alt="The Probate Profit Machine"
-              className="w-full max-w-sm mx-auto drop-shadow-2xl"
-            />
+              <CTAButton className="w-full sm:w-auto" />
+            </div>
+
+            {/* Right Column - 1/3 width - eBook Image */}
+            <div className="lg:col-span-1 flex justify-center lg:justify-end">
+              <img
+                src="/ebook-probate-profit-machine.png"
+                alt="The Probate Profit Machine"
+                className="w-full max-w-xs lg:max-w-sm drop-shadow-2xl"
+              />
+            </div>
           </div>
         </div>
       </section>
