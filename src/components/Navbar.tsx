@@ -70,10 +70,17 @@ export const Navbar = ({ minimal = false }: NavbarProps) => {
         <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
           {/* Left: Logo */}
           <Link href="/" className="flex items-center group" onClick={closeMenu}>
+            {/* Icon only on mobile */}
+            <img
+              src="/logo-icon-dark.svg"
+              alt="Homeflip.ai"
+              className="h-8 sm:hidden"
+            />
+            {/* Full wordmark on desktop */}
             <img
               src="/logo-wordmark-dark.png"
               alt="Homeflip.ai"
-              className="h-8"
+              className="h-8 hidden sm:block"
             />
           </Link>
 
@@ -103,7 +110,7 @@ export const Navbar = ({ minimal = false }: NavbarProps) => {
               aria-label="Toggle menu"
               aria-expanded={isOpen}
             >
-              <span className="text-sm font-medium uppercase tracking-[0.1em]">
+              <span className="text-sm font-medium uppercase tracking-[0.1em] hidden sm:inline">
                 {isOpen ? 'Close' : 'Menu'}
               </span>
               {/* Subtle indicator */}
