@@ -37,7 +37,16 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 **Active Work:** Probate Profit Machine landing page - high-value content offer funnel.
 
 ### Session History
-#### 2026-01-05
+#### 2026-01-05 (Session 2 - Hero Refinements)
+- ✅ Ebook mockup: increased size, left nudge on desktop, soft teal ambient glow
+- ✅ Mobile layout: ebook first, CTA underneath
+- ✅ Modal: animated progress bar with "Almost There!", larger headline/button, shimmer effect
+- ✅ Fixed phone autofill country code issue (strips leading "1")
+- ✅ Headline testing: new eyebrow, main headline, subheadline copy
+- 🚧 Added Space Grotesk font (font-space class) - **needs font-family name verification**
+- **Resume**: Check Adobe Fonts kit for exact Space Grotesk font-family name
+
+#### 2026-01-05 (Session 1)
 - ✅ Confirmed jurisdictions table: 51 states/DC, 3,103 counties
 - ✅ Mobile navbar: icon-only logo, centered CTA, pulsing glow animation
 - ✅ Created `/probate-profit-machine` landing page (renamed from `/free-guide`)
