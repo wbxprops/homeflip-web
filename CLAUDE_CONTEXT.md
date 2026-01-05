@@ -2,8 +2,8 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2025-12-27
-**Claude Code Version:** Sonnet 4.5 / Gemini 3.5
+**Last Updated:** 2026-01-05
+**Claude Code Version:** Opus 4.5
 
 ---
 
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - IBM Plex Sans body font, CTA redirects to Claim County funnel, No CC required messaging added.
+**Current Status:** 🚧 IN PROGRESS - Probate Profit Machine landing page complete, matches main site design.
 
 ---
 
@@ -34,9 +34,19 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 ## 🎯 What I Need to Know
 
 ### Current Focus
-**Active Work:** Maintenance and content refinement.
+**Active Work:** Probate Profit Machine landing page - high-value content offer funnel.
 
 ### Session History
+#### 2026-01-05
+- ✅ Confirmed jurisdictions table: 51 states/DC, 3,103 counties
+- ✅ Mobile navbar: icon-only logo, centered CTA, pulsing glow animation
+- ✅ Created `/probate-profit-machine` landing page (renamed from `/free-guide`)
+- ✅ Redesigned to match main homeflip.ai style (dark hero, teal glows, Futura PT Condensed)
+- ✅ Two-column hero with ebook image
+- ✅ Custom transparent header that fades on scroll
+- ✅ Modal form popup for lead capture
+- ✅ New themed ebook cover (`ebook-cover-probate-profit-machine.png`)
+
 #### 2025-12-27
 - ✅ Upgraded body font to IBM Plex Sans (more professional/credible)
 - ✅ CTAForm now saves to prospects table, redirects to /claim-your-county
@@ -70,10 +80,13 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 - ✅ Fixed hydration issues & local dev setup
 
 ### Next Session Goals
-- [ ] Add remaining states to jurisdictions table (LA through WY)
+- [x] ~~Add remaining states to jurisdictions table~~ (DONE - 51 states, 3,103 counties)
+- [x] ~~Connect custom domain~~ (homeflip.ai is live!)
+- [ ] Write custom copy for Probate Profit Machine (replace d2s placeholder copy)
+- [ ] Create/update thank-you page with actual PDF download link
+- [ ] Set up email automation for lead nurture sequence
+- [ ] Add tracking/analytics for conversion measurement
 - [ ] Test full claim-your-county → booking flow end-to-end
-- [ ] Connect custom domain (homeflip.ai)
-- [ ] Add real dashboard visuals and social proof logos
 
 ---
 

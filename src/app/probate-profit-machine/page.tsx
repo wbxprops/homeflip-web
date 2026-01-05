@@ -285,13 +285,35 @@ export default function ProbateProfitMachinePage() {
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="lg:col-span-2 flex justify-center"
+              // Left nudge: 24px on tablet, 48px on desktop to connect with headline
+              className="lg:col-span-2 flex justify-center md:-translate-x-6 lg:-translate-x-12"
             >
-              <img
-                src="/ebook-cover-probate-profit-machine.png"
-                alt="The Probate Profit Machine"
-                className="w-full max-w-sm lg:max-w-md drop-shadow-2xl"
-              />
+              {/* Glow container - positions ambient glow behind ebook */}
+              <div className="relative">
+                {/*
+                  Soft ambient teal/blue glow:
+                  - Large blur radius (80-100px) for diffuse, premium look
+                  - Low opacity teal-to-cyan gradient
+                  - Extends beyond image bounds (-inset-8)
+                  - No harsh edges
+                */}
+                <div
+                  className="absolute -inset-8 md:-inset-10 lg:-inset-12 bg-gradient-to-br from-[#83d4c0]/20 to-[#0891b2]/15 blur-[60px] md:blur-[80px] lg:blur-[100px] rounded-full pointer-events-none"
+                  aria-hidden="true"
+                />
+                {/*
+                  Ebook mockup sizing:
+                  - Mobile: max-w-[22rem] (~10% larger than original sm/24rem)
+                  - Tablet: max-w-[26rem] (~15% increase, proportional)
+                  - Desktop: max-w-[30rem] (~15% larger than original md/28rem)
+                  - Maintains aspect ratio via width constraint
+                */}
+                <img
+                  src="/ebook-cover-probate-profit-machine.png"
+                  alt="The Probate Profit Machine"
+                  className="relative w-full max-w-[22rem] md:max-w-[26rem] lg:max-w-[30rem] drop-shadow-2xl"
+                />
+              </div>
             </motion.div>
           </div>
         </div>
