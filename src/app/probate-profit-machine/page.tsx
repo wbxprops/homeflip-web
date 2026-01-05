@@ -1,14 +1,33 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
-import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { Download, X, CheckCircle } from 'lucide-react';
+import { Download, X, CheckCircle, Phone } from 'lucide-react';
 
 export default function ProbateProfitMachinePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(true);
+
+  // Hide header on scroll
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      // Hide header after scrolling down 100px
+      if (currentScrollY > 100) {
+        setHeaderVisible(false);
+      } else {
+        setHeaderVisible(true);
+      }
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   const [formData, setFormData] = useState({
     firstName: '',
     email: '',
@@ -182,10 +201,37 @@ export default function ProbateProfitMachinePage() {
         </div>
       )}
 
-      <Navbar />
+      {/* Custom Transparent Header - Disappears on Scroll */}
+      <motion.header
+        initial={{ opacity: 1, y: 0 }}
+        animate={{ opacity: headerVisible ? 1 : 0, y: headerVisible ? 0 : -20 }}
+        transition={{ duration: 0.3 }}
+        className="fixed top-0 left-0 right-0 z-50 py-4 px-6 pointer-events-auto"
+        style={{ pointerEvents: headerVisible ? 'auto' : 'none' }}
+      >
+        <div className="w-full flex items-center justify-center relative">
+          {/* Centered Logo */}
+          <a href="https://homeflip.ai" className="flex items-center">
+            <img
+              src="/logo-wordmark-dark.png"
+              alt="Homeflip.ai"
+              className="h-8"
+            />
+          </a>
+
+          {/* Phone Number - Far Right */}
+          <a
+            href="tel:5139865440"
+            className="absolute right-0 flex items-center gap-2 text-white/80 hover:text-white transition-colors"
+          >
+            <Phone className="w-4 h-4" />
+            <span className="font-medium hidden sm:inline">(513) 986-5440</span>
+          </a>
+        </div>
+      </motion.header>
 
       {/* Hero Section - Dark with Glows */}
-      <section className="relative pt-32 pb-24 px-6 overflow-hidden bg-[#050505] dark">
+      <section className="relative pt-24 pb-24 px-6 overflow-hidden bg-[#050505] dark">
         {/* Background Decor */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#83d4c0]/15 via-transparent to-transparent opacity-50" />
         <div className="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] bg-[#83d4c0]/25 rounded-full blur-[140px] pointer-events-none" />
