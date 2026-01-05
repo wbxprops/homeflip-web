@@ -166,7 +166,7 @@ export default function ProbateProfitMachinePage() {
 
             {/* Header - Compelling without false urgency */}
             <div className="text-center mb-5">
-              <h3 className="font-hero text-xl sm:text-2xl font-[900] text-slate-900 uppercase tracking-tight mb-2 leading-tight">
+              <h3 className="font-hero text-3xl sm:text-4xl font-[900] text-slate-900 uppercase tracking-tight mb-3 leading-[0.95]">
                 Your Free Guide Is Ready
               </h3>
               <p className="text-slate-600 text-sm leading-relaxed">
@@ -212,9 +212,9 @@ export default function ProbateProfitMachinePage() {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-xl uppercase tracking-tight shadow-lg shadow-[#83d4c0]/20 hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-2xl sm:text-3xl uppercase tracking-tight shadow-lg shadow-[#83d4c0]/20 hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {status === 'submitting' ? 'Sending...' : 'Send My Guide'}
+                {status === 'submitting' ? 'Sending...' : 'Submit'}
               </button>
 
               <p className="text-xs text-slate-400 text-center leading-relaxed">
