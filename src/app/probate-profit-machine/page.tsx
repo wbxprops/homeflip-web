@@ -228,7 +228,7 @@ export default function FreeGuidePage() {
               <p className="text-white/80 font-medium text-sm md:text-base uppercase tracking-widest mb-6">
                 Attention Real Estate Investors Who Want Properties At 47% Of The After Repair Value
               </p>
-              <h1 className="text-[#E85A2C] text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black uppercase leading-tight italic mb-8">
+              <h1 className="font-hero text-[#E85A2C] text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-[800] uppercase leading-tight italic mb-8">
                 How Thousands Of Investors Are Using The New{' '}
                 <span className="text-white">
                   &quot;D2-S Property Magnet&quot;
