@@ -202,10 +202,20 @@ export default function FreeGuidePage() {
 
       {/* Header */}
       <header className="bg-[#0f172a] py-3 px-6">
-        <div className="max-w-6xl mx-auto flex justify-center md:justify-end">
-          <a href="tel:5139865440" className="flex items-center gap-2 text-white hover:text-[#5EEADC] transition-colors">
+        <div className="max-w-6xl mx-auto flex items-center justify-center relative">
+          {/* Centered Logo */}
+          <a href="https://homeflip.ai" className="flex items-center">
+            <img
+              src="/logo-wordmark-dark.png"
+              alt="Homeflip.ai"
+              className="h-8"
+            />
+          </a>
+
+          {/* Phone Number - Far Right */}
+          <a href="tel:5139865440" className="absolute right-0 flex items-center gap-2 text-white hover:text-[#5EEADC] transition-colors">
             <Phone className="w-4 h-4" />
-            <span className="font-medium">(513) 986-5440</span>
+            <span className="font-medium hidden sm:inline">(513) 986-5440</span>
           </a>
         </div>
       </header>
