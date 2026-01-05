@@ -63,7 +63,7 @@ export const ClaimCountyForm = () => {
     if (!stateCode) return;
 
     const { data, error } = await supabase
-      .from('jurisdictions')
+      .from('jurisdictions_public')
       .select('id, jurisdiction_code, state_code, county_name, display_name, status')
       .eq('state_code', stateCode)
       .order('county_name');

@@ -271,22 +271,25 @@ export default function ProbateProfitMachinePage() {
                 Discover how thousands of investors are finding <span className="text-white font-semibold">off-market properties at 47% of ARV</span> despite record low inventory.
               </motion.p>
 
+              {/* Desktop CTA - hidden on mobile (mobile CTA is under ebook) */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.3 }}
+                className="hidden lg:block"
               >
                 <CTAButton />
               </motion.div>
             </div>
 
             {/* Right Column - 2/5 - eBook Image */}
+            {/* order-first on mobile puts ebook at top; lg:order-none restores desktop order */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               // Left nudge: 24px on tablet, 48px on desktop to connect with headline
-              className="lg:col-span-2 flex justify-center md:-translate-x-6 lg:-translate-x-12"
+              className="lg:col-span-2 flex flex-col items-center order-first lg:order-none md:-translate-x-6 lg:-translate-x-12"
             >
               {/* Glow container - positions ambient glow behind ebook */}
               <div className="relative">
@@ -314,6 +317,16 @@ export default function ProbateProfitMachinePage() {
                   className="relative w-full max-w-[22rem] md:max-w-[26rem] lg:max-w-[30rem] drop-shadow-2xl"
                 />
               </div>
+
+              {/* Mobile CTA - directly under ebook, hidden on desktop */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.5 }}
+                className="mt-8 lg:hidden"
+              >
+                <CTAButton size="medium" />
+              </motion.div>
             </motion.div>
           </div>
         </div>
