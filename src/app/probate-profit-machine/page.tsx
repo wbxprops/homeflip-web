@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
 import { Footer } from '@/components/Footer';
-import { Download, X, CheckCircle, Phone } from 'lucide-react';
+import { X, CheckCircle, Phone } from 'lucide-react';
 
 export default function ProbateProfitMachinePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -93,14 +93,13 @@ export default function ProbateProfitMachinePage() {
   const CTAButton = ({ className = '', size = 'large' }: { className?: string; size?: 'large' | 'medium' }) => (
     <button
       onClick={openModal}
-      className={`btn-gradient inline-flex items-center justify-center gap-3 rounded-2xl font-hero font-[900] uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all ${
+      className={`btn-gradient inline-flex items-center justify-center rounded-2xl font-hero font-[900] uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all ${
         size === 'large'
           ? 'px-10 sm:px-14 py-5 sm:py-6 text-2xl sm:text-3xl md:text-4xl'
           : 'px-8 sm:px-10 py-4 sm:py-5 text-xl sm:text-2xl'
       } ${className}`}
     >
-      <Download className={size === 'large' ? 'w-8 h-8' : 'w-6 h-6'} />
-      Download Free Guide
+      Get Your Free Guide
     </button>
   );
 
@@ -136,11 +135,32 @@ export default function ProbateProfitMachinePage() {
               <X className="w-6 h-6" />
             </button>
 
+            {/* Logo */}
+            <div className="flex justify-center mb-6">
+              <img
+                src="/logo-wordmark-light.png"
+                alt="Homeflip.ai"
+                className="h-8"
+              />
+            </div>
+
+            {/* Progress Bar */}
+            <div className="mb-6">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-semibold text-[#0891b2]">Almost there!</span>
+                <span className="text-sm text-slate-400">90%</span>
+              </div>
+              <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div className="h-full w-[90%] bg-gradient-to-r from-[#83d4c0] to-[#0891b2] rounded-full" />
+              </div>
+            </div>
+
+            {/* Header */}
             <div className="text-center mb-6">
-              <h3 className="font-hero text-3xl font-[900] text-slate-900 uppercase tracking-tight mb-2">
-                Get Your Free Guide
+              <h3 className="font-hero text-2xl sm:text-3xl font-[900] text-slate-900 uppercase tracking-tight mb-2">
+                Where Should We Send Your Guide?
               </h3>
-              <p className="text-slate-500">Enter your details below</p>
+              <p className="text-slate-500 text-sm">Enter your details below and we&apos;ll send it right over.</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -180,14 +200,9 @@ export default function ProbateProfitMachinePage() {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-xl uppercase tracking-tight shadow-lg shadow-[#83d4c0]/20 hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-xl uppercase tracking-tight shadow-lg shadow-[#83d4c0]/20 hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {status === 'submitting' ? 'Sending...' : (
-                  <>
-                    <Download className="w-6 h-6" />
-                    Download Now
-                  </>
-                )}
+                {status === 'submitting' ? 'Sending...' : 'Send My Guide'}
               </button>
 
               <p className="text-xs text-slate-400 text-center leading-relaxed">
