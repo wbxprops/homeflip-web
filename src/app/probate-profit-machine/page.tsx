@@ -131,8 +131,8 @@ export default function ProbateProfitMachinePage() {
             animate={{ opacity: 1, scale: 1 }}
             className="relative bg-white rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-2xl overflow-hidden"
           >
-            <button onClick={closeModal} className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors z-10">
-              <X className="w-6 h-6" />
+            <button onClick={closeModal} className="absolute top-2 right-3 text-white/70 hover:text-white transition-colors z-10">
+              <X className="w-5 h-5" />
             </button>
 
             {/* Animated Progress Bar - Full width at top */}
