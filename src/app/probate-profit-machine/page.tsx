@@ -129,38 +129,50 @@ export default function ProbateProfitMachinePage() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="relative bg-white rounded-3xl p-8 w-full max-w-md shadow-2xl"
+            className="relative bg-white rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-2xl overflow-hidden"
           >
-            <button onClick={closeModal} className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors">
+            <button onClick={closeModal} className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors z-10">
               <X className="w-6 h-6" />
             </button>
 
-            {/* Logo */}
-            <div className="flex justify-center mb-6">
+            {/* Animated Progress Bar - Full width at top */}
+            <div className="absolute top-0 left-0 right-0 h-10 bg-slate-800 overflow-hidden">
+              {/* Animated fill */}
+              <motion.div
+                initial={{ width: '0%' }}
+                animate={{ width: '90%' }}
+                transition={{ duration: 1.5, ease: 'easeOut' }}
+                className="h-full bg-gradient-to-r from-[#83d4c0] to-[#0891b2] relative"
+              >
+                {/* Shimmer effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+              </motion.div>
+              {/* "Almost There!" text inside bar */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-white font-bold text-sm uppercase tracking-wide drop-shadow-md">
+                  Almost There!
+                </span>
+              </div>
+            </div>
+
+            {/* Logo - with top padding for progress bar */}
+            <div className="flex justify-center mt-8 mb-4">
               <img
-                src="/logo-wordmark-light.png"
+                src="/logo-wordmark.png"
                 alt="Homeflip.ai"
-                className="h-8"
+                className="h-7"
               />
             </div>
 
-            {/* Progress Bar */}
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-semibold text-[#0891b2]">Almost there!</span>
-                <span className="text-sm text-slate-400">90%</span>
-              </div>
-              <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                <div className="h-full w-[90%] bg-gradient-to-r from-[#83d4c0] to-[#0891b2] rounded-full" />
-              </div>
-            </div>
-
-            {/* Header */}
-            <div className="text-center mb-6">
-              <h3 className="font-hero text-2xl sm:text-3xl font-[900] text-slate-900 uppercase tracking-tight mb-2">
-                Where Should We Send Your Guide?
+            {/* Header - Compelling without false urgency */}
+            <div className="text-center mb-5">
+              <h3 className="font-hero text-xl sm:text-2xl font-[900] text-slate-900 uppercase tracking-tight mb-2 leading-tight">
+                Your Free Guide Is Ready
               </h3>
-              <p className="text-slate-500 text-sm">Enter your details below and we&apos;ll send it right over.</p>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                This <span className="font-semibold text-[#0891b2]">FREE guide</span> reveals how investors are finding{' '}
+                <span className="font-semibold">off-market probate deals</span> that others miss completely.
+              </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
