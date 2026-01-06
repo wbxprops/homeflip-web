@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
-import { X, CheckCircle, Phone } from 'lucide-react';
+import { X, Phone } from 'lucide-react';
 
 export default function ProbateProfitMachinePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -104,23 +104,6 @@ export default function ProbateProfitMachinePage() {
       Get Your Free Guide
     </button>
   );
-
-  const benefits = [
-    "Why right now is a golden opportunity to create generational wealth through real estate",
-    "The top 3 strategies for buying off-market properties in ANY market condition",
-    "How record inflation rates will affect the future of real estate investing",
-    "How to position your real estate business for this once-in-a-lifetime buying opportunity",
-    "Foreclosure Wave 2.0 - what if the experts are wrong?",
-    "How to build generational wealth through real estate during uncertain times",
-  ];
-
-  const numberedPoints = [
-    { title: "The Cold Hard TRUTH About Finding Off-Market Properties", description: "Discover why most investors struggle and what the successful ones do differently" },
-    { title: "7 Tips To Build A Property Portfolio In 24 Months", description: "Simple strategies that compound into massive results" },
-    { title: "Why Listening To Your Agent Is A Bad Idea", description: "The 2 dirty little lies they don't want you to know" },
-    { title: "How To Have Sellers Begging You To Buy", description: "Position yourself as the obvious choice for motivated sellers" },
-    { title: "Position Yourself For The Next Real Estate Wave", description: "Get ahead of the market before everyone else catches on" },
-  ];
 
   return (
     <div className="min-h-screen bg-white selection:bg-[#83d4c0]/20">
@@ -362,136 +345,275 @@ export default function ProbateProfitMachinePage() {
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#83d4c0]/50 to-transparent" />
       </section>
 
-      {/* Benefits Section - White */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
+      {/* Section 1: Why Now - Demographic Inevitability */}
+      <section className="py-24 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #050505 0%, #0a0a0a 100%)' }}>
+        {/* Subtle glow continuation from hero */}
+        <div className="absolute top-0 right-[-10%] w-[600px] h-[600px] bg-[#83d4c0]/[0.06] rounded-full blur-[140px] pointer-events-none" />
+
+        <div className="relative max-w-6xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="font-hero text-4xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-10 text-center"
+          >
+            A Generational Transfer of Wealth Is Underway
+          </motion.h2>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="space-y-6 text-xl md:text-2xl text-slate-300 font-medium leading-relaxed mb-24 max-w-5xl mx-auto"
           >
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 mb-6 tracking-tight">
-              What You&apos;ll Discover <span className="text-slate-400">Inside</span>
-            </h2>
-            <p className="text-xl text-slate-500 max-w-2xl mx-auto">
-              This free guide reveals the exact strategies successful investors use to find deals others miss.
+            <p>
+              Baby boomers own more residential real estate than any generation in history.
+              As this generation ages, a massive wave of property is quietly entering probate
+              courts across the country.
+            </p>
+            <p>
+              This isn&apos;t a market trend that comes and goes. It&apos;s a demographic certainty
+              that will reshape real estate supply for the next two decades.
+            </p>
+            <p className="text-slate-400">
+              The investors who understand this shift are positioning themselves now.
             </p>
           </motion.div>
 
-          <div className="space-y-4 mb-12">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors"
-              >
-                <div className="w-8 h-8 rounded-full bg-[#83d4c0]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <CheckCircle className="w-5 h-5 text-[#0891b2]" />
-                </div>
-                <span className="text-lg text-slate-700">{benefit}</span>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-[#0891b2] text-xl font-bold text-center mb-10"
-          >
-            And much, much more!
-          </motion.p>
-
-          <div className="text-center">
-            <CTAButton size="medium" />
-          </div>
-        </div>
-      </section>
-
-      {/* Preview Section - Dark */}
-      <section className="py-24 px-6 bg-[#050505] dark relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#83d4c0 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-
-        <div className="relative max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="font-hero text-4xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-6">
-              A Taste Of What&apos;s Inside
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {numberedPoints.map((point, index) => (
+          {/* Info Boxes */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { number: '41%', label: 'Of U.S. Housing Stock', sublabel: 'Owned by Baby Boomers — the largest generational share in history' },
+              { number: '~32M', label: 'Boomer-Owned Residences', sublabel: 'Approximately 32 million homes held by owners approaching transition' },
+              { number: '9M+', label: 'Homes Expected to Transition', sublabel: 'Up to 9 million properties changing hands over the next decade' },
+            ].map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-[#83d4c0]/30 transition-all"
+                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                className="bg-white/[0.03] border border-white/10 rounded-2xl p-8 text-center"
               >
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#83d4c0] to-[#0891b2] flex items-center justify-center mb-4">
-                  <span className="text-[#050505] font-black text-xl">{index + 1}</span>
+                <div className="text-6xl sm:text-7xl font-bold text-[#83d4c0] mb-4 tracking-tight">
+                  {item.number}
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2">{point.title}</h3>
-                <p className="text-slate-400 text-sm">{point.description}</p>
+                <div className="text-white font-bold text-xl sm:text-2xl uppercase tracking-wide mb-3">{item.label}</div>
+                <div className="text-slate-300 text-lg sm:text-xl font-medium leading-relaxed">{item.sublabel}</div>
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="text-center">
-            <CTAButton size="medium" />
+      {/* Section 3: Why Probate - Benefits List (Static) */}
+      <section className="py-24 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0c1214 0%, #0d1416 100%)' }}>
+        {/* Subtle glow continuity */}
+        <div className="absolute top-0 left-[20%] w-[500px] h-[300px] bg-[#0f2a2a]/[0.05] rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="relative max-w-6xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="font-hero text-4xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-14"
+          >
+            Why Probate Outperforms Other Lead Sources
+          </motion.h2>
+
+          <ul className="space-y-8 max-w-5xl">
+            {[
+              { title: 'Motivated decision-makers.', desc: 'Heirs and executors want resolution, not top dollar.' },
+              { title: 'Clear authority to sell.', desc: 'Court-appointed representatives have legal power to transact.' },
+              { title: 'As-is transactions.', desc: 'Properties sell in current condition without repair negotiations.' },
+              { title: 'Pre-market access.', desc: 'Connect before listings hit MLS or reach other investors.' },
+              { title: 'Less competition.', desc: 'Most investors chase the same tired lists and skip probate entirely.' },
+              { title: 'Predictable pipeline.', desc: 'New cases file every week regardless of market conditions.' },
+            ].map((item, index) => (
+              <motion.li
+                key={index}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.15 + index * 0.08, ease: 'easeOut' }}
+                className="flex items-start gap-4"
+              >
+                <div className="w-7 h-7 rounded-full bg-[#83d4c0]/20 flex items-center justify-center flex-shrink-0 mt-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#0891b2]" />
+                </div>
+                <div className="text-xl md:text-2xl leading-relaxed">
+                  <span className="text-white font-bold">{item.title}</span>
+                  <span className="text-slate-400 font-medium"> {item.desc}</span>
+                </div>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Section 4: Timing Advantage - Silver Wave Intrigue */}
+      <section className="py-24 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0d1416 0%, #0e1518 100%)' }}>
+        <div className="relative max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left: Headline + Blurb */}
+            <div>
+              <motion.h2
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className="font-hero text-4xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-8"
+              >
+                Timing Is Everything
+              </motion.h2>
+
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+                className="text-xl md:text-2xl text-slate-300 font-medium leading-relaxed space-y-4"
+              >
+                <p>
+                  Probate opportunities don&apos;t appear all at once. They unfold in stages over weeks and months.
+                </p>
+                <p>
+                  Most investors show up too late, after the best deals have already moved. The advantage goes to those who understand when to act.
+                </p>
+              </motion.div>
+            </div>
+
+            {/* Right: Placeholder Graphic */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+              className="relative"
+            >
+              <div className="aspect-[4/3] rounded-2xl border border-white/10 bg-white/[0.02] flex items-center justify-center p-8">
+                <div className="text-center">
+                  <div className="text-slate-500 text-sm uppercase tracking-widest mb-2">Placeholder</div>
+                  <div className="text-slate-400 text-lg font-medium">Probate Timeline / Silver Wave Visualization</div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Quote Section - White */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.blockquote
-            initial={{ opacity: 0, y: 20 }}
+      {/* Section 5: The Unasked Question - Ethical/Legal Concerns */}
+      <section className="py-24 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0e1518 0%, #0f161a 100%)' }}>
+        <div className="relative max-w-5xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative"
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="font-hero text-4xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-8"
           >
-            <div className="text-[#83d4c0] text-8xl font-serif absolute -top-8 left-0 opacity-20">&quot;</div>
-            <p className="text-2xl sm:text-3xl text-slate-700 italic leading-relaxed px-8 mb-8">
-              Believe it or not, there&apos;s no need to stay away from real estate – even with the housing market being bonkers. Investing in real estate is a great way to accumulate a lot of wealth – especially if you are willing to be patient.
+            Can You Even Contact These Families?
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+            className="text-xl md:text-2xl text-slate-300 font-medium leading-relaxed mb-12 max-w-4xl"
+          >
+            This is the question most investors never ask out loud. They assume probate leads are off-limits, legally risky, or ethically complicated. The truth is simpler than you think.
+          </motion.p>
+
+          {/* Callout Box */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+            className="bg-[#83d4c0]/[0.06] border border-[#83d4c0]/20 rounded-2xl p-8 md:p-10"
+          >
+            <p className="text-xl md:text-2xl text-white font-medium leading-relaxed mb-4">
+              Inside this guide, you&apos;ll learn how experienced investors approach probate outreach with confidence and clarity.
             </p>
-            <footer>
-              <cite className="text-[#0891b2] font-bold text-lg not-italic">– The Motley Fool</cite>
-            </footer>
-          </motion.blockquote>
+            <p className="text-lg text-slate-400">
+              No guesswork. No gray areas. Just a responsible framework that protects you and respects the families you contact.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Final CTA Section - Dark */}
-      <section className="py-24 px-6 bg-[#050505] dark relative overflow-hidden">
-        <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#83d4c0]/20 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-[#0891b2]/15 rounded-full blur-[140px] pointer-events-none" />
+      {/* Section 6: Final CTA - Probate Profit Machine */}
+      <section className="py-24 px-6 relative overflow-hidden bg-[#050505]">
+        {/* Restrained hero echo glows */}
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#83d4c0]/[0.08] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#0891b2]/[0.06] rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="relative max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="font-hero text-4xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-6">
-              Get Your Free Guide Now
-            </h2>
-            <p className="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
-              Join thousands of investors who have discovered the secrets to finding off-market deals at massive discounts.
-            </p>
-            <CTAButton />
-          </motion.div>
+        <div className="relative max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left: Text + CTA */}
+            <div>
+              <motion.h2
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className="font-hero text-4xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-6"
+              >
+                Get the Step-by-Step System
+              </motion.h2>
+
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+                className="text-xl md:text-2xl text-slate-300 font-medium leading-relaxed mb-8"
+              >
+                Everything you need to start finding and closing probate deals in your market. Clear steps. No fluff.
+              </motion.p>
+
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
+                className="text-slate-400 text-lg mb-6"
+              >
+                Enter your details below to get instant access.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+              >
+                <CTAButton />
+              </motion.div>
+            </div>
+
+            {/* Right: Ebook Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+              className="flex justify-center lg:justify-end order-first lg:order-none"
+            >
+              <div className="relative">
+                <div className="absolute -inset-6 bg-gradient-to-br from-[#83d4c0]/[0.08] to-[#0891b2]/[0.05] blur-[60px] rounded-full pointer-events-none" />
+                <img
+                  src="/ebook-cover-probate-profit-machine.png"
+                  alt="The Probate Profit Machine"
+                  className="relative w-full max-w-[20rem] lg:max-w-[24rem] drop-shadow-2xl"
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
