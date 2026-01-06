@@ -523,12 +523,13 @@ export default function ProbateProfitMachinePage() {
 
             {/* Right Column - 2/5 - eBook Image */}
             {/* order-first on mobile puts ebook at top; lg:order-none restores desktop order */}
+            {/* lg:mt-16 pushes ebook below eyebrow line on desktop */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               // Left nudge: 24px on tablet, 48px on desktop to connect with headline
-              className="lg:col-span-2 flex flex-col items-center order-first lg:order-none md:-translate-x-6 lg:-translate-x-12"
+              className="lg:col-span-2 flex flex-col items-center order-first lg:order-none md:-translate-x-6 lg:-translate-x-12 lg:mt-16"
             >
               {/* Glow container - positions ambient glow behind ebook */}
               <div className="relative">
@@ -545,15 +546,14 @@ export default function ProbateProfitMachinePage() {
                 />
                 {/*
                   Ebook mockup sizing:
-                  - Mobile: max-w-[22rem] (~10% larger than original sm/24rem)
-                  - Tablet: max-w-[26rem] (~15% increase, proportional)
-                  - Desktop: max-w-[30rem] (~15% larger than original md/28rem)
-                  - Maintains aspect ratio via width constraint
+                  - Mobile: max-w-[22rem]
+                  - Tablet: max-w-[24rem]
+                  - Desktop: max-w-[26rem] (slightly smaller to fit below eyebrow)
                 */}
                 <img
                   src="/ebook-cover-probate-profit-machine.png"
                   alt="The Probate Profit Machine"
-                  className="relative w-full max-w-[22rem] md:max-w-[26rem] lg:max-w-[30rem] drop-shadow-2xl rotate-[8deg] md:rotate-0 transition-transform"
+                  className="relative w-full max-w-[22rem] md:max-w-[24rem] lg:max-w-[26rem] drop-shadow-2xl rotate-[8deg] md:rotate-0 transition-transform"
                 />
               </div>
 
