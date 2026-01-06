@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Probate Profit Machine landing page complete, matches main site design.
+**Current Status:** 🚧 IN PROGRESS - Probate Profit Machine landing page complete with all 7 sections.
 
 ---
 
@@ -34,17 +34,30 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 ## 🎯 What I Need to Know
 
 ### Current Focus
-**Active Work:** Probate Profit Machine landing page - high-value content offer funnel.
+**Active Work:** Probate Profit Machine landing page - complete short-form page ready for conversion testing.
 
 ### Session History
+#### 2026-01-05 (Session 3 - Full Sections Build-Out)
+- ✅ Fixed Space Grotesk font-family to `"space-grotesk-variable"`
+- ✅ Removed Space Grotesk from eyebrow/subheadline (IBM Plex Sans better)
+- ✅ Reduced header hide threshold (100px → 20px)
+- ✅ Removed logo link to reduce leakage
+- ✅ Minimal footer (© 2026 WhiteBox Academy + Terms/Privacy)
+- ✅ Section 2: Stats - "A Generational Transfer of Wealth Is Underway" (41%, ~32M, 9M+)
+- ✅ Section 3: Why Probate - 6 bullet points with progressive animations
+- ✅ Section 4: What's Inside - 5 icon cards (3-2 centered layout)
+- ✅ Section 5: Timing - "Timing Is Everything" two-column layout
+- ✅ Section 6: Unasked Question - "Can You Even Contact These Families?"
+- ✅ Section 7: Final CTA echoing hero design
+- ✅ CTA buttons after sections 2-5 ("Download Your Free Guide")
+- **Resume**: Push to Vercel, replace placeholder graphic in Timing section
+
 #### 2026-01-05 (Session 2 - Hero Refinements)
 - ✅ Ebook mockup: increased size, left nudge on desktop, soft teal ambient glow
 - ✅ Mobile layout: ebook first, CTA underneath
 - ✅ Modal: animated progress bar with "Almost There!", larger headline/button, shimmer effect
 - ✅ Fixed phone autofill country code issue (strips leading "1")
 - ✅ Headline testing: new eyebrow, main headline, subheadline copy
-- 🚧 Added Space Grotesk font (font-space class) - **needs font-family name verification**
-- **Resume**: Check Adobe Fonts kit for exact Space Grotesk font-family name
 
 #### 2026-01-05 (Session 1)
 - ✅ Confirmed jurisdictions table: 51 states/DC, 3,103 counties

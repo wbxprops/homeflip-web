@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
-import { X, Phone } from 'lucide-react';
+import { X, Phone, Search, TrendingUp, Landmark, Target, Compass } from 'lucide-react';
 
 export default function ProbateProfitMachinePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -95,13 +95,13 @@ export default function ProbateProfitMachinePage() {
   const CTAButton = ({ className = '', size = 'large' }: { className?: string; size?: 'large' | 'medium' }) => (
     <button
       onClick={openModal}
-      className={`btn-gradient inline-flex items-center justify-center rounded-2xl font-hero font-[900] uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all ${
+      className={`btn-gradient inline-flex items-center justify-center rounded-2xl font-hero font-[900] uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all w-full sm:w-auto ${
         size === 'large'
-          ? 'px-10 sm:px-14 py-5 sm:py-6 text-2xl sm:text-3xl md:text-4xl'
-          : 'px-8 sm:px-10 py-4 sm:py-5 text-xl sm:text-2xl'
+          ? 'px-8 sm:px-16 py-6 sm:py-7 text-2xl sm:text-4xl md:text-5xl'
+          : 'px-6 sm:px-12 py-5 sm:py-6 text-xl sm:text-3xl'
       } ${className}`}
     >
-      Get Your Free Guide
+      Download Your Free Guide
     </button>
   );
 
@@ -259,7 +259,7 @@ export default function ProbateProfitMachinePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-[#83d4c0] font-bold text-base md:text-lg uppercase tracking-widest mb-6"
+                className="hidden sm:block text-[#83d4c0] font-bold text-base md:text-lg uppercase tracking-widest mb-6"
               >
                 Attention Investors Who Want Properties At 47% Of The ARV
               </motion.p>
@@ -268,7 +268,7 @@ export default function ProbateProfitMachinePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
-                className="font-hero text-[9vw] sm:text-[3.5rem] lg:text-[4.5rem] xl:text-[5rem] font-[800] text-white leading-[0.9] tracking-[-0.02em] mb-8 uppercase"
+                className="font-hero text-[11vw] sm:text-[3.5rem] lg:text-[4.5rem] xl:text-[5rem] font-[800] text-white leading-[0.85] sm:leading-[0.9] tracking-[-0.02em] mb-8 uppercase"
               >
                 How Thousands Of Investors Are Using <span className="text-[#83d4c0]">Timeline Intelligence</span> To Uncover Hidden Probate Opportunities
               </motion.h1>
@@ -325,7 +325,7 @@ export default function ProbateProfitMachinePage() {
                 <img
                   src="/ebook-cover-probate-profit-machine.png"
                   alt="The Probate Profit Machine"
-                  className="relative w-full max-w-[22rem] md:max-w-[26rem] lg:max-w-[30rem] drop-shadow-2xl"
+                  className="relative w-full max-w-[22rem] md:max-w-[26rem] lg:max-w-[30rem] drop-shadow-2xl rotate-[8deg] md:rotate-0 transition-transform"
                 />
               </div>
 
@@ -405,6 +405,17 @@ export default function ProbateProfitMachinePage() {
               </motion.div>
             ))}
           </div>
+
+          {/* Section CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-16 text-center"
+          >
+            <CTAButton size="medium" />
+          </motion.div>
         </div>
       </section>
 
@@ -451,11 +462,124 @@ export default function ProbateProfitMachinePage() {
               </motion.li>
             ))}
           </ul>
+
+          {/* Section CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mt-16 text-center"
+          >
+            <CTAButton size="medium" />
+          </motion.div>
         </div>
       </section>
 
-      {/* Section 4: Timing Advantage - Silver Wave Intrigue */}
-      <section className="py-24 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0d1416 0%, #0e1518 100%)' }}>
+      {/* Transition Zone: Dark to Light */}
+      <div className="relative h-32 sm:h-40 overflow-hidden">
+        {/* Gradient background transition */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(180deg, #0d1416 0%, #1a2a2e 25%, #3d5a5e 50%, #7aa3a8 70%, #c8dfe2 85%, #e8f4f6 100%)'
+          }}
+        />
+
+        {/* Ambient teal glow in transition */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#83d4c0]/20 via-transparent to-transparent" />
+
+        {/* Bottom fade into light section */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#e8f4f6] to-transparent" />
+      </div>
+
+      {/* Section 4: What's Included - Guide Preview (Light Theme with Glassmorphic Cards) */}
+      <section className="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-[#e8f4f6] via-slate-50 to-cyan-50/30">
+        {/* Ambient glow orbs for depth */}
+        <div className="absolute top-[10%] left-[5%] w-[400px] h-[400px] bg-[#0891b2]/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-[10%] right-[10%] w-[350px] h-[350px] bg-[#83d4c0]/15 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gradient-to-r from-[#0891b2]/5 to-[#83d4c0]/5 rounded-full blur-[80px] pointer-events-none" />
+
+        <div className="relative max-w-6xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="font-hero text-4xl sm:text-5xl lg:text-6xl font-[800] text-slate-900 uppercase tracking-tight mb-14 text-center"
+          >
+            Here&apos;s Just Some of What You&apos;ll Learn in the <span className="text-[#0891b2]">Probate Profit Machine</span>
+          </motion.h2>
+
+          <div className="flex flex-wrap justify-center gap-6">
+            {[
+              {
+                icon: Search,
+                title: 'The Cold Hard Truth About Buying Probate Properties',
+                desc: "We've been buying probate properties for over 20 years, and in this free guide you'll learn all of the tips and tricks other investors haven't figured out."
+              },
+              {
+                icon: TrendingUp,
+                title: '7 Tips to Build a Property Portfolio in Only 24 Months',
+                desc: 'A framework for creating consistent deal flow that compounds over time.'
+              },
+              {
+                icon: Landmark,
+                title: 'Why Calling on Probate Attorneys Is a Bad Idea',
+                desc: 'What most investors get wrong about professional referrals and what works instead.'
+              },
+              {
+                icon: Target,
+                title: 'How to Find Secret Probate Leads in Your Area',
+                desc: 'Practical methods for finding probate opportunities without spending on marketing.'
+              },
+              {
+                icon: Compass,
+                title: 'Positioning for the Generational Wealth Transfer',
+                desc: 'How to prepare your business for the largest generational shift in real estate history.'
+              },
+            ].map((card, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.1 + index * 0.08, ease: 'easeOut' }}
+                className="relative group bg-white/60 backdrop-blur-xl border border-white/80 rounded-2xl p-8 shadow-[0_8px_32px_rgba(8,145,178,0.08)] hover:shadow-[0_16px_48px_rgba(8,145,178,0.15)] hover:border-[#0891b2]/30 transition-all duration-300 text-center w-full max-w-[340px]"
+              >
+                {/* Subtle gradient overlay on hover */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#0891b2]/[0.02] to-[#83d4c0]/[0.04] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                <div className="relative">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#0891b2]/15 to-[#83d4c0]/10 border border-[#0891b2]/20 flex items-center justify-center mx-auto mb-5 shadow-[0_4px_16px_rgba(8,145,178,0.1)]">
+                    <card.icon className="w-7 h-7 text-[#0891b2]" />
+                  </div>
+                  <h3 className="text-slate-900 font-bold text-xl mb-3 leading-tight uppercase tracking-wide">
+                    {card.title}
+                  </h3>
+                  <p className="text-slate-600 text-base leading-relaxed">
+                    {card.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Section CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-16 text-center"
+          >
+            <CTAButton size="medium" />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Section 5: Timing Advantage - Silver Wave Intrigue */}
+      <section className="py-24 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0e1518 0%, #0f161a 100%)' }}>
         <div className="relative max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left: Headline + Blurb */}
@@ -502,6 +626,17 @@ export default function ProbateProfitMachinePage() {
               </div>
             </motion.div>
           </div>
+
+          {/* Section CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-16 text-center"
+          >
+            <CTAButton size="medium" />
+          </motion.div>
         </div>
       </section>
 
@@ -543,10 +678,21 @@ export default function ProbateProfitMachinePage() {
               No guesswork. No gray areas. Just a responsible framework that protects you and respects the families you contact.
             </p>
           </motion.div>
+
+          {/* Section CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-12 text-center"
+          >
+            <CTAButton size="medium" />
+          </motion.div>
         </div>
       </section>
 
-      {/* Section 6: Final CTA - Probate Profit Machine */}
+      {/* Section 7: Final CTA - Probate Profit Machine */}
       <section className="py-24 px-6 relative overflow-hidden bg-[#050505]">
         {/* Restrained hero echo glows */}
         <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#83d4c0]/[0.08] rounded-full blur-[120px] pointer-events-none" />
