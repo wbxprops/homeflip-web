@@ -1,14 +1,14 @@
-# Session Log: Insights Section & Probate vs Foreclosures Article
+# Session Log: Insights Section, Mobile Optimizations, OG Meta Tags
 
 **Date:** 2026-01-06
 **Project:** homeflip-web-site
-**Focus:** SEO content section and first research article
+**Focus:** SEO content section, mobile improvements, social sharing
 
 ---
 
 ## Summary
 
-Built out the `/insights` section for hosting SEO-optimized research articles, created the first article comparing probate properties vs foreclosures, and updated Navbar to support light/dark theme variants.
+Built out the `/insights` section for SEO-optimized research articles, created the first article comparing probate vs foreclosures, updated Navbar for light/dark themes, optimized Probate Profit Machine for mobile, and added proper OG meta tags for social sharing.
 
 ---
 
@@ -37,7 +37,27 @@ Built out the `/insights` section for hosting SEO-optimized research articles, c
   - Lighter backdrop (bg-slate-900/30)
   - White panel background
   - Slate-colored text and borders
-- Footer logo updated to use light-background version
+- Footer logo updated for light backgrounds
+
+### 4. Probate Profit Machine Mobile Optimizations
+- Reduced parallax animation distances on mobile (100px vs 400px)
+- Section padding: `py-16 sm:py-24` for tighter mobile spacing
+- Headline sizes adjusted for mobile readability
+- Body copy bumped up with responsive sizing
+- Silver Tsunami images constrained with max-w-[90vw]
+- Card scroller height reduced on mobile
+- CTA button z-index fix (z-20) to stay above parallax images
+
+### 5. OG Meta Tags for Social Sharing
+- **Homepage:**
+  - Title: "AI-Powered Probate Lead Platform for Real Estate Investors"
+  - Description: "Find off-market probate deals using real court data and AI-driven insights."
+  - Image: `/og-homeflip-homepage.png`
+- **Landing Page:**
+  - Title: "Free Probate Lead Guide"
+  - Description: "How real estate investors find off-market probate deals."
+  - Image: `/og-probate-guide.png`
+- Added `metadataBase` for proper URL resolution
 
 ---
 
@@ -46,36 +66,51 @@ Built out the `/insights` section for hosting SEO-optimized research articles, c
 ### New Files
 - `src/app/insights/page.tsx` - Insights index page
 - `src/app/insights/probate-vs-foreclosure/page.tsx` - Full article
+- `src/app/probate-profit-machine/layout.tsx` - OG metadata for landing page
+- `public/og-homeflip-homepage.png` - Homepage OG image
+- `public/og-probate-guide.png` - Landing page OG image
+- `public/silver-tsunami-headline-02.png` - News headline image
+- `public/boomer-household-retention-chart.jpg` - Chart image
 
 ### Modified Files
-- `src/components/Navbar.tsx` - Added variant prop + light theme menu modal
-- `src/components/Footer.tsx` - Fixed logo to use light-bg version
+- `src/components/Navbar.tsx` - Light/dark variant + themed menu modal
+- `src/components/Footer.tsx` - Fixed logo for light backgrounds
+- `src/app/layout.tsx` - OG meta tags + metadataBase
+- `src/app/probate-profit-machine/page.tsx` - Mobile optimizations
+- `src/app/globals.css` - New animations/styles
 
 ---
 
 ## Technical Notes
 
-### Insights Page Structure
-```tsx
-const articles = [
-  {
-    slug: "probate-vs-foreclosure",
-    title: "...",
-    excerpt: "...",
-    category: "Market Research",
-    readTime: "8 min read",
-    icon: <BarChart3 />,
-    featured: true
-  }
-];
-
-// Featured articles get star icon section
-// Non-featured go to "More Insights" grid
-```
-
 ### Navbar Light Variant Usage
 ```tsx
 <Navbar variant="light" />
+```
+
+### Mobile Parallax Detection
+```tsx
+const [isMobile, setIsMobile] = useState(false);
+useEffect(() => {
+  const checkMobile = () => setIsMobile(window.innerWidth < 768);
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+  return () => window.removeEventListener('resize', checkMobile);
+}, []);
+
+const mobileOffset = isMobile ? 100 : 400;
+```
+
+### OG Meta Tags Structure
+```tsx
+export const metadata: Metadata = {
+  metadataBase: new URL("https://homeflip.ai"),
+  openGraph: {
+    title: "...",
+    description: "...",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
+};
 ```
 
 ---
@@ -85,19 +120,28 @@ const articles = [
 1. **No dates on articles** - Avoids revealing posting frequency
 2. **Featured/More structure** - Highlights best content without needing many articles
 3. **Educational tone** - Citable research positioning, not salesy
-4. **Two CTAs in article** - "Find Out More" + "Claim Your County" for choose-your-own-adventure
+4. **Mobile-first parallax** - Reduced animations prevent jarring UX on small screens
+5. **Separate OG metadata per route** - Different social previews for different pages
+
+---
+
+## Deployment
+
+- **Commit:** `4849598` - "Add insights section, mobile optimizations, OG meta tags"
+- **Pushed to:** origin/master
+- **Vercel:** Auto-deploying
 
 ---
 
 ## Next Session Goals
 
-- [ ] Push changes to Vercel
-- [ ] Test insights pages on production
+- [ ] Test OG previews with opengraph.xyz after deploy
 - [ ] Add more articles to insights section
-- [ ] Consider adding social sharing buttons to articles
+- [ ] Consider social sharing buttons on articles
+- [ ] Create thank-you page with actual PDF download
 
 ---
 
 ## Resume Point
 
-Light theme menu modal complete. Ready to push and test on production.
+All changes pushed. OG images and meta tags configured. Test social previews after Vercel deploy completes.

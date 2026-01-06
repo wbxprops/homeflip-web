@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Insights section added with first SEO research article (Probate vs Foreclosures).
+**Current Status:** 🚧 IN PROGRESS - Insights section, mobile optimizations, OG meta tags complete.
 
 ---
 
@@ -37,16 +37,22 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 **Active Work:** Insights section with SEO-optimized research articles.
 
 ### Session History
-#### 2026-01-06 (Insights Section & Probate Article)
+#### 2026-01-06 (Insights, Mobile, OG Tags)
 - ✅ Created `/insights/page.tsx` - index page with Featured/More structure (no dates)
 - ✅ Created `/insights/probate-vs-foreclosure/page.tsx` - first research article
-- ✅ Article: "Probate vs Foreclosures: Why Investors Are Missing Double the Opportunities in 2026"
-- ✅ Navbar: Added `variant` prop for light/dark themes
-- ✅ Navbar: Updated menu modal to support light theme
+- ✅ Navbar: Added `variant` prop for light/dark themes + themed menu modal
 - ✅ Footer: Fixed logo for light backgrounds
-- ✅ Professional, citable research tone (not salesy)
-- ✅ Glassmorphic "How HomeFlip.ai Can Help" section with two CTAs
-- **Resume**: Push to Vercel, test on production
+- ✅ **Probate Profit Machine mobile optimizations:**
+  - Reduced parallax animation distances (100px vs 400px on mobile)
+  - Section padding: `py-16 sm:py-24`
+  - Headline sizes adjusted for mobile readability
+  - CTA z-index fix (z-20) to stay above parallax images
+- ✅ **OG Meta Tags for social sharing:**
+  - Homepage: "AI-Powered Probate Lead Platform for Real Estate Investors"
+  - Landing page: "Free Probate Lead Guide"
+  - Added `metadataBase` for proper URL resolution
+  - Created OG images: `og-homeflip-homepage.png`, `og-probate-guide.png`
+- **Deployed**: Commit `4849598` pushed to origin/master
 
 #### 2026-01-05 (Session 3 - Full Sections Build-Out)
 - ✅ Fixed Space Grotesk font-family to `"space-grotesk-variable"`
@@ -192,6 +198,7 @@ background: linear-gradient(to right, #5EEADC, #A855F7);
 - ✅ Include clear CTAs on every section
 - ✅ Test on mobile devices
 - ✅ Use brand gradient for primary buttons
+- ✅ **Ensure HVCO landing page (`/probate-profit-machine`) looks good on mobile** - bold headlines, readable copy, smooth animations
 
 ---
 
