@@ -122,14 +122,11 @@ export default function ProbateProfitMachinePage() {
   const inputStyles = "w-full px-4 py-4 rounded-xl border-2 border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#83d4c0]/50 focus:border-[#83d4c0] transition-all text-lg";
 
   // CTA Button Component - Matches main site btn-gradient
+  // Mobile: text-[6.5vw] scales to fit, full width, breaks out of parent padding with -mx-2
   const CTAButton = ({ className = '', size = 'large' }: { className?: string; size?: 'large' | 'medium' }) => (
     <button
       onClick={openModal}
-      className={`btn-gradient inline-flex items-center justify-center rounded-2xl font-hero font-[900] uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all w-full sm:w-auto ${
-        size === 'large'
-          ? 'px-8 sm:px-16 py-6 sm:py-7 text-2xl sm:text-4xl md:text-5xl'
-          : 'px-6 sm:px-12 py-5 sm:py-6 text-2xl sm:text-4xl'
-      } ${className}`}
+      className={`btn-gradient inline-flex items-center justify-center rounded-2xl font-hero font-[900] uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all whitespace-nowrap w-[calc(100%+1rem)] -mx-2 sm:w-auto sm:mx-0 px-4 sm:px-16 py-5 sm:py-7 text-[6.5vw] sm:text-4xl md:text-5xl ${className}`}
     >
       Download Your Free Guide
     </button>
@@ -296,10 +293,10 @@ export default function ProbateProfitMachinePage() {
                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#83d4c0]/[0.02] to-transparent pointer-events-none" />
                     <div className="relative">
                       <h3 className={`font-bold mb-2 transition-all duration-300 flex items-center gap-2.5 ${card.isPreCard ? 'text-lg italic text-slate-300' : 'text-xl text-white'}`}>
-                        {/* Signal dot - indicates focus/relevance */}
+                        {/* Signal dot - indicates focus/relevance, hidden on mobile */}
                         {!card.isPreCard && (
                           <span
-                            className={`rounded-full flex-shrink-0 transition-all duration-500 ${state.dotAnimate ? 'animate-dot-breathe' : ''}`}
+                            className={`hidden sm:block rounded-full flex-shrink-0 transition-all duration-500 ${state.dotAnimate ? 'animate-dot-breathe' : ''}`}
                             style={{
                               width: `${state.dotSize}px`,
                               height: `${state.dotSize}px`,
@@ -496,7 +493,7 @@ export default function ProbateProfitMachinePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
-                className="font-hero text-[11vw] sm:text-[3.5rem] lg:text-[4.5rem] xl:text-[5rem] font-[800] text-white leading-[0.85] sm:leading-[0.9] tracking-[-0.02em] mb-8 uppercase"
+                className="font-hero text-[13vw] sm:text-[3.5rem] lg:text-[4.5rem] xl:text-[5rem] font-[800] text-white leading-[0.85] sm:leading-[0.9] tracking-[-0.02em] mb-8 uppercase text-center sm:text-left"
               >
                 How Thousands Of Investors Are Using <span className="text-[#83d4c0]">Timeline Intelligence</span> To Uncover Hidden Probate Opportunities
               </motion.h1>
@@ -505,7 +502,7 @@ export default function ProbateProfitMachinePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
-                className="text-xl sm:text-2xl md:text-3xl text-white font-medium uppercase tracking-wide max-w-2xl leading-tight mb-10"
+                className="text-xl sm:text-2xl md:text-3xl text-white font-medium uppercase tracking-wide max-w-2xl leading-tight mb-4 sm:mb-10 text-center sm:text-left"
               >
                 Buy Your Next Deal In 30 Days Or Less
               </motion.p>
@@ -522,14 +519,13 @@ export default function ProbateProfitMachinePage() {
             </div>
 
             {/* Right Column - 2/5 - eBook Image */}
-            {/* order-first on mobile puts ebook at top; lg:order-none restores desktop order */}
             {/* lg:mt-16 pushes ebook below eyebrow line on desktop */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               // Left nudge: 24px on tablet, 48px on desktop to connect with headline
-              className="lg:col-span-2 flex flex-col items-center order-first lg:order-none md:-translate-x-6 lg:-translate-x-12 lg:mt-16"
+              className="lg:col-span-2 flex flex-col items-center md:-translate-x-6 lg:-translate-x-12 lg:mt-16"
             >
               {/* Glow container - positions ambient glow behind ebook */}
               <div className="relative">
@@ -553,7 +549,7 @@ export default function ProbateProfitMachinePage() {
                 <img
                   src="/ebook-cover-probate-profit-machine.png"
                   alt="The Probate Profit Machine"
-                  className="relative w-full max-w-[22rem] md:max-w-[25rem] lg:max-w-[28rem] drop-shadow-2xl rotate-[8deg] md:rotate-0 transition-transform"
+                  className="relative w-full max-w-[22rem] md:max-w-[25rem] lg:max-w-[28rem] drop-shadow-2xl rotate-[3deg] md:rotate-0 transition-transform"
                 />
               </div>
 
@@ -584,7 +580,7 @@ export default function ProbateProfitMachinePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-hero text-4xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-10 text-center"
+            className="font-hero text-5xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-10 text-center"
           >
             A Generational Transfer of Wealth Is Underway
           </motion.h2>
@@ -642,7 +638,7 @@ export default function ProbateProfitMachinePage() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="mt-16 text-center"
           >
-            <CTAButton size="medium" />
+            <CTAButton size="large" />
           </motion.div>
         </div>
       </section>
@@ -658,7 +654,7 @@ export default function ProbateProfitMachinePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="font-hero text-4xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-14"
+            className="font-hero text-5xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-14"
           >
             Why Probate Outperforms Other Lead Sources
           </motion.h2>
@@ -723,7 +719,7 @@ export default function ProbateProfitMachinePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
-                className="font-hero text-4xl sm:text-5xl lg:text-8xl font-[800] text-white uppercase tracking-tight leading-[0.9] mb-6 text-center"
+                className="font-hero text-5xl sm:text-5xl lg:text-8xl font-[800] text-white uppercase tracking-tight leading-[0.9] mb-6 text-center"
               >
                 Here's What's Inside Your Probate{' '}
                 <span className="text-[#83d4c0] animate-text-glow-pulse">Profit</span>{' '}
@@ -735,17 +731,18 @@ export default function ProbateProfitMachinePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
-                className="text-lg sm:text-xl text-slate-400 text-center mb-8"
+                className="hidden sm:block text-lg sm:text-xl text-slate-400 text-center mb-8"
               >
                 A step-by-step system for finding and closing probate deals.
               </motion.p>
 
+              {/* Desktop CTA - hidden on mobile */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
-                className="text-center"
+                className="text-center hidden lg:block"
               >
                 <CTAButton size="medium" />
               </motion.div>
@@ -754,6 +751,17 @@ export default function ProbateProfitMachinePage() {
             {/* Right Column: Infinite Scrolling Card Carousel */}
             <InfiniteCardScroller />
           </div>
+
+          {/* Mobile CTA - below cards, hidden on desktop */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+            className="text-center mt-8 lg:hidden"
+          >
+            <CTAButton size="medium" />
+          </motion.div>
         </div>
       </section>
 
@@ -766,7 +774,7 @@ export default function ProbateProfitMachinePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="font-hero text-4xl sm:text-5xl lg:text-7xl font-[800] text-white uppercase tracking-tight mb-4 text-center"
+            className="font-hero text-5xl sm:text-5xl lg:text-7xl font-[800] text-white uppercase tracking-tight mb-4 text-center"
           >
             Be Prepared for the{' '}
             <span className="text-silver-shimmer">
@@ -820,13 +828,13 @@ export default function ProbateProfitMachinePage() {
             </motion.div>
           </div>
 
-          {/* Section CTA - z-20 keeps it above the parallax images (z-10, z-0) */}
+          {/* Section CTA - z-20 keeps it above the parallax images (z-10, z-0), hidden on mobile */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="relative z-20 mt-12 text-center"
+            className="relative z-20 mt-12 text-center hidden lg:block"
           >
             <CTAButton size="medium" />
           </motion.div>
@@ -846,7 +854,7 @@ export default function ProbateProfitMachinePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="font-hero text-3xl sm:text-4xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-1 text-center leading-[0.95]"
+            className="font-hero text-5xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-1 text-center leading-[0.95]"
           >
             Keep Reading. It Gets Better.
           </motion.h2>
@@ -855,7 +863,7 @@ export default function ProbateProfitMachinePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
-            className="font-hero text-3xl sm:text-4xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-10 sm:mb-14 text-center leading-[0.95]"
+            className="font-hero text-5xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-10 sm:mb-14 text-center leading-[0.95]"
           >
             The Probate <span className="text-[#83d4c0]">Profit</span> Machine Also Covers:
           </motion.h3>
