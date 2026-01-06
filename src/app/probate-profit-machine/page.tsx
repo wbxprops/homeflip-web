@@ -547,13 +547,13 @@ export default function ProbateProfitMachinePage() {
                 {/*
                   Ebook mockup sizing:
                   - Mobile: max-w-[22rem]
-                  - Tablet: max-w-[24rem]
-                  - Desktop: max-w-[26rem] (slightly smaller to fit below eyebrow)
+                  - Tablet: max-w-[25rem]
+                  - Desktop: max-w-[28rem]
                 */}
                 <img
                   src="/ebook-cover-probate-profit-machine.png"
                   alt="The Probate Profit Machine"
-                  className="relative w-full max-w-[22rem] md:max-w-[24rem] lg:max-w-[26rem] drop-shadow-2xl rotate-[8deg] md:rotate-0 transition-transform"
+                  className="relative w-full max-w-[22rem] md:max-w-[25rem] lg:max-w-[28rem] drop-shadow-2xl rotate-[8deg] md:rotate-0 transition-transform"
                 />
               </div>
 
