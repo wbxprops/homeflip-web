@@ -1,13 +1,43 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
 import { X, Phone, Search, TrendingUp, Landmark, Target, Compass } from 'lucide-react';
 
 export default function ProbateProfitMachinePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [headerVisible, setHeaderVisible] = useState(true);
+
+  // Ref for Silver Tsunami section scroll tracking
+  const silverTsunamiRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: tsunamiProgress } = useScroll({
+    target: silverTsunamiRef,
+    offset: ["start end", "end start"] // track from when section enters to when it exits
+  });
+
+  // Check if mobile for reduced parallax (SSR-safe)
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Reduced transforms for mobile (100px vs 400px), full effect on desktop
+  const mobileOffset = isMobile ? 100 : 400;
+  const mobileYOffset = isMobile ? 80 : 300;
+
+  // Transform values for newspaper (enters from bottom-left, exits to right)
+  const newspaperX = useTransform(tsunamiProgress, [0, 0.45, 0.55, 1], [-mobileOffset, 0, 0, mobileOffset]);
+  const newspaperY = useTransform(tsunamiProgress, [0, 0.45, 0.55, 1], [mobileYOffset, 0, 0, 0]);
+  const newspaperOpacity = useTransform(tsunamiProgress, [0, 0.35, 0.65, 1], [0, 1, 1, 0]);
+
+  // Transform values for chart (enters from right, exits to bottom-left)
+  const chartX = useTransform(tsunamiProgress, [0, 0.45, 0.55, 1], [mobileOffset, 0, 0, -mobileOffset]);
+  const chartY = useTransform(tsunamiProgress, [0, 0.45, 0.55, 1], [0, 0, 0, mobileYOffset]);
+  const chartOpacity = useTransform(tsunamiProgress, [0, 0.4, 0.6, 1], [0, 1, 1, 0]);
 
   // Hide header on scroll
   useEffect(() => {
@@ -98,12 +128,211 @@ export default function ProbateProfitMachinePage() {
       className={`btn-gradient inline-flex items-center justify-center rounded-2xl font-hero font-[900] uppercase tracking-tighter shadow-xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all w-full sm:w-auto ${
         size === 'large'
           ? 'px-8 sm:px-16 py-6 sm:py-7 text-2xl sm:text-4xl md:text-5xl'
-          : 'px-6 sm:px-12 py-5 sm:py-6 text-xl sm:text-3xl'
+          : 'px-6 sm:px-12 py-5 sm:py-6 text-2xl sm:text-4xl'
       } ${className}`}
     >
       Download Your Free Guide
     </button>
   );
+
+  // Card carousel with scroll-snap - iOS picker style
+  const InfiniteCardScroller = () => {
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const hasInitialized = useRef(false);
+    const [focusedIndex, setFocusedIndex] = useState(1);
+
+    // Pre-card + main cards (no numbering)
+    const preCard = {
+      title: 'Probate Profit Machine',
+      desc: 'A step-by-step system for finding and closing probate deals.',
+      isPreCard: true
+    };
+
+    const cards = [
+      { title: 'Proven Call Scripts', desc: 'Say exactly what works. Skip the 20 years of |trial| and error.', highlight: 'trial' },
+      { title: 'Follow-Up Cadence', desc: 'Stay top of mind without being |pushy|. Tailored to your style.', highlight: 'pushy' },
+      { title: 'Timeline Intelligence', desc: 'Know when an estate is ready to sell — |before| other investors notice.', highlight: 'before' },
+      { title: 'How to Source Probate Leads', desc: 'Find |hidden| deals in your market that others overlook.', highlight: 'hidden' },
+      { title: 'Online Community', desc: 'Get answers fast from investors who are |actually| closing deals.', highlight: 'actually' },
+      { title: 'Live Coaching Calls', desc: 'Real guidance. Real deals. |Weekly| sessions for long-term success.', highlight: 'weekly' },
+      { title: 'The Complete Playbook', desc: 'Every strategy. Every template. Learn at your |own| pace.', highlight: 'own' },
+    ];
+
+    // All cards including pre-card (index 0 = pre-card, 1+ = main cards)
+    const allCards = [preCard, ...cards.map(c => ({ ...c, isPreCard: false }))];
+
+    // Detect which card is centered
+    useEffect(() => {
+      const container = scrollRef.current;
+      if (!container) return;
+
+      const handleScroll = () => {
+        const containerRect = container.getBoundingClientRect();
+        const centerY = containerRect.top + containerRect.height / 2;
+        const cardElements = container.querySelectorAll('[data-card-index]');
+
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+
+        cardElements.forEach((card) => {
+          const index = parseInt(card.getAttribute('data-card-index') || '0');
+          const cardRect = card.getBoundingClientRect();
+          const cardCenterY = cardRect.top + cardRect.height / 2;
+          const distance = Math.abs(centerY - cardCenterY);
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+          }
+        });
+
+        setFocusedIndex(closestIndex);
+      };
+
+      // Scroll to show first main card (index 1) centered on load - only once
+      if (!hasInitialized.current) {
+        hasInitialized.current = true;
+        setTimeout(() => {
+          const firstMainCard = container.querySelector('[data-card-index="1"]') as HTMLElement;
+          if (firstMainCard) {
+            // Use scrollTop on container instead of scrollIntoView to avoid page scroll
+            const cardTop = firstMainCard.offsetTop;
+            const cardHeight = firstMainCard.offsetHeight;
+            const containerHeight = container.offsetHeight;
+            container.scrollTop = cardTop - (containerHeight / 2) + (cardHeight / 2);
+          }
+          handleScroll();
+        }, 100);
+      }
+
+      container.addEventListener('scroll', handleScroll);
+      return () => container.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Calculate visual state based on distance from focused card
+    const getCardState = (index: number, isPreCard: boolean) => {
+      const distance = Math.abs(index - focusedIndex);
+
+      // Pre-card is always slightly dimmer
+      if (isPreCard) {
+        return { scale: 0.96, brightness: 0.7, borderWidth: 1, borderOpacity: 0.15, dotOpacity: 0.2, dotSize: 6, dotAnimate: false };
+      }
+
+      if (distance === 0) {
+        // Featured card - full signal
+        return { scale: 1.02, brightness: 1, borderWidth: 2, borderOpacity: 0.8, dotOpacity: 1, dotSize: 8, dotAnimate: true };
+      } else if (distance === 1) {
+        // Adjacent cards - partial signal
+        return { scale: 0.98, brightness: 0.85, borderWidth: 1, borderOpacity: 0.3, dotOpacity: 0.5, dotSize: 7, dotAnimate: false };
+      } else {
+        // Distant cards - low signal
+        return { scale: 0.96, brightness: 0.75, borderWidth: 1, borderOpacity: 0.2, dotOpacity: 0.2, dotSize: 6, dotAnimate: false };
+      }
+    };
+
+    return (
+      <div className="relative overflow-hidden h-[400px] sm:h-[480px]">
+        {/* Top fade gradient */}
+        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#050505] via-[#050505]/80 to-transparent z-10 pointer-events-none" />
+        {/* Bottom fade gradient */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent z-10 pointer-events-none" />
+
+        {/* Scroll container with CSS snap */}
+        <div
+          ref={scrollRef}
+          className="h-full overflow-y-auto scrollbar-hide px-2"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            scrollSnapType: 'y proximity',
+            WebkitOverflowScrolling: 'touch',
+            scrollBehavior: 'smooth'
+          }}
+        >
+          {/* Top spacer - adjusted to center featured card with "Probate Profit" headline */}
+          <div className="h-[5px]" />
+
+          {allCards.map((card, index) => {
+            const state = getCardState(index, card.isPreCard);
+            const isFocused = index === focusedIndex;
+
+            return (
+              <div
+                key={index}
+                data-card-index={index}
+                className="h-[140px] flex items-center justify-center"
+                style={{ scrollSnapAlign: 'center' }}
+              >
+                <div
+                  className="w-full transition-all duration-300 ease-out"
+                  style={{
+                    transform: `scale(${state.scale})`,
+                    filter: `brightness(${state.brightness})`,
+                  }}
+                >
+                  <div
+                    className={`relative bg-[#0a0f14] rounded-2xl transition-all duration-500 ${isFocused && !card.isPreCard ? 'p-7' : 'p-6'}`}
+                    style={{
+                      border: `${state.borderWidth}px solid rgba(131, 212, 192, ${state.borderOpacity})`,
+                      boxShadow: 'inset 0 1px 0 rgba(131,212,192,0.03)',
+                    }}
+                  >
+                    {/* Top glow - centered, 60% width */}
+                    <div
+                      className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[2px] transition-all duration-500 pointer-events-none"
+                      style={{
+                        background: isFocused && !card.isPreCard ? 'radial-gradient(ellipse at center, rgba(131,212,192,0.6) 0%, transparent 70%)' : 'transparent',
+                        boxShadow: isFocused && !card.isPreCard ? '0 -15px 40px 10px rgba(131,212,192,0.2)' : 'none',
+                      }}
+                    />
+                    {/* Bottom glow - centered, 60% width */}
+                    <div
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60%] h-[2px] transition-all duration-500 pointer-events-none"
+                      style={{
+                        background: isFocused && !card.isPreCard ? 'radial-gradient(ellipse at center, rgba(131,212,192,0.6) 0%, transparent 70%)' : 'transparent',
+                        boxShadow: isFocused && !card.isPreCard ? '0 15px 40px 10px rgba(131,212,192,0.2)' : 'none',
+                      }}
+                    />
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#83d4c0]/[0.02] to-transparent pointer-events-none" />
+                    <div className="relative">
+                      <h3 className={`font-bold mb-2 transition-all duration-300 flex items-center gap-2.5 ${card.isPreCard ? 'text-lg italic text-slate-300' : 'text-xl text-white'}`}>
+                        {/* Signal dot - indicates focus/relevance */}
+                        {!card.isPreCard && (
+                          <span
+                            className={`rounded-full flex-shrink-0 transition-all duration-500 ${state.dotAnimate ? 'animate-dot-breathe' : ''}`}
+                            style={{
+                              width: `${state.dotSize}px`,
+                              height: `${state.dotSize}px`,
+                              backgroundColor: `rgba(131, 212, 192, ${state.dotOpacity})`,
+                            }}
+                          />
+                        )}
+                        {card.title}
+                      </h3>
+                      <p className={`text-base transition-all duration-300 ${isFocused ? 'text-slate-300 leading-relaxed' : 'text-slate-500'}`}>
+                        {isFocused && !card.isPreCard && card.desc ? (
+                          // Render with highlighted word in teal
+                          card.desc.split('|').map((part: string, i: number) =>
+                            i % 2 === 1 ? <span key={i} className="text-[#83d4c0] font-medium">{part}</span> : part
+                          )
+                        ) : (
+                          // Remove highlight markers for non-focused cards
+                          card.desc?.replace(/\|/g, '')
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+
+          {/* Bottom spacer */}
+          <div className="h-[140px]" />
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-white selection:bg-[#83d4c0]/20">
@@ -143,7 +372,7 @@ export default function ProbateProfitMachinePage() {
             {/* Logo - with top padding for progress bar */}
             <div className="flex justify-center mt-8 mb-4">
               <img
-                src="/logo-wordmark.png"
+                src="/logo-wordmark-light.png"
                 alt="Homeflip.ai"
                 className="h-7"
               />
@@ -151,12 +380,11 @@ export default function ProbateProfitMachinePage() {
 
             {/* Header - Compelling without false urgency */}
             <div className="text-center mb-5">
-              <h3 className="font-hero text-3xl sm:text-4xl font-[900] text-slate-900 uppercase tracking-tight mb-3 leading-[0.95]">
-                Your Free Guide Is Ready
+              <h3 className="font-hero text-[2.375rem] sm:text-[3rem] font-[900] text-slate-900 uppercase tracking-tighter mb-4 leading-[0.9]">
+                Your Probate <span className="text-[#83d4c0]">Profit</span> Machine Is Ready
               </h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                This <span className="font-semibold text-[#0891b2]">FREE guide</span> reveals how investors are finding{' '}
-                <span className="font-semibold">off-market probate deals</span> that others miss completely.
+              <p className="text-slate-600 text-lg leading-relaxed font-semibold">
+                This brand new, FREE guide gives you a repeatable system for finding off-market probate deals in your market.
               </p>
             </div>
 
@@ -346,7 +574,7 @@ export default function ProbateProfitMachinePage() {
       </section>
 
       {/* Section 1: Why Now - Demographic Inevitability */}
-      <section className="py-24 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #050505 0%, #0a0a0a 100%)' }}>
+      <section className="py-16 sm:py-24 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #050505 0%, #0a0a0a 100%)' }}>
         {/* Subtle glow continuation from hero */}
         <div className="absolute top-0 right-[-10%] w-[600px] h-[600px] bg-[#83d4c0]/[0.06] rounded-full blur-[140px] pointer-events-none" />
 
@@ -420,7 +648,7 @@ export default function ProbateProfitMachinePage() {
       </section>
 
       {/* Section 3: Why Probate - Benefits List (Static) */}
-      <section className="py-24 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0c1214 0%, #0d1416 100%)' }}>
+      <section className="py-16 sm:py-24 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0c1214 0%, #0d1416 100%)' }}>
         {/* Subtle glow continuity */}
         <div className="absolute top-0 left-[20%] w-[500px] h-[300px] bg-[#0f2a2a]/[0.05] rounded-full blur-[100px] pointer-events-none" />
 
@@ -474,31 +702,143 @@ export default function ProbateProfitMachinePage() {
             <CTAButton size="medium" />
           </motion.div>
         </div>
+
+        {/* Gradient fade into next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-[#050505] pointer-events-none" />
       </section>
 
-      {/* Transition Zone: Dark to Light */}
-      <div className="relative h-32 sm:h-40 overflow-hidden">
-        {/* Gradient background transition */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(180deg, #0d1416 0%, #1a2a2e 25%, #3d5a5e 50%, #7aa3a8 70%, #c8dfe2 85%, #e8f4f6 100%)'
-          }}
-        />
+      {/* Section: What's Inside Your Probate Profit Machine */}
+      <section className="py-16 sm:py-24 px-6 relative overflow-hidden bg-[#050505]">
+        {/* Top gradient blend from previous section */}
+        <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#050505] to-transparent pointer-events-none" />
+        {/* Gradient bottom border */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#83d4c0]/40 to-transparent" />
 
-        {/* Ambient teal glow in transition */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#83d4c0]/20 via-transparent to-transparent" />
+        <div className="relative max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            {/* Left Column: Static/Anchored - Headline + CTA */}
+            <div className="lg:sticky lg:top-32">
+              <motion.h2
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className="font-hero text-4xl sm:text-5xl lg:text-8xl font-[800] text-white uppercase tracking-tight leading-[0.9] mb-6 text-center"
+              >
+                Here's What's Inside Your Probate{' '}
+                <span className="text-[#83d4c0] animate-text-glow-pulse">Profit</span>{' '}
+                Machine
+              </motion.h2>
 
-        {/* Bottom fade into light section */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#e8f4f6] to-transparent" />
-      </div>
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+                className="text-lg sm:text-xl text-slate-400 text-center mb-8"
+              >
+                A step-by-step system for finding and closing probate deals.
+              </motion.p>
 
-      {/* Section 4: What's Included - Guide Preview (Light Theme with Glassmorphic Cards) */}
-      <section className="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-[#e8f4f6] via-slate-50 to-cyan-50/30">
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+                className="text-center"
+              >
+                <CTAButton size="medium" />
+              </motion.div>
+            </div>
+
+            {/* Right Column: Infinite Scrolling Card Carousel */}
+            <InfiniteCardScroller />
+          </div>
+        </div>
+      </section>
+
+      {/* Section 5: The Silver Tsunami */}
+      <section ref={silverTsunamiRef} className="py-16 sm:py-24 px-6 relative overflow-hidden bg-[#0a0a0a]">
+        <div className="max-w-6xl mx-auto">
+          {/* Headline */}
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="font-hero text-4xl sm:text-5xl lg:text-7xl font-[800] text-white uppercase tracking-tight mb-4 text-center"
+          >
+            Be Prepared for the{' '}
+            <span className="text-silver-shimmer">
+              Silver Tsunami
+            </span>
+          </motion.h2>
+
+          {/* Supporting text */}
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+            className="text-xl sm:text-2xl md:text-3xl text-slate-300 font-medium leading-relaxed max-w-5xl mx-auto text-center mb-6"
+          >
+            Over the next 10 years, the number of properties moving through probate will skyrocket as millions of baby boomers transition away from homeownership.
+          </motion.p>
+
+          {/* Two images with scroll-linked parallax */}
+          <div className="relative flex flex-col lg:flex-row items-center justify-center gap-6 sm:gap-8 lg:gap-12 min-h-[300px] sm:min-h-[400px]">
+            {/* Newspaper - scroll-linked from bottom left */}
+            <motion.div
+              style={{
+                x: newspaperX,
+                y: newspaperY,
+                opacity: newspaperOpacity
+              }}
+              className="relative z-10 lg:-rotate-3"
+            >
+              <img
+                src="/silver-tsunami-headline-02.png"
+                alt="News headline about aging boomers and housing market impact"
+                className="w-full max-w-[90vw] sm:max-w-md lg:max-w-xl rounded-lg shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+              />
+            </motion.div>
+
+            {/* Chart - scroll-linked from right */}
+            <motion.div
+              style={{
+                x: chartX,
+                y: chartY,
+                opacity: chartOpacity
+              }}
+              className="relative z-0 lg:rotate-2"
+            >
+              <img
+                src="/boomer-household-retention-chart.jpg"
+                alt="Chart showing cumulative change in boomer homeowner households"
+                className="w-full max-w-[85vw] sm:max-w-sm lg:max-w-md rounded-lg shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+              />
+            </motion.div>
+          </div>
+
+          {/* Section CTA - z-20 keeps it above the parallax images (z-10, z-0) */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="relative z-20 mt-12 text-center"
+          >
+            <CTAButton size="medium" />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Section: What You'll Learn - Dark Glassmorphic Cards */}
+      <section className="py-16 sm:py-24 px-6 relative overflow-hidden bg-[#050505]">
         {/* Ambient glow orbs for depth */}
-        <div className="absolute top-[10%] left-[5%] w-[400px] h-[400px] bg-[#0891b2]/10 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-[10%] right-[10%] w-[350px] h-[350px] bg-[#83d4c0]/15 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gradient-to-r from-[#0891b2]/5 to-[#83d4c0]/5 rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute top-[5%] left-[10%] w-[500px] h-[500px] bg-[#83d4c0]/[0.06] rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-[10%] right-[5%] w-[400px] h-[400px] bg-[#0891b2]/[0.08] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-r from-[#83d4c0]/[0.03] to-[#0891b2]/[0.03] rounded-full blur-[100px] pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto">
           <motion.h2
@@ -506,37 +846,46 @@ export default function ProbateProfitMachinePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="font-hero text-4xl sm:text-5xl lg:text-6xl font-[800] text-slate-900 uppercase tracking-tight mb-14 text-center"
+            className="font-hero text-3xl sm:text-4xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-1 text-center leading-[0.95]"
           >
-            Here&apos;s Just Some of What You&apos;ll Learn in the <span className="text-[#0891b2]">Probate Profit Machine</span>
+            Keep Reading. It Gets Better.
           </motion.h2>
+          <motion.h3
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+            className="font-hero text-3xl sm:text-4xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-10 sm:mb-14 text-center leading-[0.95]"
+          >
+            The Probate <span className="text-[#83d4c0]">Profit</span> Machine Also Covers:
+          </motion.h3>
 
           <div className="flex flex-wrap justify-center gap-6">
             {[
               {
                 icon: Search,
                 title: 'The Cold Hard Truth About Buying Probate Properties',
-                desc: "We've been buying probate properties for over 20 years, and in this free guide you'll learn all of the tips and tricks other investors haven't figured out."
+                desc: "20 years of hard-won lessons distilled into actionable strategies most investors will never discover on their own."
               },
               {
                 icon: TrendingUp,
                 title: '7 Tips to Build a Property Portfolio in Only 24 Months',
-                desc: 'A framework for creating consistent deal flow that compounds over time.'
+                desc: 'A proven framework that anyone can implement to generate equity through consistent deal flow.'
               },
               {
                 icon: Landmark,
                 title: 'Why Calling on Probate Attorneys Is a Bad Idea',
-                desc: 'What most investors get wrong about professional referrals and what works instead.'
+                desc: "Most investors think calling probate attorneys leads to deals. We'll show you why that rarely works and what to do instead."
               },
               {
                 icon: Target,
                 title: 'How to Find Secret Probate Leads in Your Area',
-                desc: 'Practical methods for finding probate opportunities without spending on marketing.'
+                desc: "Most probate leads are hidden in plain sight. We'll show you where to look and how to find them."
               },
               {
                 icon: Compass,
                 title: 'Positioning for the Generational Wealth Transfer',
-                desc: 'How to prepare your business for the largest generational shift in real estate history.'
+                desc: "Learn how to prepare for what could be the largest real estate shift in your lifetime."
               },
             ].map((card, index) => (
               <motion.div
@@ -545,217 +894,140 @@ export default function ProbateProfitMachinePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.1 + index * 0.08, ease: 'easeOut' }}
-                className="relative group bg-white/60 backdrop-blur-xl border border-white/80 rounded-2xl p-8 shadow-[0_8px_32px_rgba(8,145,178,0.08)] hover:shadow-[0_16px_48px_rgba(8,145,178,0.15)] hover:border-[#0891b2]/30 transition-all duration-300 text-center w-full max-w-[340px]"
+                className="relative group w-full max-w-[340px]"
               >
-                {/* Subtle gradient overlay on hover */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#0891b2]/[0.02] to-[#83d4c0]/[0.04] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                {/* Outer glow on hover */}
+                <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-[#83d4c0]/30 via-[#0891b2]/20 to-[#83d4c0]/10 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500 pointer-events-none" />
 
-                <div className="relative">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#0891b2]/15 to-[#83d4c0]/10 border border-[#0891b2]/20 flex items-center justify-center mx-auto mb-5 shadow-[0_4px_16px_rgba(8,145,178,0.1)]">
-                    <card.icon className="w-7 h-7 text-[#0891b2]" />
+                {/* Card container */}
+                <div
+                  className="relative rounded-2xl p-8 text-center backdrop-blur-xl transition-all duration-300 group-hover:translate-y-[-2px]"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 50%, rgba(131,212,192,0.04) 100%)',
+                    boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -1px 1px rgba(0,0,0,0.1), 0 8px 32px rgba(0,0,0,0.4)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                  }}
+                >
+                  {/* Top glossy edge highlight */}
+                  <div className="absolute top-0 left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+
+                  {/* Inner gradient overlay for depth */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/[0.05] via-transparent to-black/[0.1] pointer-events-none" />
+
+                  {/* Hover glow overlay */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#83d4c0]/[0.08] to-[#0891b2]/[0.04] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                  <div className="relative">
+                    {/* Icon container with glass effect */}
+                    <div
+                      className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5 backdrop-blur-md"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(131,212,192,0.2) 0%, rgba(8,145,178,0.15) 100%)',
+                        boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.15), 0 4px 16px rgba(131,212,192,0.15)',
+                        border: '1px solid rgba(131,212,192,0.25)',
+                      }}
+                    >
+                      <card.icon className="w-7 h-7 text-[#83d4c0]" />
+                    </div>
+                    <h3 className="text-white font-bold text-lg sm:text-xl mb-3 leading-tight uppercase tracking-wide">
+                      {card.title}
+                    </h3>
+                    <p className="text-slate-400 text-base sm:text-lg leading-relaxed">
+                      {card.desc}
+                    </p>
                   </div>
-                  <h3 className="text-slate-900 font-bold text-xl mb-3 leading-tight uppercase tracking-wide">
-                    {card.title}
-                  </h3>
-                  <p className="text-slate-600 text-base leading-relaxed">
-                    {card.desc}
-                  </p>
                 </div>
               </motion.div>
             ))}
           </div>
-
-          {/* Section CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="mt-16 text-center"
-          >
-            <CTAButton size="medium" />
-          </motion.div>
         </div>
       </section>
 
-      {/* Section 5: Timing Advantage - Silver Wave Intrigue */}
-      <section className="py-24 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0e1518 0%, #0f161a 100%)' }}>
+      {/* Section 8: Final CTA - Probate Profit Machine */}
+      <section className="py-20 sm:py-32 px-6 relative overflow-hidden bg-[#050505]">
+        {/* Animated background glow */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.5, ease: 'easeOut' }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#83d4c0]/[0.06] rounded-full blur-[150px] pointer-events-none animate-pulse-glow"
+        />
+
         <div className="relative max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left: Headline + Blurb */}
-            <div>
-              <motion.h2
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-                className="font-hero text-4xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-8"
-              >
-                Timing Is Everything
-              </motion.h2>
-
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
-                className="text-xl md:text-2xl text-slate-300 font-medium leading-relaxed space-y-4"
-              >
-                <p>
-                  Probate opportunities don&apos;t appear all at once. They unfold in stages over weeks and months.
-                </p>
-                <p>
-                  Most investors show up too late, after the best deals have already moved. The advantage goes to those who understand when to act.
-                </p>
-              </motion.div>
-            </div>
-
-            {/* Right: Placeholder Graphic */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-              className="relative"
-            >
-              <div className="aspect-[4/3] rounded-2xl border border-white/10 bg-white/[0.02] flex items-center justify-center p-8">
-                <div className="text-center">
-                  <div className="text-slate-500 text-sm uppercase tracking-widest mb-2">Placeholder</div>
-                  <div className="text-slate-400 text-lg font-medium">Probate Timeline / Silver Wave Visualization</div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Section CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-16 text-center"
-          >
-            <CTAButton size="medium" />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Section 5: The Unasked Question - Ethical/Legal Concerns */}
-      <section className="py-24 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0e1518 0%, #0f161a 100%)' }}>
-        <div className="relative max-w-5xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="font-hero text-4xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-8"
-          >
-            Can You Even Contact These Families?
-          </motion.h2>
-
+          {/* Full-width subheading at top */}
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
-            className="text-xl md:text-2xl text-slate-300 font-medium leading-relaxed mb-12 max-w-4xl"
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            className="text-xl sm:text-2xl lg:text-3xl text-slate-400 font-medium leading-tight mb-14 text-center"
           >
-            This is the question most investors never ask out loud. They assume probate leads are off-limits, legally risky, or ethically complicated. The truth is simpler than you think.
+            Download the Probate Profit Machine and learn exactly how to find, contact, and convert probate opportunities in your market.
           </motion.p>
 
-          {/* Callout Box */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
-            className="bg-[#83d4c0]/[0.06] border border-[#83d4c0]/20 rounded-2xl p-8 md:p-10"
-          >
-            <p className="text-xl md:text-2xl text-white font-medium leading-relaxed mb-4">
-              Inside this guide, you&apos;ll learn how experienced investors approach probate outreach with confidence and clarity.
-            </p>
-            <p className="text-lg text-slate-400">
-              No guesswork. No gray areas. Just a responsible framework that protects you and respects the families you contact.
-            </p>
-          </motion.div>
-
-          {/* Section CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-12 text-center"
-          >
-            <CTAButton size="medium" />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Section 7: Final CTA - Probate Profit Machine */}
-      <section className="py-24 px-6 relative overflow-hidden bg-[#050505]">
-        {/* Restrained hero echo glows */}
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#83d4c0]/[0.08] rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#0891b2]/[0.06] rounded-full blur-[100px] pointer-events-none" />
-
-        <div className="relative max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left: Text + CTA */}
-            <div>
+          <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-center">
+            {/* Left Column - Content (3/5 width) */}
+            <div className="text-center lg:text-left lg:col-span-3">
               <motion.h2
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-                className="font-hero text-4xl sm:text-5xl lg:text-6xl font-[800] text-white uppercase tracking-tight mb-6"
+                transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                className="font-hero text-6xl sm:text-7xl lg:text-8xl font-[800] text-white uppercase tracking-tight mb-4 leading-[0.95]"
               >
-                Get the Step-by-Step System
+                Everything You Need to Start Buying Probate Properties
               </motion.h2>
 
               <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
-                className="text-xl md:text-2xl text-slate-300 font-medium leading-relaxed mb-8"
+                transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+                className="text-xl sm:text-2xl text-[#83d4c0] font-semibold mb-10 uppercase tracking-wide"
               >
-                Everything you need to start finding and closing probate deals in your market. Clear steps. No fluff.
-              </motion.p>
-
-              <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
-                className="text-slate-400 text-lg mb-6"
-              >
-                Enter your details below to get instant access.
+                Unlock deals from 47¢ on the dollar
               </motion.p>
 
               <motion.div
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+                transition={{ duration: 0.6, delay: 0.45, ease: 'easeOut' }}
+                className="flex flex-col items-center lg:items-start mb-6"
               >
-                <CTAButton />
+                <CTAButton size="medium" />
               </motion.div>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.6, ease: 'easeOut' }}
+                className="text-xs sm:text-sm text-slate-500 uppercase tracking-widest text-center lg:text-left"
+              >
+                🔒 100% Privacy. No Games. No Spam.
+              </motion.p>
             </div>
 
-            {/* Right: Ebook Image */}
+            {/* Right Column - Ebook Image (2/5 width) */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-              className="flex justify-center lg:justify-end order-first lg:order-none"
+              transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+              className="flex justify-center lg:justify-end order-first lg:order-none lg:col-span-2"
             >
               <div className="relative">
-                <div className="absolute -inset-6 bg-gradient-to-br from-[#83d4c0]/[0.08] to-[#0891b2]/[0.05] blur-[60px] rounded-full pointer-events-none" />
+                {/* Subtle glow behind ebook */}
+                <div
+                  className="absolute inset-0 bg-[#83d4c0]/15 blur-[80px] scale-125 rounded-full"
+                  aria-hidden="true"
+                />
                 <img
                   src="/ebook-cover-probate-profit-machine.png"
                   alt="The Probate Profit Machine"
-                  className="relative w-full max-w-[20rem] lg:max-w-[24rem] drop-shadow-2xl"
+                  className="relative w-full max-w-[20rem] sm:max-w-[24rem] lg:max-w-[28rem] drop-shadow-2xl"
                 />
               </div>
             </motion.div>
@@ -764,12 +1036,13 @@ export default function ProbateProfitMachinePage() {
       </section>
 
       {/* Minimal Footer - Landing Page Only */}
-      <footer className="py-6 px-6 bg-[#050505] border-t border-white/10">
-        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-400">
+      <footer className="py-6 px-6 bg-[#050505] border-t border-white/5">
+        <div className="max-w-4xl mx-auto flex flex-col items-center gap-2 text-xs text-slate-700">
           <p>&copy; 2026 WhiteBox Academy. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <a href="/terms" className="hover:text-white transition-colors">Terms of Use</a>
-            <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
+          <div className="flex items-center gap-4">
+            <a href="/terms" className="hover:text-slate-500 transition-colors">Terms</a>
+            <span className="text-slate-800">·</span>
+            <a href="/privacy" className="hover:text-slate-500 transition-colors">Privacy</a>
           </div>
         </div>
       </footer>

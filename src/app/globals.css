@@ -134,6 +134,43 @@ input::placeholder, textarea::placeholder {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
+/* Subtle text glow animation - "did that just glow?" effect */
+@keyframes text-glow-pulse {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(131, 212, 192, 0.1);
+  }
+  /* Long pause... */
+  70% {
+    text-shadow: 0 0 4px rgba(131, 212, 192, 0.1);
+  }
+  /* Subtle glow in */
+  82% {
+    text-shadow: 0 0 8px rgba(131, 212, 192, 0.4), 0 0 16px rgba(131, 212, 192, 0.2);
+  }
+  /* Fade back out */
+  94% {
+    text-shadow: 0 0 4px rgba(131, 212, 192, 0.1);
+  }
+}
+
+.animate-text-glow-pulse {
+  animation: text-glow-pulse 8s ease-in-out infinite;
+}
+
+/* Subtle dot breathing animation - barely perceptible */
+@keyframes dot-breathe {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-dot-breathe {
+  animation: dot-breathe 2.8s ease-in-out infinite;
+}
+
 /* Shimmer animation for progress bars */
 @keyframes shimmer {
   0% {
@@ -146,4 +183,90 @@ input::placeholder, textarea::placeholder {
 
 .animate-shimmer {
   animation: shimmer 2s ease-in-out infinite;
+}
+
+/* Tsunami Wave Background Animations */
+@keyframes wave-shift {
+  0% { transform: translate3d(-18%, 8%, 0) scale(1.05); }
+  18% { transform: translate3d(-8%, 2%, 0) scale(1.08); }
+  38% { transform: translate3d(6%, -10%, 0) scale(1.2); }
+  52% { transform: translate3d(18%, -14%, 0) scale(1.24); }
+  72% { transform: translate3d(6%, -6%, 0) scale(1.14); }
+  90% { transform: translate3d(-4%, 4%, 0) scale(1.07); }
+  100% { transform: translate3d(-18%, 8%, 0) scale(1.05); }
+}
+
+@keyframes wave-parallax {
+  0% { transform: translate3d(14%, -10%, 0) scale(1.2); }
+  15% { transform: translate3d(8%, -6%, 0) scale(1.22); }
+  35% { transform: translate3d(0%, -2%, 0) scale(1.24); }
+  50% { transform: translate3d(-10%, 6%, 0) scale(1.26); }
+  65% { transform: translate3d(-18%, 12%, 0) scale(1.22); }
+  82% { transform: translate3d(-6%, 4%, 0) scale(1.19); }
+  100% { transform: translate3d(14%, -10%, 0) scale(1.2); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.18; transform: translate3d(0, 0, 0); }
+  24% { opacity: 0.4; transform: translate3d(-1%, 1%, 0); }
+  46% { opacity: 0.7; transform: translate3d(-3%, 2%, 0); }
+  68% { opacity: 0.5; transform: translate3d(-4%, 3%, 0); }
+  85% { opacity: 0.3; transform: translate3d(-2%, 1%, 0); }
+}
+
+@keyframes swoosh-band {
+  0% { transform: translate3d(-16%, -18%, 0) rotate(-8deg) scale(1.05); opacity: 0; }
+  10% { transform: translate3d(-8%, -10%, 0) rotate(-6deg) scale(1.06); opacity: 0.55; }
+  28% { transform: translate3d(10%, 6%, 0) rotate(-3deg) scale(1.08); opacity: 0.7; }
+  42% { transform: translate3d(22%, 18%, 0) rotate(-2deg) scale(1.06); opacity: 0.28; }
+  54% { transform: translate3d(30%, 24%, 0) rotate(-2deg) scale(1.04); opacity: 0; }
+  70% { transform: translate3d(20%, 20%, 0) rotate(-2deg) scale(1.02); opacity: 0; }
+  100% { transform: translate3d(-16%, -18%, 0) rotate(-8deg) scale(1.05); opacity: 0; }
+}
+
+@keyframes particle-drift-a {
+  0% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(2%, -1%, 0); }
+  50% { transform: translate3d(3%, 2%, 0); }
+  75% { transform: translate3d(-1%, 3%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes particle-drift-b {
+  0% { transform: translate3d(0, 0, 0); }
+  20% { transform: translate3d(-2%, 1%, 0); }
+  45% { transform: translate3d(-3%, -2%, 0); }
+  70% { transform: translate3d(1%, -3%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes particle-drift-c {
+  0% { transform: translate3d(0, 0, 0); }
+  30% { transform: translate3d(1%, 2%, 0); }
+  55% { transform: translate3d(-2%, 1%, 0); }
+  85% { transform: translate3d(2%, -2%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+/* Silver shimmer effect for metallic text */
+@keyframes shimmer-silver {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hide scrollbar for infinite scroll */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.text-silver-shimmer {
+  background: linear-gradient(135deg, #e2e8f0 0%, #f8fafc 15%, #94a3b8 30%, #f8fafc 45%, #cbd5e1 60%, #f8fafc 75%, #94a3b8 90%, #e2e8f0 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(148,163,184,0.4));
+  animation: shimmer-silver 4s ease-in-out infinite;
 }

@@ -16,19 +16,29 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "Homeflip.ai - Consistent Off-Market Deals Powered by Probate",
-  description: "The simplified, guided, AI-powered system for real estate investors who want consistent deal flow without the chaos.",
+  metadataBase: new URL("https://homeflip.ai"),
+  title: "AI-Powered Probate Lead Platform for Real Estate Investors | Homeflip.ai",
+  description: "Find off-market probate deals using real court data and AI-driven insights.",
   openGraph: {
-    title: "Homeflip.ai - Consistent Off-Market Deals Powered by Probate",
-    description: "The simplified, guided, AI-powered system for real estate investors who want consistent deal flow without the chaos.",
+    title: "AI-Powered Probate Lead Platform for Real Estate Investors",
+    description: "Find off-market probate deals using real court data and AI-driven insights.",
     type: "website",
     locale: "en_US",
     siteName: "Homeflip.ai",
+    images: [
+      {
+        url: "/og-homeflip-homepage.png",
+        width: 1200,
+        height: 630,
+        alt: "AI-Powered Probate Lead Platform for Real Estate Investors",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Homeflip.ai - Consistent Off-Market Deals Powered by Probate",
-    description: "The simplified, guided, AI-powered system for real estate investors who want consistent deal flow without the chaos.",
+    title: "AI-Powered Probate Lead Platform for Real Estate Investors",
+    description: "Find off-market probate deals using real court data and AI-driven insights.",
+    images: ["/og-homeflip-homepage.png"],
   },
 };
 

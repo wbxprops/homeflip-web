@@ -12,7 +12,7 @@ export const Footer = () => {
           <div className="col-span-1 lg:col-span-2">
             <Link href="/" className="flex items-center mb-6 group">
               <img
-                src="/logo-wordmark.png"
+                src="/logo-wordmark-light.png"
                 alt="Homeflip.ai"
                 className="h-10 group-hover:opacity-80 transition-opacity"
               />

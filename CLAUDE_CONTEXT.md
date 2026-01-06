@@ -2,7 +2,7 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2026-01-05
+**Last Updated:** 2026-01-06
 **Claude Code Version:** Opus 4.5
 
 ---
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Probate Profit Machine landing page complete with all 7 sections.
+**Current Status:** 🚧 IN PROGRESS - Insights section added with first SEO research article (Probate vs Foreclosures).
 
 ---
 
@@ -34,9 +34,20 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 ## 🎯 What I Need to Know
 
 ### Current Focus
-**Active Work:** Probate Profit Machine landing page - complete short-form page ready for conversion testing.
+**Active Work:** Insights section with SEO-optimized research articles.
 
 ### Session History
+#### 2026-01-06 (Insights Section & Probate Article)
+- ✅ Created `/insights/page.tsx` - index page with Featured/More structure (no dates)
+- ✅ Created `/insights/probate-vs-foreclosure/page.tsx` - first research article
+- ✅ Article: "Probate vs Foreclosures: Why Investors Are Missing Double the Opportunities in 2026"
+- ✅ Navbar: Added `variant` prop for light/dark themes
+- ✅ Navbar: Updated menu modal to support light theme
+- ✅ Footer: Fixed logo for light backgrounds
+- ✅ Professional, citable research tone (not salesy)
+- ✅ Glassmorphic "How HomeFlip.ai Can Help" section with two CTAs
+- **Resume**: Push to Vercel, test on production
+
 #### 2026-01-05 (Session 3 - Full Sections Build-Out)
 - ✅ Fixed Space Grotesk font-family to `"space-grotesk-variable"`
 - ✅ Removed Space Grotesk from eyebrow/subheadline (IBM Plex Sans better)
