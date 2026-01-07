@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Insights section, mobile optimizations, OG meta tags complete.
+**Current Status:** 🚧 IN PROGRESS - Insights section, HVCO mobile polish, OG meta tags complete.
 
 ---
 
@@ -52,7 +52,14 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
   - Landing page: "Free Probate Lead Guide"
   - Added `metadataBase` for proper URL resolution
   - Created OG images: `og-homeflip-homepage.png`, `og-probate-guide.png`
-- **Deployed**: Commit `4849598` pushed to origin/master
+- ✅ **Extended Mobile Polish (Continued Session):**
+  - Hero: Headline moved to top, increased to 13vw, center-justified
+  - CTAs: Full-width with `text-[6.5vw]` + `whitespace-nowrap`
+  - Ebook rotation reduced from 8deg to 3deg on mobile
+  - All section headlines unified at `text-5xl` on mobile
+  - Card signal dots hidden on mobile
+  - Step-by-step subheadline hidden on mobile
+- **Deployed**: Commits `4849598`, `a6e500d` pushed to origin/master
 
 #### 2026-01-05 (Session 3 - Full Sections Build-Out)
 - ✅ Fixed Space Grotesk font-family to `"space-grotesk-variable"`

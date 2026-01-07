@@ -123,7 +123,7 @@ export const Navbar = ({ minimal = false, variant = 'dark' }: NavbarProps) => {
             {/* Primary CTA - Claim Your County */}
             <Link
               href="/claim-your-county"
-              className="hidden sm:block btn-gradient px-5 py-2 rounded-lg text-sm font-black uppercase tracking-wide shadow-xl shadow-[#83d4c0]/40 hover:scale-105 transition-transform whitespace-nowrap animate-pulse-glow ring-2 ring-white/20"
+              className="hidden sm:block btn-gradient px-5 py-2 rounded-xl text-sm font-bold uppercase tracking-wide whitespace-nowrap shadow-lg shadow-[#83d4c0]/20 hover:scale-[1.02] transition-all"
             >
               Claim Your County
             </Link>
@@ -243,7 +243,7 @@ export const Navbar = ({ minimal = false, variant = 'dark' }: NavbarProps) => {
                   <Link
                     href="/claim-your-county"
                     onClick={closeMenu}
-                    className="block w-full btn-gradient py-4 rounded-xl font-bold text-lg uppercase tracking-wide text-center shadow-lg shadow-[#83d4c0]/20"
+                    className="block w-full btn-gradient py-4 rounded-xl font-bold text-lg uppercase tracking-wide text-center shadow-lg shadow-[#83d4c0]/20 hover:scale-[1.02] transition-all"
                   >
                     Claim Your County
                   </Link>

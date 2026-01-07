@@ -48,7 +48,18 @@ Built out the `/insights` section for SEO-optimized research articles, created t
 - Card scroller height reduced on mobile
 - CTA button z-index fix (z-20) to stay above parallax images
 
-### 5. OG Meta Tags for Social Sharing
+### 5. Extended Mobile Polish (Continued Session)
+- **Hero headline:** Moved to top on mobile (removed `order-first` from ebook)
+- **Hero headline:** Increased font to 13vw, center-justified on mobile
+- **Hero subheadline:** Center-justified on mobile, reduced spacing to ebook
+- **Ebook image:** Rotation reduced from 8deg to 3deg on mobile
+- **CTA buttons:** Full-width with viewport-width text (`text-[6.5vw]`)
+- **CTA buttons:** Added `whitespace-nowrap` to prevent label wrapping
+- **Section headlines:** All set to `text-5xl` on mobile for consistency
+- **Card signal dots:** Hidden on mobile (`hidden sm:block`) to prevent title wrapping
+- **Step-by-step subheadline:** Hidden on mobile under "What's Inside"
+
+### 6. OG Meta Tags for Social Sharing
 - **Homepage:**
   - Title: "AI-Powered Probate Lead Platform for Real Estate Investors"
   - Description: "Find off-market probate deals using real court data and AI-driven insights."
@@ -127,7 +138,8 @@ export const metadata: Metadata = {
 
 ## Deployment
 
-- **Commit:** `4849598` - "Add insights section, mobile optimizations, OG meta tags"
+- **Commit 1:** `4849598` - "Add insights section, mobile optimizations, OG meta tags"
+- **Commit 2:** `a6e500d` - "Mobile optimizations for Probate Profit Machine landing page"
 - **Pushed to:** origin/master
 - **Vercel:** Auto-deploying
 
@@ -144,4 +156,10 @@ export const metadata: Metadata = {
 
 ## Resume Point
 
-All changes pushed. OG images and meta tags configured. Test social previews after Vercel deploy completes.
+All changes pushed. Mobile optimizations complete for Probate Profit Machine:
+- Hero: headline first, 13vw font, centered
+- CTAs: full-width, 6.5vw text, no wrapping
+- Cards: green dots hidden on mobile
+- All section headlines consistent text-5xl
+
+Test on real mobile device after Vercel deploy completes. Consider testing OG previews with opengraph.xyz.

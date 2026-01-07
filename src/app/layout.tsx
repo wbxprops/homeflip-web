@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans, Lora } from "next/font/google";
+import { IBM_Plex_Sans, Lora, Inter } from "next/font/google";
 import "./globals.css";
 import { CookieConsentBanner } from "@/components/CookieConsent";
 import { TrackingScripts } from "@/components/TrackingScripts";
@@ -13,6 +13,13 @@ const ibmPlexSans = IBM_Plex_Sans({
 const lora = Lora({
   variable: "--font-lora",
   subsets: ["latin"],
+});
+
+// Inter font for CRM-style pages (hub, etc.)
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -53,7 +60,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://use.typekit.net/brb7iad.css" />
       </head>
       <body
-        className={`${ibmPlexSans.variable} ${lora.variable} font-sans antialiased bg-white text-slate-900 selection:bg-[#0891b2]/20`}
+        className={`${ibmPlexSans.variable} ${lora.variable} ${inter.variable} font-sans antialiased bg-white text-slate-900 selection:bg-[#0891b2]/20`}
         suppressHydrationWarning
       >
         {children}
