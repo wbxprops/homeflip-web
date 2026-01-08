@@ -1,8 +1,10 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { GuideSection } from '@/components/hub';
+import { ArrowRight, Users, Zap } from 'lucide-react';
 
 export default function GuidePart2Page() {
   const params = useParams();
@@ -47,21 +49,30 @@ export default function GuidePart2Page() {
       ),
     },
     {
-      id: 'it-doesnt-matter',
-      title: "It Doesn't Matter Where We Find Leads",
+      id: 'why-i-built-homeflip',
+      title: 'Why I Built Homeflip.ai',
       content: (
         <>
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">
             I get asked all the time: "Gary, where do you find your probate leads?"
           </p>
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">
-            And my answer is always the same: it doesn't matter where we find ours. The real question is, where do you need to find probate leads in your area?
+            The honest answer? I get all of my leads from Homeflip.ai, the platform my team and I built.
           </p>
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">
-            Because here's the reality. There are over 3,000 counties in this country. I can't give you a detailed breakdown for each one. What I can give you is a framework. A four-step process that works anywhere, in any county, regardless of what systems they use or how much information they publish.
+            But that's not where I started. For years, I did everything manually. I drove to courthouses. I sweet-talked clerks. I built spreadsheets that got so complicated I couldn't keep track of my own follow-ups. And every time I wanted to expand to a new county, I had to start from scratch, learning a whole new system.
+          </p>
+          <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">
+            That's exactly why I built Homeflip.ai. Not because I wanted to sell software, but because I needed to solve my own problem. The manual process was killing me. And I knew that if I could automate the tedious parts, pulling records, skip tracing, managing follow-ups, I could focus on what actually matters: talking to sellers and closing deals.
+          </p>
+          <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-6">
+            So yes, today I use my own platform. But I'm going to teach you the manual process anyway, because understanding how it works will make you better at this, whether you do it yourself or use a tool like ours.
+          </p>
+          <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">
+            There are over 3,000 counties in this country. I can't give you a detailed breakdown for each one. What I can give you is a framework. A four-step process that works anywhere, in any county, regardless of what systems they use or how much information they publish.
           </p>
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed">
-            This is the exact process my team and I have used for years. It's not complicated, but it does take effort. And once you see how it works, you'll understand why most investors never crack the code.
+            This is the exact process my team and I used for years before we had software. It's not complicated, but it does take effort. And once you see how it works, you'll understand why most investors never crack the code.
           </p>
         </>
       ),
@@ -330,9 +341,33 @@ export default function GuidePart2Page() {
               Search the fiduciary's address, not the property address. The fiduciary is the person you want to call. They don't live at the deceased person's house. They live somewhere else. Make sure you're skip tracing their information, not the decedent's.
             </p>
           </div>
-          <p className="text-sm italic" style={{ color: 'rgba(255,255,255,0.4)' }}>
-            I have a complete skip tracing training inside the D2S Property Magnet course at skool.com/propertymagnet. It's free. Covers both paid and free services in detail.
-          </p>
+          {/* CTA: Community */}
+          <div
+            className="p-5 rounded-xl flex items-center justify-between gap-4"
+            style={{ backgroundColor: 'rgba(139,92,246,0.08)', border: '1px solid rgba(139,92,246,0.2)' }}
+          >
+            <div className="flex items-center gap-3">
+              <Users className="w-5 h-5 flex-shrink-0" style={{ color: '#a78bfa' }} />
+              <div>
+                <p className="font-medium text-sm" style={{ color: 'rgba(255,255,255,0.9)' }}>
+                  Want to dive deeper into skip tracing?
+                </p>
+                <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                  I have a complete training in our free community. Covers both paid and free services.
+                </p>
+              </div>
+            </div>
+            <a
+              href="https://skool.com/propertymagnet"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition hover:opacity-80"
+              style={{ backgroundColor: 'rgba(139,92,246,0.2)', color: '#a78bfa' }}
+            >
+              Join Free
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
         </>
       ),
     },
@@ -498,9 +533,33 @@ export default function GuidePart2Page() {
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">
             Here's my take: when I started, I did everything myself. I went to courthouses. We baked cupcakes for the clerks. We built relationships with the secretaries who controlled the records. That hands-on experience taught me more about probate than any course ever could.
           </p>
-          <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed">
+          <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-6">
             But I also know that time is money. And the tedious parts of this process, the pulling, the formatting, the skip tracing, that's exactly why we built Homeflip.ai. To automate the grunt work so you can focus on what actually matters: calling sellers and closing deals.
           </p>
+          {/* CTA: Claim Your County */}
+          <div
+            className="p-5 rounded-xl flex items-center justify-between gap-4"
+            style={{ backgroundColor: 'rgba(131,212,192,0.08)', border: '1px solid rgba(131,212,192,0.2)' }}
+          >
+            <div className="flex items-center gap-3">
+              <Zap className="w-5 h-5 flex-shrink-0" style={{ color: '#83d4c0' }} />
+              <div>
+                <p className="font-medium text-sm" style={{ color: 'rgba(255,255,255,0.9)' }}>
+                  Ready to start getting probate leads in your area?
+                </p>
+                <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                  Skip the manual work. We'll handle the research, skip tracing, and delivery.
+                </p>
+              </div>
+            </div>
+            <Link
+              href={`/hub/${slug}/upgrade`}
+              className="flex items-center gap-1.5 btn-gradient px-4 py-2 rounded-lg text-sm font-bold whitespace-nowrap hover:scale-[1.02] transition-all"
+            >
+              Claim Your County
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </>
       ),
     },

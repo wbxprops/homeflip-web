@@ -1,8 +1,10 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { GuideSection } from '@/components/hub';
+import { ArrowRight, Users, Zap } from 'lucide-react';
 
 export default function GuidePart3Page() {
   const params = useParams();
@@ -491,9 +493,36 @@ export default function GuidePart3Page() {
           >
             "If it's alright with you, I'm going to text you my information so you have it when we hang up."
           </div>
-          <p className="text-sm mt-3" style={{ color: 'rgba(255,255,255,0.5)' }}>
+          <p className="text-sm mt-3 mb-6" style={{ color: 'rgba(255,255,255,0.5)' }}>
             Now you can text. They've given permission.
           </p>
+          {/* CTA: Community for Scripts */}
+          <div
+            className="p-5 rounded-xl flex items-center justify-between gap-4"
+            style={{ backgroundColor: 'rgba(139,92,246,0.08)', border: '1px solid rgba(139,92,246,0.2)' }}
+          >
+            <div className="flex items-center gap-3">
+              <Users className="w-5 h-5 flex-shrink-0" style={{ color: '#a78bfa' }} />
+              <div>
+                <p className="font-medium text-sm" style={{ color: 'rgba(255,255,255,0.9)' }}>
+                  Want word-for-word scripts and live role-play practice?
+                </p>
+                <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                  Join our free community. We host live coaching calls multiple times per week.
+                </p>
+              </div>
+            </div>
+            <a
+              href="https://skool.com/propertymagnet"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition hover:opacity-80"
+              style={{ backgroundColor: 'rgba(139,92,246,0.2)', color: '#a78bfa' }}
+            >
+              Join Free
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
         </>
       ),
     },
@@ -781,9 +810,33 @@ export default function GuidePart3Page() {
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">
             Tracking all of this manually, call dates, letter schedules, PB scores, case status, objections, outcomes, across 50 or 100+ leads, in a spreadsheet, gets overwhelming fast.
           </p>
-          <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed">
+          <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-6">
             This is exactly why I built Homeflip.ai from the ground up around Timeline Intelligence. It's not a rebranded generic CRM. It's purpose-built for probate investors who want to work leads the right way.
           </p>
+          {/* CTA: Claim Your County */}
+          <div
+            className="p-5 rounded-xl flex items-center justify-between gap-4"
+            style={{ backgroundColor: 'rgba(131,212,192,0.08)', border: '1px solid rgba(131,212,192,0.2)' }}
+          >
+            <div className="flex items-center gap-3">
+              <Zap className="w-5 h-5 flex-shrink-0" style={{ color: '#83d4c0' }} />
+              <div>
+                <p className="font-medium text-sm" style={{ color: 'rgba(255,255,255,0.9)' }}>
+                  Ready to let Homeflip.ai handle the tracking for you?
+                </p>
+                <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                  Timeline Intelligence, follow-up management, and lead delivery, all in one place.
+                </p>
+              </div>
+            </div>
+            <Link
+              href={`/hub/${slug}/upgrade`}
+              className="flex items-center gap-1.5 btn-gradient px-4 py-2 rounded-lg text-sm font-bold whitespace-nowrap hover:scale-[1.02] transition-all"
+            >
+              Claim Your County
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </>
       ),
     },
