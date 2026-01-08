@@ -90,7 +90,7 @@ export function GuideSection({
       {/* Desktop Layout - content + sticky nav */}
       <div className="flex">
         {/* Content Column */}
-        <div className="flex-1 lg:pr-[280px]">
+        <div className="flex-1 lg:pr-[320px]">
           <article className="max-w-4xl mx-auto px-8 md:px-12 py-8 md:py-12">
             {/* Section Header */}
             <header className="mb-12 pb-8" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
@@ -180,7 +180,7 @@ export function GuideSection({
         </div>
 
         {/* Navigator Column - fixed on right (desktop only) */}
-        <div className="hidden lg:block fixed right-0 top-0 w-[280px] h-screen border-l border-white/[0.06] bg-[#0a0a0f]">
+        <div className="hidden lg:block fixed right-0 top-0 w-[320px] h-screen border-l border-white/[0.06] bg-[#0a0a0f]">
           <div className="pt-20">
             <SectionNavigator
               parts={partsMeta}

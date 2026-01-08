@@ -16,7 +16,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
 
   // Guide sections - matches ebook structure
   const guideSections = [
-    { id: 'part-1', label: 'Part I: The Opportunity', href: `/hub/${slug}/guide/part-1` },
+    { id: 'part-1', label: 'Part I: Why Probate', href: `/hub/${slug}/guide/part-1` },
     { id: 'part-2', label: 'Part II: Finding Probate Leads', href: `/hub/${slug}/guide/part-2` },
     { id: 'part-3', label: 'Part III: Working the Leads', href: `/hub/${slug}/guide/part-3` },
     { id: 'part-4', label: 'Part IV: Tying It All Together', href: `/hub/${slug}/guide/part-4` },
@@ -116,7 +116,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
                       color: pathname === `/hub/${slug}` ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.5)',
                     }}
                   >
-                    Overview
+                    Introduction
                   </Link>
                   {/* Section links */}
                   {guideSections.map((section) => (
