@@ -102,7 +102,7 @@ export default function ProbateProfitMachinePage() {
 
       // Call n8n magic-link-create webhook
       // This handles: prospect upsert, token generation, email sending
-      const response = await fetch('https://n8n.whitebox-one.onrender.com/webhook/opt-in/probate-profit-machine', {
+      const response = await fetch('https://whitebox-one.onrender.com/webhook/opt-in/probate-profit-machine', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
