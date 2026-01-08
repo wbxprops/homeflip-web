@@ -508,7 +508,7 @@ export default function GuidePart3Page() {
                   Want word-for-word scripts and live role-play practice?
                 </p>
                 <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                  Join our free community. We host live coaching calls multiple times per week.
+                  Join hundreds of investors in our free community. Live weekly trainings, real deal discussions, all courses included.
                 </p>
               </div>
             </div>

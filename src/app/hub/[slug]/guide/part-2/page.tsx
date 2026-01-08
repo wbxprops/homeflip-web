@@ -353,7 +353,7 @@ export default function GuidePart2Page() {
                   Want to dive deeper into skip tracing?
                 </p>
                 <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                  I have a complete training in our free community. Covers both paid and free services.
+                  Join hundreds of investors in our free community. Full skip tracing training included, plus live weekly calls.
                 </p>
               </div>
             </div>
