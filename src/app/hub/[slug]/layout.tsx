@@ -185,44 +185,38 @@ export default function HubLayout({ children }: HubLayoutProps) {
   if (tokenState.status === 'no_token' || tokenState.status === 'invalid') {
     return (
       <div className="min-h-screen bg-[#0a0a0f] flex flex-col">
-        {/* Resend Modal */}
+        {/* Resend Modal - Glassmorphic */}
         {resendModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            {/* Backdrop */}
             <div
-              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/60"
               onClick={() => {
                 setResendModalOpen(false);
                 setResendStatus('idle');
                 setResendEmail('');
               }}
             />
+            {/* Modal */}
             <div
-              className="relative w-full max-w-md rounded-2xl p-8"
+              className="relative w-full max-w-md overflow-hidden"
               style={{
-                background: 'linear-gradient(135deg, rgba(20,20,25,0.98) 0%, rgba(15,15,20,0.98) 100%)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                boxShadow: '0 25px 50px rgba(0,0,0,0.5)',
+                backgroundColor: 'rgba(24, 28, 36, 0.75)',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: '16px',
+                boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
               }}
             >
-              {/* Close button */}
-              <button
-                onClick={() => {
-                  setResendModalOpen(false);
-                  setResendStatus('idle');
-                  setResendEmail('');
-                }}
-                className="absolute top-4 right-4 text-white/40 hover:text-white/70 transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
               {resendStatus === 'success' ? (
-                <div className="text-center py-4">
+                /* Success State */
+                <div className="p-8 text-center">
                   <div className="w-16 h-16 rounded-full bg-[#53dac1]/20 flex items-center justify-center mx-auto mb-6">
                     <Mail className="w-8 h-8 text-[#53dac1]" />
                   </div>
-                  <h2 className="text-2xl font-bold text-white mb-3">Check Your Inbox</h2>
-                  <p className="text-white/60 leading-relaxed">
+                  <h2 className="text-2xl font-semibold text-white mb-3">Check Your Inbox</h2>
+                  <p className="text-white/60 leading-relaxed text-[0.95rem]">
                     If <span className="text-white font-medium">{resendEmail}</span> is in our system, you'll receive your secure access link within a few minutes.
                   </p>
                   <button
@@ -231,49 +225,83 @@ export default function HubLayout({ children }: HubLayoutProps) {
                       setResendStatus('idle');
                       setResendEmail('');
                     }}
-                    className="mt-8 px-8 py-3 rounded-xl font-bold text-sm uppercase tracking-wide text-white/70 hover:text-white transition-colors"
+                    className="mt-8 px-8 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all text-base font-medium"
                   >
                     Close
                   </button>
                 </div>
               ) : (
                 <>
-                  <h2 className="text-2xl font-bold text-white mb-2 text-center">Resend Secure Link</h2>
-                  <p className="text-white/50 text-center mb-8">
-                    Enter the email you signed up with and we'll send your access link.
-                  </p>
-
-                  <form onSubmit={handleResendSubmit}>
-                    <div className="mb-6">
-                      <input
-                        type="email"
-                        required
-                        placeholder="Email address"
-                        value={resendEmail}
-                        onChange={(e) => setResendEmail(e.target.value)}
-                        className="w-full px-5 py-4 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#53dac1]/50 transition-all"
-                        style={{
-                          background: 'rgba(255,255,255,0.05)',
-                          border: '1px solid rgba(255,255,255,0.1)',
-                        }}
-                      />
-                    </div>
-
+                  {/* Header */}
+                  <div className="flex items-center justify-between px-6 py-5 border-b border-white/[0.06]">
+                    <h2 className="text-xl font-semibold text-white">Resend Secure Link</h2>
                     <button
-                      type="submit"
-                      disabled={resendStatus === 'submitting'}
-                      className="w-full btn-gradient px-8 py-4 rounded-xl font-bold text-base uppercase tracking-wide text-center transition-all hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
+                      onClick={() => {
+                        setResendModalOpen(false);
+                        setResendStatus('idle');
+                        setResendEmail('');
+                      }}
+                      className="text-white/40 hover:text-white/70 transition-colors p-1 hover:bg-white/5 rounded-lg"
                     >
-                      {resendStatus === 'submitting' ? (
-                        <span className="flex items-center justify-center gap-2">
-                          <RefreshCw className="w-5 h-5 animate-spin" />
-                          Sending...
-                        </span>
-                      ) : (
-                        'Send My Link'
-                      )}
+                      <X className="w-5 h-5" />
                     </button>
-                  </form>
+                  </div>
+
+                  {/* Content */}
+                  <div className="px-6 py-6">
+                    <p className="text-white/50 text-[0.95rem] mb-6">
+                      Enter the email you signed up with and we'll send your access link.
+                    </p>
+
+                    <form onSubmit={handleResendSubmit}>
+                      <div className="mb-6">
+                        <label className="block text-white/60 text-sm mb-2 font-medium">Email Address</label>
+                        <input
+                          type="email"
+                          required
+                          placeholder="you@example.com"
+                          value={resendEmail}
+                          onChange={(e) => setResendEmail(e.target.value)}
+                          className="w-full px-4 text-white placeholder:text-white/30 focus:outline-none transition-all text-[1.1rem]"
+                          style={{
+                            backgroundColor: 'rgba(255,255,255,0.05)',
+                            border: '1px solid rgba(255,255,255,0.1)',
+                            borderRadius: '12px',
+                            minHeight: '56px',
+                          }}
+                        />
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex justify-end gap-3 pt-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setResendModalOpen(false);
+                            setResendStatus('idle');
+                            setResendEmail('');
+                          }}
+                          className="px-6 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all text-base font-medium"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="submit"
+                          disabled={resendStatus === 'submitting'}
+                          className="btn-gradient px-6 py-3 rounded-xl font-semibold text-base transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          {resendStatus === 'submitting' ? (
+                            <span className="flex items-center gap-2">
+                              <RefreshCw className="w-4 h-4 animate-spin" />
+                              Sending...
+                            </span>
+                          ) : (
+                            'Send Link'
+                          )}
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 </>
               )}
             </div>
