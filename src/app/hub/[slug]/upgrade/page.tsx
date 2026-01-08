@@ -348,7 +348,7 @@ function ClaimCountyFormDark({ step, setStep }: ClaimCountyFormDarkProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-6">
       {step <= 2 && <ProgressIndicator currentStep={step} />}
 
       {status === 'error' && (
@@ -364,7 +364,7 @@ function ClaimCountyFormDark({ step, setStep }: ClaimCountyFormDarkProps) {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="space-y-3 max-w-md"
+            className="space-y-4 max-w-md"
           >
             <input
               type="text"
@@ -393,7 +393,7 @@ function ClaimCountyFormDark({ step, setStep }: ClaimCountyFormDarkProps) {
 
             <button
               type="submit"
-              className="w-full btn-gradient py-3.5 rounded-xl font-bold text-sm uppercase tracking-wide hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
+              className="w-full btn-gradient py-4 rounded-xl font-bold text-sm uppercase tracking-wide hover:scale-[1.01] transition-all flex items-center justify-center gap-2 mt-2"
             >
               Select Your Markets
               <ArrowRight className="w-4 h-4" />
@@ -724,25 +724,25 @@ export default function HubUpgradePage() {
                       transition={{ duration: 0.3, ease: 'easeInOut' }}
                     >
                       {/* Feature Access Label */}
-                      <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-2 mb-4">
                         <Lock className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} strokeWidth={1.5} />
                         <span className="text-xs font-medium uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.4)' }}>
                           Feature Access
                         </span>
                       </div>
 
-                      <h1 className="font-sans font-bold text-3xl md:text-4xl mb-4" style={{ color: 'rgba(255,255,255,0.95)' }}>
+                      <h1 className="font-sans font-bold text-3xl md:text-4xl mb-5" style={{ color: 'rgba(255,255,255,0.95)' }}>
                         Claim Your County
                       </h1>
 
-                      <p className="text-[15px] leading-relaxed mb-6" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                        To start working probate cases, you'll need to claim a county. This unlocks access to live cases and the full Probate Pro workflow.
+                      <p className="text-[15px] leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                        To start working probate cases, you'll need to claim a county. This unlocks access to live cases in the full Homeflip.ai platform.
                       </p>
-                      <ul className="space-y-3">
+                      <ul className="space-y-4">
                         {[
                           'Access live probate cases for one county',
                           'Receive daily updates from court records',
-                          'Use the full Probate Pro workflow',
+                          'Use the full Homeflip.ai platform',
                           'View cases only from your selected county'
                         ].map((item, i) => (
                           <li key={i} className="flex items-center gap-3 text-[14px]" style={{ color: 'rgba(255,255,255,0.5)' }}>

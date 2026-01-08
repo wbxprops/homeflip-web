@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, Phone } from 'lucide-react';
+import { logos } from '@/config/hub.config';
 
 interface NavbarProps {
   minimal?: boolean;
@@ -54,7 +55,7 @@ export const Navbar = ({ minimal = false, variant = 'dark' }: NavbarProps) => {
           {/* Centered logo */}
           <Link href="/" className="flex items-center group">
             <img
-              src="/logo-wordmark-dark.png"
+              src={logos.logo.onDark}
               alt="Homeflip.ai"
               className="h-8"
             />
@@ -107,13 +108,13 @@ export const Navbar = ({ minimal = false, variant = 'dark' }: NavbarProps) => {
           <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center group" onClick={closeMenu}>
             {/* Mobile icon - swap based on variant */}
             <img
-              src={isLight ? '/logo-icon-dark.svg' : '/logo-icon-light.svg'}
+              src={isLight ? logos.icon.onLight : logos.icon.onDark}
               alt="Homeflip.ai"
               className="h-9 sm:hidden"
             />
-            {/* Desktop wordmark - swap based on variant */}
+            {/* Desktop full logo - swap based on variant */}
             <img
-              src={isLight ? '/logo-wordmark-light.png' : '/logo-wordmark-dark.png'}
+              src={isLight ? logos.logo.onLight : logos.logo.onDark}
               alt="Homeflip.ai"
               className="h-10 hidden sm:block"
             />

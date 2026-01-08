@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { CookieSettingsButton } from './CookieConsent';
+import { logos } from '@/config/hub.config';
 
 export const Footer = () => {
   return (
@@ -12,7 +13,7 @@ export const Footer = () => {
           <div className="col-span-1 lg:col-span-2">
             <Link href="/" className="flex items-center mb-6 group">
               <img
-                src="/logo-wordmark-light.png"
+                src={logos.logo.onLight}
                 alt="Homeflip.ai"
                 className="h-10 group-hover:opacity-80 transition-opacity"
               />

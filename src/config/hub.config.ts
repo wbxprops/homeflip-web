@@ -7,6 +7,69 @@
  * @see magic-link-hub project for product vision and roadmap
  */
 
+/**
+ * Logo Assets
+ *
+ * NAMING CONVENTION: "onDark" = use on dark backgrounds (light-colored asset)
+ *                    "onLight" = use on light backgrounds (dark-colored asset)
+ *
+ * DEFAULT: Always use `logos.logo` (full logo) unless you have a specific reason.
+ *
+ * ASSET TYPES:
+ *   logo     = DEFAULT - Full logo: house icon + "homeflip.ai" text
+ *   wordmark = SPECIAL - Text only, for use WITH animated icon
+ *   icon     = SPECIAL - House icon only, for animations/effects
+ */
+export const logos = {
+  /** DEFAULT: Full logo with house icon + "homeflip.ai" wordmark */
+  logo: {
+    onDark: '/homeflip-logo-dark.png',   // Light logo for dark backgrounds
+    onLight: '/homeflip-logo-light.png', // Dark logo for light backgrounds
+  },
+  /** SPECIAL: Wordmark only - use alongside animated icon */
+  wordmark: {
+    onDark: '/wordmark-dark.png',
+    onLight: '/wordmark-light.png',
+  },
+  /** SPECIAL: Icon only - use for animations/effects */
+  icon: {
+    onDark: '/logo-icon-dark.svg',
+    onLight: '/logo-icon-light.svg',
+  },
+} as const;
+
+/**
+ * Hub Branding
+ *
+ * Product-specific branding for each resource hub.
+ * Used on access pages, emails, and anywhere hub-specific content appears.
+ */
+export const hubBranding: Record<string, HubBrand> = {
+  'probate-profit-machine': {
+    name: 'Probate Profit Machine',
+    tagline: 'Your step-by-step system for finding and closing off-market probate deals',
+    coverImage: '/ebook-cover-probate-profit-machine.png',
+    accentColor: '#83d4c0',
+    optInPath: '/probate-profit-machine', // Where to send new users
+    benefits: [
+      'How to find probate leads in any market',
+      'Scripts that actually convert grieving families',
+      'The follow-up system that closes deals',
+      'Timeline intelligence for perfect timing',
+    ],
+  },
+  // Future hubs can be added here
+};
+
+export interface HubBrand {
+  name: string;
+  tagline: string;
+  coverImage: string;
+  accentColor: string;
+  optInPath: string;
+  benefits: string[];
+}
+
 export const hubConfig = {
   // Layout
   layout: {

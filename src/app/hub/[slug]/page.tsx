@@ -5,7 +5,7 @@ import { useParams, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
-import { Download, Sparkles, CheckCircle, AlertCircle, Wand2, ArrowRight, Clock, FileText } from 'lucide-react';
+import { Download, Sparkles, CheckCircle, AlertCircle, Wand2, ArrowRight } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 
@@ -34,33 +34,29 @@ export default function HubGuidePage() {
     {
       id: 'part-1',
       part: 'Part I',
-      title: 'The Opportunity',
-      description: 'Why probate is the best lead source and the Silver Tsunami demographics.',
-      readTime: '8 min',
+      title: 'Why Probate',
+      description: 'Why probate outperforms foreclosures, wholesaler lists, and every other lead source you\'ve tried.',
       href: `/hub/${slug}/guide/part-1`
     },
     {
       id: 'part-2',
       part: 'Part II',
       title: 'Finding Probate Leads',
-      description: 'How to identify and source probate leads in your target market.',
-      readTime: '10 min',
+      description: 'The 4-step process to find leads in any county, plus a secret source most investors miss.',
       href: `/hub/${slug}/guide/part-2`
     },
     {
       id: 'part-3',
       part: 'Part III',
       title: 'Working the Leads',
-      description: 'Timeline intelligence, follow-up cadence, and tracking everything.',
-      readTime: '12 min',
+      description: 'The follow-up system that turns cold leads into $100k price drops over 6 months.',
       href: `/hub/${slug}/guide/part-3`
     },
     {
       id: 'part-4',
       part: 'Part IV',
       title: 'Tying It All Together',
-      description: 'Your next steps and how Homeflip.ai brings it all together.',
-      readTime: '5 min',
+      description: 'Your roadmap to consistent deal flow, whether you DIY or use Homeflip.ai.',
       href: `/hub/${slug}/guide/part-4`
     },
   ];
@@ -287,15 +283,9 @@ export default function HubGuidePage() {
   // Valid access - Guide Overview
   return (
     <div className="flex-1 overflow-y-auto">
-      <div className="max-w-3xl mx-auto px-6 md:px-10 py-10 md:py-14">
+      <div className="max-w-4xl mx-auto px-6 md:px-10 py-10 md:py-14">
         {/* Header */}
         <header className="mb-10">
-          <div className="flex items-center gap-2 mb-4">
-            <FileText className="w-5 h-5" style={{ color: 'rgba(255,255,255,0.4)' }} strokeWidth={1.5} />
-            <span className="text-xs font-medium uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.4)' }}>
-              Internal Documentation
-            </span>
-          </div>
           <h1
             className="font-sans font-bold text-3xl md:text-4xl leading-tight mb-4"
             style={{ color: 'rgba(255,255,255,0.95)' }}
@@ -303,50 +293,43 @@ export default function HubGuidePage() {
             Probate Profit Machine
           </h1>
           <p
-            className="text-lg leading-relaxed"
-            style={{ color: 'rgba(255,255,255,0.5)' }}
+            className="text-xl leading-relaxed"
+            style={{ color: 'rgba(255,255,255,0.55)' }}
           >
-            A complete introduction to probate real estate investing. Learn what probate is, how to find cases, and how to approach families with empathy.
+            Your step-by-step system for finding and closing off-market probate deals before other investors even know they exist.
           </p>
         </header>
 
         {/* Sections */}
         <section className="mb-10">
-          <h2 className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>
-            Sections
-          </h2>
-          <div className="space-y-3">
+          <div className="space-y-4">
             {guideSections.map((section, index) => (
               <Link
                 key={section.id}
                 href={section.href}
-                className="group block p-5 rounded-xl transition hover:bg-white/[0.03]"
-                style={{ backgroundColor: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}
+                className="group block p-6 rounded-2xl transition hover:bg-white/[0.04]"
+                style={{ backgroundColor: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
+                    <div className="mb-3">
                       <span
-                        className="text-xs font-medium px-2 py-0.5 rounded"
-                        style={{ backgroundColor: 'rgba(131,212,192,0.1)', color: '#83d4c0' }}
+                        className="text-sm font-medium px-3 py-1 rounded-lg"
+                        style={{ backgroundColor: 'rgba(131,212,192,0.12)', color: '#83d4c0' }}
                       >
                         {section.part}
                       </span>
-                      <span className="flex items-center gap-1 text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>
-                        <Clock className="w-3 h-3" />
-                        {section.readTime}
-                      </span>
                     </div>
-                    <h3 className="font-medium text-[15px] mb-1" style={{ color: 'rgba(255,255,255,0.9)' }}>
+                    <h3 className="font-semibold text-xl mb-2" style={{ color: 'rgba(255,255,255,0.95)' }}>
                       {section.title}
                     </h3>
-                    <p className="text-sm" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                    <p className="text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>
                       {section.description}
                     </p>
                   </div>
                   <ArrowRight
-                    className="w-5 h-5 flex-shrink-0 mt-1 transition group-hover:translate-x-1"
-                    style={{ color: 'rgba(255,255,255,0.25)' }}
+                    className="w-6 h-6 flex-shrink-0 mt-2 transition group-hover:translate-x-1"
+                    style={{ color: 'rgba(255,255,255,0.3)' }}
                   />
                 </div>
               </Link>
@@ -354,28 +337,44 @@ export default function HubGuidePage() {
           </div>
         </section>
 
-        {/* PDF Download - Secondary */}
+        {/* PDF Download - Featured with Ebook Cover */}
         <section>
           <div
-            className="p-5 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-            style={{ backgroundColor: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}
+            className="p-6 sm:p-8 rounded-2xl grid grid-cols-1 sm:grid-cols-[70%_30%] items-center gap-6 relative overflow-hidden"
+            style={{ backgroundColor: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
           >
-            <div>
-              <p className="text-sm font-medium mb-1" style={{ color: 'rgba(255,255,255,0.6)' }}>
-                Offline Reading
+            {/* Subtle glow behind ebook */}
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[250px] h-[250px] bg-[#83d4c0]/10 rounded-full blur-[80px] pointer-events-none" />
+
+            {/* Content - Left Side (70%) */}
+            <div className="text-center sm:text-left order-2 sm:order-1">
+              <p className="text-lg font-semibold mb-2" style={{ color: 'rgba(255,255,255,0.9)' }}>
+                Prefer Offline Reading?
               </p>
-              <p className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>
-                Download the complete guide as a PDF for offline access
+              <p className="text-base mb-5" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                Download the complete Probate Profit Machine as a PDF to read anytime, anywhere.
               </p>
+              <span
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold"
+                style={{
+                  backgroundColor: 'rgba(255,255,255,0.05)',
+                  color: 'rgba(255,255,255,0.4)',
+                  border: '1px solid rgba(255,255,255,0.08)'
+                }}
+              >
+                <Download className="w-4 h-4" />
+                Coming Soon
+              </span>
             </div>
-            <a
-              href="#"
-              className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition hover:bg-white/[0.04]"
-              style={{ color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.08)' }}
-            >
-              <Download className="w-4 h-4" />
-              Download PDF
-            </a>
+
+            {/* Ebook Cover - Right Side (30%) */}
+            <div className="relative flex justify-center order-1 sm:order-2">
+              <img
+                src="/ebook-cover-probate-profit-machine.png"
+                alt="The Probate Profit Machine"
+                className="w-32 sm:w-full max-w-[140px] drop-shadow-xl"
+              />
+            </div>
           </div>
         </section>
       </div>

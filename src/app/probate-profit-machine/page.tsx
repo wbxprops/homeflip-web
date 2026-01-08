@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
+import { logos } from '@/config/hub.config';
 import { X, Phone, Search, TrendingUp, Landmark, Target, Compass } from 'lucide-react';
 
 export default function ProbateProfitMachinePage() {
@@ -89,6 +90,7 @@ export default function ProbateProfitMachinePage() {
     setErrorMessage('');
 
     try {
+      // Also save to prospect_responses for analytics/backup
       await supabase
         .from('prospect_responses')
         .insert([{
@@ -98,14 +100,21 @@ export default function ProbateProfitMachinePage() {
           source: 'probate_profit_machine',
         }]);
 
-      await supabase
-        .from('prospects')
-        .insert([{
-          name: formData.firstName,
+      // Call n8n magic-link-create webhook
+      // This handles: prospect upsert, token generation, email sending
+      const response = await fetch('https://n8n.whitebox-one.onrender.com/webhook/opt-in/probate-profit-machine', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           email: formData.email,
-          phone: formData.phone,
-          source: 'probate_profit_machine',
-        }]);
+          firstName: formData.firstName,
+          hub_slug: 'probate-profit-machine',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create magic link');
+      }
 
       setStatus('success');
       window.location.href = '/probate-profit-machine/thank-you';
@@ -369,7 +378,7 @@ export default function ProbateProfitMachinePage() {
             {/* Logo - with top padding for progress bar */}
             <div className="flex justify-center mt-8 mb-4">
               <img
-                src="/logo-wordmark-light.png"
+                src={logos.logo.onLight}
                 alt="Homeflip.ai"
                 className="h-7"
               />
@@ -450,7 +459,7 @@ export default function ProbateProfitMachinePage() {
           {/* Centered Logo - No link to reduce leakage */}
           <div className="flex items-center">
             <img
-              src="/logo-wordmark-dark.png"
+              src={logos.logo.onDark}
               alt="Homeflip.ai"
               className="h-8"
             />

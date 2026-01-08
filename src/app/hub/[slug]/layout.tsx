@@ -1,18 +1,99 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useParams, usePathname } from 'next/navigation';
+import { useParams, usePathname, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { TrendingUp, Play, GraduationCap, Bell, Landmark, X, Bookmark, ChevronDown, ChevronRight } from 'lucide-react';
+import { TrendingUp, Play, GraduationCap, Bell, Landmark, X, Bookmark, ChevronDown, ChevronRight, RefreshCw } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+import { logos, hubBranding } from '@/config/hub.config';
 
 interface HubLayoutProps {
   children: React.ReactNode;
 }
 
+interface TokenState {
+  status: 'loading' | 'valid' | 'expired' | 'invalid' | 'no_token';
+  daysRemaining?: number;
+  errorMessage?: string;
+}
+
 export default function HubLayout({ children }: HubLayoutProps) {
   const params = useParams();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const slug = params.slug as string;
+
+  // Token validation state
+  const [tokenState, setTokenState] = useState<TokenState>({ status: 'loading' });
+
+  // Validate token on mount
+  useEffect(() => {
+    const validateToken = async () => {
+      // Check for token in URL first, then sessionStorage
+      const urlToken = searchParams.get('token');
+      const storedToken = sessionStorage.getItem(`hub_token_${slug}`);
+      const token = urlToken || storedToken;
+
+      // If token came from URL, store it for navigation within hub
+      if (urlToken) {
+        sessionStorage.setItem(`hub_token_${slug}`, urlToken);
+      }
+
+      if (!token) {
+        setTokenState({ status: 'no_token' });
+        return;
+      }
+
+      try {
+        // Call the mlh_access_hub RPC function
+        const { data, error } = await supabase.rpc('mlh_access_hub', { p_token: token });
+
+        if (error) {
+          console.error('Token validation error:', error);
+          setTokenState({ status: 'invalid', errorMessage: 'Unable to validate access' });
+          return;
+        }
+
+        const result = data?.[0];
+
+        if (!result || !result.is_valid) {
+          // Determine specific error
+          const errorMsg = result?.error_message || 'Invalid token';
+          if (errorMsg.includes('expired')) {
+            setTokenState({ status: 'expired', errorMessage: 'Your access has expired' });
+          } else {
+            setTokenState({ status: 'invalid', errorMessage: errorMsg });
+          }
+          // Clear stored token if invalid
+          sessionStorage.removeItem(`hub_token_${slug}`);
+          return;
+        }
+
+        // Calculate days remaining from hub settings (expiry tracked in token)
+        // The RPC already validated expiry, so we need to get remaining days
+        // For now, we'll query the token directly for expires_at
+        const { data: tokenData } = await supabase
+          .from('mlh_tokens')
+          .select('expires_at')
+          .eq('token', token)
+          .single();
+
+        let daysRemaining = 30; // Default
+        if (tokenData?.expires_at) {
+          const expiresAt = new Date(tokenData.expires_at);
+          const now = new Date();
+          daysRemaining = Math.max(0, Math.ceil((expiresAt.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)));
+        }
+
+        setTokenState({ status: 'valid', daysRemaining });
+      } catch (err) {
+        console.error('Token validation error:', err);
+        setTokenState({ status: 'invalid', errorMessage: 'Unable to validate access' });
+      }
+    };
+
+    validateToken();
+  }, [slug, searchParams]);
 
   // Guide sections - matches ebook structure
   const guideSections = [
@@ -30,7 +111,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
   const isCommunityPage = pathname.includes('/community');
 
   // Expand guide nav if on any guide page
-  const [guideExpanded, setGuideExpanded] = useState(isGuidePage);
+  const [guideExpanded, setGuideExpanded] = useState(true);
 
   // Update expansion when route changes
   useEffect(() => {
@@ -57,6 +138,125 @@ export default function HubLayout({ children }: HubLayoutProps) {
     }, 300);
   };
 
+  // Loading state
+  if (tokenState.status === 'loading') {
+    return (
+      <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
+        <div className="text-center">
+          <RefreshCw className="w-8 h-8 text-[#5fc9ba] animate-spin mx-auto mb-4" />
+          <p className="text-white/60 text-sm">Validating access...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Get hub branding for this slug (fallback to generic if not found)
+  const brand = hubBranding[slug] || {
+    name: 'Resource Hub',
+    tagline: 'Your exclusive resources',
+    coverImage: null,
+    accentColor: '#83d4c0',
+    optInPath: '/probate-profit-machine',
+    benefits: [],
+  };
+
+  // No token or invalid token - show friendly access screen
+  if (tokenState.status === 'no_token' || tokenState.status === 'invalid') {
+    return (
+      <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center px-6 py-12">
+        <div className="max-w-lg text-center">
+          {/* Ebook cover */}
+          {brand.coverImage && (
+            <div className="mb-8">
+              <img
+                src={brand.coverImage}
+                alt={brand.name}
+                className="h-48 mx-auto drop-shadow-2xl"
+              />
+            </div>
+          )}
+
+          {/* Logo */}
+          <img
+            src={logos.logo.onDark}
+            alt="Homeflip.ai"
+            className="h-10 mx-auto mb-6"
+          />
+
+          <h1 className="text-2xl font-bold text-white mb-2">Welcome to the {brand.name}</h1>
+          <p className="text-white/50 text-sm mb-6">{brand.tagline}</p>
+
+          <p className="text-white/60 mb-6">
+            {tokenState.status === 'no_token'
+              ? "Get instant access — just enter your email and we'll send your personal access link."
+              : "Looks like this link isn't working. No worries — request a fresh one below and you'll be back in seconds."}
+          </p>
+
+          <a
+            href={brand.optInPath}
+            className="btn-gradient inline-block px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wide mb-4"
+          >
+            Get Your Free Access
+          </a>
+
+          <p className="text-white/40 text-sm">
+            No password needed · No account to create · Just click and you're in
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Expired token - show friendly renewal screen
+  if (tokenState.status === 'expired') {
+    return (
+      <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center px-6 py-12">
+        <div className="max-w-lg text-center">
+          {/* Ebook cover */}
+          {brand.coverImage && (
+            <div className="mb-8">
+              <img
+                src={brand.coverImage}
+                alt={brand.name}
+                className="h-48 mx-auto drop-shadow-2xl"
+              />
+            </div>
+          )}
+
+          {/* Logo */}
+          <img
+            src={logos.logo.onDark}
+            alt="Homeflip.ai"
+            className="h-10 mx-auto mb-6"
+          />
+
+          <h1 className="text-2xl font-bold text-white mb-2">Time for a Fresh Link</h1>
+          <p className="text-white/50 text-sm mb-6">Your {brand.name} access has expired</p>
+
+          <p className="text-white/60 mb-6">
+            Getting back in is easy. Request a new link below and you'll have instant access to all your resources again.
+          </p>
+
+          <a
+            href={brand.optInPath}
+            className="btn-gradient inline-block px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wide mb-4"
+          >
+            Get a Fresh Link
+          </a>
+
+          <p className="text-white/40 text-sm">
+            Takes 10 seconds · Same email, new link · All your resources waiting
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Format days remaining text
+  const daysText = tokenState.daysRemaining === 1
+    ? '1 day remaining'
+    : `${tokenState.daysRemaining} days remaining`;
+
   return (
     <div className="flex min-h-screen font-inter">
       {/* Sidebar - 280px width, full height */}
@@ -69,7 +269,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
         {/* Brand */}
         <div className="pl-5 pr-4 pt-4 pb-5">
           <img
-            src="/logo-wordmark-dark.png"
+            src={logos.logo.onDark}
             alt="Homeflip.ai"
             className="h-6"
           />
@@ -136,8 +336,8 @@ export default function HubLayout({ children }: HubLayoutProps) {
               )}
             </div>
 
-            {/* Training Videos */}
-            <Link
+            {/* Training Videos - Hidden until content is ready */}
+            {/* <Link
               href={`/hub/${slug}/training`}
               className="group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 transition"
               style={{
@@ -151,7 +351,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
                 strokeWidth={1.25}
               />
               <span className="text-[14px] font-normal">Training Videos</span>
-            </Link>
+            </Link> */}
 
             {/* Community */}
             <Link
@@ -184,7 +384,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
                 style={{ color: 'rgba(255,255,255,0.65)' }}
               >
                 <Bell className="h-[18px] w-[18px]" style={{ color: 'rgba(255,255,255,0.45)' }} strokeWidth={1.25} />
-                <span className="text-[14px] font-normal">New Cases</span>
+                <span className="text-[14px] font-normal">Get New Cases</span>
               </Link>
               <Link
                 href={`/hub/${slug}/upgrade`}
@@ -210,7 +410,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#5fc9ba' }} />
               <span style={{ color: 'rgba(255,255,255,0.7)' }}>Access Active</span>
               <span style={{ color: 'rgba(255,255,255,0.25)' }}>·</span>
-              <span style={{ color: 'rgba(255,255,255,0.45)' }}>30 days remaining</span>
+              <span style={{ color: 'rgba(255,255,255,0.45)' }}>{daysText}</span>
             </div>
             {showBookmarkReminder && (
               <div
@@ -245,7 +445,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
         {/* Mobile Header */}
         <div className="lg:hidden sticky top-0 z-40 border-b border-white/[0.06]" style={{ backgroundColor: '#0a0a0f' }}>
           <div className="flex items-center justify-between min-h-12 px-4">
-            <img src="/logo-wordmark-dark.png" alt="Homeflip.ai" className="h-6" />
+            <img src={logos.logo.onDark} alt="Homeflip.ai" className="h-6" />
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#5fc9ba' }} />
               <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: '#5fc9ba' }}>Active</span>

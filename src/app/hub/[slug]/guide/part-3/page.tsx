@@ -80,7 +80,7 @@ export default function GuidePart3Page() {
     },
     {
       id: 'follow-up-cadence',
-      title: 'My Three-Phase Follow-Up Cadence',
+      title: 'Three-Phase Follow-Up Cadence',
       content: (
         <>
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-6">
@@ -416,7 +416,7 @@ export default function GuidePart3Page() {
     },
     {
       id: 'scripting-principles',
-      title: 'Scripting Principles: Strategy Over Tactics',
+      title: 'Scripting Principles',
       content: (
         <>
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">

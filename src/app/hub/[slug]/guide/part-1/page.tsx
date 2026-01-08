@@ -43,7 +43,7 @@ export default function GuidePart1Page() {
     },
     {
       id: 'why-probate-works',
-      title: "Why Probate Works When Other Sources Don't",
+      title: "Why Probate Works",
       content: (
         <>
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">
@@ -71,7 +71,7 @@ export default function GuidePart1Page() {
     },
     {
       id: 'demographic-wave',
-      title: "The Demographic Wave You Can't Ignore",
+      title: "The Demographic Wave",
       content: (
         <>
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">
@@ -105,7 +105,7 @@ export default function GuidePart1Page() {
     },
     {
       id: 'why-sellers-want-to-talk',
-      title: 'Why Sellers Actually Want to Talk to You',
+      title: 'Why Sellers Want to Talk to You',
       content: (
         <>
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">
@@ -151,7 +151,7 @@ export default function GuidePart1Page() {
     },
     {
       id: 'real-numbers',
-      title: 'The Real Numbers: Pennies on the Dollar',
+      title: 'The Real Numbers',
       content: (
         <>
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">
@@ -226,7 +226,7 @@ export default function GuidePart1Page() {
     },
     {
       id: 'how-many-leads',
-      title: 'How Many Leads Do You Actually Need?',
+      title: 'How Many Leads Do You Need?',
       content: (
         <>
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">

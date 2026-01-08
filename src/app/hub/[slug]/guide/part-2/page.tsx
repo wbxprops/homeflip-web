@@ -79,7 +79,7 @@ export default function GuidePart2Page() {
     },
     {
       id: 'step-1-public-notices',
-      title: 'Step 1: Find Where Public Notices Are Published',
+      title: 'Step 1: Find Public Notices',
       content: (
         <>
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">
@@ -141,7 +141,7 @@ export default function GuidePart2Page() {
     },
     {
       id: 'step-2-online-records',
-      title: 'Step 2: Determine If Records Are Available Online',
+      title: 'Step 2: Check Online Records',
       content: (
         <>
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">
