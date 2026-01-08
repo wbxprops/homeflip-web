@@ -1,10 +1,100 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X, MapPin, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Plus, X, MapPin, ArrowRight, ArrowLeft, Calendar, CheckCircle2 } from 'lucide-react';
+
+// Helper to split full name into first and last
+function splitName(fullName: string): { firstName: string; lastName: string } {
+  const parts = fullName.trim().split(/\s+/);
+  if (parts.length === 1) {
+    return { firstName: parts[0], lastName: '' };
+  }
+  return {
+    firstName: parts[0],
+    lastName: parts.slice(1).join(' ')
+  };
+}
+
+// Calendly Embed Component
+interface CalendlyEmbedProps {
+  url: string;
+  prefill?: {
+    name?: string;
+    email?: string;
+  };
+  onEventScheduled?: () => void;
+}
+
+function CalendlyEmbed({ url, prefill, onEventScheduled }: CalendlyEmbedProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Load Calendly script
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    script.onload = () => {
+      if (window.Calendly && containerRef.current) {
+        const nameParts = prefill?.name ? splitName(prefill.name) : { firstName: '', lastName: '' };
+
+        window.Calendly.initInlineWidget({
+          url: url,
+          parentElement: containerRef.current,
+          prefill: {
+            firstName: nameParts.firstName,
+            lastName: nameParts.lastName,
+            email: prefill?.email,
+          },
+        });
+      }
+    };
+
+    // Listen for Calendly events
+    const handleCalendlyEvent = (e: MessageEvent) => {
+      if (e.data.event === 'calendly.event_scheduled') {
+        onEventScheduled?.();
+      }
+    };
+
+    window.addEventListener('message', handleCalendlyEvent);
+
+    return () => {
+      window.removeEventListener('message', handleCalendlyEvent);
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, [url, prefill, onEventScheduled]);
+
+  return (
+    <div
+      ref={containerRef}
+      style={{ minWidth: '320px', height: '700px' }}
+    />
+  );
+}
+
+// Add Calendly type to window
+declare global {
+  interface Window {
+    Calendly?: {
+      initInlineWidget: (options: {
+        url: string;
+        parentElement: HTMLElement;
+        prefill?: {
+          firstName?: string;
+          lastName?: string;
+          email?: string;
+        };
+      }) => void;
+    };
+  }
+}
 
 interface Jurisdiction {
   id: number;
@@ -23,7 +113,6 @@ interface StateSelection {
 }
 
 export const ClaimCountyForm = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [jurisdictions, setJurisdictions] = useState<Jurisdiction[]>([]);
   const [loading, setLoading] = useState(true);
@@ -37,8 +126,9 @@ export const ClaimCountyForm = () => {
   ]);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
-  const [step, setStep] = useState<1 | 2>(1);
+  const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [bookingComplete, setBookingComplete] = useState(false);
   const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
 
   // Format phone number as +1 (XXX) XXX-XXXX
@@ -71,7 +161,6 @@ export const ClaimCountyForm = () => {
     if (error) {
       console.error('Error fetching counties:', error);
     } else {
-      // Merge with existing jurisdictions (for other states already loaded)
       setJurisdictions(prev => {
         const otherStates = prev.filter(j => j.state_code !== stateCode);
         return [...otherStates, ...(data || [])];
@@ -79,7 +168,6 @@ export const ClaimCountyForm = () => {
     }
   };
 
-  // No upfront loading needed
   useEffect(() => {
     setLoading(false);
   }, []);
@@ -105,12 +193,10 @@ export const ClaimCountyForm = () => {
     { code: 'WI', name: 'Wisconsin' }, { code: 'WY', name: 'Wyoming' }
   ];
 
-  // Get counties for a state from database
   const getCountiesForState = (stateCode: string) => {
     return jurisdictions.filter(j => j.state_code === stateCode);
   };
 
-  // Filter counties based on search query
   const getFilteredCounties = (stateCode: string, query: string, selectedCounties: string[]) => {
     const stateCounties = getCountiesForState(stateCode);
     if (!query.trim()) return stateCounties.filter(c => !selectedCounties.includes(c.county_name));
@@ -121,18 +207,15 @@ export const ClaimCountyForm = () => {
       );
   };
 
-  // Handle state selection change
   const handleStateChange = (selectionId: string, stateCode: string) => {
     setStateSelections(prev => prev.map(sel =>
       sel.id === selectionId
         ? { ...sel, stateCode, counties: [], searchQuery: '' }
         : sel
     ));
-    // Fetch counties for this state
     fetchCountiesForState(stateCode);
   };
 
-  // Handle search query change
   const handleSearchChange = (selectionId: string, query: string) => {
     setStateSelections(prev => prev.map(sel =>
       sel.id === selectionId
@@ -142,7 +225,6 @@ export const ClaimCountyForm = () => {
     setActiveDropdown(selectionId);
   };
 
-  // Add county as tag
   const addCounty = (selectionId: string, countyName: string) => {
     setStateSelections(prev => prev.map(sel => {
       if (sel.id !== selectionId) return sel;
@@ -150,13 +232,11 @@ export const ClaimCountyForm = () => {
       if (sel.counties.includes(countyName)) return sel;
       return { ...sel, counties: [...sel.counties, countyName], searchQuery: '' };
     }));
-    // Keep focus on input
     setTimeout(() => {
       inputRefs.current[selectionId]?.focus();
     }, 0);
   };
 
-  // Remove county tag
   const removeCounty = (selectionId: string, countyName: string) => {
     setStateSelections(prev => prev.map(sel => {
       if (sel.id !== selectionId) return sel;
@@ -164,7 +244,6 @@ export const ClaimCountyForm = () => {
     }));
   };
 
-  // Add another state selection
   const addStateSelection = () => {
     if (stateSelections.length < 3) {
       setStateSelections(prev => [...prev, {
@@ -176,20 +255,17 @@ export const ClaimCountyForm = () => {
     }
   };
 
-  // Remove a state selection
   const removeStateSelection = (selectionId: string) => {
     if (stateSelections.length > 1) {
       setStateSelections(prev => prev.filter(sel => sel.id !== selectionId));
     }
   };
 
-  // Validate email format
   const isValidEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     return emailRegex.test(email);
   };
 
-  // Handle step 1 to step 2 transition
   const handleNextStep = () => {
     if (!formData.name || !formData.phone || !formData.email) {
       setStatus('error');
@@ -206,11 +282,9 @@ export const ClaimCountyForm = () => {
     setStep(2);
   };
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // If on step 1, go to step 2 instead of submitting
     if (step === 1) {
       handleNextStep();
       return;
@@ -233,7 +307,6 @@ export const ClaimCountyForm = () => {
     }
 
     try {
-      // Always log the response (tracks every interaction)
       await supabase
         .from('prospect_responses')
         .insert([{
@@ -244,7 +317,6 @@ export const ClaimCountyForm = () => {
           jurisdictions_requested: jurisdictionsRequested
         }]);
 
-      // Try to create/update prospect (ignore if exists)
       const { error } = await supabase
         .from('prospects')
         .insert([{
@@ -255,18 +327,13 @@ export const ClaimCountyForm = () => {
           jurisdictions_requested: jurisdictionsRequested
         }]);
 
-      // Ignore duplicate error - prospect already exists
       if (error && error.code !== '23505') {
         throw error;
       }
 
-      // Redirect to booking page with pre-filled info
-      const bookingParams = new URLSearchParams({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-      });
-      router.push(`/claim-your-county/book?${bookingParams.toString()}`);
+      // Move to confirmation step
+      setStep(3);
+      setStatus('idle');
     } catch (error: any) {
       console.error('Submission error:', error);
       setStatus('error');
@@ -284,34 +351,37 @@ export const ClaimCountyForm = () => {
 
   const inputStyles = "w-full px-5 py-4 rounded-xl border-2 border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all text-lg placeholder:text-slate-400";
 
-  // Progress indicator component
-  const ProgressIndicator = ({ currentStep }: { currentStep: 1 | 2 | 3 }) => (
-    <div className="flex items-center justify-center mb-8">
-      <div className="relative flex items-center w-48">
-        <div className="absolute left-0 right-0 h-1 bg-slate-200 rounded-full" />
-        <div
-          className="absolute left-0 h-1 bg-gradient-to-r from-[#0891b2] to-[#7c3aed] rounded-full transition-all duration-300"
-          style={{ width: currentStep === 1 ? '0%' : currentStep === 2 ? '50%' : '100%' }}
-        />
-        <div className="relative flex justify-between w-full">
-          {[1, 2, 3].map((dotStep) => (
-            <div
-              key={dotStep}
-              className={`w-5 h-5 rounded-full border-2 transition-all duration-300 ${
-                dotStep <= currentStep
-                  ? 'bg-gradient-to-r from-[#0891b2] to-[#7c3aed] border-transparent'
-                  : 'bg-white border-slate-300'
-              }`}
-            />
-          ))}
+  // Progress indicator component - only shows on steps 1-2
+  const ProgressIndicator = ({ currentStep }: { currentStep: 1 | 2 | 3 | 4 }) => {
+    const progressWidth = currentStep === 1 ? '0%' : currentStep === 2 ? '33%' : currentStep === 3 ? '66%' : '100%';
+    return (
+      <div className="flex items-center justify-center mb-8">
+        <div className="relative flex items-center w-48">
+          <div className="absolute left-0 right-0 h-1 bg-slate-200 rounded-full" />
+          <div
+            className="absolute left-0 h-1 bg-gradient-to-r from-[#0891b2] to-[#7c3aed] rounded-full transition-all duration-300"
+            style={{ width: progressWidth }}
+          />
+          <div className="relative flex justify-between w-full">
+            {[1, 2, 3, 4].map((dotStep) => (
+              <div
+                key={dotStep}
+                className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
+                  dotStep <= currentStep
+                    ? 'bg-gradient-to-r from-[#0891b2] to-[#7c3aed] border-transparent'
+                    : 'bg-white border-slate-300'
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <ProgressIndicator currentStep={step} />
+      {step <= 2 && <ProgressIndicator currentStep={step} />}
 
       {status === 'error' && (
         <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm">
@@ -361,7 +431,7 @@ export const ClaimCountyForm = () => {
               <ArrowRight className="w-6 h-6" />
             </button>
           </motion.div>
-        ) : (
+        ) : step === 2 ? (
           <motion.div
             key="step2"
             initial={{ opacity: 0, x: 20 }}
@@ -406,7 +476,6 @@ export const ClaimCountyForm = () => {
                       )}
                     </div>
 
-                    {/* State Dropdown */}
                     <select
                       value={selection.stateCode}
                       onChange={(e) => handleStateChange(selection.id, e.target.value)}
@@ -420,10 +489,8 @@ export const ClaimCountyForm = () => {
                       ))}
                     </select>
 
-                    {/* County Tag Input */}
                     {selection.stateCode && (
                       <div className="space-y-2">
-                        {/* Selected counties as tags */}
                         {selection.counties.length > 0 && (
                           <div className="flex flex-wrap gap-2 mb-2">
                             {selection.counties.map(county => (
@@ -444,7 +511,6 @@ export const ClaimCountyForm = () => {
                           </div>
                         )}
 
-                        {/* Search input */}
                         {selection.counties.length < 3 && (
                           <div className="relative">
                             <input
@@ -458,7 +524,6 @@ export const ClaimCountyForm = () => {
                               className="w-full px-4 py-2 rounded-lg border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all bg-white text-sm"
                             />
 
-                            {/* Dropdown */}
                             {activeDropdown === selection.id && (
                               <div className="absolute z-10 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg max-h-64 overflow-y-auto">
                                 {getFilteredCounties(selection.stateCode, selection.searchQuery, selection.counties).length > 0 ? (
@@ -509,16 +574,128 @@ export const ClaimCountyForm = () => {
             <button
               type="submit"
               disabled={status === 'submitting'}
-              className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-2xl uppercase tracking-tighter shadow-lg shadow-[#0891b2]/20 hover:scale-[1.01] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-2xl uppercase tracking-tighter shadow-lg shadow-[#0891b2]/20 hover:scale-[1.01] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
             >
-              {status === 'submitting' ? 'Joining...' : 'Join the Beta'}
+              {status === 'submitting' ? 'Processing...' : (
+                <>
+                  Continue
+                  <ArrowRight className="w-6 h-6" />
+                </>
+              )}
             </button>
+          </motion.div>
+        ) : step === 3 ? (
+          <motion.div
+            key="step3"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="py-8"
+          >
+            {/* Confirmation Checkpoint */}
+            <div className="flex flex-col items-center text-center max-w-md mx-auto">
+              {/* Status Icon */}
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-[#0891b2]/10 to-[#7c3aed]/10 flex items-center justify-center mb-6">
+                <CheckCircle2 className="w-8 h-8 text-[#0891b2]" />
+              </div>
 
-            <p className="text-center text-sm text-slate-500">
-              By submitting, you agree to our{' '}
-              <a href="/terms" className="underline hover:text-[#0891b2]">Terms</a> and{' '}
-              <a href="/privacy" className="underline hover:text-[#0891b2]">Privacy Policy</a>.
-            </p>
+              {/* Headline */}
+              <h2 className="font-hero font-[900] text-3xl text-slate-900 uppercase tracking-tighter mb-3">
+                Application Received
+              </h2>
+
+              {/* Supporting Copy */}
+              <p className="text-lg text-slate-600 leading-relaxed mb-8">
+                Your county request has been submitted. To complete your application, schedule a quick setup call.
+              </p>
+
+              {/* CTA */}
+              <button
+                type="button"
+                onClick={() => setStep(4)}
+                className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-2xl uppercase tracking-tighter shadow-lg shadow-[#0891b2]/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-3"
+              >
+                Schedule Setup Call
+                <ArrowRight className="w-6 h-6" />
+              </button>
+
+              {/* Expectation-Setting Line */}
+              <p className="text-sm text-slate-500 mt-5">
+                Next step: Pick a time that works for a 15-minute call.
+              </p>
+            </div>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="step4"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="py-4"
+          >
+            <AnimatePresence mode="wait">
+              {!bookingComplete ? (
+                <motion.div
+                  key="calendly"
+                  initial={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="space-y-6"
+                >
+                  {/* Header */}
+                  <div className="text-center mb-6">
+                    <h2 className="font-hero font-[900] text-3xl text-slate-900 uppercase tracking-tighter mb-3">
+                      Book Your Call
+                    </h2>
+                    <p className="text-lg text-slate-600 leading-relaxed max-w-xl mx-auto">
+                      Select a time for your setup call. We'll confirm your county selection and get you started.
+                    </p>
+                  </div>
+
+                  {/* Calendly Container */}
+                  <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50">
+                    <div className="p-4 border-b border-slate-200 bg-white">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-5 h-5 text-slate-400" />
+                        <span className="text-sm font-medium text-slate-600">
+                          Schedule your setup call
+                        </span>
+                      </div>
+                    </div>
+                    <CalendlyEmbed
+                      url="https://calendly.com/wb-props/county-activation?hide_event_type_details=1&hide_gdpr_banner=1"
+                      prefill={{
+                        name: formData.name,
+                        email: formData.email,
+                      }}
+                      onEventScheduled={() => setBookingComplete(true)}
+                    />
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="confirmation"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="py-12"
+                >
+                  {/* Final Confirmation */}
+                  <div className="flex flex-col items-center text-center max-w-md mx-auto">
+                    {/* Status Icon */}
+                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-r from-green-400/20 to-emerald-500/20 flex items-center justify-center mb-6">
+                      <CheckCircle2 className="w-10 h-10 text-green-500" />
+                    </div>
+
+                    {/* Headline */}
+                    <h2 className="font-hero font-[900] text-3xl text-slate-900 uppercase tracking-tighter mb-3">
+                      You're All Set!
+                    </h2>
+
+                    {/* Supporting Copy */}
+                    <p className="text-lg text-slate-600 leading-relaxed">
+                      Your setup call is booked. Check your email for confirmation and calendar invite.
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>

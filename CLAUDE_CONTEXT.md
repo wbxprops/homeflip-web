@@ -2,7 +2,7 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2026-01-06
+**Last Updated:** 2026-01-07
 **Claude Code Version:** Opus 4.5
 
 ---
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Insights section, HVCO mobile polish, OG meta tags complete.
+**Current Status:** 🚧 IN PROGRESS - Resource Hub with guide sections and community workspace complete.
 
 ---
 
@@ -34,9 +34,20 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 ## 🎯 What I Need to Know
 
 ### Current Focus
-**Active Work:** Insights section with SEO-optimized research articles.
+**Active Work:** Resource Hub build-out complete. Ready for Training Videos page or additional content.
 
 ### Session History
+#### 2026-01-07 (Resource Hub: Guide & Community)
+- ✅ Expandable "Probate Profit Machine" nav with Part I, II, III sub-items
+- ✅ Guide overview page with section cards and secondary PDF download
+- ✅ Part I: "What Is Probate?" - documentation-style reading view
+- ✅ Part II: "Finding Cases" - documentation-style reading view
+- ✅ Part III: "Making Contact" - documentation-style reading view
+- ✅ Community Workspace page redesigned as "bridge surface" (~50-60% marketing)
+- ✅ 2-column layout with feature tiles (Live Calls, Trainings, D2S, Real Estate Empires)
+- ✅ Layout updates: smaller logo (h-6), aligned with nav icons (pl-5)
+- **Deployed**: Commit `0b4bb7e` pushed to origin/master
+
 #### 2026-01-06 (Insights, Mobile, OG Tags)
 - ✅ Created `/insights/page.tsx` - index page with Featured/More structure (no dates)
 - ✅ Created `/insights/probate-vs-foreclosure/page.tsx` - first research article
@@ -128,11 +139,19 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 ### Next Session Goals
 - [x] ~~Add remaining states to jurisdictions table~~ (DONE - 51 states, 3,103 counties)
 - [x] ~~Connect custom domain~~ (homeflip.ai is live!)
-- [ ] Write custom copy for Probate Profit Machine (replace d2s placeholder copy)
-- [ ] Create/update thank-you page with actual PDF download link
-- [ ] Set up email automation for lead nurture sequence
-- [ ] Add tracking/analytics for conversion measurement
-- [ ] Test full claim-your-county → booking flow end-to-end
+- [x] ~~Resource Hub guide sections~~ (DONE - Part I, II, III)
+- [x] ~~Community Workspace page~~ (DONE - bridge surface design)
+- [ ] **Resource Hub: Probate Profit Machine enhancements** (see `docs/CONTEXT-probate-profit-machine-guide.md`)
+  - [ ] Build AudioPlayer component (Wistia embed)
+  - [ ] Build FullStoryCallout component
+  - [ ] Add Part IV page
+  - [ ] Add audio players to Part I, II, III, IV pages
+  - [ ] Update guide overview with audio indicators
+  - [ ] Connect PDF download to actual file
+- [ ] Training Videos page content
+- [ ] Test upgrade flow end-to-end (Claim Your County → Calendly)
+- [ ] Mobile testing for Resource Hub pages
+- [ ] **Insights Article: TCPA Compliance** - Write article about TCPA regulations for real estate investors contacting probate leads. Clever title idea: "TCPA: It's Not Optional" or similar. Cover do-not-call rules, cold texting fines, state-specific calling hours, legal disclaimers. Critical topic referenced in Probate Profit Machine ebook. **IMPORTANT:** Once published, link to this article from Section 3 of the Probate Profit Machine guide (compliance disclaimer section).
 
 ---
 
@@ -140,6 +159,8 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 
 ### Key Files
 - **docs/guide-website-overview.md** - Source of truth for content strategy, tone/voice, page structure
+- **docs/CONTEXT-resource-hub.md** - Resource Hub philosophy and design rules
+- **docs/CONTEXT-probate-profit-machine-guide.md** - PPM guide implementation (web/audio/PDF model)
 - **src/app/page.tsx** - Main landing page (all content)
 - **src/app/globals.css** - Brand colors and utility classes
 - **src/app/layout.tsx** - SEO metadata and layout

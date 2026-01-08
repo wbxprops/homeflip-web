@@ -16,6 +16,24 @@ const articles = [
     readTime: "8 min read",
     icon: <BarChart3 className="w-5 h-5" />,
     featured: true
+  },
+  {
+    slug: "tcpa-ruling-cold-calling-investors",
+    title: "TCPA Ruling 2025: Investors Can Cold Call to Buy Houses",
+    excerpt: "The Cofey v. Fast Easy Offer ruling confirms investor buy offers are NOT telephone solicitations under TCPA. Here's what it means for cold calling probate leads.",
+    category: "Legal Update",
+    readTime: "10 min read",
+    icon: <Lightbulb className="w-5 h-5" />,
+    featured: false
+  },
+  {
+    slug: "ai-cold-calling-real-estate-investors",
+    title: "AI Cold Calling for Real Estate Investors 2026: Scale Probate Deals Compliantly",
+    excerpt: "The best AI cold calling tools for wholesalers and investors. Learn how to scale your probate lead outreach while staying TCPA compliant.",
+    category: "Technology Guide",
+    readTime: "12 min read",
+    icon: <Lightbulb className="w-5 h-5" />,
+    featured: false
   }
   // Add more articles here as you create them:
   // {
