@@ -24,6 +24,7 @@ export const Navbar = ({ minimal = false, variant = 'dark' }: NavbarProps) => {
   const menuLinks = [
     { href: '/#probate-investing', label: 'Why Probate' },
     { href: '/#features', label: 'How It Works' },
+    { href: '/insights', label: 'Insights' },
     { href: '/#faq', label: 'FAQs' },
     { href: '/about', label: 'About Us' },
     { href: '/contact', label: 'Contact' },
