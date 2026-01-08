@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { hubConfig } from '@/config/hub.config';
 
 interface Part {
   id: string;
@@ -14,9 +15,11 @@ interface SectionNavigatorProps {
 }
 
 export function SectionNavigator({ parts, activePart, onPartClick }: SectionNavigatorProps) {
-  const truncateTitle = (title: string, maxLength: number = 36) => {
-    if (title.length <= maxLength) return title;
-    return title.slice(0, maxLength).trimEnd() + '...';
+  const { titleMaxLength, truncationSuffix } = hubConfig.navigation;
+
+  const truncateTitle = (title: string) => {
+    if (title.length <= titleMaxLength) return title;
+    return title.slice(0, titleMaxLength).trimEnd() + truncationSuffix;
   };
 
   return (
