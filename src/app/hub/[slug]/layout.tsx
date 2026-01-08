@@ -232,34 +232,31 @@ export default function HubLayout({ children }: HubLayoutProps) {
                 </div>
               ) : (
                 <>
-                  {/* Header */}
-                  <div className="flex items-center justify-between px-6 py-5 border-b border-white/[0.06]">
-                    <h2 className="text-xl font-semibold text-white">Resend Secure Link</h2>
-                    <button
-                      onClick={() => {
-                        setResendModalOpen(false);
-                        setResendStatus('idle');
-                        setResendEmail('');
-                      }}
-                      className="text-white/40 hover:text-white/70 transition-colors p-1 hover:bg-white/5 rounded-lg"
-                    >
-                      <X className="w-5 h-5" />
-                    </button>
-                  </div>
+                  {/* Close button */}
+                  <button
+                    onClick={() => {
+                      setResendModalOpen(false);
+                      setResendStatus('idle');
+                      setResendEmail('');
+                    }}
+                    className="absolute top-4 right-4 text-white/40 hover:text-white/70 transition-colors p-1 hover:bg-white/5 rounded-lg"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
 
-                  {/* Content */}
-                  <div className="px-6 py-6">
-                    <p className="text-white/50 text-[0.95rem] mb-6">
+                  {/* Content - Centered */}
+                  <div className="px-8 py-8">
+                    <h2 className="text-2xl font-semibold text-white mb-2 text-center">Resend Secure Link</h2>
+                    <p className="text-white/50 text-[0.95rem] mb-8 text-center">
                       Enter the email you signed up with and we'll send your access link.
                     </p>
 
                     <form onSubmit={handleResendSubmit}>
                       <div className="mb-6">
-                        <label className="block text-white/60 text-sm mb-2 font-medium">Email Address</label>
                         <input
                           type="email"
                           required
-                          placeholder="you@example.com"
+                          placeholder="Email address"
                           value={resendEmail}
                           onChange={(e) => setResendEmail(e.target.value)}
                           className="w-full px-4 text-white placeholder:text-white/30 focus:outline-none transition-all text-[1.1rem]"
@@ -272,34 +269,20 @@ export default function HubLayout({ children }: HubLayoutProps) {
                         />
                       </div>
 
-                      {/* Actions */}
-                      <div className="flex justify-end gap-3 pt-2">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setResendModalOpen(false);
-                            setResendStatus('idle');
-                            setResendEmail('');
-                          }}
-                          className="px-6 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all text-base font-medium"
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          type="submit"
-                          disabled={resendStatus === 'submitting'}
-                          className="btn-gradient px-6 py-3 rounded-xl font-semibold text-base transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                          {resendStatus === 'submitting' ? (
-                            <span className="flex items-center gap-2">
-                              <RefreshCw className="w-4 h-4 animate-spin" />
-                              Sending...
-                            </span>
-                          ) : (
-                            'Send Link'
-                          )}
-                        </button>
-                      </div>
+                      <button
+                        type="submit"
+                        disabled={resendStatus === 'submitting'}
+                        className="w-full btn-gradient px-6 py-4 rounded-xl font-semibold text-base transition-all hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {resendStatus === 'submitting' ? (
+                          <span className="flex items-center justify-center gap-2">
+                            <RefreshCw className="w-4 h-4 animate-spin" />
+                            Sending...
+                          </span>
+                        ) : (
+                          'Send My Link'
+                        )}
+                      </button>
                     </form>
                   </div>
                 </>
