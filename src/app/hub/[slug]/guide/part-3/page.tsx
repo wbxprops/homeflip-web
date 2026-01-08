@@ -250,7 +250,7 @@ export default function GuidePart3Page() {
     },
     {
       id: 'timeline-intelligence',
-      title: 'Timeline Intelligence: The PB Scoring System',
+      title: 'Timeline Intelligence',
       content: (
         <>
           <p style={{ color: 'rgba(255,255,255,0.6)' }} className="leading-relaxed mb-4">
