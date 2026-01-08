@@ -30,13 +30,13 @@ export default function GuidePart1Page() {
             className="font-sans font-bold text-3xl md:text-4xl leading-tight mb-4"
             style={{ color: 'rgba(255,255,255,0.95)' }}
           >
-            What Is Probate?
+            The Opportunity
           </h1>
           <p
             className="text-lg leading-relaxed"
             style={{ color: 'rgba(255,255,255,0.5)' }}
           >
-            Understanding the probate process and why it creates unique opportunities for real estate investors.
+            Why probate is the best lead source and the Silver Tsunami demographics.
           </p>
         </header>
 
@@ -154,7 +154,7 @@ export default function GuidePart1Page() {
               className="flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-medium transition hover:bg-white/[0.04]"
               style={{ color: '#83d4c0' }}
             >
-              Part II: Finding Cases
+              Part II: Finding Probate Leads
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

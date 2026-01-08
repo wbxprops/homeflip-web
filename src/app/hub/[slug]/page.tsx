@@ -29,31 +29,39 @@ export default function HubGuidePage() {
   // DEV MODE: Bypass token validation for development
   const DEV_MODE = true;
 
-  // Guide sections
+  // Guide sections - matches ebook structure
   const guideSections = [
     {
       id: 'part-1',
       part: 'Part I',
-      title: 'What Is Probate?',
-      description: 'Understanding the probate process and why it creates unique opportunities.',
-      readTime: '5 min',
+      title: 'The Opportunity',
+      description: 'Why probate is the best lead source and the Silver Tsunami demographics.',
+      readTime: '8 min',
       href: `/hub/${slug}/guide/part-1`
     },
     {
       id: 'part-2',
       part: 'Part II',
-      title: 'Finding Cases',
+      title: 'Finding Probate Leads',
       description: 'How to identify and source probate leads in your target market.',
-      readTime: '7 min',
+      readTime: '10 min',
       href: `/hub/${slug}/guide/part-2`
     },
     {
       id: 'part-3',
       part: 'Part III',
-      title: 'Making Contact',
-      description: 'Reaching out to probate leads with empathy and professionalism.',
-      readTime: '8 min',
+      title: 'Working the Leads',
+      description: 'Timeline intelligence, follow-up cadence, and tracking everything.',
+      readTime: '12 min',
       href: `/hub/${slug}/guide/part-3`
+    },
+    {
+      id: 'part-4',
+      part: 'Part IV',
+      title: 'Tying It All Together',
+      description: 'Your next steps and how Homeflip.ai brings it all together.',
+      readTime: '5 min',
+      href: `/hub/${slug}/guide/part-4`
     },
   ];
 

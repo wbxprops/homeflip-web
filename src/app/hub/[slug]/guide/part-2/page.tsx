@@ -30,7 +30,7 @@ export default function GuidePart2Page() {
             className="font-sans font-bold text-3xl md:text-4xl leading-tight mb-4"
             style={{ color: 'rgba(255,255,255,0.95)' }}
           >
-            Finding Probate Cases
+            Finding Probate Leads
           </h1>
           <p
             className="text-lg leading-relaxed"
@@ -183,14 +183,14 @@ export default function GuidePart2Page() {
               style={{ color: 'rgba(255,255,255,0.5)' }}
             >
               <ArrowLeft className="w-4 h-4" />
-              Part I: What Is Probate?
+              Part I: The Opportunity
             </Link>
             <Link
               href={`/hub/${slug}/guide/part-3`}
               className="flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-medium transition hover:bg-white/[0.04]"
               style={{ color: '#83d4c0' }}
             >
-              Part III: Making Contact
+              Part III: Working the Leads
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { ArrowLeft, Clock, Download } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Clock, Download } from 'lucide-react';
 
 export default function GuidePart3Page() {
   const params = useParams();
@@ -30,13 +30,13 @@ export default function GuidePart3Page() {
             className="font-sans font-bold text-3xl md:text-4xl leading-tight mb-4"
             style={{ color: 'rgba(255,255,255,0.95)' }}
           >
-            Making Contact
+            Working the Leads
           </h1>
           <p
             className="text-lg leading-relaxed"
             style={{ color: 'rgba(255,255,255,0.5)' }}
           >
-            How to reach out to probate leads with empathy and professionalism.
+            Timeline intelligence, follow-up cadence, and tracking everything.
           </p>
         </header>
 
@@ -254,11 +254,16 @@ export default function GuidePart3Page() {
               style={{ color: 'rgba(255,255,255,0.5)' }}
             >
               <ArrowLeft className="w-4 h-4" />
-              Part II: Finding Cases
+              Part II: Finding Probate Leads
             </Link>
-            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>
-              End of guide
-            </span>
+            <Link
+              href={`/hub/${slug}/guide/part-4`}
+              className="flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-medium transition hover:bg-white/[0.04]"
+              style={{ color: '#83d4c0' }}
+            >
+              Part IV: Tying It All Together
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </footer>
       </article>
