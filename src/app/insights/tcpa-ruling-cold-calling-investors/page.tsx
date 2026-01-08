@@ -129,7 +129,7 @@ export default function TCPARulingPage() {
                     The Bottom Line
                   </p>
                   <p className="text-lg text-slate-700">
-                    Calls offering to <strong>buy</strong> real estate are NOT "telephone solicitations" under the TCPA. Investors can cold call homeowners with cash offers—including probate leads—without the same legal exposure agents face for listing pitches.
+                    Calls offering to <strong>buy</strong> real estate are NOT "telephone solicitations" under the TCPA. Investors can cold call homeowners with cash offers, including probate leads, without the same legal exposure agents face for listing pitches.
                   </p>
                 </div>
               </div>
@@ -155,7 +155,7 @@ export default function TCPARulingPage() {
               </p>
 
               <p className="text-xl text-slate-600 leading-relaxed mb-6">
-                For investors targeting <strong className="text-slate-900">probate leads</strong>—where motivated executors and heirs often need fast solutions—this ruling removes a major compliance concern. Now you can work those leads by phone with clarity on where the law stands.
+                For investors targeting <strong className="text-slate-900">probate leads</strong>, where motivated executors and heirs often need fast solutions, this ruling removes a major compliance concern. Now you can work those leads by phone with clarity on where the law stands.
               </p>
 
               <h2 className="font-hero font-[900] text-3xl md:text-4xl text-slate-900 uppercase tracking-tighter mt-16 mb-6">
@@ -183,7 +183,7 @@ export default function TCPARulingPage() {
               </ul>
 
               <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                For years, real estate investors feared that cold calling homeowners—even with legitimate cash offers—could trigger TCPA liability. That fear was overblown. And now we have federal court confirmation.
+                For years, real estate investors feared that cold calling homeowners (even with legitimate cash offers) could trigger TCPA liability. That fear was overblown. And now we have federal court confirmation.
               </p>
 
               <h2 className="font-hero font-[900] text-3xl md:text-4xl text-slate-900 uppercase tracking-tighter mt-16 mb-6">
@@ -229,7 +229,7 @@ export default function TCPARulingPage() {
                 <a href="https://tcpaworld.com/2025/07/24/buy-away-another-court-holds-offers-to-buy-real-estate-are-not-telephone-solicitations-under-the-tcpas-dnc-provisions/" target="_blank" rel="noopener noreferrer" className="text-[#0891b2] hover:underline">
                   TCPAWorld's analysis
                 </a>
-                {' '}noted: "The call was not designed to encourage the recipient to buy something—it was designed to encourage the recipient to <strong className="text-slate-900">sell</strong> something."
+                {' '}noted: "The call was not designed to encourage the recipient to buy something. It was designed to encourage the recipient to <strong className="text-slate-900">sell</strong> something."
               </p>
 
               <h2 className="font-hero font-[900] text-3xl md:text-4xl text-slate-900 uppercase tracking-tighter mt-16 mb-6">
@@ -286,7 +286,7 @@ export default function TCPARulingPage() {
               </p>
 
               <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                The difference? Agents pitch their <strong className="text-slate-900">services</strong>—listing, marketing, selling—which constitutes "encouraging the purchase" of those services. Investors offering to buy don't trigger the same provision.
+                The difference? Agents pitch their <strong className="text-slate-900">services</strong> (listing, marketing, selling) which constitutes "encouraging the purchase" of those services. Investors offering to buy don't trigger the same provision.
               </p>
 
               <h2 className="font-hero font-[900] text-3xl md:text-4xl text-slate-900 uppercase tracking-tighter mt-16 mb-6">
@@ -319,7 +319,7 @@ export default function TCPARulingPage() {
                 {[
                   { title: "Robocalls and autodialers", desc: "Prior express consent is still required for automated calling systems" },
                   { title: "State-specific laws", desc: "Some states have their own telemarketing regulations beyond federal TCPA" },
-                  { title: "Misrepresentation", desc: "Calls must be truthful—claiming you'll \"buy\" when you intend only to wholesale requires honest disclosure" },
+                  { title: "Misrepresentation", desc: "Calls must be truthful. Claiming you'll \"buy\" when you intend only to wholesale requires honest disclosure" },
                   { title: "Time restrictions", desc: "The 8am-9pm calling window still applies as a best practice" }
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
@@ -344,7 +344,7 @@ export default function TCPARulingPage() {
               </p>
 
               <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                The vacated rule would have required that consumer consent for marketing calls be limited to a single, specific seller. With the rule vacated, broader consent arrangements for lead sharing are again permissible—giving more flexibility to lead generation services and the investors who use them.
+                The vacated rule would have required that consumer consent for marketing calls be limited to a single, specific seller. With the rule vacated, broader consent arrangements for lead sharing are again permissible, giving more flexibility to lead generation services and the investors who use them.
               </p>
 
               <h2 className="font-hero font-[900] text-3xl md:text-4xl text-slate-900 uppercase tracking-tighter mt-16 mb-6">
@@ -369,7 +369,7 @@ export default function TCPARulingPage() {
                 {[
                   { title: "Motivated sellers", desc: "Executors and heirs often prioritize speed over maximum price" },
                   { title: "Less competition", desc: "Most investors don't know how to find or work probate leads" },
-                  { title: "Direct relationships", desc: "No bidding wars—just conversations with decision-makers" },
+                  { title: "Direct relationships", desc: "No bidding wars, just conversations with decision-makers" },
                   { title: "Consistent volume", desc: "Probate happens year-round regardless of market conditions" }
                 ].map((item, i) => (
                   <div key={i} className="p-5 bg-slate-50 rounded-xl">
@@ -391,7 +391,7 @@ export default function TCPARulingPage() {
               </div>
 
               <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                Simple. Direct. Frames you as the buyer—exactly what the <em>Cofey</em> ruling protects.
+                Simple. Direct. Frames you as the buyer. Exactly what the <em>Cofey</em> ruling protects.
               </p>
 
               <h2 className="font-hero font-[900] text-3xl md:text-4xl text-slate-900 uppercase tracking-tighter mt-16 mb-6">
@@ -400,18 +400,18 @@ export default function TCPARulingPage() {
 
               <ol className="space-y-5 my-8">
                 {[
-                  { title: "Use manual dialing", desc: "No autodialers or predictive dialers—keep it compliant" },
+                  { title: "Use manual dialing", desc: "No autodialers or predictive dialers. Keep it compliant" },
                   { title: "Get targeted probate leads", desc: "Fresh leads from court records, matched to property data" },
                   { title: "Train on \"buy offer\" framing", desc: "Every call clearly communicates your intent to purchase" },
                   { title: "Document everything", desc: "Log calls in your CRM: dates, times, scripts, outcomes" },
                   { title: "Consult an attorney", desc: "Review your practices for state-level compliance" },
-                  { title: "Follow up consistently", desc: "Probate timelines are long—systematic follow-up wins deals" }
+                  { title: "Follow up consistently", desc: "Probate timelines are long. Systematic follow-up wins deals" }
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-4">
                     <span className="w-9 h-9 rounded-full bg-[#7c3aed]/10 text-[#7c3aed] font-bold flex items-center justify-center flex-shrink-0 text-lg">{i + 1}</span>
                     <div>
                       <strong className="text-lg text-slate-900">{item.title}</strong>
-                      <span className="text-lg text-slate-600"> — {item.desc}</span>
+                      <span className="text-lg text-slate-600">: {item.desc}</span>
                     </div>
                   </li>
                 ))}
@@ -477,7 +477,7 @@ export default function TCPARulingPage() {
               </p>
 
               <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                For investors targeting probate leads, this is a green light to pick up the phone. Probate properties represent nearly twice the opportunity of foreclosures, with a fraction of the competition. Executors and heirs often need fast, simple solutions—exactly what investor cash offers provide.
+                For investors targeting probate leads, this is a green light to pick up the phone. Probate properties represent nearly twice the opportunity of foreclosures, with a fraction of the competition. Executors and heirs often need fast, simple solutions. Exactly what investor cash offers provide.
               </p>
 
               <p className="text-lg text-slate-600 leading-relaxed font-medium">
@@ -491,49 +491,49 @@ export default function TCPARulingPage() {
                   <li className="flex items-start gap-2">
                     <span>1.</span>
                     <a href="https://www.casemine.com/judgement/us/6843a77b656e170da02cc29e" target="_blank" rel="noopener noreferrer" className="text-[#0891b2] hover:underline flex items-center gap-1">
-                      Cofey v. Fast Easy Offer, LLC — U.S. District Court, Arizona (June 2025)
+                      Cofey v. Fast Easy Offer, LLC, U.S. District Court, Arizona (June 2025)
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   </li>
                   <li className="flex items-start gap-2">
                     <span>2.</span>
                     <a href="https://tcpaworld.com/2025/07/24/buy-away-another-court-holds-offers-to-buy-real-estate-are-not-telephone-solicitations-under-the-tcpas-dnc-provisions/" target="_blank" rel="noopener noreferrer" className="text-[#0891b2] hover:underline flex items-center gap-1">
-                      TCPAWorld — Buy Away: Court Holds Offers to Buy Are Not Solicitations
+                      TCPAWorld: Buy Away: Court Holds Offers to Buy Are Not Solicitations
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   </li>
                   <li className="flex items-start gap-2">
                     <span>3.</span>
                     <a href="https://www.rothjackson.com/blog/2025/06/are-real-estate-purchase-calls-telephone-solicitations-another-federal-district-court-says-no/" target="_blank" rel="noopener noreferrer" className="text-[#0891b2] hover:underline flex items-center gap-1">
-                      Roth Jackson — Real Estate Purchase Calls Analysis
+                      Roth Jackson: Real Estate Purchase Calls Analysis
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   </li>
                   <li className="flex items-start gap-2">
                     <span>4.</span>
                     <a href="https://www.mintz.com/insights-center/viewpoints/2776/2025-06-25-telephone-and-texting-compliance-wake-and-smell-coffey" target="_blank" rel="noopener noreferrer" className="text-[#0891b2] hover:underline flex items-center gap-1">
-                      Mintz — Wake and Smell the Coffey
+                      Mintz: Wake and Smell the Coffey
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   </li>
                   <li className="flex items-start gap-2">
                     <span>5.</span>
                     <a href="https://natlawreview.com/article/buying-activity-vs-selling-activity-court-holds-offers-buy-houses-are-not-telephone" target="_blank" rel="noopener noreferrer" className="text-[#0891b2] hover:underline flex items-center gap-1">
-                      National Law Review — Buying vs. Selling Activity
+                      National Law Review: Buying vs. Selling Activity
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   </li>
                   <li className="flex items-start gap-2">
                     <span>6.</span>
                     <a href="https://nationalmortgageprofessional.com/news/realogy-settles-tcpa-class-action-lawsuit-20m" target="_blank" rel="noopener noreferrer" className="text-[#0891b2] hover:underline flex items-center gap-1">
-                      National Mortgage Professional — Realogy $20M Settlement
+                      National Mortgage Professional: Realogy $20M Settlement
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   </li>
                   <li className="flex items-start gap-2">
                     <span>7.</span>
                     <a href="https://www.wiley.law/alert-UPDATE-11th-Circuit-Vacates-FCCs-One-to-One-TCPA-Consent-Rule" target="_blank" rel="noopener noreferrer" className="text-[#0891b2] hover:underline flex items-center gap-1">
-                      Wiley — 11th Circuit Vacates One-to-One Consent Rule
+                      Wiley: 11th Circuit Vacates One-to-One Consent Rule
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   </li>

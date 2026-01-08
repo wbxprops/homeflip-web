@@ -10,8 +10,8 @@ import { useState } from "react";
 // FAQ data
 const faqs = [
   {
-    question: "Can I use AI voice agents for cold calling probate leads?",
-    answer: "Generally no—not without prior consent. AI voice agents making autonomous outbound calls are treated as robocalls under FCC rules. For unsolicited probate outreach, use AI-assisted human calling instead."
+    question: "Can I use AI voice agents to cold call probate leads without consent?",
+    answer: "No. This is illegal under federal law. The FCC explicitly ruled in February 2024 that AI-generated voices in robocalls are illegal without prior express written consent. AI voice agents making autonomous outbound calls to people who haven't opted in violates TCPA and can result in $500-$1,500 per call in statutory damages. Many investors have been misled by AI vendors. Don't be one of them. For unsolicited outreach, you must have a human on the line."
   },
   {
     question: "What's the best AI dialer for real estate wholesalers?",
@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     question: "Can AI write my cold calling scripts?",
-    answer: "Absolutely. AI tools excel at generating scripts optimized for real estate cold calling. Just ensure every script positions you as a buyer making offers—not selling services."
+    answer: "Absolutely. AI tools excel at generating scripts optimized for real estate cold calling. Just ensure every script positions you as a buyer making offers, not selling services."
   },
   {
     question: "Do I still need to scrub against the Do Not Call registry?",
@@ -35,7 +35,7 @@ const faqs = [
   },
   {
     question: "How do AI coaching tools work during calls?",
-    answer: "AI coaching tools analyze your conversation in real-time, displaying suggested responses for objections, highlighting buying signals, and prompting follow-up questions—like having an expert whispering in your ear."
+    answer: "AI coaching tools analyze your conversation in real-time, displaying suggested responses for objections, highlighting buying signals, and prompting follow-up questions. It's like having an expert whispering in your ear."
   },
   {
     question: "Can I use AI to leave voicemails?",
@@ -47,7 +47,7 @@ const faqs = [
   },
   {
     question: "Should I use AI for inbound calls too?",
-    answer: "Yes—AI excels at handling inbound callbacks. Tools like Callin.io and Ylopo AI Voice can qualify incoming leads 24/7, routing hot prospects to your team immediately."
+    answer: "Yes. AI excels at handling inbound callbacks. Tools like Callin.io and Ylopo AI Voice can qualify incoming leads 24/7, routing hot prospects to your team immediately."
   }
 ];
 
@@ -97,7 +97,7 @@ const tools = [
     name: "Convin.ai",
     bestFor: "Call analytics & coaching",
     pros: "Deep analytics, objection tracking",
-    cons: "Analytics tool only—needs separate dialer",
+    cons: "Analytics tool only, needs separate dialer",
     pricing: "Contact for quote",
     url: "https://convin.ai/blog/cold-calls-real-estate"
   }
@@ -189,9 +189,36 @@ export default function AIColdCallingPage() {
                     The Opportunity
                   </p>
                   <p className="text-lg text-slate-700">
-                    AI doesn't replace the human connection that closes deals—it <strong>amplifies your reach</strong>. The right tools can 2-4x your daily conversations while keeping you TCPA compliant.
+                    AI doesn't replace the human connection that closes deals. It <strong>amplifies your reach</strong>. The right tools can 2-4x your daily conversations while keeping you TCPA compliant.
                   </p>
                 </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Critical Warning Section */}
+        <section className="py-8 px-6 bg-red-50 border-y border-red-200">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex items-start gap-4"
+            >
+              <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
+                <AlertTriangle className="w-6 h-6 text-red-600" />
+              </div>
+              <div>
+                <p className="text-xl md:text-2xl font-bold text-red-900 mb-2">
+                  The Hard Truth About AI Cold Calling
+                </p>
+                <p className="text-lg text-red-800 mb-3">
+                  <strong>AI voice agents making unsolicited cold calls is illegal without prior express written consent.</strong> The FCC ruled in February 2024 that AI-generated voices in robocalls are prohibited. Violations carry statutory damages of $500-$1,500 <em>per call</em>.
+                </p>
+                <p className="text-base text-red-700">
+                  Many AI vendors market their tools to real estate investors without clearly explaining this. Don't be misled. If the person you're calling hasn't opted in to receive AI calls from you, a human must be on the line. This article focuses on <strong>AI-assisted human calling</strong>, the legal way to scale.
+                </p>
               </div>
             </motion.div>
           </div>
@@ -207,15 +234,15 @@ export default function AIColdCallingPage() {
               className="prose prose-lg prose-slate max-w-none"
             >
               <p className="text-xl text-slate-600 leading-relaxed mb-6">
-                2026 is the year AI transforms cold calling for real estate investors. Between the landmark TCPA ruling that cleared investor buy offers from solicitation restrictions and the explosion of AI-powered dialing tools, you now have an unprecedented opportunity to scale your outreach.
+                2026 is the year AI transforms cold calling for real estate investors. Between the landmark TCPA ruling that cleared investor buy offers from solicitation restrictions and the explosion of AI-powered dialing tools, you now have an unprecedented opportunity to scale your outreach, <strong className="text-slate-900">if you do it right</strong>.
               </p>
 
               <p className="text-xl text-slate-600 leading-relaxed mb-6">
-                For investors targeting <strong className="text-slate-900">probate leads</strong>—where motivated executors and heirs represent nearly twice the deal volume of foreclosures—this convergence is a game-changer.
+                For investors targeting <strong className="text-slate-900">probate leads</strong>—where motivated executors and heirs represent nearly twice the deal volume of foreclosures—this is exciting. But you need to understand what's legal and what isn't.
               </p>
 
               <p className="text-xl text-slate-600 leading-relaxed mb-6">
-                But there's a critical distinction: fully automated AI robocalls generally require prior consent. The opportunity isn't in replacing yourself with a robot. It's in using <strong className="text-slate-900">AI-assisted tools</strong> to enhance your manual cold calling.
+                <strong className="text-slate-900">Here's the bottom line:</strong> Fully automated AI voice agents making unsolicited calls require prior express written consent. Without it, you're breaking federal law. The opportunity isn't in replacing yourself with a robot. It's in using <strong className="text-slate-900">AI-assisted tools</strong> to make your human cold calling faster, smarter, and more effective.
               </p>
 
               <h2 className="font-hero font-[900] text-3xl md:text-4xl text-slate-900 uppercase tracking-tighter mt-16 mb-6">
@@ -391,7 +418,7 @@ export default function AIColdCallingPage() {
               <ol className="space-y-5 my-8">
                 {[
                   { title: "Get Fresh Leads", desc: "HomeFlip.ai delivers probate leads direct from county court records, matched to property data" },
-                  { title: "Scrub Your Lists", desc: "Run numbers through DNC verification—best practice even for investor calls" },
+                  { title: "Scrub Your Lists", desc: "Run numbers through DNC verification. Best practice even for investor calls" },
                   { title: "Load Into Your AI Dialer", desc: "Import leads with property details, case info, and notes. Let AI organize by priority" },
                   { title: "Power Dial with AI Assistance", desc: "As each call connects, AI surfaces context: address, case date, executor name, value" },
                   { title: "Follow AI-Prompted Scripts", desc: "Lead with buy offers. AI prompts responses for common objections" },
@@ -402,7 +429,7 @@ export default function AIColdCallingPage() {
                     <span className="w-9 h-9 rounded-full bg-[#0891b2]/10 text-[#0891b2] font-bold flex items-center justify-center flex-shrink-0 text-lg">{i + 1}</span>
                     <div>
                       <strong className="text-lg text-slate-900">{item.title}</strong>
-                      <span className="text-lg text-slate-600"> — {item.desc}</span>
+                      <span className="text-lg text-slate-600">: {item.desc}</span>
                     </div>
                   </li>
                 ))}
@@ -477,7 +504,7 @@ export default function AIColdCallingPage() {
               <ol className="space-y-5 my-8">
                 {[
                   { title: "Get exclusive probate leads", desc: "Fresh leads from court records, delivered daily from HomeFlip.ai" },
-                  { title: "Choose a TCPA-compliant AI tool", desc: "Power dialers with AI assistance—not autonomous voice agents" },
+                  { title: "Choose a TCPA-compliant AI tool", desc: "Power dialers with AI assistance, not autonomous voice agents" },
                   { title: "Scrub your lists", desc: "DNC verification before loading campaigns. Document compliance" },
                   { title: "Train on buy-focused scripts", desc: "Every call positions you as the buyer, not a service seller" },
                   { title: "Start with power dialing", desc: "Human on line when each call connects. AI handles efficiency" },
@@ -488,7 +515,7 @@ export default function AIColdCallingPage() {
                     <span className="w-9 h-9 rounded-full bg-[#7c3aed]/10 text-[#7c3aed] font-bold flex items-center justify-center flex-shrink-0 text-lg">{i + 1}</span>
                     <div>
                       <strong className="text-lg text-slate-900">{item.title}</strong>
-                      <span className="text-lg text-slate-600"> — {item.desc}</span>
+                      <span className="text-lg text-slate-600">: {item.desc}</span>
                     </div>
                   </li>
                 ))}

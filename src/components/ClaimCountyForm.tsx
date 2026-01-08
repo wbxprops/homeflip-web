@@ -602,12 +602,12 @@ export const ClaimCountyForm = () => {
 
               {/* Headline */}
               <h2 className="font-hero font-[900] text-3xl text-slate-900 uppercase tracking-tighter mb-3">
-                Application Received
+                County Activation Pending
               </h2>
 
               {/* Supporting Copy */}
               <p className="text-lg text-slate-600 leading-relaxed mb-8">
-                Your county request has been submitted. To complete your application, schedule a quick setup call.
+                Your county has been submitted. Access will be activated after setup is completed.
               </p>
 
               {/* CTA */}
@@ -616,13 +616,13 @@ export const ClaimCountyForm = () => {
                 onClick={() => setStep(4)}
                 className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-2xl uppercase tracking-tighter shadow-lg shadow-[#0891b2]/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-3"
               >
-                Schedule Setup Call
+                Finalize Setup
                 <ArrowRight className="w-6 h-6" />
               </button>
 
               {/* Expectation-Setting Line */}
               <p className="text-sm text-slate-500 mt-5">
-                Next step: Pick a time that works for a 15-minute call.
+                Next step: schedule your implementation call to complete activation.
               </p>
             </div>
           </motion.div>
