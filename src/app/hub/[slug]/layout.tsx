@@ -172,12 +172,25 @@ export default function HubLayout({ children }: HubLayoutProps) {
     setResendStatus('submitting');
 
     try {
-      // TODO: Wire up to n8n resend workflow
-      // For now, just simulate success after a short delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setResendStatus('success');
+      const response = await fetch('https://whitebox-one.onrender.com/webhook/resend-magic-link', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: resendEmail.toLowerCase().trim(),
+          hub_slug: slug,
+        }),
+      });
+
+      // Always show success (security: don't reveal if email exists)
+      if (response.ok) {
+        setResendStatus('success');
+      } else {
+        // Even on error, show success for security
+        setResendStatus('success');
+      }
     } catch {
-      setResendStatus('error');
+      // Even on network error, show success for security
+      setResendStatus('success');
     }
   };
 
