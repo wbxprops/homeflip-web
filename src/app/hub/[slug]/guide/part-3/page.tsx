@@ -193,16 +193,16 @@ export default function GuidePart3Page() {
             <div className="space-y-4">
               {[
                 {
-                  objection: '"We're not ready to sell yet"',
-                  response: 'Completely understand. Would it be okay if I checked back in a few months? The offer will still be there when you're ready.'
+                  objection: "\"We're not ready to sell yet\"",
+                  response: "Completely understand. Would it be okay if I checked back in a few months? The offer will still be there when you're ready."
                 },
                 {
-                  objection: '"We're going to list with a realtor"',
-                  response: 'That makes sense—you may get a higher price that way. If it doesn't work out or you'd prefer a faster, simpler sale, feel free to reach out.'
+                  objection: "\"We're going to list with a realtor\"",
+                  response: "That makes sense—you may get a higher price that way. If it doesn't work out or you'd prefer a faster, simpler sale, feel free to reach out."
                 },
                 {
-                  objection: '"How did you get my information?"',
-                  response: 'Probate filings are public record. I review them to connect with families who might need help selling inherited property.'
+                  objection: "\"How did you get my information?\"",
+                  response: "Probate filings are public record. I review them to connect with families who might need help selling inherited property."
                 },
               ].map((item, i) => (
                 <div
