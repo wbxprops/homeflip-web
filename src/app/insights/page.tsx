@@ -52,6 +52,15 @@ const articles = [
     readTime: "9 min read",
     icon: <BarChart3 className="w-5 h-5" />,
     featured: false
+  },
+  {
+    slug: "trump-institutional-buyers-ban-probate",
+    title: "Trump's Proposed Ban on Institutional Buyers: What It Means for Probate Investors",
+    excerpt: "The January 7, 2026 announcement could shift competition dynamics. Here's what the data shows and how probate investors should prepare.",
+    category: "Strategy",
+    readTime: "9 min read",
+    icon: <Lightbulb className="w-5 h-5" />,
+    featured: false
   }
   // Add more articles here as you create them:
   // {
