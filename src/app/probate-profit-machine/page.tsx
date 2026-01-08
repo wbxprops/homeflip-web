@@ -108,6 +108,7 @@ export default function ProbateProfitMachinePage() {
         body: JSON.stringify({
           email: formData.email,
           firstName: formData.firstName,
+          phone: formData.phone,
           hub_slug: 'probate-profit-machine',
         }),
       });
