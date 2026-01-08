@@ -199,8 +199,15 @@ export default function HubLayout({ children }: HubLayoutProps) {
             Get Your Free Access
           </a>
 
-          <p className="text-white/40 text-sm">
+          <p className="text-white/40 text-sm mb-4">
             No password needed · No account to create · Just click and you're in
+          </p>
+
+          <p className="text-white/30 text-xs">
+            Already signed up?{' '}
+            <a href={`${brand.optInPath}/resend`} className="text-[#83d4c0] hover:underline">
+              Resend your magic link
+            </a>
           </p>
         </div>
       </div>
@@ -238,7 +245,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
           </p>
 
           <a
-            href={brand.optInPath}
+            href={`${brand.optInPath}/resend`}
             className="btn-gradient inline-block px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wide mb-4"
           >
             Get a Fresh Link
@@ -466,7 +473,8 @@ export default function HubLayout({ children }: HubLayoutProps) {
             <TrendingUp className="h-4 w-4" strokeWidth={1.25} />
             Guide
           </Link>
-          <Link
+          {/* Training - Hidden until video content is ready */}
+          {/* <Link
             href={`/hub/${slug}/training`}
             className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] font-medium whitespace-nowrap transition"
             style={{
@@ -476,7 +484,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
           >
             <Play className="h-4 w-4" strokeWidth={1.25} />
             Training
-          </Link>
+          </Link> */}
           <Link
             href={`/hub/${slug}/community`}
             className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] font-medium whitespace-nowrap transition"
