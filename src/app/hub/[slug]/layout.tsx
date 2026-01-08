@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, usePathname, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { TrendingUp, Play, GraduationCap, Bell, Landmark, X, Bookmark, ChevronDown, ChevronRight, RefreshCw } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { TrendingUp, Play, GraduationCap, Bell, Landmark, X, Bookmark, ChevronDown, ChevronRight, RefreshCw, Mail } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { logos, hubBranding } from '@/config/hub.config';
 
@@ -25,6 +26,11 @@ export default function HubLayout({ children }: HubLayoutProps) {
 
   // Token validation state
   const [tokenState, setTokenState] = useState<TokenState>({ status: 'loading' });
+
+  // Resend modal state
+  const [resendModalOpen, setResendModalOpen] = useState(false);
+  const [resendEmail, setResendEmail] = useState('');
+  const [resendStatus, setResendStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   // Validate token on mount
   useEffect(() => {
@@ -160,55 +166,220 @@ export default function HubLayout({ children }: HubLayoutProps) {
     benefits: [],
   };
 
-  // No token or invalid token - show friendly access screen
+  // Handle resend form submission
+  const handleResendSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setResendStatus('submitting');
+
+    try {
+      // TODO: Wire up to n8n resend workflow
+      // For now, just simulate success after a short delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setResendStatus('success');
+    } catch {
+      setResendStatus('error');
+    }
+  };
+
+  // No token or invalid token - show path picker
   if (tokenState.status === 'no_token' || tokenState.status === 'invalid') {
     return (
-      <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center px-6 py-12">
-        <div className="max-w-lg text-center">
-          {/* Ebook cover */}
-          {brand.coverImage && (
-            <div className="mb-8">
-              <img
-                src={brand.coverImage}
-                alt={brand.name}
-                className="h-48 mx-auto drop-shadow-2xl"
-              />
+      <div className="min-h-screen bg-[#0a0a0f] flex flex-col">
+        {/* Resend Modal */}
+        {resendModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+              onClick={() => {
+                setResendModalOpen(false);
+                setResendStatus('idle');
+                setResendEmail('');
+              }}
+            />
+            <div
+              className="relative w-full max-w-md rounded-2xl p-8"
+              style={{
+                background: 'linear-gradient(135deg, rgba(20,20,25,0.98) 0%, rgba(15,15,20,0.98) 100%)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                boxShadow: '0 25px 50px rgba(0,0,0,0.5)',
+              }}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => {
+                  setResendModalOpen(false);
+                  setResendStatus('idle');
+                  setResendEmail('');
+                }}
+                className="absolute top-4 right-4 text-white/40 hover:text-white/70 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {resendStatus === 'success' ? (
+                <div className="text-center py-4">
+                  <div className="w-16 h-16 rounded-full bg-[#53dac1]/20 flex items-center justify-center mx-auto mb-6">
+                    <Mail className="w-8 h-8 text-[#53dac1]" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-white mb-3">Check Your Inbox</h2>
+                  <p className="text-white/60 leading-relaxed">
+                    If <span className="text-white font-medium">{resendEmail}</span> is in our system, you'll receive your secure access link within a few minutes.
+                  </p>
+                  <button
+                    onClick={() => {
+                      setResendModalOpen(false);
+                      setResendStatus('idle');
+                      setResendEmail('');
+                    }}
+                    className="mt-8 px-8 py-3 rounded-xl font-bold text-sm uppercase tracking-wide text-white/70 hover:text-white transition-colors"
+                  >
+                    Close
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <h2 className="text-2xl font-bold text-white mb-2 text-center">Resend Secure Link</h2>
+                  <p className="text-white/50 text-center mb-8">
+                    Enter the email you signed up with and we'll send your access link.
+                  </p>
+
+                  <form onSubmit={handleResendSubmit}>
+                    <div className="mb-6">
+                      <input
+                        type="email"
+                        required
+                        placeholder="Email address"
+                        value={resendEmail}
+                        onChange={(e) => setResendEmail(e.target.value)}
+                        className="w-full px-5 py-4 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#53dac1]/50 transition-all"
+                        style={{
+                          background: 'rgba(255,255,255,0.05)',
+                          border: '1px solid rgba(255,255,255,0.1)',
+                        }}
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={resendStatus === 'submitting'}
+                      className="w-full btn-gradient px-8 py-4 rounded-xl font-bold text-base uppercase tracking-wide text-center transition-all hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {resendStatus === 'submitting' ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <RefreshCw className="w-5 h-5 animate-spin" />
+                          Sending...
+                        </span>
+                      ) : (
+                        'Send My Link'
+                      )}
+                    </button>
+                  </form>
+                </>
+              )}
             </div>
-          )}
+          </div>
+        )}
 
-          {/* Logo */}
-          <img
-            src={logos.logo.onDark}
-            alt="Homeflip.ai"
-            className="h-10 mx-auto mb-6"
-          />
-
-          <h1 className="text-2xl font-bold text-white mb-2">Welcome to the {brand.name}</h1>
-          <p className="text-white/50 text-sm mb-6">{brand.tagline}</p>
-
-          <p className="text-white/60 mb-6">
-            {tokenState.status === 'no_token'
-              ? "Get instant access — just enter your email and we'll send your personal access link."
-              : "Looks like this link isn't working. No worries — request a fresh one below and you'll be back in seconds."}
-          </p>
-
-          <a
-            href={brand.optInPath}
-            className="btn-gradient inline-block px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wide mb-4"
-          >
-            Get Your Free Access
+        {/* Top bar with logo */}
+        <motion.header
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
+          className="w-full py-4 px-6 flex justify-center"
+        >
+          <a href="https://homeflip.ai">
+            <img
+              src={logos.logo.onDark}
+              alt="Homeflip.ai"
+              className="h-8"
+            />
           </a>
+        </motion.header>
 
-          <p className="text-white/40 text-sm mb-4">
-            No password needed · No account to create · Just click and you're in
-          </p>
+        {/* Centered single-column layout */}
+        <div className="flex-1 flex items-center justify-center px-6 py-12">
+          <div className="w-full max-w-2xl">
+            {/* Context line - above everything */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className="text-white/30 text-base tracking-wide text-center mb-8"
+            >
+              Access to this resource is provided via a secure link.
+            </motion.p>
 
-          <p className="text-white/30 text-xs">
-            Already signed up?{' '}
-            <a href={`${brand.optInPath}/resend`} className="text-[#83d4c0] hover:underline">
-              Resend your magic link
-            </a>
-          </p>
+            {/* Title and tagline - centered */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
+              className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight text-center"
+            >
+              Probate <span style={{ color: '#53dac1' }}>Profit</span> Machine
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: 'easeOut', delay: 0.15 }}
+              className="text-white/50 text-lg md:text-xl mb-10 text-center"
+            >
+              {brand.tagline}
+            </motion.p>
+
+            {/* Two paths - stacked with breathing room, centered */}
+            <div className="flex flex-col gap-8 items-center">
+              {/* Primary: Get Access */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: 'easeOut', delay: 0.25 }}
+                className="text-center"
+              >
+                <a
+                  href={brand.optInPath}
+                  className="btn-gradient inline-block w-64 py-4 rounded-xl font-bold text-base uppercase tracking-wide text-center transition-all hover:scale-[1.02]"
+                >
+                  Get Access
+                </a>
+                <p className="text-white/40 text-sm mt-3">New here? Start with the full overview of Homeflip.ai.</p>
+              </motion.div>
+
+              {/* Divider */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4, ease: 'easeOut', delay: 0.35 }}
+                className="flex items-center gap-4 w-64"
+              >
+                <div className="flex-1 h-px bg-white/10" />
+                <span className="text-white/20 text-xs">or</span>
+                <div className="flex-1 h-px bg-white/10" />
+              </motion.div>
+
+              {/* Secondary: Resend Secure Link */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
+                className="text-center"
+              >
+                <button
+                  onClick={() => setResendModalOpen(true)}
+                  className="group relative w-64 py-4 rounded-xl font-semibold text-sm uppercase tracking-wide text-center transition-all hover:scale-[1.02]"
+                  style={{
+                    background: 'transparent',
+                    border: '1px solid rgba(255,255,255,0.10)',
+                    color: 'rgba(255,255,255,0.6)',
+                  }}
+                >
+                  <span className="relative z-10">Resend Secure Link</span>
+                  <div className="absolute inset-0 rounded-xl bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </button>
+                <p className="text-white/30 text-sm mt-3">Already had access? We'll email your link.</p>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -217,43 +388,68 @@ export default function HubLayout({ children }: HubLayoutProps) {
   // Expired token - show friendly renewal screen
   if (tokenState.status === 'expired') {
     return (
-      <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center px-6 py-12">
-        <div className="max-w-lg text-center">
-          {/* Ebook cover */}
-          {brand.coverImage && (
-            <div className="mb-8">
-              <img
-                src={brand.coverImage}
-                alt={brand.name}
-                className="h-48 mx-auto drop-shadow-2xl"
-              />
-            </div>
-          )}
-
-          {/* Logo */}
+      <div className="min-h-screen bg-[#0a0a0f] flex flex-col">
+        {/* Top bar with logo */}
+        <header className="w-full py-4 px-6 flex justify-center">
           <img
             src={logos.logo.onDark}
             alt="Homeflip.ai"
-            className="h-10 mx-auto mb-6"
+            className="h-8"
           />
+        </header>
 
-          <h1 className="text-2xl font-bold text-white mb-2">Time for a Fresh Link</h1>
-          <p className="text-white/50 text-sm mb-6">Your {brand.name} access has expired</p>
-
-          <p className="text-white/60 mb-6">
-            Getting back in is easy. Request a new link below and you'll have instant access to all your resources again.
-          </p>
-
-          <a
-            href={`${brand.optInPath}/resend`}
-            className="btn-gradient inline-block px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wide mb-4"
+        {/* Centered card */}
+        <div className="flex-1 flex items-center justify-center px-6 py-12">
+          {/* Glassmorphic card - 2 columns on desktop */}
+          <div
+            className="w-full max-w-4xl rounded-2xl overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)',
+            }}
           >
-            Get a Fresh Link
-          </a>
+            <div className="grid md:grid-cols-2 gap-0">
+              {/* Left column - Ebook cover */}
+              <div className="flex items-center justify-center p-8 md:p-12 bg-gradient-to-br from-white/[0.02] to-transparent">
+                {brand.coverImage && (
+                  <div className="relative">
+                    {/* Subtle glow behind ebook */}
+                    <div className="absolute inset-0 bg-[#83d4c0]/10 blur-[60px] scale-110 rounded-full" />
+                    <img
+                      src={brand.coverImage}
+                      alt={brand.name}
+                      className="relative w-full max-w-[200px] md:max-w-[240px] drop-shadow-2xl"
+                    />
+                  </div>
+                )}
+              </div>
 
-          <p className="text-white/40 text-sm">
-            Takes 10 seconds · Same email, new link · All your resources waiting
-          </p>
+              {/* Right column - Content */}
+              <div className="flex flex-col justify-center p-8 md:p-12 md:border-l border-white/[0.06]">
+                <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                  Time for a Fresh Link
+                </h1>
+                <p className="text-white/50 text-sm mb-6">Your {brand.name} access has expired</p>
+
+                <p className="text-white/60 mb-6 leading-relaxed">
+                  Getting back in is easy. Request a new link below and you'll have instant access to all your resources again.
+                </p>
+
+                <a
+                  href={`${brand.optInPath}/resend`}
+                  className="btn-gradient inline-block px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wide text-center mb-4"
+                >
+                  Get a Fresh Link
+                </a>
+
+                <p className="text-white/40 text-sm text-center">
+                  Takes 10 seconds · Same email, new link · All your resources waiting
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
