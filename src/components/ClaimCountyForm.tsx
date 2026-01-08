@@ -620,10 +620,6 @@ export const ClaimCountyForm = () => {
                 <ArrowRight className="w-6 h-6" />
               </button>
 
-              {/* Expectation-Setting Line */}
-              <p className="text-sm text-slate-500 mt-5">
-                Next step: schedule your implementation call to complete activation.
-              </p>
             </div>
           </motion.div>
         ) : (
@@ -647,7 +643,7 @@ export const ClaimCountyForm = () => {
                       Book Your Call
                     </h2>
                     <p className="text-lg text-slate-600 leading-relaxed max-w-xl mx-auto">
-                      Select a time for your setup call. We'll confirm your county selection and get you started.
+                      Select a time for your implementation call. We'll confirm your county selection and get you started.
                     </p>
                   </div>
 
@@ -657,12 +653,12 @@ export const ClaimCountyForm = () => {
                       <div className="flex items-center gap-2">
                         <Calendar className="w-5 h-5 text-slate-400" />
                         <span className="text-sm font-medium text-slate-600">
-                          Schedule your setup call
+                          Schedule your implementation call
                         </span>
                       </div>
                     </div>
                     <CalendlyEmbed
-                      url="https://calendly.com/wb-props/county-activation?hide_event_type_details=1&hide_gdpr_banner=1"
+                      url="https://calendly.com/wb-props/county-activation?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=5EEADC"
                       prefill={{
                         name: formData.name,
                         email: formData.email,
