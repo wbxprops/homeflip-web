@@ -28,10 +28,19 @@ const articles = [
   },
   {
     slug: "ai-cold-calling-real-estate-investors",
-    title: "AI Cold Calling for Real Estate Investors 2026: Scale Probate Deals Compliantly",
-    excerpt: "The best AI cold calling tools for wholesalers and investors. Learn how to scale your probate lead outreach while staying TCPA compliant.",
-    category: "Technology Guide",
-    readTime: "12 min read",
+    title: "AI Cold Calling for Real Estate: Why We Don't Recommend It for Probate",
+    excerpt: "AI dialers and voice agents are everywhere in real estate. But for probate leads, they're the wrong tool. Here's why the personal approach still wins.",
+    category: "Strategy Guide",
+    readTime: "10 min read",
+    icon: <Lightbulb className="w-5 h-5" />,
+    featured: false
+  },
+  {
+    slug: "cold-texting-real-estate-investors",
+    title: "Is Cold Texting Legal for Real Estate Investors in 2026?",
+    excerpt: "Cold texting probate leads without consent violates TCPA. The Coffey ruling doesn't make it legal. Learn the real penalties and compliant alternatives.",
+    category: "Legal Update",
+    readTime: "9 min read",
     icon: <Lightbulb className="w-5 h-5" />,
     featured: false
   }
