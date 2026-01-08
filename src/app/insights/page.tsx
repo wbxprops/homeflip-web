@@ -43,6 +43,15 @@ const articles = [
     readTime: "9 min read",
     icon: <Lightbulb className="w-5 h-5" />,
     featured: false
+  },
+  {
+    slug: "silver-tsunami-probate-real-estate",
+    title: "Silver Tsunami: How Baby Boomers Are Reshaping Probate Real Estate",
+    excerpt: "Baby boomers own 41% of U.S. homes worth $13.5 trillion. As this generation ages, probate properties will surge. Here's what investors need to know.",
+    category: "Market Research",
+    readTime: "9 min read",
+    icon: <BarChart3 className="w-5 h-5" />,
+    featured: false
   }
   // Add more articles here as you create them:
   // {

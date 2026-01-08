@@ -2,7 +2,7 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2026-01-07
+**Last Updated:** 2026-01-08
 **Claude Code Version:** Opus 4.5
 
 ---
@@ -37,6 +37,16 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 **Active Work:** Resource Hub build-out complete. Ready for Training Videos page or additional content.
 
 ### Session History
+#### 2026-01-08 (Claim Your County Wording Consistency)
+- ✅ Fixed main site Claim Your County form to match Resource Hub wording exactly
+- ✅ Step 3: "County Activation Pending" + "Finalize Setup" button
+- ✅ Removed "Next step" subtext from confirmation step
+- ✅ Step 4: Changed "setup call" to "implementation call" throughout
+- ✅ Calendly branding: Added `primary_color=5EEADC` for teal theme
+- ✅ Navbar: Insights link, glassmorphic right-aligned menu, larger logo/phone
+- ✅ Fixed build errors: curly apostrophes in part-3, TypeScript Calendly types
+- **Deployed**: Commits `04853af`, `bb68ae0` pushed to origin/master
+
 #### 2026-01-07 (Resource Hub: Guide & Community)
 - ✅ Expandable "Probate Profit Machine" nav with Part I, II, III sub-items
 - ✅ Guide overview page with section cards and secondary PDF download
@@ -141,6 +151,7 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 - [x] ~~Connect custom domain~~ (homeflip.ai is live!)
 - [x] ~~Resource Hub guide sections~~ (DONE - Part I, II, III)
 - [x] ~~Community Workspace page~~ (DONE - bridge surface design)
+- [ ] **🔥 Google Tag Manager + Google Analytics** - PRIORITY! Track Insights article performance. Install GTM container in layout.tsx, configure GA4 property, set up page view tracking. Articles are getting traction, need analytics ASAP.
 - [ ] **Resource Hub: Probate Profit Machine enhancements** (see `docs/CONTEXT-probate-profit-machine-guide.md`)
   - [ ] Build AudioPlayer component (Wistia embed)
   - [ ] Build FullStoryCallout component
