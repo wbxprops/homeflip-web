@@ -75,8 +75,8 @@ export default function GuidePart3Page() {
                 },
                 {
                   role: 'Heirs/Beneficiaries',
-                  desc: 'May influence decisions even if they don't have direct authority.',
-                  tip: 'Be careful—they may not have decision-making power.'
+                  desc: "May influence decisions even if they don't have direct authority.",
+                  tip: "Be careful—they may not have decision-making power."
                 },
               ].map((item) => (
                 <div
