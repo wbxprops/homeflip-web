@@ -91,6 +91,8 @@ declare global {
           lastName?: string;
           email?: string;
         };
+        hideEventTypeDetails?: boolean;
+        hideGdprBanner?: boolean;
       }) => void;
     };
   }
