@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect, useState, ReactNode } from 'react';
+import React, { useEffect, useState, ReactNode } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { SectionNavigator } from './SectionNavigator';
@@ -34,38 +34,24 @@ export function GuideSection({
   prevSection,
   nextSection,
 }: GuideSectionProps) {
-  const contentRef = useRef<HTMLDivElement>(null);
   const [activePart, setActivePart] = useState<string | null>(parts[0]?.id || null);
 
   // Set up Intersection Observer to track which part is in view
   useEffect(() => {
-    const contentContainer = contentRef.current;
-    if (!contentContainer) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
-        // Find the entry that is most visible
-        let mostVisible: IntersectionObserverEntry | null = null;
-        let maxRatio = 0;
-
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
-            maxRatio = entry.intersectionRatio;
-            mostVisible = entry;
+          if (entry.isIntersecting) {
+            const partId = entry.target.getAttribute('data-part-id');
+            if (partId) {
+              setActivePart(partId);
+            }
           }
         });
-
-        if (mostVisible) {
-          const partId = (mostVisible as IntersectionObserverEntry).target.getAttribute('data-part-id');
-          if (partId) {
-            setActivePart(partId);
-          }
-        }
       },
       {
-        root: contentContainer,
         rootMargin: '-20% 0px -60% 0px',
-        threshold: [0, 0.25, 0.5, 0.75, 1],
+        threshold: 0,
       }
     );
 
@@ -83,7 +69,7 @@ export function GuideSection({
   // Handle navigator click - smooth scroll to part
   const handlePartClick = (partId: string) => {
     const element = document.getElementById(partId);
-    if (element && contentRef.current) {
+    if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
@@ -91,9 +77,9 @@ export function GuideSection({
   const partsMeta = parts.map(p => ({ id: p.id, title: p.title }));
 
   return (
-    <div className="flex-1 flex flex-col overflow-hidden">
-      {/* Mobile Navigator */}
-      <div className="lg:hidden">
+    <div className="flex-1">
+      {/* Mobile Navigator - sticky at top */}
+      <div className="lg:hidden sticky top-0 z-20">
         <MobileNavigator
           parts={partsMeta}
           activePart={activePart}
@@ -101,14 +87,10 @@ export function GuideSection({
         />
       </div>
 
-      {/* Main Content Area - 70/30 split on desktop */}
-      <div className="flex-1 flex overflow-hidden">
-        {/* Content Column - 70% */}
-        <div
-          ref={contentRef}
-          className="flex-1 lg:w-[70%] overflow-y-auto"
-          style={{ scrollBehavior: 'smooth' }}
-        >
+      {/* Desktop Layout - content + sticky nav */}
+      <div className="flex">
+        {/* Content Column */}
+        <div className="flex-1 lg:pr-[280px]">
           <article className="max-w-4xl mx-auto px-8 md:px-12 py-8 md:py-12">
             {/* Section Header */}
             <header className="mb-12 pb-8" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
@@ -139,7 +121,7 @@ export function GuideSection({
                   key={part.id}
                   id={part.id}
                   data-part-id={part.id}
-                  className="scroll-mt-8"
+                  className="scroll-mt-24"
                 >
                   {/* Part Header */}
                   <div className="flex items-center gap-3 mb-6">
@@ -197,13 +179,15 @@ export function GuideSection({
           </article>
         </div>
 
-        {/* Navigator Column - 30% (desktop only, sticky) */}
-        <div className="hidden lg:block w-[30%] border-l border-white/[0.06] sticky top-0 h-screen overflow-y-auto">
-          <SectionNavigator
-            parts={partsMeta}
-            activePart={activePart}
-            onPartClick={handlePartClick}
-          />
+        {/* Navigator Column - fixed on right (desktop only) */}
+        <div className="hidden lg:block fixed right-0 top-0 w-[280px] h-screen border-l border-white/[0.06] bg-[#0a0a0f]">
+          <div className="pt-20">
+            <SectionNavigator
+              parts={partsMeta}
+              activePart={activePart}
+              onPartClick={handlePartClick}
+            />
+          </div>
         </div>
       </div>
     </div>
