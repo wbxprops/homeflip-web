@@ -272,7 +272,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
                       <button
                         type="submit"
                         disabled={resendStatus === 'submitting'}
-                        className="w-full btn-gradient px-6 py-4 rounded-xl font-bold text-lg uppercase tracking-wide transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full btn-gradient px-6 py-4 rounded-xl font-semibold text-base transition-all hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {resendStatus === 'submitting' ? (
                           <span className="flex items-center justify-center gap-2">
@@ -280,8 +280,8 @@ export default function HubLayout({ children }: HubLayoutProps) {
                             Sending...
                           </span>
                         ) : (
-                          <span className="flex items-center justify-center gap-2">
-                            <Sparkles className="w-5 h-5" />
+                          <span className="flex items-center justify-center gap-2.5">
+                            <Sparkles className="w-5 h-5 animate-pulse" style={{ animationDuration: '2s' }} />
                             Send Magic Link
                           </span>
                         )}
