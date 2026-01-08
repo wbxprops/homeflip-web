@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, usePathname, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { TrendingUp, Play, GraduationCap, Bell, Landmark, X, Bookmark, ChevronDown, ChevronRight, RefreshCw, Mail } from 'lucide-react';
+import { TrendingUp, Play, GraduationCap, Bell, Landmark, X, Bookmark, ChevronDown, ChevronRight, RefreshCw, Mail, Sparkles } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { logos, hubBranding } from '@/config/hub.config';
 
@@ -272,15 +272,18 @@ export default function HubLayout({ children }: HubLayoutProps) {
                       <button
                         type="submit"
                         disabled={resendStatus === 'submitting'}
-                        className="w-full btn-gradient px-6 py-4 rounded-xl font-semibold text-base transition-all hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full btn-gradient px-6 py-4 rounded-xl font-bold text-lg uppercase tracking-wide transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {resendStatus === 'submitting' ? (
                           <span className="flex items-center justify-center gap-2">
-                            <RefreshCw className="w-4 h-4 animate-spin" />
+                            <RefreshCw className="w-5 h-5 animate-spin" />
                             Sending...
                           </span>
                         ) : (
-                          'Send My Link'
+                          <span className="flex items-center justify-center gap-2">
+                            <Sparkles className="w-5 h-5" />
+                            Send Magic Link
+                          </span>
                         )}
                       </button>
                     </form>
