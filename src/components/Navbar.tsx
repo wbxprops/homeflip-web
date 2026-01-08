@@ -86,8 +86,8 @@ export const Navbar = ({ minimal = false, variant = 'dark' }: NavbarProps) => {
                   : 'text-white/60 hover:text-white/100'
               }`}
             >
-              <Phone className="w-4 h-4" strokeWidth={1.5} />
-              <span className="text-sm font-normal">{PHONE_NUMBER}</span>
+              <Phone className="w-5 h-5" strokeWidth={1.5} />
+              <span className="text-base font-medium">{PHONE_NUMBER}</span>
             </a>
             {/* Mobile: show phone icon only */}
             <a
@@ -109,13 +109,13 @@ export const Navbar = ({ minimal = false, variant = 'dark' }: NavbarProps) => {
             <img
               src={isLight ? '/logo-icon-dark.svg' : '/logo-icon-light.svg'}
               alt="Homeflip.ai"
-              className="h-8 sm:hidden"
+              className="h-9 sm:hidden"
             />
             {/* Desktop wordmark - swap based on variant */}
             <img
               src={isLight ? '/logo-wordmark-light.png' : '/logo-wordmark-dark.png'}
               alt="Homeflip.ai"
-              className="h-8 hidden sm:block"
+              className="h-10 hidden sm:block"
             />
           </Link>
 
