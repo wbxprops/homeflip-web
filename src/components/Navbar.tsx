@@ -183,18 +183,18 @@ export const Navbar = ({ minimal = false, variant = 'dark' }: NavbarProps) => {
               }`}
             />
 
-            {/* Menu Panel */}
+            {/* Menu Panel - Right aligned, glassmorphic */}
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="fixed top-[73px] left-4 right-4 z-50 max-w-xl mx-auto"
+              initial={{ opacity: 0, y: -10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.95 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              className="fixed top-[73px] right-4 z-50 w-72 sm:w-80"
             >
-              <div className={`rounded-2xl shadow-2xl overflow-hidden ${
+              <div className={`rounded-2xl shadow-2xl overflow-hidden backdrop-blur-xl ${
                 isLight
-                  ? 'bg-white border border-slate-200 shadow-slate-200/50'
-                  : 'bg-[#111] border border-white/10 shadow-black/50'
+                  ? 'bg-white/80 border border-slate-200/50'
+                  : 'bg-[#0a0a0f]/80 border border-white/10'
               }`}>
                 {/* Navigation Links */}
                 <div className="p-2">
