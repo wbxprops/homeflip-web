@@ -95,50 +95,10 @@ function HeroSection() {
         }}
       />
 
-      {/* Case Card Mockup - Right side */}
-      <motion.div
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-        className="absolute right-[8%] top-1/2 -translate-y-1/2 hidden xl:block"
-      >
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 w-[320px] shadow-2xl">
-          {/* Case Card Header */}
-          <div className="flex items-center justify-between mb-4">
-            <span className="px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-black">
-              PB-03
-            </span>
-            <span className="text-white/50 text-xs">Hamilton County, OH</span>
-          </div>
-
-          {/* Property Info */}
-          <div className="mb-4">
-            <div className="text-white font-bold text-lg mb-1">1847 Elm Street</div>
-            <div className="text-white/60 text-sm">Cincinnati, OH 45202</div>
-          </div>
-
-          {/* Equity Badge */}
-          <div className="bg-white/5 rounded-lg p-3 mb-4">
-            <div className="flex items-center justify-between">
-              <span className="text-white/60 text-sm">Est. Equity</span>
-              <span className="text-emerald-400 font-bold">$127,000</span>
-            </div>
-          </div>
-
-          {/* Playbook Action */}
-          <div className="bg-[#0891b2]/20 rounded-lg p-4 border border-[#0891b2]/30">
-            <div className="text-[#83d4c0] text-xs font-bold uppercase tracking-wider mb-2">
-              Playbook Action
-            </div>
-            <div className="text-white font-medium">
-              Send &quot;Inventory Filed&quot; Letter
-            </div>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Content */}
-      <div className="relative max-w-4xl mx-auto text-center z-10 xl:mr-[200px]">
+      {/* Main Content Grid */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        {/* Left Side - Text Content */}
+        <div className="text-center lg:text-left">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -165,7 +125,7 @@ function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto lg:mx-0 mb-12 leading-relaxed"
         >
           The only system that turns 20 years of probate expertise into a guided
           &quot;Next-Action&quot; dashboard. Built for investors who need consistent deals
@@ -176,7 +136,7 @@ function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="flex flex-col items-center gap-4"
+          className="flex flex-col items-center lg:items-start gap-4"
         >
           <Link
             href="/claim-your-county"
@@ -187,6 +147,49 @@ function HeroSection() {
           <p className="text-xs text-white/40 font-bold tracking-[0.2em] uppercase">
             Beta &bull; Founder Pricing &bull; Limited Access
           </p>
+        </motion.div>
+        </div>
+
+        {/* Right Side - Case Card Mockup */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="hidden lg:flex justify-center lg:justify-end"
+        >
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 w-[320px] shadow-2xl">
+            {/* Case Card Header */}
+            <div className="flex items-center justify-between mb-4">
+              <span className="px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-black">
+                PB-03
+              </span>
+              <span className="text-white/50 text-xs">Hamilton County, OH</span>
+            </div>
+
+            {/* Property Info */}
+            <div className="mb-4">
+              <div className="text-white font-bold text-lg mb-1">1847 Elm Street</div>
+              <div className="text-white/60 text-sm">Cincinnati, OH 45202</div>
+            </div>
+
+            {/* Equity Badge */}
+            <div className="bg-white/5 rounded-lg p-3 mb-4">
+              <div className="flex items-center justify-between">
+                <span className="text-white/60 text-sm">Est. Equity</span>
+                <span className="text-emerald-400 font-bold">$127,000</span>
+              </div>
+            </div>
+
+            {/* Playbook Action */}
+            <div className="bg-[#0891b2]/20 rounded-lg p-4 border border-[#0891b2]/30">
+              <div className="text-[#83d4c0] text-xs font-bold uppercase tracking-wider mb-2">
+                Playbook Action
+              </div>
+              <div className="text-white font-medium">
+                Send &quot;Inventory Filed&quot; Letter
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
 
