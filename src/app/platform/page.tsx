@@ -22,34 +22,34 @@ export default function PlatformPage() {
         <HeroSection />
         <AuthorityBlock />
 
-        {/* Section 02: The 15-Minute Workflow */}
-        <WorkflowSection />
+        {/* Section 02: THE AUTOMATION TRAP */}
+        <AutomationTrapSection />
 
-        {/* Section 03: The Architecture */}
-        <ArchitectureSection />
+        {/* Section 03: TIMELINE INTELLIGENCE™ */}
+        <TimelineIntelligenceSection />
 
-        {/* Section 04: PB-Score Algorithm */}
+        {/* Section 04: PB SCORECARD (PB-01 → PB-03 → PB-00) */}
         <PBScoreSection />
 
-        {/* Section 05: Data Pipeline */}
-        <DataPipelineSection />
+        {/* Section 05: HOW HOMEFLIP.AI WORKS (END-TO-END) */}
+        <HowItWorksSection />
 
-        {/* Section 06: Community Bridge */}
-        <CommunityBridgeSection />
+        {/* Section 06: MORE THAN A CRM */}
+        <MoreThanCRMSection />
 
-        {/* Section 07: Live Inventory Terminal */}
+        {/* Section 07: LIVE INVENTORY TERMINAL */}
         <CountyTerminalSection />
 
-        {/* Section 08: Founder Access */}
+        {/* Section 08: FOUNDER ACCESS */}
         <FounderAccessSection />
 
-        {/* Section 09: Demo Gallery */}
+        {/* Section 09: DEMO GALLERY */}
         <DemoGallerySection />
 
-        {/* Section 10: Founder-Led Authority */}
+        {/* Section 10: FOUNDER-LED AUTHORITY */}
         <ProofSection />
 
-        {/* Section 11: Final CTA */}
+        {/* Section 11: FINAL CTA */}
         <FinalCTASection />
       </main>
       <Footer />
@@ -99,55 +99,54 @@ function HeroSection() {
       <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         {/* Left Side - Text Content */}
         <div className="text-center lg:text-left">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="inline-block px-4 py-2 rounded-full bg-white/5 text-[#83d4c0] text-sm font-bold mb-8 tracking-[0.2em] uppercase border border-white/10"
-        >
-          For Part-Time Investors
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-8 tracking-tight leading-[1.1]"
-        >
-          The Automated Probate Playbook
-          <br />
-          <span className="bg-gradient-to-r from-[#83d4c0] to-[#0891b2] bg-clip-text text-transparent">
-            for the Professional Investor
-          </span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto lg:mx-0 mb-12 leading-relaxed"
-        >
-          The only system that turns 20 years of probate expertise into a guided
-          &quot;Next-Action&quot; dashboard. Built for investors who need consistent deals
-          without the full-time grind.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="flex flex-col items-center lg:items-start gap-4"
-        >
-          <Link
-            href="/claim-your-county"
-            className="btn-gradient inline-block px-12 sm:px-16 py-5 sm:py-6 rounded-2xl font-hero font-[900] text-2xl sm:text-3xl md:text-4xl uppercase tracking-tighter shadow-2xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all animate-pulse-glow"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="inline-block px-4 py-2 rounded-full bg-white/5 text-[#83d4c0] text-sm font-bold mb-8 tracking-[0.2em] uppercase border border-white/10"
           >
-            Claim Your County
-          </Link>
-          <p className="text-xs text-white/40 font-bold tracking-[0.2em] uppercase">
-            Beta &bull; Founder Pricing &bull; Limited Access
-          </p>
-        </motion.div>
+            For Professional Investors
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-8 tracking-tight leading-[1.1]"
+          >
+            The Automated Probate Playbook
+            <br />
+            <span className="bg-gradient-to-r from-[#83d4c0] to-[#0891b2] bg-clip-text text-transparent">
+              Built for Judgment.
+            </span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto lg:mx-0 mb-12 leading-relaxed"
+          >
+            The only system that turns 20 years of probate expertise into a guided
+            &quot;Next-Action&quot; dashboard. Stop scaling activity and start scaling results.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="flex flex-col items-center lg:items-start gap-4"
+          >
+            <Link
+              href="/claim-your-county"
+              className="btn-gradient inline-block px-12 sm:px-16 py-5 sm:py-6 rounded-2xl font-hero font-[900] text-2xl sm:text-3xl md:text-4xl uppercase tracking-tighter shadow-2xl shadow-[#83d4c0]/20 hover:scale-105 active:scale-95 transition-all animate-pulse-glow"
+            >
+              Claim Your County
+            </Link>
+            <p className="text-xs text-white/40 font-bold tracking-[0.2em] uppercase">
+              Early Access &bull; Founder Pricing &bull; Limited Markets
+            </p>
+          </motion.div>
         </div>
 
         {/* Right Side - Case Card Mockup */}
@@ -185,7 +184,7 @@ function HeroSection() {
               <div className="text-[#83d4c0] text-xs font-bold uppercase tracking-wider mb-2">
                 Playbook Action
               </div>
-              <div className="text-white font-medium">
+              <div className="text-white font-medium text-sm">
                 Send &quot;Inventory Filed&quot; Letter
               </div>
             </div>
@@ -226,21 +225,6 @@ function AuthorityBlock() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="flex items-center gap-3"
-          >
-            <div className="w-10 h-10 rounded-full bg-[#0891b2]/20 flex items-center justify-center">
-              <Users className="w-5 h-5 text-[#83d4c0]" />
-            </div>
-            <span className="text-white/80 text-sm">
-              Built by <strong className="text-white">Gary</strong> for the Property Magnet community
-            </span>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="flex items-center gap-3"
           >
@@ -258,308 +242,240 @@ function AuthorityBlock() {
 }
 
 /* =============================================================================
-   SECTION 02: THE 15-MINUTE WORKFLOW
+   SECTION 02: THE AUTOMATION TRAP
    ============================================================================= */
 
-function WorkflowSection() {
-  const steps = [
-    {
-      time: '1',
-      unit: 'Minute',
-      title: 'The Intake',
-      description: 'While you\'re at your day job, our system is at the courthouse. It filters the noise, identifies property equity, and scores every case.',
-      visual: (
-        <div className="bg-slate-900 rounded-xl p-4 border border-slate-700">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-8 h-8 rounded-full bg-[#0891b2] flex items-center justify-center">
-              <Bell className="w-4 h-4 text-white" />
-            </div>
-            <span className="text-white/60 text-xs">Just Now</span>
-          </div>
-          <div className="text-white text-sm font-medium mb-1">New PB-03 Case</div>
-          <div className="text-white/50 text-xs">Hamilton County, OH</div>
-        </div>
-      ),
-      color: '#6366f1'
-    },
-    {
-      time: '2',
-      unit: 'Minutes',
-      title: 'The Decision',
-      description: 'Don\'t guess what to say. The platform tells you exactly where the family is in the process. Open the Playbook, grab the script, and act.',
-      visual: (
-        <div className="bg-slate-900 rounded-xl p-4 border border-slate-700">
-          <div className="text-[#83d4c0] text-xs font-bold uppercase tracking-wider mb-2">
-            Guided Script
-          </div>
-          <div className="text-white text-sm leading-relaxed">
-            &quot;Hi, my name is [Name]. I help families navigate property decisions during probate...&quot;
-          </div>
-        </div>
-      ),
-      color: '#0891b2'
-    },
-    {
-      time: '12',
-      unit: 'Minutes',
-      title: 'The Execution',
-      description: 'Send your outreach using integrated workflows. Then, close your laptop. The system monitors for status changes and alerts you when it\'s time to follow up.',
-      visual: (
-        <div className="bg-slate-900 rounded-xl p-4 border border-slate-700">
-          <div className="flex items-center justify-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
-              <CheckCircle2 className="w-6 h-6 text-emerald-400" />
-            </div>
-            <div>
-              <div className="text-emerald-400 font-bold">Outreach Complete</div>
-              <div className="text-white/50 text-xs">Monitoring for updates...</div>
-            </div>
-          </div>
-        </div>
-      ),
-      color: '#10b981'
-    }
-  ];
-
+function AutomationTrapSection() {
   return (
-    <Section id="workflow" className="bg-white overflow-hidden">
-      <div className="text-center mb-16">
+    <Section id="automation-trap" className="bg-[#fcfcfc] overflow-hidden py-24 md:py-32">
+      <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+        {/* Left Side: The Trap */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="inline-block px-4 py-1 rounded-full bg-slate-50 text-slate-500 text-sm font-bold mb-6 tracking-[0.2em] uppercase border border-slate-200"
+          className="space-y-8"
         >
-          The Part-Timer&apos;s Path
+          <div className="inline-block px-4 py-1 rounded-full bg-red-50 text-red-600 text-sm font-bold tracking-widest uppercase border border-red-100">
+            The Automation Trap
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-[1.1]">
+            Automation scales activity,
+            <br />
+            <span className="text-slate-400">not judgment.</span>
+          </h2>
+          <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
+            <p>
+              Most probate tools focus on volume. They help you send more mail, make more calls, and blast more texts.
+            </p>
+            <p className="font-medium text-slate-900">
+              In probate, mass outreach is a liability.
+            </p>
+            <p>
+              These families aren&apos;t &quot;records&quot; in a database. They are heirs navigating grief, legal complexity, and property decisions. When you lead with automation, you lead with insensitivity.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4 pt-4">
+            {[
+              { title: 'Probate is emotional', desc: 'Families value empathy over speed.' },
+              { title: 'Sellers aren\'t records', desc: 'Every case has a unique human timeline.' },
+              { title: 'Mass outreach kills trust', desc: 'One wrong message can burn a deal forever.' },
+              { title: 'Timing beats speed', desc: 'Being first matters less than being on time.' },
+            ].map((item) => (
+              <div key={item.title} className="p-4 rounded-xl bg-white border border-slate-100 shadow-sm">
+                <div className="text-slate-900 font-bold text-sm mb-1">{item.title}</div>
+                <div className="text-slate-500 text-xs">{item.desc}</div>
+              </div>
+            ))}
+          </div>
         </motion.div>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 mb-6 tracking-tight"
-        >
-          Your Tuesday Night
-          <br />
-          <span className="text-slate-400">Workflow</span>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed"
-        >
-          Most investors think probate requires hours of research.
-          Here&apos;s what <strong className="text-slate-900">15 minutes</strong> actually looks like.
-        </motion.p>
-      </div>
 
-      {/* 3-Column Workflow */}
-      <div className="grid lg:grid-cols-3 gap-8">
-        {steps.map((step, i) => (
-          <motion.div
-            key={step.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.15 }}
-            className="relative"
-          >
-            {/* Connector arrow (desktop) */}
-            {i < steps.length - 1 && (
-              <div className="hidden lg:flex absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
-                <ArrowRight className="w-8 h-8 text-slate-200" />
+        {/* Right Side: Visual Contrast */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="relative"
+        >
+          <div className="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 shadow-2xl border border-slate-800 relative overflow-hidden">
+            {/* Chaotic Automation Side */}
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-red-500/5 blur-3xl pointer-events-none" />
+            
+            <div className="relative space-y-6">
+              <div className="flex items-center gap-3 text-red-400 font-mono text-xs tracking-widest uppercase">
+                <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                Legacy Automation Flow
               </div>
-            )}
-
-            <div className="bg-slate-50 rounded-[2rem] p-8 border border-slate-100 h-full">
-              {/* Time badge */}
-              <div className="flex items-baseline gap-1 mb-6">
-                <span
-                  className="text-5xl font-black"
-                  style={{ color: step.color }}
-                >
-                  {step.time}
-                </span>
-                <span className="text-slate-400 font-bold uppercase text-sm tracking-wider">
-                  {step.unit}
-                </span>
+              
+              <div className="space-y-3 opacity-40">
+                <div className="h-12 bg-white/5 rounded-lg border border-white/10 flex items-center px-4 gap-3">
+                  <div className="w-2 h-2 rounded-full bg-red-500" />
+                  <div className="h-2 w-32 bg-white/20 rounded" />
+                </div>
+                <div className="h-12 bg-white/5 rounded-lg border border-white/10 flex items-center px-4 gap-3">
+                  <div className="w-2 h-2 rounded-full bg-red-500" />
+                  <div className="h-2 w-48 bg-white/20 rounded" />
+                </div>
+                <div className="h-12 bg-white/5 rounded-lg border border-white/10 flex items-center px-4 gap-3">
+                  <div className="w-2 h-2 rounded-full bg-red-500" />
+                  <div className="h-2 w-24 bg-white/20 rounded" />
+                </div>
               </div>
 
-              {/* Title */}
-              <h3 className="text-xl font-black text-slate-900 mb-3 tracking-tight">
-                {step.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-slate-500 mb-6 leading-relaxed">
-                {step.description}
-              </p>
-
-              {/* Visual */}
-              {step.visual}
+              <div className="pt-8 flex items-center gap-3 text-emerald-400 font-mono text-xs tracking-widest uppercase">
+                <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                Homeflip Intelligence Layer
+              </div>
+              
+              <div className="bg-white/5 rounded-2xl p-6 border border-emerald-500/30 shadow-lg shadow-emerald-500/5">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="px-3 py-1 rounded bg-emerald-500 text-white text-[10px] font-black tracking-tighter uppercase">
+                    Decision: Hold
+                  </div>
+                  <div className="text-white/40 text-[10px] font-mono">ID: 089-HAM</div>
+                </div>
+                <div className="text-white font-medium text-sm mb-2">Wait for Inventory Filing</div>
+                <div className="text-white/60 text-xs leading-relaxed">
+                  &quot;Family is currently in the initial 30-day grieving window. Early outreach will trigger high resistance.&quot;
+                </div>
+              </div>
             </div>
-          </motion.div>
-        ))}
+          </div>
+          
+          {/* Subtle label */}
+          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white px-6 py-2 rounded-full shadow-lg border border-slate-100 text-slate-500 text-xs font-bold whitespace-nowrap">
+            Intelligence &gt; Automation
+          </div>
+        </motion.div>
       </div>
-
-      {/* Total time */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mt-12"
-      >
-        <div className="inline-flex items-center gap-4 bg-gradient-to-r from-[#0891b2]/10 to-[#83d4c0]/10 rounded-full px-8 py-4 border border-[#0891b2]/20">
-          <Clock className="w-6 h-6 text-[#0891b2]" />
-          <span className="text-slate-900 font-bold text-lg">
-            Total: <span className="text-[#0891b2]">15 minutes</span> per session
-          </span>
-        </div>
-      </motion.div>
     </Section>
   );
 }
 
 /* =============================================================================
-   SECTION 03: THE ARCHITECTURE
+   SECTION 03: TIMELINE INTELLIGENCE™
    ============================================================================= */
 
-function ArchitectureSection() {
-  const pipelineSteps = [
-    { label: 'County Courts', sublabel: '3,000+ portals', icon: <Building className="w-6 h-6" /> },
-    { label: 'Ingestion Engine', sublabel: 'Real-time sync', icon: <ArrowDown className="w-6 h-6" /> },
-    { label: 'Data Normalization', sublabel: 'Structured output', icon: <FileText className="w-6 h-6" /> },
-    { label: 'PB-Score Algorithm', sublabel: 'Weighted scoring', icon: <Brain className="w-6 h-6" /> },
-    { label: 'Your Dashboard', sublabel: 'Prioritized actions', icon: <Target className="w-6 h-6" /> },
+function TimelineIntelligenceSection() {
+  const stages = [
+    { id: 'PB-01', label: 'Filing', desc: 'Case opens. Family is processing grief. Decisions are months away.', status: 'Nurture' },
+    { id: 'PB-02', label: 'Discovery', desc: 'Assets identified. Inventory filed. Family working legalities.', status: 'Remove Barriers' },
+    { id: 'PB-03', label: 'Resolution', desc: 'Court approval pending or granted. Family actively seeking solutions.', status: 'Act Decisively' },
+    { id: 'PB-00', label: 'Stalled', desc: 'Case delayed or status unclear. Monitoring for reactivation.', status: 'Monitor' },
   ];
 
   return (
-    <Section id="architecture" className="bg-slate-50/70 overflow-hidden">
-      <div className="text-center mb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="inline-block px-4 py-1 rounded-full bg-white text-[#0891b2] text-sm font-bold mb-6 tracking-[0.2em] uppercase border border-slate-200"
-        >
-          Under The Hood
-        </motion.div>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 mb-6 tracking-tight"
-        >
-          The Architecture
-          <br />
-          <span className="text-slate-400">of Timing</span>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed"
-        >
-          Most &quot;AI&quot; in real estate is just a skin on a database.
-          Here&apos;s how our actual intelligence layer functions.
-        </motion.p>
-      </div>
+    <Section id="timeline-intelligence" className="bg-slate-950 py-32 overflow-hidden relative">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-500/5 via-transparent to-transparent opacity-50" />
+      
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="text-center mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-block px-4 py-1 rounded-full bg-white/5 text-emerald-400 text-sm font-bold tracking-widest uppercase border border-white/10 mb-8"
+          >
+            Introducing
+          </motion.div>
+          <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter mb-8">
+            Timeline
+            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent"> Intelligence™</span>
+          </h2>
+          <p className="text-white/60 text-xl max-w-2xl mx-auto leading-relaxed">
+            Built from real conversations over two decades, aligning your outreach with seller readiness.
+          </p>
+        </div>
 
-      {/* Pipeline Diagram */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="max-w-3xl mx-auto"
-      >
-        <div className="bg-white rounded-[2rem] p-8 md:p-12 border border-slate-200 shadow-xl">
-          <div className="space-y-4">
-            {pipelineSteps.map((step, i) => (
+        {/* The Timeline Visual */}
+        <div className="relative pt-12 pb-24">
+          {/* Horizontal Line */}
+          <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-slate-800 via-emerald-500/50 to-slate-800 -translate-y-1/2 hidden md:block" />
+          
+          <div className="grid md:grid-cols-4 gap-8 md:gap-4 relative">
+            {stages.map((stage, i) => (
               <motion.div
-                key={step.label}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                key={stage.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
+                className="relative text-center group"
               >
-                <div className="flex items-center gap-4">
-                  {/* Icon */}
-                  <div className={`w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                    i === pipelineSteps.length - 1
-                      ? 'bg-gradient-to-br from-[#0891b2] to-[#83d4c0] text-white shadow-lg shadow-[#0891b2]/20'
-                      : 'bg-slate-100 text-slate-500'
-                  }`}>
-                    {step.icon}
+                {/* Node */}
+                <div className="relative mb-8 md:mb-12">
+                  <div className="w-16 h-16 rounded-2xl bg-slate-900 border-2 border-slate-800 flex items-center justify-center mx-auto relative z-10 transition-all duration-500 group-hover:border-emerald-500/50 group-hover:scale-110 shadow-xl">
+                    <span className="text-white font-black">{stage.id}</span>
                   </div>
-
-                  {/* Label */}
-                  <div className="flex-1">
-                    <div className="font-bold text-slate-900">{step.label}</div>
-                    <div className="text-sm text-slate-400">{step.sublabel}</div>
-                  </div>
-
-                  {/* Step number */}
-                  <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-sm font-bold">
-                    {i + 1}
-                  </div>
+                  {/* Vertical connector for mobile */}
+                  {i < stages.length - 1 && (
+                    <div className="md:hidden absolute top-16 left-1/2 w-px h-8 bg-slate-800 -translate-x-1/2" />
+                  )}
                 </div>
 
-                {/* Connector */}
-                {i < pipelineSteps.length - 1 && (
-                  <div className="ml-7 my-2 w-px h-6 bg-gradient-to-b from-slate-200 to-transparent" />
-                )}
+                <div className="space-y-4 px-4">
+                  <h3 className="text-white font-bold text-lg tracking-tight">{stage.label}</h3>
+                  <div className="inline-block px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">
+                    {stage.status}
+                  </div>
+                  <p className="text-white/40 text-sm leading-relaxed max-w-[200px] mx-auto">
+                    {stage.desc}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
-      </motion.div>
+
+        <div className="text-center">
+          <p className="text-white/40 font-mono text-xs tracking-[0.3em] uppercase">
+            Each stage demands different action
+          </p>
+        </div>
+      </div>
     </Section>
   );
 }
 
 /* =============================================================================
-   SECTION 04: PB-SCORE ALGORITHM
+   SECTION 04: PB SCORECARD (PB-01 → PB-03 → PB-00)
    ============================================================================= */
 
 function PBScoreSection() {
-  const variables = [
-    {
-      name: 'Lifecycle Stage',
-      description: 'Filing vs. Inventory vs. Resolution',
-      icon: <Scale className="w-6 h-6" />,
-      color: '#6366f1'
-    },
-    {
-      name: 'Asset Verification',
-      description: 'Cross-referenced property data',
-      icon: <Building className="w-6 h-6" />,
-      color: '#0891b2'
-    },
-    {
-      name: 'Case Velocity',
-      description: 'How fast is this specific court moving?',
-      icon: <Gauge className="w-6 h-6" />,
-      color: '#f59e0b'
-    },
-    {
-      name: 'Equity Ratio',
-      description: 'Estimated debt vs. market value',
-      icon: <TrendingUp className="w-6 h-6" />,
-      color: '#10b981'
-    }
-  ];
-
   const pbStages = [
-    { code: 'PB-01', name: 'Early Filing', action: 'Nurture & Patience', color: '#6366f1' },
-    { code: 'PB-02', name: 'Mid-Process', action: 'Remove Barriers', color: '#0891b2' },
-    { code: 'PB-03', name: 'Ready to Sell', action: 'Act Decisively', color: '#10b981' },
-    { code: 'PB-00', name: 'Monitoring', action: 'Watch & Wait', color: '#64748b' },
+    { 
+      code: 'PB-01', 
+      name: 'Early Filing', 
+      action: 'Nurture & Patience', 
+      guidance: 'Timing unclear, nurture phase. Hold. Seller timing is still developing.',
+      color: '#64748b' 
+    },
+    { 
+      code: 'PB-02', 
+      name: 'Mid-Process', 
+      action: 'Remove Barriers', 
+      guidance: 'Decision made, barriers exist. Readiness increasing. Continue light follow-up.',
+      color: '#38bdf8' 
+    },
+    { 
+      code: 'PB-03', 
+      name: 'Ready to Sell', 
+      action: 'Act Decisively', 
+      guidance: 'Action window open. Act now. Alignment achieved.',
+      color: '#22c55e' 
+    },
+    { 
+      code: 'PB-00', 
+      name: 'Monitoring', 
+      action: 'Watch & Wait', 
+      guidance: 'Not for sale / cold. No action recommended. Monitor case status.',
+      color: '#94a3b8' 
+    },
   ];
 
   return (
-    <Section id="pb-score" className="bg-white overflow-hidden">
+    <Section id="pb-score" className="bg-[#fcfcfc] overflow-hidden py-24">
       <div className="text-center mb-16">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -567,7 +483,7 @@ function PBScoreSection() {
           viewport={{ once: true }}
           className="inline-block px-4 py-1 rounded-full bg-slate-50 text-slate-500 text-sm font-bold mb-6 tracking-[0.2em] uppercase border border-slate-200"
         >
-          The Algorithm
+          The PB Scorecard
         </motion.div>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -575,80 +491,40 @@ function PBScoreSection() {
           viewport={{ once: true }}
           className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 mb-6 tracking-tight"
         >
-          The PB-Score
+          Different Stages,
           <br />
-          <span className="text-slate-400">Algorithm</span>
+          <span className="text-slate-400">Different Actions.</span>
         </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed"
-        >
-          A PB-Score isn&apos;t random. It&apos;s a weighted calculation based on <strong className="text-slate-900">4 key variables</strong>.
-        </motion.p>
+        <p className="text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed">
+          Timeline Intelligence ensures the right action at the right moment.
+        </p>
       </div>
 
-      {/* 4 Variables Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-        {variables.map((variable, i) => (
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {pbStages.map((stage, i) => (
           <motion.div
-            key={variable.name}
+            key={stage.code}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="bg-slate-50 rounded-2xl p-6 border border-slate-100 text-center"
+            className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 group flex flex-col h-full"
           >
             <div
-              className="w-14 h-14 rounded-xl mx-auto mb-4 flex items-center justify-center text-white"
-              style={{ backgroundColor: variable.color }}
-            >
-              {variable.icon}
-            </div>
-            <h3 className="font-bold text-slate-900 mb-1">{variable.name}</h3>
-            <p className="text-sm text-slate-500">{variable.description}</p>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Arrow down */}
-      <div className="flex justify-center mb-12">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center"
-        >
-          <ArrowDown className="w-6 h-6 text-slate-400" />
-        </motion.div>
-      </div>
-
-      {/* PB Stages */}
-      <div className="text-center mb-8">
-        <h3 className="text-xl font-bold text-slate-900 mb-2">Output: Your PB Score</h3>
-        <p className="text-slate-500">Each score tells you exactly what to do</p>
-      </div>
-
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {pbStages.map((stage, i) => (
-          <motion.div
-            key={stage.code}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="bg-white rounded-xl p-4 border border-slate-200 text-center hover:shadow-lg transition-all"
-          >
-            <div
-              className="inline-block px-3 py-1 rounded-full text-white text-sm font-black mb-3"
+              className="w-14 h-14 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg group-hover:scale-110 transition-transform"
               style={{ backgroundColor: stage.color }}
             >
-              {stage.code}
+              <span className="text-lg font-black">{stage.code}</span>
             </div>
-            <div className="text-slate-900 font-bold text-sm mb-1">{stage.name}</div>
-            <div className="text-slate-400 text-xs">{stage.action}</div>
+            
+            <h3 className="text-xl font-bold text-slate-900 mb-2">{stage.name}</h3>
+            <div className="text-slate-400 font-bold uppercase text-[10px] tracking-widest mb-4">
+              Strategy: {stage.action}
+            </div>
+            
+            <div className="mt-auto pt-6 border-t border-slate-50 italic text-slate-500 text-sm leading-relaxed">
+              &quot;{stage.guidance}&quot;
+            </div>
           </motion.div>
         ))}
       </div>
@@ -657,214 +533,194 @@ function PBScoreSection() {
 }
 
 /* =============================================================================
-   SECTION 05: DATA PIPELINE
+   SECTION 05: HOW HOMEFLIP.AI WORKS (END-TO-END)
    ============================================================================= */
 
-function DataPipelineSection() {
-  const features = [
+function HowItWorksSection() {
+  const steps = [
     {
-      title: 'Court-Sync Engine',
-      description: 'We don\'t just scrape names. We ingest case numbers, fiduciary roles, and filing types from county court systems daily.',
-      highlight: 'Real-time data, not stale lists'
+      title: 'Probate Ingestion',
+      desc: 'Our engine monitors 3,000+ county portals daily. We don\'t just scrape names; we ingest case numbers, fiduciary roles, and filing types.',
+      icon: <Building className="w-6 h-6" />,
+      detail: 'Daily Court Sync'
     },
     {
-      title: 'LLM Document Processing',
-      description: 'Our system reads actual court PDFs—inventory lists, petitions, orders—to extract property addresses often hidden in case notes.',
-      highlight: 'AI that reads legal documents'
+      title: 'Timeline Scoring',
+      desc: 'AI analyzes thousands of data points—filing velocity, inventory submission, and equity ratios—to assign a precise PB Score.',
+      icon: <Brain className="w-6 h-6" />,
+      detail: 'Judgment Engine'
     },
     {
-      title: 'Your 2-Week Head Start',
-      description: 'We find the property before it\'s even recorded in the tax assessor\'s office. That\'s the window other investors miss.',
-      highlight: 'First-mover advantage'
+      title: 'Guided Actions',
+      desc: 'The platform identifies the exact &quot;Action Window&quot; for each case and provides the corresponding playbook and script.',
+      icon: <Target className="w-6 h-6" />,
+      detail: 'Playbook Activation'
+    },
+    {
+      title: 'Outcome Learning',
+      desc: 'Every closed deal feeds back into the system, refining the algorithm for your specific market over time.',
+      icon: <TrendingUp className="w-6 h-6" />,
+      detail: 'Market Intelligence'
     }
   ];
 
   return (
-    <section className="px-6 py-32 bg-[#050505] relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#0891b2]/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-[#83d4c0]/10 rounded-full blur-[100px] pointer-events-none" />
+    <Section id="how-it-works" className="bg-white py-32 overflow-hidden">
+      <div className="text-center mb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="inline-block px-4 py-1 rounded-full bg-slate-50 text-slate-500 text-sm font-bold tracking-widest uppercase border border-slate-200 mb-8"
+        >
+          The Closed-Loop System
+        </motion.div>
+        <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight mb-8">
+          Built to
+          <span className="text-slate-400"> Think</span>
+        </h2>
+        <p className="text-slate-500 text-xl max-w-2xl mx-auto leading-relaxed">
+          The platform learns and adapts. Every outcome makes your market intelligence sharper.
+        </p>
+      </div>
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-block px-4 py-1 rounded-full bg-white/5 text-[#83d4c0] text-sm font-bold mb-6 tracking-[0.2em] uppercase border border-white/10"
-          >
-            The Data Edge
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight"
-          >
-            The Data
-            <br />
-            <span className="text-white/40">Pipeline</span>
-          </motion.h2>
-        </div>
+      <div className="relative">
+        {/* Connector Line (Desktop) */}
+        <div className="absolute top-1/2 left-0 w-full h-px bg-slate-100 -translate-y-1/2 hidden lg:block" />
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          {features.map((feature, i) => (
+        <div className="grid lg:grid-cols-4 gap-8">
+          {steps.map((step, i) => (
             <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 30 }}
+              key={step.title}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-[#83d4c0]/30 transition-all"
+              transition={{ delay: i * 0.1 }}
+              className="bg-slate-50 rounded-[2rem] p-8 border border-slate-100 relative z-10 h-full group hover:border-[#83d4c0]/50 transition-all duration-500"
             >
-              <div className="text-[#83d4c0] text-sm font-bold uppercase tracking-wider mb-4">
-                {feature.highlight}
+              <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-[#0891b2] mb-6 group-hover:scale-110 transition-transform">
+                {step.icon}
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">
-                {feature.title}
-              </h3>
-              <p className="text-white/60 leading-relaxed">
-                {feature.description}
-              </p>
+              <div className="text-[#0891b2] text-[10px] font-black uppercase tracking-widest mb-2 opacity-60">
+                Step {i + 1}: {step.detail}
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-4">{step.title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">{step.desc}</p>
             </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
 
 /* =============================================================================
-   SECTION 06: COMMUNITY BRIDGE
+   SECTION 06: MORE THAN A CRM
    ============================================================================= */
 
-function CommunityBridgeSection() {
+function MoreThanCRMSection() {
   return (
-    <Section id="community" className="bg-slate-50/70 overflow-hidden">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-        {/* Left - Content */}
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-block px-4 py-1 rounded-full bg-white text-[#0891b2] text-sm font-bold mb-6 tracking-[0.2em] uppercase border border-slate-200"
-          >
-            The Business Model
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl sm:text-5xl font-black text-slate-900 mb-6 tracking-tight"
-          >
-            The Strategy is Free.
+    <Section id="more-than-crm" className="bg-slate-950 py-32 overflow-hidden relative">
+      <div className="grid lg:grid-cols-2 gap-24 items-center">
+        {/* Left: Content */}
+        <div className="space-y-8">
+          <div className="inline-block px-4 py-1 rounded-full bg-white/5 text-[#83d4c0] text-sm font-bold tracking-widest uppercase border border-white/10">
+            Category Reframing
+          </div>
+          <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-[1]">
+            CRMs Store History.
             <br />
-            <span className="bg-gradient-to-r from-[#0891b2] to-[#83d4c0] bg-clip-text text-transparent">
-              The Execution is Automated.
-            </span>
-          </motion.h2>
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="space-y-4 text-lg text-slate-600 leading-relaxed"
-          >
+            <span className="text-white/40 italic">We Drive Decisions.</span>
+          </h2>
+          <div className="space-y-6 text-lg text-white/60 leading-relaxed">
             <p>
-              I give away my 20 years of probate training for free in our community. Why?
-              Because the strategy only works if you have the <strong className="text-slate-900">data</strong> and
-              the <strong className="text-slate-900">discipline</strong> to execute it.
+              A CRM is a database with a UI. It&apos;s designed to store what happened in the past. It doesn&apos;t care about your ROI or the seller&apos;s readiness.
+            </p>
+            <p className="text-[#83d4c0] font-medium">
+              Homeflip.ai is the intelligence layer that sits above your execution.
             </p>
             <p>
-              Homeflip.ai is the engine that executes the Property Magnet strategy. It takes
-              the guesswork out of Timeline Intelligence, so you can focus on building
-              relationships and closing deals.
+              We don&apos;t just manage your contacts; we provide the judgment required to know which contacts to ignore and which ones to engage with right now.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="mt-8"
-          >
-            <a
-              href="https://skool.com/propertymagnet"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-white px-6 py-4 rounded-xl border border-slate-200 hover:border-[#0891b2]/30 hover:shadow-lg transition-all group"
-            >
-              <div className="w-10 h-10 rounded-lg bg-[#0891b2] flex items-center justify-center text-white">
-                <Play className="w-5 h-5" />
-              </div>
-              <div className="text-left">
-                <div className="text-slate-900 font-bold">Join the Free Community</div>
-                <div className="text-slate-500 text-sm">skool.com/propertymagnet</div>
-              </div>
-              <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-[#0891b2] group-hover:translate-x-1 transition-all" />
-            </a>
-          </motion.div>
+          <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex items-center gap-2 text-white/40 text-sm font-medium">
+              <CheckCircle2 className="w-4 h-4 text-[#83d4c0]" />
+              No Manual Data Entry
+            </div>
+            <div className="flex items-center gap-2 text-white/40 text-sm font-medium">
+              <CheckCircle2 className="w-4 h-4 text-[#83d4c0]" />
+              Automated Case Monitoring
+            </div>
+            <div className="flex items-center gap-2 text-white/40 text-sm font-medium">
+              <CheckCircle2 className="w-4 h-4 text-[#83d4c0]" />
+              Strategy-Led Playbooks
+            </div>
+          </div>
         </div>
 
-        {/* Right - Visual */}
+        {/* Right: Comparative Visual */}
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
           className="relative"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-[#83d4c0]/10 to-[#0891b2]/10 rounded-[2.5rem] blur-2xl opacity-50" />
-
-          <div className="relative bg-white rounded-[2.5rem] p-8 border border-slate-200 shadow-2xl">
-            {/* Free Training */}
-            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 mb-4">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600">
-                  <BookOpen className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-sm font-bold text-slate-900">Free Training</div>
-                  <div className="text-xs text-emerald-600 font-medium">Property Magnet Community</div>
+          <div className="bg-white/5 backdrop-blur-md rounded-[2.5rem] p-1 border border-white/10">
+            <div className="bg-slate-900 rounded-[2.4rem] overflow-hidden">
+              {/* Header */}
+              <div className="bg-slate-800/50 p-6 border-b border-white/5 flex items-center justify-between">
+                <div className="text-white font-bold tracking-tight">System Architecture</div>
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/20" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/20" />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2">
-                {['Video Courses', 'Live Coaching', 'Scripts & Templates', 'Community Q&A'].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-sm text-slate-600">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                    {item}
+
+              {/* Layers */}
+              <div className="p-8 space-y-4">
+                {/* Intelligence Layer */}
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="bg-gradient-to-br from-[#0891b2] to-[#83d4c0] p-6 rounded-2xl shadow-lg shadow-[#0891b2]/20 border border-white/20"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-white font-black uppercase text-xs tracking-widest">Intelligence Layer</span>
+                    <Brain className="w-5 h-5 text-white" />
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Plus sign */}
-            <div className="flex justify-center my-4">
-              <div className="w-8 h-8 rounded-full bg-[#0891b2] text-white flex items-center justify-center font-bold">
-                +
-              </div>
-            </div>
-
-            {/* Homeflip Platform */}
-            <div className="bg-gradient-to-br from-[#0891b2]/10 to-[#83d4c0]/10 rounded-2xl p-6 border border-[#0891b2]/20">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0891b2] to-[#83d4c0] flex items-center justify-center text-white shadow-lg">
-                  <Sparkles className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-sm font-bold text-slate-900">Homeflip.ai Platform</div>
-                  <div className="text-xs text-[#0891b2] font-medium">Execution Engine</div>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                {['Court Data Sync', 'PB-Score Algorithm', 'Guided Playbooks', 'Status Monitoring'].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-sm text-slate-700">
-                    <CheckCircle2 className="w-4 h-4 text-[#0891b2]" />
-                    {item}
+                  <div className="grid grid-cols-3 gap-2">
+                    {['Scoring', 'Playbooks', 'Learning'].map(tag => (
+                      <div key={tag} className="bg-white/20 rounded-md py-1.5 text-center text-[10px] text-white font-bold">
+                        {tag}
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </motion.div>
+
+                {/* Connector */}
+                <div className="flex justify-center">
+                  <ArrowDown className="w-6 h-6 text-white/10" />
+                </div>
+
+                {/* Execution Layer */}
+                <div className="bg-white/5 p-6 rounded-2xl border border-white/10 opacity-60">
+                  <div className="flex items-center justify-between mb-3 text-white/60">
+                    <span className="font-black uppercase text-xs tracking-widest">Execution Layer</span>
+                    <Gauge className="w-5 h-5" />
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    {['CRM', 'Mail', 'Calls'].map(tag => (
+                      <div key={tag} className="bg-white/10 rounded-md py-1.5 text-center text-[10px] text-white/40 font-bold">
+                        {tag}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1297,7 +1153,7 @@ function ProofSection() {
             It&apos;s a system built by an investor who&apos;s closed over 1,000 probate deals.
             The playbooks aren&apos;t theory—they&apos;re what actually works.&quot;
           </p>
-          <div className="mt-4 text-slate-900 font-bold">— Gary</div>
+          <div className="mt-4 text-slate-900 font-bold">— Gary Bailey</div>
           <div className="text-slate-400 text-sm">Founder, Homeflip.ai</div>
         </div>
       </motion.div>

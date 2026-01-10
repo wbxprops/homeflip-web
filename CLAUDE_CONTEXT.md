@@ -2,8 +2,8 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2026-01-08
-**Claude Code Version:** Opus 4.5
+**Last Updated:** 2026-01-09
+**Claude Code Version:** Sonnet 4.5
 
 ---
 
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Resource Hub with guide sections and community workspace complete.
+**Current Status:** 🚧 IN PROGRESS - Platform page redesign in progress. Hero, Automation Trap, and Timeline Intelligence sections implemented.
 
 ---
 
@@ -34,9 +34,17 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 ## 🎯 What I Need to Know
 
 ### Current Focus
-**Active Work:** Resource Hub build-out complete. Ready for Training Videos page or additional content.
+**Active Work:** Platform page redesign (`/platform`). Shifting positioning to "Built for Judgment" and "Intelligence > Automation".
 
 ### Session History
+#### 2026-01-09 (Platform Page Redesign Initial Build)
+- ✅ Refactored `/platform` page structure to align with `Master_Spec.md`.
+- ✅ Implemented new sections: Automation Trap, Timeline Intelligence™, PB Scorecard, and How It Works.
+- ✅ Fixed Hero section layout (Case Card overlap fix).
+- ✅ Brand Update: Changed "Gary" to "Gary Bailey" and removed community-specific lines for a broader SaaS feel.
+- ✅ Fixed critical JSX syntax error and cleared port 3003 dev server hang.
+- **Deployed**: Commits `ff0236a`, `9175aca` pushed to origin/master.
+
 #### 2026-01-08 (Claim Your County Wording Consistency)
 - ✅ Fixed main site Claim Your County form to match Resource Hub wording exactly
 - ✅ Step 3: "County Activation Pending" + "Finalize Setup" button
