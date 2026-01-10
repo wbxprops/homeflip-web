@@ -437,6 +437,17 @@ function ProbateProfitMachineAccessPageContent() {
                 Buy Your Next Deal In 30 Days Or Less
               </motion.p>
 
+              {/* Mobile CTA - appears right after headline, before book */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.3 }}
+                className="lg:hidden mb-8"
+              >
+                <CTAButton size="medium" />
+              </motion.div>
+
+              {/* Desktop CTA */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -464,15 +475,6 @@ function ProbateProfitMachineAccessPageContent() {
                   className="relative w-full max-w-[22rem] md:max-w-[25rem] lg:max-w-[28rem] drop-shadow-2xl rotate-[3deg] md:rotate-0 transition-transform"
                 />
               </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.5 }}
-                className="mt-8 lg:hidden"
-              >
-                <CTAButton size="medium" />
-              </motion.div>
             </motion.div>
           </div>
         </div>
