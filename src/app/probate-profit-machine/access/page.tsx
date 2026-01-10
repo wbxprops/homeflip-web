@@ -66,12 +66,12 @@ function LoadingOverlay({ message }: { message: string }) {
       animate={{ opacity: 1 }}
       className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-[#050505]"
     >
-      <HouseLoader size={100} />
+      <HouseLoader size={64} />
       <motion.p
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="mt-6 text-2xl sm:text-3xl font-hero font-bold text-white uppercase tracking-wide"
+        className="mt-5 text-lg sm:text-xl text-slate-300 font-medium tracking-wide"
       >
         {message}
       </motion.p>
