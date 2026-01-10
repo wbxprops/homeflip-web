@@ -442,9 +442,12 @@ function ProbateProfitMachineAccessPageContent() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.3 }}
-                className="lg:hidden mb-8"
+                className="lg:hidden mb-8 flex flex-col items-center"
               >
                 <CTAButton size="medium" />
+                <p className="mt-3 text-xs text-slate-500 uppercase tracking-widest">
+                  Instant Access – No Form Required
+                </p>
               </motion.div>
 
               {/* Desktop CTA */}
