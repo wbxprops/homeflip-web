@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
 import { logos } from '@/config/hub.config';
@@ -79,7 +79,7 @@ function LoadingOverlay({ message }: { message: string }) {
   );
 }
 
-export default function ProbateProfitMachineAccessPage() {
+function ProbateProfitMachineAccessPageContent() {
   const searchParams = useSearchParams();
   const email = searchParams.get('email');
 
@@ -934,5 +934,18 @@ export default function ProbateProfitMachineAccessPage() {
         </div>
       </footer>
     </div>
+  );
+}
+
+// Wrap in Suspense for useSearchParams
+export default function ProbateProfitMachineAccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
+        <HouseLoader size={100} />
+      </div>
+    }>
+      <ProbateProfitMachineAccessPageContent />
+    </Suspense>
   );
 }
