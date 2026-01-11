@@ -22,7 +22,7 @@ function BookCallContent() {
   const lastName = nameParts.slice(1).join(' ') || '';
 
   // Build Calendly URL with prefilled params
-  const calendlyBaseUrl = 'https://calendly.com/wb-props/homeflip-roadmap';
+  const calendlyBaseUrl = 'https://calendly.com/wb-props/homeflip-activation';
   const calendlyParams = new URLSearchParams({
     hide_event_type_details: '1',
     hide_gdpr_banner: '1',
