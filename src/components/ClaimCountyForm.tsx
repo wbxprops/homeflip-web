@@ -658,7 +658,7 @@ export const ClaimCountyForm = () => {
                       </div>
                     </div>
                     <CalendlyEmbed
-                      url="https://calendly.com/wb-props/homeflip-activation?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=5EEADC"
+                      url="https://calendly.com/wb-props/homeflip-activation?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=189ab4"
                       prefill={{
                         name: formData.name,
                         email: formData.email,

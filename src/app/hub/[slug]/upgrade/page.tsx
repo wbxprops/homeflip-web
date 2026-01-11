@@ -643,7 +643,7 @@ function ClaimCountyFormDark({ step, setStep }: ClaimCountyFormDarkProps) {
                       </div>
                     </div>
                     <CalendlyEmbed
-                      url="https://calendly.com/wb-props/homeflip-activation?hide_event_type_details=1&hide_gdpr_banner=1&background_color=0a0a0f&text_color=ffffff&primary_color=83d4c0"
+                      url="https://calendly.com/wb-props/homeflip-activation?hide_event_type_details=1&hide_gdpr_banner=1&background_color=0a0a0f&text_color=ffffff&primary_color=189ab4"
                       prefill={{
                         name: formData.name,
                         email: formData.email,
