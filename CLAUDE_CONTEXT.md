@@ -2,7 +2,7 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2026-01-09
+**Last Updated:** 2026-01-10
 **Claude Code Version:** Sonnet 4.5
 
 ---
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Platform page redesign in progress. Hero, Automation Trap, and Timeline Intelligence sections implemented.
+**Current Status:** 🚧 IN PROGRESS - GTM/GA4 analytics live. Platform page redesign in progress.
 
 ---
 
@@ -34,9 +34,27 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 ## 🎯 What I Need to Know
 
 ### Current Focus
-**Active Work:** Platform page redesign (`/platform`). Shifting positioning to "Built for Judgment" and "Intelligence > Automation".
+**Active Work:** Pre-strategy survey funnel complete. Manual setup needed: SQL migration, AC tag, n8n workflow import. Then test flow.
 
 ### Session History
+#### 2026-01-12 (Pre-Strategy Survey Funnel)
+- Created `/ppm-pre-strategy-survey` page with 4-step form
+- Created `PreStrategySurveyForm.tsx` component with conditional logic
+- Transformed thank-you page to long-form VSL placeholder structure
+- Created `ppm-survey-complete` n8n workflow for AC tagging
+- Added `survey-complete-ppm-strategy` tag to TAG-REGISTRY
+- Created database migration for `survey_data` JSONB column
+- **Manual actions needed:** Run SQL migration, create AC tag, import n8n workflow
+- **Session log:** `docs/session-logs/2026-01-12-pre-strategy-survey-funnel.md`
+
+#### 2026-01-10 (Contact Page Cleanup & GTM/GA4 Setup)
+- ✅ Simplified `/contact` page - removed form, email, location; now just CTA to claim-your-county
+- ✅ Added Google Tag Manager (GTM-5K2H3HDN) to TrackingScripts.tsx
+- ✅ Created GA4 property (G-2D3CNVNVKK) and connected via GTM
+- ✅ Updated dataLayer event helpers for GTM compatibility
+- ✅ Created `homeflip-ai/docs/THIRD-PARTY-SERVICE-IDS.md` for ID reference
+- **Deployed**: Commits `cf13d70`, `4973a85` pushed to origin/master
+
 #### 2026-01-09 (Platform Page Redesign Initial Build)
 - ✅ Refactored `/platform` page structure to align with `Master_Spec.md`.
 - ✅ Implemented new sections: Automation Trap, Timeline Intelligence™, PB Scorecard, and How It Works.
@@ -159,7 +177,7 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 - [x] ~~Connect custom domain~~ (homeflip.ai is live!)
 - [x] ~~Resource Hub guide sections~~ (DONE - Part I, II, III)
 - [x] ~~Community Workspace page~~ (DONE - bridge surface design)
-- [ ] **🔥 Google Tag Manager + Google Analytics** - PRIORITY! Track Insights article performance. Install GTM container in layout.tsx, configure GA4 property, set up page view tracking. Articles are getting traction, need analytics ASAP.
+- [x] ~~**🔥 Google Tag Manager + Google Analytics**~~ (DONE 2026-01-10 - GTM-5K2H3HDN, GA4 G-2D3CNVNVKK)
 - [ ] **Resource Hub: Probate Profit Machine enhancements** (see `docs/CONTEXT-probate-profit-machine-guide.md`)
   - [ ] Build AudioPlayer component (Wistia embed)
   - [ ] Build FullStoryCallout component
