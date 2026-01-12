@@ -9,7 +9,7 @@ export default function PreStrategySurveyPage() {
   return (
     <main className="min-h-screen bg-[#050505] dark">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-[#050505]/80 backdrop-blur-md border-b border-white/5">
+      <header className="fixed top-0 left-0 right-0 z-50 py-4 px-6 bg-transparent backdrop-blur-sm border-b border-white/5">
         <div className="w-full flex items-center justify-center relative">
           {/* Centered Logo */}
           <div className="flex items-center">
