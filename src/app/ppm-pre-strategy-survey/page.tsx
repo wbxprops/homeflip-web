@@ -1,9 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Phone } from 'lucide-react';
 import { logos } from '@/config/hub.config';
 import { PreStrategySurveyForm } from '@/components/PreStrategySurveyForm';
+
+// Loading placeholder for form
+function FormLoading() {
+  return (
+    <div className="animate-pulse space-y-4">
+      <div className="h-12 bg-white/10 rounded-lg" />
+      <div className="h-12 bg-white/10 rounded-lg" />
+      <div className="h-12 bg-white/10 rounded-lg" />
+      <div className="h-12 bg-white/10 rounded-lg w-1/2 mx-auto mt-6" />
+    </div>
+  );
+}
 
 export default function PreStrategySurveyPage() {
   return (
@@ -48,7 +60,9 @@ export default function PreStrategySurveyPage() {
 
           {/* Form Card */}
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-6 sm:p-8">
-            <PreStrategySurveyForm />
+            <Suspense fallback={<FormLoading />}>
+              <PreStrategySurveyForm />
+            </Suspense>
           </div>
 
           {/* Footer Note */}

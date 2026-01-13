@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X, MapPin, ArrowRight, ArrowLeft, Calendar, CheckCircle2, User, Target, Building2 } from 'lucide-react';
+import { Plus, X, MapPin, ArrowRight, ArrowLeft, Calendar, CheckCircle2, User, Target, Building2, MessageSquare } from 'lucide-react';
 
 // ==================== TYPES ====================
 
@@ -49,17 +50,6 @@ interface StateSelection {
 }
 
 // ==================== CALENDLY EMBED ====================
-
-function splitName(fullName: string): { firstName: string; lastName: string } {
-  const parts = fullName.trim().split(/\s+/);
-  if (parts.length === 1) {
-    return { firstName: parts[0], lastName: '' };
-  }
-  return {
-    firstName: parts[0],
-    lastName: parts.slice(1).join(' ')
-  };
-}
 
 interface CalendlyEmbedProps {
   url: string;
@@ -174,8 +164,6 @@ const EXPERIENCE_EXISTING_OPTIONS = [
   { value: '5+yrs', label: '5+ years' },
 ];
 
-const COMMITMENT_OPTIONS = [1, 2, 3, 4, 5];
-
 const US_STATES = [
   { code: 'AL', name: 'Alabama' }, { code: 'AK', name: 'Alaska' }, { code: 'AZ', name: 'Arizona' },
   { code: 'AR', name: 'Arkansas' }, { code: 'CA', name: 'California' }, { code: 'CO', name: 'Colorado' },
@@ -199,20 +187,23 @@ const US_STATES = [
 // ==================== MAIN COMPONENT ====================
 
 export const PreStrategySurveyForm = () => {
-  // Form state
-  const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
+  const searchParams = useSearchParams();
+
+  // Form state - now 6 steps
+  const [step, setStep] = useState<1 | 2 | 3 | 4 | 5 | 6>(1);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Contact info (Step 1)
+  // Contact info (Step 1) - pre-fill from URL params if available
+  // AC merge fields: ?email=%EMAIL%&firstName=%FIRSTNAME%&lastName=%LASTNAME%&phone=%PHONE%
   const [contactInfo, setContactInfo] = useState<ContactInfo>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
+    firstName: searchParams.get('firstName') || searchParams.get('first_name') || '',
+    lastName: searchParams.get('lastName') || searchParams.get('last_name') || '',
+    email: searchParams.get('email') || '',
+    phone: searchParams.get('phone') || '',
   });
 
-  // Survey data (Steps 2-3)
+  // Survey data
   const [surveyData, setSurveyData] = useState<SurveyData>({
     investor_type: '',
     is_full_time: '',
@@ -226,7 +217,7 @@ export const PreStrategySurveyForm = () => {
     commitment_level: null,
   });
 
-  // County selection (Step 4)
+  // County selection
   const [jurisdictions, setJurisdictions] = useState<Jurisdiction[]>([]);
   const [stateSelections, setStateSelections] = useState<StateSelection[]>([
     { id: '1', stateCode: '', counties: [], searchQuery: '' }
@@ -348,6 +339,11 @@ export const PreStrategySurveyForm = () => {
 
   // ==================== STEP NAVIGATION ====================
 
+  const clearError = () => {
+    setStatus('idle');
+    setErrorMessage('');
+  };
+
   const handleStep1Submit = () => {
     if (!contactInfo.firstName || !contactInfo.lastName || !contactInfo.email || !contactInfo.phone) {
       setStatus('error');
@@ -359,8 +355,7 @@ export const PreStrategySurveyForm = () => {
       setErrorMessage('Please enter a valid email address.');
       return;
     }
-    setStatus('idle');
-    setErrorMessage('');
+    clearError();
     setStep(2);
   };
 
@@ -375,6 +370,11 @@ export const PreStrategySurveyForm = () => {
       setErrorMessage('Please indicate if real estate is your full-time job.');
       return;
     }
+    clearError();
+    setStep(3);
+  };
+
+  const handleStep3Submit = () => {
     if (!isNotInvestor && surveyData.strategies.length === 0) {
       setStatus('error');
       setErrorMessage('Please select at least one investment strategy.');
@@ -385,12 +385,11 @@ export const PreStrategySurveyForm = () => {
       setErrorMessage('Please select your experience level.');
       return;
     }
-    setStatus('idle');
-    setErrorMessage('');
-    setStep(3);
+    clearError();
+    setStep(4);
   };
 
-  const handleStep3Submit = async () => {
+  const handleStep4Submit = () => {
     if (!surveyData.goal) {
       setStatus('error');
       setErrorMessage('Please tell us your #1 goal.');
@@ -398,13 +397,14 @@ export const PreStrategySurveyForm = () => {
     }
     if (!surveyData.biggest_struggle) {
       setStatus('error');
-      setErrorMessage('Please tell us your biggest struggle.');
+      setErrorMessage('Please tell us your biggest challenge.');
       return;
     }
+    clearError();
+    setStep(5);
+  };
 
-    setStatus('submitting');
-    setErrorMessage('');
-
+  const handleStep5Submit = async () => {
     const jurisdictionsRequested = stateSelections
       .filter(sel => sel.stateCode && sel.counties.length > 0)
       .map(sel => ({
@@ -417,6 +417,9 @@ export const PreStrategySurveyForm = () => {
       setErrorMessage('Please select a state and at least one county.');
       return;
     }
+
+    setStatus('submitting');
+    setErrorMessage('');
 
     try {
       // Save to Supabase
@@ -446,16 +449,16 @@ export const PreStrategySurveyForm = () => {
           })
         });
       } catch (webhookError) {
-        // Don't block on webhook failure
         console.error('Webhook error:', webhookError);
       }
 
       setStatus('idle');
-      setStep(4);
-    } catch (error: any) {
+      setStep(6);
+    } catch (error: unknown) {
       console.error('Submission error:', error);
       setStatus('error');
-      setErrorMessage(error.message || 'Something went wrong. Please try again.');
+      const errorMsg = error instanceof Error ? error.message : 'Something went wrong. Please try again.';
+      setErrorMessage(errorMsg);
     }
   };
 
@@ -469,22 +472,24 @@ export const PreStrategySurveyForm = () => {
 
   // ==================== PROGRESS INDICATOR ====================
 
-  const ProgressIndicator = ({ currentStep }: { currentStep: 1 | 2 | 3 | 4 }) => {
+  const ProgressIndicator = ({ currentStep }: { currentStep: number }) => {
     const steps = [
       { num: 1, label: 'Contact', icon: User },
-      { num: 2, label: 'Profile', icon: Target },
-      { num: 3, label: 'Goals', icon: Building2 },
-      { num: 4, label: 'Book Call', icon: Calendar },
+      { num: 2, label: 'Type', icon: Target },
+      { num: 3, label: 'Strategy', icon: Building2 },
+      { num: 4, label: 'Goals', icon: MessageSquare },
+      { num: 5, label: 'Markets', icon: MapPin },
+      { num: 6, label: 'Book', icon: Calendar },
     ];
 
     return (
       <div className="flex items-center justify-center mb-8">
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-1 sm:gap-2">
           {steps.map((s, idx) => (
             <React.Fragment key={s.num}>
               <div className="flex flex-col items-center">
                 <div
-                  className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all ${
+                  className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all ${
                     s.num < currentStep
                       ? 'bg-[#83d4c0] text-black'
                       : s.num === currentStep
@@ -493,19 +498,19 @@ export const PreStrategySurveyForm = () => {
                   }`}
                 >
                   {s.num < currentStep ? (
-                    <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" />
                   ) : (
-                    <s.icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <s.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                   )}
                 </div>
-                <span className={`text-xs mt-1 hidden sm:block ${
+                <span className={`text-[10px] sm:text-xs mt-1 hidden sm:block ${
                   s.num <= currentStep ? 'text-white/80' : 'text-white/40'
                 }`}>
                   {s.label}
                 </span>
               </div>
               {idx < steps.length - 1 && (
-                <div className={`w-8 sm:w-12 h-0.5 ${
+                <div className={`w-4 sm:w-8 h-0.5 ${
                   s.num < currentStep ? 'bg-[#83d4c0]' : 'bg-white/20'
                 }`} />
               )}
@@ -515,6 +520,37 @@ export const PreStrategySurveyForm = () => {
       </div>
     );
   };
+
+  // ==================== BACK BUTTON ====================
+
+  const BackButton = ({ onClick, label }: { onClick: () => void; label: string }) => (
+    <button
+      type="button"
+      onClick={onClick}
+      className="flex items-center gap-2 text-white/50 hover:text-[#83d4c0] transition-colors text-sm font-medium"
+    >
+      <ArrowLeft className="w-4 h-4" />
+      {label}
+    </button>
+  );
+
+  // ==================== CONTINUE BUTTON ====================
+
+  const ContinueButton = ({ onClick, loading, label = 'Continue' }: { onClick: () => void; loading?: boolean; label?: string }) => (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={loading}
+      className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-xl uppercase tracking-tighter shadow-lg shadow-[#0891b2]/20 hover:scale-[1.01] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+    >
+      {loading ? 'Saving...' : (
+        <>
+          {label}
+          <ArrowRight className="w-6 h-6" />
+        </>
+      )}
+    </button>
+  );
 
   // ==================== RENDER ====================
 
@@ -543,7 +579,7 @@ export const PreStrategySurveyForm = () => {
                 Let&apos;s Get Started
               </h2>
               <p className="text-white/60">
-                Tell us a bit about yourself so we can personalize your experience.
+                Tell us a bit about yourself.
               </p>
             </div>
 
@@ -582,18 +618,11 @@ export const PreStrategySurveyForm = () => {
               onChange={(e) => setContactInfo({ ...contactInfo, phone: formatPhoneNumber(e.target.value) })}
             />
 
-            <button
-              type="button"
-              onClick={handleStep1Submit}
-              className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-xl uppercase tracking-tighter shadow-lg shadow-[#0891b2]/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-3"
-            >
-              Continue
-              <ArrowRight className="w-6 h-6" />
-            </button>
+            <ContinueButton onClick={handleStep1Submit} />
           </motion.div>
         )}
 
-        {/* STEP 2: Investor Profile */}
+        {/* STEP 2: Investor Type + Full-Time Status */}
         {step === 2 && (
           <motion.div
             key="step2"
@@ -602,29 +631,19 @@ export const PreStrategySurveyForm = () => {
             exit={{ opacity: 0, x: 20 }}
             className="space-y-6"
           >
-            <button
-              type="button"
-              onClick={() => setStep(1)}
-              className="flex items-center gap-2 text-white/50 hover:text-[#83d4c0] transition-colors text-sm font-medium"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to contact info
-            </button>
+            <BackButton onClick={() => setStep(1)} label="Back" />
 
             <div className="text-center mb-6">
               <h2 className="font-hero font-[900] text-2xl sm:text-3xl text-white uppercase tracking-tighter mb-2">
-                About Your Investing
+                About You
               </h2>
               <p className="text-white/60">
-                Help us understand your real estate background.
+                What best describes your situation?
               </p>
             </div>
 
             {/* Investor Type */}
             <div className="space-y-3">
-              <label className="block text-sm font-medium text-white/80">
-                What best describes you? *
-              </label>
               {INVESTOR_TYPE_OPTIONS.map((option) => (
                 <button
                   key={option.value}
@@ -645,7 +664,7 @@ export const PreStrategySurveyForm = () => {
                 className="space-y-3"
               >
                 <label className="block text-sm font-medium text-white/80">
-                  Is real estate investing your full-time job? *
+                  Is real estate investing your full-time job?
                 </label>
                 {FULL_TIME_OPTIONS.map((option) => (
                   <button
@@ -660,15 +679,35 @@ export const PreStrategySurveyForm = () => {
               </motion.div>
             )}
 
-            {/* Investment Strategy (conditional) */}
-            {!isNotInvestor && surveyData.investor_type && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                className="space-y-3"
-              >
+            <ContinueButton onClick={handleStep2Submit} />
+          </motion.div>
+        )}
+
+        {/* STEP 3: Strategy + Experience */}
+        {step === 3 && (
+          <motion.div
+            key="step3"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-6"
+          >
+            <BackButton onClick={() => setStep(2)} label="Back" />
+
+            <div className="text-center mb-6">
+              <h2 className="font-hero font-[900] text-2xl sm:text-3xl text-white uppercase tracking-tighter mb-2">
+                Your Strategy
+              </h2>
+              <p className="text-white/60">
+                Tell us about your investing approach.
+              </p>
+            </div>
+
+            {/* Investment Strategy */}
+            {!isNotInvestor && (
+              <div className="space-y-3">
                 <label className="block text-sm font-medium text-white/80">
-                  What is your real estate investing strategy? * (select all that apply)
+                  What is your investing strategy? (select all that apply)
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {STRATEGY_OPTIONS.map((option) => (
@@ -687,99 +726,58 @@ export const PreStrategySurveyForm = () => {
                     </button>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             )}
 
             {/* Experience Years */}
-            {surveyData.investor_type && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                className="space-y-3"
-              >
-                <label className="block text-sm font-medium text-white/80">
-                  {isNewInvestor
-                    ? 'How long have you been thinking about investing in real estate? *'
-                    : 'How long have you been investing in real estate? *'}
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  {(isNewInvestor ? EXPERIENCE_NEW_OPTIONS : EXPERIENCE_EXISTING_OPTIONS).map((option) => (
-                    <button
-                      key={option.value}
-                      type="button"
-                      onClick={() => setSurveyData({ ...surveyData, experience_years: option.value as ExperienceYears })}
-                      className={surveyData.experience_years === option.value ? radioSelectedStyles : radioStyles}
-                    >
-                      {option.label}
-                    </button>
-                  ))}
-                </div>
-              </motion.div>
-            )}
+            <div className="space-y-3">
+              <label className="block text-sm font-medium text-white/80">
+                {isNewInvestor
+                  ? 'How long have you been thinking about investing?'
+                  : 'How long have you been investing?'}
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                {(isNewInvestor ? EXPERIENCE_NEW_OPTIONS : EXPERIENCE_EXISTING_OPTIONS).map((option) => (
+                  <button
+                    key={option.value}
+                    type="button"
+                    onClick={() => setSurveyData({ ...surveyData, experience_years: option.value as ExperienceYears })}
+                    className={surveyData.experience_years === option.value ? radioSelectedStyles : radioStyles}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-            {/* Deals Last 12 Months (conditional) */}
-            {isExperiencedInvestor && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                className="space-y-3"
-              >
-                <label className="block text-sm font-medium text-white/80">
-                  How many houses have you completed in the past 12 months?
-                </label>
-                <input
-                  type="number"
-                  min="0"
-                  placeholder="Enter a number"
-                  className={inputStyles}
-                  value={surveyData.deals_last_12_months ?? ''}
-                  onChange={(e) => setSurveyData({ ...surveyData, deals_last_12_months: parseInt(e.target.value) || null })}
-                />
-              </motion.div>
-            )}
-
-            <button
-              type="button"
-              onClick={handleStep2Submit}
-              className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-xl uppercase tracking-tighter shadow-lg shadow-[#0891b2]/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-3"
-            >
-              Continue
-              <ArrowRight className="w-6 h-6" />
-            </button>
+            <ContinueButton onClick={handleStep3Submit} />
           </motion.div>
         )}
 
-        {/* STEP 3: Goals, Challenges & County Selection */}
-        {step === 3 && (
+        {/* STEP 4: Goal + Struggle */}
+        {step === 4 && (
           <motion.div
-            key="step3"
+            key="step4"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
             className="space-y-6"
           >
-            <button
-              type="button"
-              onClick={() => setStep(2)}
-              className="flex items-center gap-2 text-white/50 hover:text-[#83d4c0] transition-colors text-sm font-medium"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to profile
-            </button>
+            <BackButton onClick={() => setStep(3)} label="Back" />
 
             <div className="text-center mb-6">
               <h2 className="font-hero font-[900] text-2xl sm:text-3xl text-white uppercase tracking-tighter mb-2">
-                Goals & Markets
+                Your Goals
               </h2>
               <p className="text-white/60">
-                Tell us what you want to achieve and where you invest.
+                What are you trying to achieve?
               </p>
             </div>
 
             {/* Goal */}
             <div className="space-y-2">
               <label className="block text-sm font-medium text-white/80">
-                What is the #1 thing you want to achieve through real estate investing? *
+                What is the #1 thing you want to achieve through real estate?
               </label>
               <textarea
                 rows={3}
@@ -794,8 +792,8 @@ export const PreStrategySurveyForm = () => {
             <div className="space-y-2">
               <label className="block text-sm font-medium text-white/80">
                 {isNewInvestor
-                  ? 'What is currently stopping you from buying your first property? *'
-                  : 'What is your #1 biggest struggle in achieving your real estate goals? *'}
+                  ? 'What is currently stopping you from getting started?'
+                  : 'What is your biggest challenge right now?'}
               </label>
               <textarea
                 rows={3}
@@ -806,70 +804,35 @@ export const PreStrategySurveyForm = () => {
               />
             </div>
 
-            {/* Current Sources */}
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-white/80">
-                What sources do you currently use to find properties?
-              </label>
-              <textarea
-                rows={2}
-                placeholder="MLS, driving for dollars, direct mail, etc."
-                className={`${inputStyles} resize-none`}
-                value={surveyData.current_sources}
-                onChange={(e) => setSurveyData({ ...surveyData, current_sources: e.target.value })}
-              />
-            </div>
+            <ContinueButton onClick={handleStep4Submit} />
+          </motion.div>
+        )}
 
-            {/* Why Now */}
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-white/80">
-                What made you take action right now?
-              </label>
-              <textarea
-                rows={2}
-                placeholder="What prompted you to download the guide?"
-                className={`${inputStyles} resize-none`}
-                value={surveyData.why_now}
-                onChange={(e) => setSurveyData({ ...surveyData, why_now: e.target.value })}
-              />
-            </div>
+        {/* STEP 5: County Selection */}
+        {step === 5 && (
+          <motion.div
+            key="step5"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="space-y-6"
+          >
+            <BackButton onClick={() => setStep(4)} label="Back" />
 
-            {/* Commitment Level (conditional) */}
-            {surveyData.investor_type && (
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-white/80">
-                  {isNewInvestor
-                    ? 'How committed are you to getting your real estate business started?'
-                    : 'How committed are you to growing your real estate business?'}
-                </label>
-                <div className="flex gap-2">
-                  {COMMITMENT_OPTIONS.map((level) => (
-                    <button
-                      key={level}
-                      type="button"
-                      onClick={() => setSurveyData({ ...surveyData, commitment_level: level })}
-                      className={`flex-1 py-3 rounded-lg border-2 transition-all ${
-                        surveyData.commitment_level === level
-                          ? 'border-[#83d4c0] bg-[#83d4c0]/10 text-white'
-                          : 'border-white/20 bg-white/5 text-white/60 hover:bg-white/10'
-                      }`}
-                    >
-                      {level}
-                    </button>
-                  ))}
-                </div>
-                <div className="flex justify-between text-xs text-white/40 px-1">
-                  <span>Somewhat</span>
-                  <span>Very Committed</span>
-                </div>
-              </div>
-            )}
+            <div className="text-center mb-6">
+              <h2 className="font-hero font-[900] text-2xl sm:text-3xl text-white uppercase tracking-tighter mb-2">
+                Your Markets
+              </h2>
+              <p className="text-white/60">
+                Where do you want to invest?
+              </p>
+            </div>
 
             {/* County Selection */}
-            <div className="space-y-4 pt-4 border-t border-white/10">
-              <label className="block text-sm font-bold text-white/80">
+            <div className="space-y-4">
+              <label className="block text-sm font-medium text-white/80">
                 <MapPin className="w-4 h-4 inline mr-1" />
-                Select Your Investment Markets * (up to 3 counties per state)
+                Select your investment markets (up to 3 counties per state)
               </label>
 
               <AnimatePresence>
@@ -989,26 +952,18 @@ export const PreStrategySurveyForm = () => {
               )}
             </div>
 
-            <button
-              type="button"
-              onClick={handleStep3Submit}
-              disabled={status === 'submitting'}
-              className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-xl uppercase tracking-tighter shadow-lg shadow-[#0891b2]/20 hover:scale-[1.01] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
-            >
-              {status === 'submitting' ? 'Saving...' : (
-                <>
-                  Book Your Strategy Call
-                  <ArrowRight className="w-6 h-6" />
-                </>
-              )}
-            </button>
+            <ContinueButton
+              onClick={handleStep5Submit}
+              loading={status === 'submitting'}
+              label="Book Your Strategy Call"
+            />
           </motion.div>
         )}
 
-        {/* STEP 4: Calendly Booking */}
-        {step === 4 && (
+        {/* STEP 6: Calendly Booking */}
+        {step === 6 && (
           <motion.div
-            key="step4"
+            key="step6"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="py-4"
