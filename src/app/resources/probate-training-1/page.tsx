@@ -310,7 +310,7 @@ export default function ProbateTraining1Page() {
 
             <div className="mt-10 pt-8 border-t border-white/10">
               <p className="text-slate-500 text-sm">
-                <strong className="text-slate-400">About the Instructor:</strong> Gary Bailey has been a full-time real estate investor in Cincinnati, Ohio for over 20 years. He specializes in probate properties and has built systems to find, contact, and close deals consistently. This is Part 1 of a 4-part free training series.
+                I&apos;ve been doing this in Cincinnati for 20+ years. Everything I share in this training is stuff I actually do in my business—I looked at a house yesterday, I&apos;ll look at one today, and I&apos;ve got two more to sell this week. This isn&apos;t theory. It&apos;s what works.
               </p>
             </div>
           </motion.div>

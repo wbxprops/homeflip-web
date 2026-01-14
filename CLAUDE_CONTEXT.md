@@ -2,7 +2,7 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2026-01-10
+**Last Updated:** 2026-01-13
 **Claude Code Version:** Sonnet 4.5
 
 ---
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - GTM/GA4 analytics live. Platform page redesign in progress.
+**Current Status:** 🚧 IN PROGRESS - Pre-strategy survey 6-step form deployed. Ready to test end-to-end flow.
 
 ---
 
@@ -34,9 +34,19 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 ## 🎯 What I Need to Know
 
 ### Current Focus
-**Active Work:** Pre-strategy survey funnel complete. Manual setup needed: SQL migration, AC tag, n8n workflow import. Then test flow.
+**Active Work:** Pre-strategy survey 6-step form deployed. Test flow end-to-end. Replace VSL placeholder content.
 
 ### Session History
+#### 2026-01-13 (Pre-Strategy Survey Polish)
+- ✅ Restructured form from 4 steps to 6 steps (max 2 questions per step)
+- ✅ Added URL param prefill for AC merge fields (`%FIRSTNAME%`, `%EMAIL%`, etc.)
+- ✅ Made survey header transparent with backdrop blur
+- ✅ Verified AC tag IDs via API (survey-complete-ppm-strategy = ID **101**)
+- ✅ Set up central API keys at `AI Projects/.keys/api-keys.env`
+- ✅ Fixed Calendly type declaration for Vercel build
+- **New Step Structure:** Contact → Investor Type → Strategy → Goals → Counties → Calendly
+- **Session log:** `docs/session-logs/2026-01-13-pre-strategy-survey-polish.md`
+
 #### 2026-01-12 (Pre-Strategy Survey Funnel)
 - Created `/ppm-pre-strategy-survey` page with 4-step form
 - Created `PreStrategySurveyForm.tsx` component with conditional logic
