@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X, MapPin, ArrowRight, ArrowLeft, Calendar, CheckCircle2 } from 'lucide-react';
+import { Plus, X, MapPin, ArrowRight, ArrowLeft, CheckCircle2 } from 'lucide-react';
 
 // Helper to split full name into first and last
 function splitName(fullName: string): { firstName: string; lastName: string } {
@@ -18,85 +18,25 @@ function splitName(fullName: string): { firstName: string; lastName: string } {
   };
 }
 
-// Calendly Embed Component
-interface CalendlyEmbedProps {
-  url: string;
-  prefill?: {
-    name?: string;
-    email?: string;
-  };
-  onEventScheduled?: () => void;
-}
+// ==================== TRACKING PARAMS ====================
 
-function CalendlyEmbed({ url, prefill, onEventScheduled }: CalendlyEmbedProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+// Fields that are used for contact info (not tracking)
+const CONTACT_FIELDS = ['name', 'firstName', 'first_name', 'lastName', 'last_name', 'email', 'phone', 'redirect_after'];
 
-  useEffect(() => {
-    // Load Calendly script
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    document.body.appendChild(script);
+// Standard UTM fields for marketing attribution
+// Usage in email/ad links: ?utm_source=email&utm_medium=drip&utm_campaign=ppm_sequence&utm_term=email_5&utm_content=cta_button
+// Also supports: fbclid, gclid, ref, and any custom params
 
-    script.onload = () => {
-      if (window.Calendly && containerRef.current) {
-        const nameParts = prefill?.name ? splitName(prefill.name) : { firstName: '', lastName: '' };
-
-        window.Calendly.initInlineWidget({
-          url: url,
-          parentElement: containerRef.current,
-          prefill: {
-            firstName: nameParts.firstName,
-            lastName: nameParts.lastName,
-            email: prefill?.email,
-          },
-        });
-      }
-    };
-
-    // Listen for Calendly events
-    const handleCalendlyEvent = (e: MessageEvent) => {
-      if (e.data.event === 'calendly.event_scheduled') {
-        onEventScheduled?.();
-      }
-    };
-
-    window.addEventListener('message', handleCalendlyEvent);
-
-    return () => {
-      window.removeEventListener('message', handleCalendlyEvent);
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-  }, [url, prefill, onEventScheduled]);
-
-  return (
-    <div
-      ref={containerRef}
-      style={{ minWidth: '320px', height: '700px' }}
-    />
-  );
-}
-
-// Add Calendly type to window
-declare global {
-  interface Window {
-    Calendly?: {
-      initInlineWidget: (options: {
-        url: string;
-        parentElement: HTMLElement;
-        prefill?: {
-          firstName?: string;
-          lastName?: string;
-          email?: string;
-        };
-        hideEventTypeDetails?: boolean;
-        hideGdprBanner?: boolean;
-      }) => void;
-    };
-  }
-}
+// Extract all tracking params from URL (everything except contact fields)
+const getTrackingParams = (searchParams: URLSearchParams): Record<string, string> => {
+  const tracking: Record<string, string> = {};
+  searchParams.forEach((value, key) => {
+    if (!CONTACT_FIELDS.includes(key)) {
+      tracking[key] = value;
+    }
+  });
+  return tracking;
+};
 
 interface Jurisdiction {
   id: number;
@@ -116,22 +56,32 @@ interface StateSelection {
 
 export const ClaimCountyForm = () => {
   const searchParams = useSearchParams();
+  const router = useRouter();
+
+  // Capture all tracking params on mount (UTMs, fbclid, campaign, etc.)
+  const [trackingParams] = useState<Record<string, string>>(() => getTrackingParams(searchParams));
+
   const [jurisdictions, setJurisdictions] = useState<Jurisdiction[]>([]);
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
-    name: '',
+    name: searchParams.get('name') || '',
     email: searchParams.get('email') || '',
-    phone: '',
+    phone: searchParams.get('phone') || '',
   });
   const [stateSelections, setStateSelections] = useState<StateSelection[]>([
     { id: '1', stateCode: '', counties: [], searchQuery: '' }
   ]);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
-  const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
+  const [step, setStep] = useState<1 | 2 | 3>(1);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [bookingComplete, setBookingComplete] = useState(false);
   const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
+
+  // Get redirect destination from URL param (default to booking-activation)
+  const redirectAfter = searchParams.get('redirect_after') || 'booking-activation';
+
+  // Check if contact info was pre-filled (skip step 1 if so)
+  const hasPrefilledContact = !!(searchParams.get('name') || searchParams.get('email'));
 
   // Format phone number as +1 (XXX) XXX-XXXX
   const formatPhoneNumber = (value: string) => {
@@ -172,6 +122,10 @@ export const ClaimCountyForm = () => {
 
   useEffect(() => {
     setLoading(false);
+    // Skip to step 2 if contact info was pre-filled
+    if (hasPrefilledContact && formData.name && formData.email) {
+      setStep(2);
+    }
   }, []);
 
   // All 50 US states
@@ -316,21 +270,26 @@ export const ClaimCountyForm = () => {
           name: formData.name,
           phone: formData.phone,
           source: 'claim_county_page',
-          jurisdictions_requested: jurisdictionsRequested
+          jurisdictions_requested: jurisdictionsRequested,
+          // Store all tracking params (UTMs, fbclid, campaign, etc.)
+          ...(Object.keys(trackingParams).length > 0 && { tracking_params: trackingParams }),
         }]);
 
+      // Upsert to prospects table (creates or updates based on email)
       const { error } = await supabase
         .from('prospects')
-        .insert([{
+        .upsert([{
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
           source: 'claim_county_page',
-          jurisdictions_requested: jurisdictionsRequested
-        }]);
+          jurisdictions_requested: jurisdictionsRequested,
+          // Store all tracking params (UTMs, fbclid, campaign, etc.)
+          ...(Object.keys(trackingParams).length > 0 && { tracking_params: trackingParams }),
+        }], { onConflict: 'email' });
 
-      if (error && error.code !== '23505') {
-        throw error;
+      if (error) {
+        console.error('Prospects upsert error:', error);
       }
 
       // Move to confirmation step
@@ -610,92 +569,28 @@ export const ClaimCountyForm = () => {
                 Your county has been submitted. Access will be activated after setup is completed.
               </p>
 
-              {/* CTA */}
+              {/* CTA - Redirect to booking page */}
               <button
                 type="button"
-                onClick={() => setStep(4)}
+                onClick={() => {
+                  // Build booking URL with contact info and tracking params
+                  const bookingParams = new URLSearchParams({
+                    ...(formData.name && { name: formData.name }),
+                    ...(formData.email && { email: formData.email }),
+                    ...(formData.phone && { phone: formData.phone }),
+                    ...trackingParams, // Pass tracking params through
+                  });
+                  router.push(`/${redirectAfter}?${bookingParams.toString()}`);
+                }}
                 className="w-full btn-gradient py-5 rounded-2xl font-hero font-[900] text-2xl uppercase tracking-tighter shadow-lg shadow-[#0891b2]/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-3"
               >
-                Finalize Setup
+                Book Your Call
                 <ArrowRight className="w-6 h-6" />
               </button>
 
             </div>
           </motion.div>
-        ) : (
-          <motion.div
-            key="step4"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="py-4"
-          >
-            <AnimatePresence mode="wait">
-              {!bookingComplete ? (
-                <motion.div
-                  key="calendly"
-                  initial={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="space-y-6"
-                >
-                  {/* Header */}
-                  <div className="text-center mb-6">
-                    <h2 className="font-hero font-[900] text-3xl text-slate-900 uppercase tracking-tighter mb-3">
-                      Book Your Call
-                    </h2>
-                    <p className="text-lg text-slate-600 leading-relaxed max-w-xl mx-auto">
-                      Select a time for your implementation call. We'll confirm your county selection and get you started.
-                    </p>
-                  </div>
-
-                  {/* Calendly Container */}
-                  <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50">
-                    <div className="p-4 border-b border-slate-200 bg-white">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-5 h-5 text-slate-400" />
-                        <span className="text-sm font-medium text-slate-600">
-                          Schedule your implementation call
-                        </span>
-                      </div>
-                    </div>
-                    <CalendlyEmbed
-                      url="https://calendly.com/wb-props/homeflip-activation?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=189ab4"
-                      prefill={{
-                        name: formData.name,
-                        email: formData.email,
-                      }}
-                      onEventScheduled={() => setBookingComplete(true)}
-                    />
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="confirmation"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="py-12"
-                >
-                  {/* Final Confirmation */}
-                  <div className="flex flex-col items-center text-center max-w-md mx-auto">
-                    {/* Status Icon */}
-                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-r from-green-400/20 to-emerald-500/20 flex items-center justify-center mb-6">
-                      <CheckCircle2 className="w-10 h-10 text-green-500" />
-                    </div>
-
-                    {/* Headline */}
-                    <h2 className="font-hero font-[900] text-3xl text-slate-900 uppercase tracking-tighter mb-3">
-                      You're All Set!
-                    </h2>
-
-                    {/* Supporting Copy */}
-                    <p className="text-lg text-slate-600 leading-relaxed">
-                      Your setup call is booked. Check your email for confirmation and calendar invite.
-                    </p>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
     </form>
   );

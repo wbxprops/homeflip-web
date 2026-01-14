@@ -4,105 +4,7 @@ import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X, MapPin, ArrowRight, ArrowLeft, Lock, Calendar, CheckCircle2 } from 'lucide-react';
-
-// Calendly Embed Component
-interface CalendlyEmbedProps {
-  url: string;
-  prefill?: {
-    name?: string;
-    email?: string;
-  };
-  onEventScheduled?: (eventData?: { date?: string; time?: string }) => void;
-}
-
-// Helper to split full name into first and last
-function splitName(fullName: string): { firstName: string; lastName: string } {
-  const parts = fullName.trim().split(/\s+/);
-  if (parts.length === 1) {
-    return { firstName: parts[0], lastName: '' };
-  }
-  return {
-    firstName: parts[0],
-    lastName: parts.slice(1).join(' ')
-  };
-}
-
-function CalendlyEmbed({ url, prefill, onEventScheduled }: CalendlyEmbedProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Load Calendly script
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    script.onload = () => {
-      if (window.Calendly && containerRef.current) {
-        const nameParts = prefill?.name ? splitName(prefill.name) : { firstName: '', lastName: '' };
-
-        window.Calendly.initInlineWidget({
-          url: url,
-          parentElement: containerRef.current,
-          prefill: {
-            firstName: nameParts.firstName,
-            lastName: nameParts.lastName,
-            email: prefill?.email,
-          },
-        });
-      }
-    };
-
-    // Listen for Calendly events
-    const handleCalendlyEvent = (e: MessageEvent) => {
-      if (e.data.event === 'calendly.event_scheduled') {
-        // Extract event details if available
-        const eventData = e.data.payload?.event;
-        onEventScheduled?.({
-          date: eventData?.start_time,
-          time: eventData?.start_time,
-        });
-      }
-    };
-
-    window.addEventListener('message', handleCalendlyEvent);
-
-    return () => {
-      // Cleanup
-      window.removeEventListener('message', handleCalendlyEvent);
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-  }, [url, prefill, onEventScheduled]);
-
-  return (
-    <div
-      ref={containerRef}
-      style={{ minWidth: '320px', height: '700px' }}
-    />
-  );
-}
-
-// Add Calendly type to window
-declare global {
-  interface Window {
-    Calendly?: {
-      initInlineWidget: (options: {
-        url: string;
-        parentElement: HTMLElement;
-        prefill?: {
-          firstName?: string;
-          lastName?: string;
-          email?: string;
-        };
-        hideEventTypeDetails?: boolean;
-        hideGdprBanner?: boolean;
-      }) => void;
-    };
-  }
-}
+import { Plus, X, ArrowRight, ArrowLeft, Lock, CheckCircle2 } from 'lucide-react';
 
 interface Jurisdiction {
   id: number;
@@ -121,8 +23,8 @@ interface StateSelection {
 }
 
 interface ClaimCountyFormDarkProps {
-  step: 1 | 2 | 3 | 4;
-  setStep: (step: 1 | 2 | 3 | 4) => void;
+  step: 1 | 2 | 3;
+  setStep: (step: 1 | 2 | 3) => void;
 }
 
 function ClaimCountyFormDark({ step, setStep }: ClaimCountyFormDarkProps) {
@@ -131,9 +33,9 @@ function ClaimCountyFormDark({ step, setStep }: ClaimCountyFormDarkProps) {
   const [jurisdictions, setJurisdictions] = useState<Jurisdiction[]>([]);
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
-    name: '',
+    name: searchParams.get('name') || '',
     email: searchParams.get('email') || '',
-    phone: '',
+    phone: searchParams.get('phone') || '',
   });
   const [stateSelections, setStateSelections] = useState<StateSelection[]>([
     { id: '1', stateCode: '', counties: [], searchQuery: '' }
@@ -141,8 +43,13 @@ function ClaimCountyFormDark({ step, setStep }: ClaimCountyFormDarkProps) {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [bookingComplete, setBookingComplete] = useState(false);
   const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
+
+  // Get redirect destination from URL param (default to booking-activation for hub upgrade)
+  const redirectAfter = searchParams.get('redirect_after') || 'booking-activation';
+
+  // Check if contact info was pre-filled (skip step 1 if so)
+  const hasPrefilledContact = !!(searchParams.get('name') || searchParams.get('email'));
 
   // Format phone number
   const formatPhoneNumber = (value: string) => {
@@ -176,6 +83,10 @@ function ClaimCountyFormDark({ step, setStep }: ClaimCountyFormDarkProps) {
 
   useEffect(() => {
     setLoading(false);
+    // Skip to step 2 if contact info was pre-filled
+    if (hasPrefilledContact && formData.name && formData.email) {
+      setStep(2);
+    }
   }, []);
 
   const states = [
@@ -320,18 +231,18 @@ function ClaimCountyFormDark({ step, setStep }: ClaimCountyFormDarkProps) {
 
   const inputStyles = "w-full px-4 py-3.5 rounded-xl border border-white/10 bg-white/[0.03] focus:outline-none focus:ring-2 focus:ring-[#83d4c0]/30 focus:border-[#83d4c0]/50 transition-all text-[15px] text-white placeholder:text-white/30";
 
-  const ProgressIndicator = ({ currentStep }: { currentStep: 1 | 2 | 3 | 4 }) => {
-    const progressWidth = currentStep === 1 ? '0%' : currentStep === 2 ? '33%' : currentStep === 3 ? '66%' : '100%';
+  const ProgressIndicator = ({ currentStep }: { currentStep: 1 | 2 | 3 }) => {
+    const progressWidth = currentStep === 1 ? '0%' : currentStep === 2 ? '50%' : '100%';
     return (
       <div className="flex items-center justify-center mb-6">
-        <div className="relative flex items-center w-44">
+        <div className="relative flex items-center w-32">
           <div className="absolute left-0 right-0 h-0.5 bg-white/10 rounded-full" />
           <div
             className="absolute left-0 h-0.5 bg-gradient-to-r from-[#83d4c0] to-[#0891b2] rounded-full transition-all duration-300"
             style={{ width: progressWidth }}
           />
           <div className="relative flex justify-between w-full">
-            {[1, 2, 3, 4].map((dotStep) => (
+            {[1, 2, 3].map((dotStep) => (
               <div
                 key={dotStep}
                 className={`w-3 h-3 rounded-full border transition-all duration-300 ${
@@ -558,7 +469,7 @@ function ClaimCountyFormDark({ step, setStep }: ClaimCountyFormDarkProps) {
               )}
             </button>
           </motion.div>
-        ) : step === 3 ? (
+        ) : (
           <motion.div
             key="step3"
             initial={{ opacity: 0, y: 10 }}
@@ -585,13 +496,21 @@ function ClaimCountyFormDark({ step, setStep }: ClaimCountyFormDarkProps) {
                 Your county has been submitted. Access will be activated after setup is completed.
               </p>
 
-              {/* CTA */}
+              {/* CTA - Redirect to booking page */}
               <button
                 type="button"
-                onClick={() => setStep(4)}
+                onClick={() => {
+                  // Build booking URL with contact info
+                  const bookingParams = new URLSearchParams({
+                    ...(formData.name && { name: formData.name }),
+                    ...(formData.email && { email: formData.email }),
+                    ...(formData.phone && { phone: formData.phone }),
+                  });
+                  router.push(`/${redirectAfter}?${bookingParams.toString()}`);
+                }}
                 className="w-full btn-gradient py-4 rounded-xl font-bold text-sm uppercase tracking-wide hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
               >
-                Finalize Setup
+                Book Your Call
                 <ArrowRight className="w-4 h-4" />
               </button>
 
@@ -601,88 +520,6 @@ function ClaimCountyFormDark({ step, setStep }: ClaimCountyFormDarkProps) {
               </p>
             </div>
           </motion.div>
-        ) : (
-          <motion.div
-            key="step4"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="py-4"
-          >
-            <AnimatePresence mode="wait">
-              {!bookingComplete ? (
-                <motion.div
-                  key="calendly"
-                  initial={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="space-y-6"
-                >
-                  {/* Header */}
-                  <div className="text-center mb-8">
-                    <h2 className="font-sans font-semibold text-2xl mb-3" style={{ color: 'rgba(255,255,255,0.95)' }}>
-                      Complete County Activation
-                    </h2>
-                    <p className="text-[15px] leading-relaxed max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                      To complete county activation, schedule a short implementation call. We'll confirm your setup and activate access after the call.
-                    </p>
-                  </div>
-
-                  {/* Calendly Container */}
-                  <div
-                    className="rounded-xl overflow-hidden"
-                    style={{
-                      backgroundColor: 'rgba(255,255,255,0.02)',
-                      border: '1px solid rgba(255,255,255,0.06)'
-                    }}
-                  >
-                    <div className="p-4 border-b" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4" style={{ color: 'rgba(255,255,255,0.4)' }} />
-                        <span className="text-sm font-medium" style={{ color: 'rgba(255,255,255,0.6)' }}>
-                          Schedule your implementation call
-                        </span>
-                      </div>
-                    </div>
-                    <CalendlyEmbed
-                      url="https://calendly.com/wb-props/homeflip-activation?hide_event_type_details=1&hide_gdpr_banner=1&background_color=0a0a0f&text_color=ffffff&primary_color=83d4c0"
-                      prefill={{
-                        name: formData.name,
-                        email: formData.email,
-                      }}
-                      onEventScheduled={() => setBookingComplete(true)}
-                    />
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="confirmation"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="py-12 md:py-16"
-                >
-                  {/* Confirmation State */}
-                  <div className="flex flex-col items-center text-center max-w-md mx-auto">
-                    {/* Status Icon */}
-                    <div
-                      className="w-16 h-16 rounded-xl flex items-center justify-center mb-6"
-                      style={{ backgroundColor: 'rgba(131,212,192,0.1)' }}
-                    >
-                      <CheckCircle2 className="w-8 h-8" style={{ color: '#83d4c0' }} />
-                    </div>
-
-                    {/* Headline */}
-                    <h2 className="font-sans font-semibold text-2xl mb-3" style={{ color: 'rgba(255,255,255,0.95)' }}>
-                      Implementation Call Scheduled
-                    </h2>
-
-                    {/* Supporting Copy */}
-                    <p className="text-[15px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                      Your county activation is now in progress. We'll complete setup during your scheduled call.
-                    </p>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
         )}
       </AnimatePresence>
     </form>
@@ -690,7 +527,7 @@ function ClaimCountyFormDark({ step, setStep }: ClaimCountyFormDarkProps) {
 }
 
 export default function HubUpgradePage() {
-  const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
+  const [step, setStep] = useState<1 | 2 | 3>(1);
 
   return (
     <>

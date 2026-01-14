@@ -1,9 +1,24 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
+
+// ==================== TRACKING PARAMS ====================
+
+// Fields that are used for contact info (not tracking)
+const CONTACT_FIELDS = ['name', 'firstName', 'first_name', 'lastName', 'last_name', 'email', 'phone', 'redirect_after'];
+
+// Extract all tracking params from URL (everything except contact fields)
+const getTrackingParams = (searchParams: URLSearchParams): Record<string, string> => {
+  const tracking: Record<string, string> = {};
+  searchParams.forEach((value, key) => {
+    if (!CONTACT_FIELDS.includes(key)) {
+      tracking[key] = value;
+    }
+  });
+  return tracking;
+};
 
 interface CTAFormProps {
   buttonText?: string;
@@ -17,6 +32,11 @@ export const CTAForm = ({
   onSuccess
 }: CTAFormProps) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Capture all tracking params on mount (UTMs, fbclid, campaign, etc.)
+  const [trackingParams] = useState<Record<string, string>>(() => getTrackingParams(searchParams));
+
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
@@ -30,24 +50,33 @@ export const CTAForm = ({
         .from('prospect_responses')
         .insert([{
           email: email,
-          source: 'hero_cta'
+          source: 'hero_cta',
+          // Store all tracking params (UTMs, fbclid, campaign, etc.)
+          ...(Object.keys(trackingParams).length > 0 && { tracking_params: trackingParams }),
         }]);
 
-      // Try to create prospect (ignore if exists)
+      // Upsert to prospects table (creates or updates based on email)
       const { error } = await supabase
         .from('prospects')
-        .insert([{
+        .upsert([{
           email: email,
-          source: 'hero_cta'
-        }]);
+          source: 'hero_cta',
+          // Store all tracking params (UTMs, fbclid, campaign, etc.)
+          ...(Object.keys(trackingParams).length > 0 && { tracking_params: trackingParams }),
+        }], { onConflict: 'email' });
 
-      // Ignore duplicate error - prospect already exists
-      if (error && error.code !== '23505') {
-        throw error;
+      if (error) {
+        console.error('Prospects upsert error:', error);
       }
 
       if (onSuccess) onSuccess();
-      router.push(`/claim-your-county?email=${encodeURIComponent(email)}`);
+
+      // Pass tracking params through to claim-your-county
+      const params = new URLSearchParams({
+        email: email,
+        ...trackingParams,
+      });
+      router.push(`/claim-your-county?${params.toString()}`);
     } catch (error) {
       console.error('Submission error:', error);
       setStatus('error');
