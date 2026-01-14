@@ -181,7 +181,7 @@ export default function ProbateTraining1Page() {
             <div className="mb-6">
               <p className="text-slate-500 uppercase tracking-wider text-xs font-semibold mb-3">Before</p>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                {[1, 2, 3, 4].map((num) => (
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
                   <div key={num} className="aspect-[4/3] rounded-lg overflow-hidden border border-white/10">
                     <img
                       src={`/before-after/richey/before-${num}.jpg`}
