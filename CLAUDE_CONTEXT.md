@@ -2,7 +2,7 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2026-01-13
+**Last Updated:** 2026-01-14
 **Claude Code Version:** Sonnet 4.5
 
 ---
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Pre-strategy survey 6-step form deployed. Ready to test end-to-end flow.
+**Current Status:** 🚧 IN PROGRESS - Resources landing page with training videos and case studies deployed.
 
 ---
 
@@ -34,9 +34,18 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 ## 🎯 What I Need to Know
 
 ### Current Focus
-**Active Work:** Pre-strategy survey 6-step form deployed. Test flow end-to-end. Replace VSL placeholder content.
+**Active Work:** Resources section deployed. Add Parts 2-4 of training series. Link from main nav when ready.
 
 ### Session History
+#### 2026-01-14 (Resources Landing Page)
+- ✅ Created `/resources` directory page
+- ✅ Created `/resources/probate-training-1` with Wistia embed, case studies, SEO content
+- ✅ Added before/after photos for Richey Rd (8 before, 3 after + YouTube walkthrough)
+- ✅ Added before/after photos for Kemper Ln (4 before, 3 after)
+- ✅ Used `homeflip-pw` Redfin endpoint to extract after photos
+- ✅ Photos organized in `/public/before-after/richey/` and `/kemper/`
+- **Session log:** `docs/session-logs/2026-01-14-resources-landing-page.md`
+
 #### 2026-01-13 (Pre-Strategy Survey Polish)
 - ✅ Restructured form from 4 steps to 6 steps (max 2 questions per step)
 - ✅ Added URL param prefill for AC merge fields (`%FIRSTNAME%`, `%EMAIL%`, etc.)
