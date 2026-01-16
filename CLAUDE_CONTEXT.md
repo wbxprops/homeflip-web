@@ -2,8 +2,8 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2026-01-14
-**Claude Code Version:** Sonnet 4.5
+**Last Updated:** 2026-01-16
+**Claude Code Version:** Opus 4.5
 
 ---
 
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Resources landing page with training videos and case studies deployed.
+**Current Status:** 🚧 IN PROGRESS - ConversationForm module built. Strategy Call Survey (v2) ready for testing.
 
 ---
 
@@ -34,9 +34,21 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 ## 🎯 What I Need to Know
 
 ### Current Focus
-**Active Work:** Resources section deployed. Add Parts 2-4 of training series. Link from main nav when ready.
+**Active Work:** ConversationForm module complete. Strategy Call Survey v2 ready at `/pre-strategy-survey-v2`. Replace old survey when ready to go live.
 
 ### Session History
+#### 2026-01-16 (Conversation-Style Form + Strategy Call Survey)
+- ✅ Built `ConversationForm` module - Typeform-style one-question-at-a-time form engine
+- ✅ Created field components: TextField, EmailField, PhoneField, NumberField, TextareaField, RadioField, CheckboxField, EntryScreen, ConfirmationScreen
+- ✅ RadioField with acknowledgment text after selection
+- ✅ TextareaField with starter anchor chips
+- ✅ Created `StrategyCallSurvey` component (8 steps) following PROMPT spec
+- ✅ No progress bar design (clean, operational feel)
+- ✅ Updated all Calendly booking pages to use `#0d9488` teal color
+- ✅ Analytics placeholders (`track()` function)
+- **Test URL:** http://localhost:3000/pre-strategy-survey-v2
+- **Session log:** `docs/session-logs/2026-01-16-conversation-form-strategy-call-survey.md`
+
 #### 2026-01-14 (Resources Landing Page)
 - ✅ Created `/resources` directory page
 - ✅ Created `/resources/probate-training-1` with Wistia embed, case studies, SEO content

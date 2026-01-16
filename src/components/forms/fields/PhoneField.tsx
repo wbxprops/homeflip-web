@@ -1,0 +1,46 @@
+'use client';
+
+import React from 'react';
+import { FieldProps } from '../types';
+
+// Format phone as +1 (XXX) XXX-XXXX
+const formatPhoneNumber = (value: string) => {
+  const numbers = value.replace(/\D/g, '');
+  const digits = numbers.startsWith('1') ? numbers.slice(1) : numbers;
+  const limited = digits.slice(0, 10);
+
+  if (limited.length === 0) return '';
+  if (limited.length <= 3) return `+1 (${limited}`;
+  if (limited.length <= 6) return `+1 (${limited.slice(0, 3)}) ${limited.slice(3)}`;
+  return `+1 (${limited.slice(0, 3)}) ${limited.slice(3, 6)}-${limited.slice(6)}`;
+};
+
+export const PhoneField = ({ question, value, onChange, error, theme = 'dark', autoFocus }: FieldProps) => {
+  const isDark = theme === 'dark';
+
+  const inputStyles = isDark
+    ? "w-full px-5 py-4 rounded-xl border-2 border-white/20 bg-white/5 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-[#83d4c0]/50 focus:border-[#83d4c0] transition-all text-lg"
+    : "w-full px-5 py-4 rounded-xl border-2 border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0891b2]/30 focus:border-[#0891b2] transition-all text-lg";
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    onChange(formatted);
+  };
+
+  return (
+    <div className="space-y-2">
+      <input
+        type="tel"
+        value={(value as string) || ''}
+        onChange={handleChange}
+        placeholder={question.placeholder || '+1 (555) 555-1212'}
+        required={question.required}
+        autoFocus={autoFocus}
+        className={`${inputStyles} ${error ? 'border-red-500' : ''}`}
+      />
+      {error && (
+        <p className={`text-sm ${isDark ? 'text-red-400' : 'text-red-600'}`}>{error}</p>
+      )}
+    </div>
+  );
+};

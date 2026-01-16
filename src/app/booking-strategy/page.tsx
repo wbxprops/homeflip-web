@@ -38,7 +38,7 @@ function BookingStrategyContent() {
   const calendlyParams = new URLSearchParams({
     hide_event_type_details: '1',
     hide_gdpr_banner: '1',
-    primary_color: '5EEADC',
+    primary_color: '0d9488',
     ...(firstName && { first_name: firstName }),
     ...(lastName && { last_name: lastName }),
     ...(email && { email }),
