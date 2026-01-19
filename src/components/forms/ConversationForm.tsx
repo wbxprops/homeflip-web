@@ -18,6 +18,7 @@ import { NumberField } from './fields/NumberField';
 import { TextareaField } from './fields/TextareaField';
 import { RadioField } from './fields/RadioField';
 import { CheckboxField } from './fields/CheckboxField';
+import { ContactInfoField } from './fields/ContactInfoField';
 import { EntryScreen } from './fields/EntryScreen';
 import { ConfirmationScreen } from './fields/ConfirmationScreen';
 
@@ -205,6 +206,8 @@ export const ConversationForm = ({
         return <RadioField {...fieldProps} />;
       case 'checkbox':
         return <CheckboxField {...fieldProps} />;
+      case 'contact_info':
+        return <ContactInfoField {...fieldProps} />;
       default:
         return <TextField {...fieldProps} />;
     }
@@ -259,16 +262,16 @@ export const ConversationForm = ({
           )}
 
           {/* Question prompt */}
-          {currentQuestion.prompt && (
+          {(currentQuestion.prompt || currentQuestion.label) && (
             <div className="space-y-2">
               <h2 className={`text-2xl sm:text-3xl font-medium leading-tight ${
                 isDark ? 'text-white' : 'text-slate-900'
               }`}>
-                {currentQuestion.prompt}
+                {currentQuestion.prompt || currentQuestion.label}
               </h2>
-              {currentQuestion.subPrompt && (
+              {(currentQuestion.subPrompt || currentQuestion.subLabel) && (
                 <p className={`text-base ${isDark ? 'text-white/50' : 'text-slate-500'}`}>
-                  {currentQuestion.subPrompt}
+                  {currentQuestion.subPrompt || currentQuestion.subLabel}
                 </p>
               )}
             </div>

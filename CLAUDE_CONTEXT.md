@@ -2,7 +2,7 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2026-01-16
+**Last Updated:** 2026-01-18
 **Claude Code Version:** Opus 4.5
 
 ---
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - ConversationForm module built. Strategy Call Survey (v2) ready for testing.
+**Current Status:** 🚧 IN PROGRESS - Interactive Case Claim Demo widget built for thank-you page. Ready for FB ad launch testing.
 
 ---
 
@@ -34,9 +34,22 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 ## 🎯 What I Need to Know
 
 ### Current Focus
-**Active Work:** ConversationForm module complete. Strategy Call Survey v2 ready at `/pre-strategy-survey-v2`. Replace old survey when ready to go live.
+**Active Work:** Interactive Case Claim Demo widget complete on thank-you page. Ready for FB ad launch to test conversion impact.
 
 ### Session History
+#### 2026-01-18 (Interactive Case Claim Demo Widget)
+- ✅ Built `DiamondIcon.tsx` - faceted gemstone SVG with 4 color variants
+- ✅ Built `CaseClaimDemo.tsx` - full interactive demo (~850 lines)
+- ✅ Calendar with weekday-only display (M-F), status dots (amber/teal/purple)
+- ✅ Three-beat reveal animation: "Scanning..." → "Checking..." → "Verified"
+- ✅ CRM-style unclaimed cards with glassmorphic styling, 2px teal border
+- ✅ Two-row card layout: Case # • County + Claim/reject capsule, then property/value badges
+- ✅ Claim button with hover glow, "reject" link, celebration toast
+- ✅ Reset button to replay entire demo experience
+- ✅ Custom glassmorphic scrollbar, floating buttons with gradient fade
+- ✅ Integrated into `/probate-profit-machine/thank-you` page
+- **Session log:** `docs/session-logs/2026-01-18-case-claim-demo-widget.md`
+
 #### 2026-01-16 (Conversation-Style Form + Strategy Call Survey)
 - ✅ Built `ConversationForm` module - Typeform-style one-question-at-a-time form engine
 - ✅ Created field components: TextField, EmailField, PhoneField, NumberField, TextareaField, RadioField, CheckboxField, EntryScreen, ConfirmationScreen

@@ -14,7 +14,7 @@ export const NumberField = ({ question, value, onChange, error, theme = 'dark', 
     <div className="space-y-2">
       <input
         type="number"
-        value={value === '' || value === undefined ? '' : value}
+        value={value === '' || value === undefined ? '' : (value as string | number)}
         onChange={(e) => onChange(e.target.value === '' ? '' : parseInt(e.target.value))}
         placeholder={question.placeholder || 'Enter a number'}
         required={question.required}

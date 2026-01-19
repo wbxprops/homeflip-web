@@ -10,7 +10,8 @@ export type FieldType =
   | 'radio'
   | 'checkbox'  // multi-select
   | 'entry'     // splash/intro screen
-  | 'confirmation';  // final handoff screen
+  | 'confirmation'  // final handoff screen
+  | 'contact_info';
 
 export interface FieldOption {
   value: string;
@@ -22,8 +23,10 @@ export interface Question {
   type: FieldType;
   // Main prompt/heading
   prompt?: string;
+  label?: string; // Compatibility
   // Subheader text (below prompt)
   subPrompt?: string;
+  subLabel?: string; // Compatibility
   // Muted helper text (below input)
   helper?: string;
   // For entry/confirmation screens
@@ -53,7 +56,7 @@ export interface ContactInfoValue {
   phone: string;
 }
 
-export type FieldValue = string | number | string[] | ContactInfoValue;
+export type FieldValue = string | number | string[] | ContactInfoValue | undefined;
 
 export interface FormValues {
   [questionId: string]: FieldValue;

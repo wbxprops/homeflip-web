@@ -175,8 +175,7 @@ export const PreStrategySurveyConversation = ({ onStepChange }: PreStrategySurve
       questions={SURVEY_QUESTIONS}
       onSubmit={handleSubmit}
       onStepChange={onStepChange}
-      prefillContact={prefillContact.name ? prefillContact : undefined}
-      submitButtonText="Continue to County Selection"
+      prefillValues={prefillContact.name ? { contact_info: prefillContact } : undefined}
       theme="dark"
     />
   );
