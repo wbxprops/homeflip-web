@@ -2,8 +2,8 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2026-01-18
-**Claude Code Version:** Opus 4.5
+**Last Updated:** 2026-01-20
+**Claude Code Version:** Gemini 3 Flash
 
 ---
 
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Interactive Case Claim Demo widget built for thank-you page. Ready for FB ad launch testing.
+**Current Status:** 🚧 IN PROGRESS - Probate Profit Machine Thank You page pivoted to Strategy Call focus. Large-format proof sections added. Build errors resolved.
 
 ---
 
@@ -34,9 +34,18 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 ## 🎯 What I Need to Know
 
 ### Current Focus
-**Active Work:** Interactive Case Claim Demo widget complete on thank-you page. Ready for FB ad launch to test conversion impact.
+**Active Work:** Pivot the Thank You page from "probate education" to "sell the strategy call". Incorporating high-end glassmorphism and stunning before/after property galleries.
 
 ### Session History
+#### 2026-01-20 (Thank You Page Strategy Pivot & Polish)
+- ✅ **Strategy Call Agenda**: Re-framed all sections as "Agenda Items" for the discovery call.
+- ✅ **Stunning Transformations**: Added `StunningTransformation` component for large-format, full-width property galleries (6 houses total).
+- ✅ **Glassmorphism Polish**: Enhanced background orbs, animated glows, and premium video player layout.
+- ✅ **Build Fixes**: Resolved critical TypeScript errors in `ConversationForm` and survey components.
+- ✅ **Standardization**: Updated all hooks to `React.useState` / `React.useEffect` to prevent "not defined" errors.
+- ✅ **Header Refresh**: Non-sticky, transparent header with status message and logo/phone alignment.
+- **Session log:** `docs/session-logs/2026-01-20-thank-you-page-strategy-pivot.md`
+
 #### 2026-01-18 (Interactive Case Claim Demo Widget)
 - ✅ Built `DiamondIcon.tsx` - faceted gemstone SVG with 4 color variants
 - ✅ Built `CaseClaimDemo.tsx` - full interactive demo (~850 lines)
