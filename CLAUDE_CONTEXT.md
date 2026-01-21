@@ -2,7 +2,7 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2026-01-20
+**Last Updated:** 2026-01-21
 **Claude Code Version:** Gemini 3 Flash
 
 ---
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Probate Profit Machine Thank You page pivoted to Strategy Call focus. Large-format proof sections added. Build errors resolved.
+**Current Status:** 🚧 IN PROGRESS - Thank You page now has 5 real customer success stories with actual property photos. Placeholder sections removed. Ready for Vercel deploy.
 
 ---
 
@@ -37,6 +37,16 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 **Active Work:** Pivot the Thank You page from "probate education" to "sell the strategy call". Incorporating high-end glassmorphism and stunning before/after property galleries.
 
 ### Session History
+#### 2026-01-21 (Real Customer Success Stories)
+- ✅ **Real Customers Added**: Matt O. (Blue Rock, Firestone), Steph & Graem (Gatch), Frank (Chambers), Kassie (Kay)
+- ✅ **Photo Organization**: Created structured directories under `/public/before-after/` for each property
+- ✅ **Headshots Directory**: Consolidated all customer headshots in `/before-after/headshots/`
+- ✅ **BRRRR Fix**: Hawk property photos now display without cropping text (object-contain)
+- ✅ **Cleanup**: Removed placeholder sections (Competition Bypass, Agenda #3, fake success stories)
+- ✅ **Prompt Template**: Created reusable success story prompt in homeflip-marketing-repo
+- **Git Push**: 140 files, commit `bb98fba`
+- **Session log:** `docs/session-logs/2026-01-21-real-customer-success-stories.md`
+
 #### 2026-01-20 (Thank You Page Strategy Pivot & Polish)
 - ✅ **Strategy Call Agenda**: Re-framed all sections as "Agenda Items" for the discovery call.
 - ✅ **Stunning Transformations**: Added `StunningTransformation` component for large-format, full-width property galleries (6 houses total).

@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
 import {
   CheckCircle, Mail, Phone, ArrowRight, Play, Clock,
   TrendingUp, DollarSign, Building, Lock, Star, Users,
@@ -92,6 +92,184 @@ const GlassCard = ({ children, className = "" }: { children: React.ReactNode; cl
       {children}
     </div>
   </div>
+);
+
+// Feature Section - fixed background with scrolling card
+type FeatureSection3DProps = {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  screenshotSrc: string;
+  screenshotAlt?: string;
+  cardPosition?: 'left' | 'right';
+};
+
+const FeatureSection3D = ({
+  eyebrow,
+  title,
+  subtitle,
+  screenshotSrc,
+  screenshotAlt = '',
+  cardPosition = 'left'
+}: FeatureSection3DProps) => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Track scroll progress through this section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"] // 0 when section enters, 1 when it leaves
+  });
+
+  // Card movement: tuned for 85vh section height
+  const cardYRaw = useTransform(scrollYProgress, [0.15, 0.7], [-50, 600]);
+  // Add spring smoothing for buttery animation
+  const cardY = useSpring(cardYRaw, { stiffness: 100, damping: 30 });
+
+  // Card fades out: visible until 50%, gone by 65%
+  const cardOpacityRaw = useTransform(scrollYProgress, [0, 0.5, 0.65], [1, 1, 0]);
+  const cardOpacity = useSpring(cardOpacityRaw, { stiffness: 100, damping: 30 });
+
+  // Background brightens as card fades (50% -> 100%)
+  const bgOpacityRaw = useTransform(scrollYProgress, [0, 0.4, 0.55], [0.5, 0.5, 1]);
+  const bgOpacity = useSpring(bgOpacityRaw, { stiffness: 100, damping: 30 });
+
+  return (
+    <>
+      {/* Desktop: Scroll-controlled card over sticky background */}
+      <div
+        ref={sectionRef}
+        className="hidden md:block relative"
+        style={{ height: '85vh' }}
+      >
+        {/* STICKY BACKGROUND - stays centered in viewport */}
+        <div className="sticky top-0 h-screen pointer-events-none">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <motion.div
+              className="w-[min(1100px,90vw)]"
+              style={{
+                opacity: bgOpacity,
+                maskImage: 'radial-gradient(ellipse 100% 100% at 50% 50%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%)',
+                WebkitMaskImage: 'radial-gradient(ellipse 100% 100% at 50% 50%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%)'
+              }}
+            >
+              <Image
+                src={screenshotSrc}
+                alt={screenshotAlt}
+                width={1200}
+                height={540}
+                className="w-full h-auto"
+                priority
+              />
+            </motion.div>
+          </div>
+        </div>
+
+        {/* CARD - position controlled by scroll progress */}
+        <motion.div
+          className="absolute top-0 left-0 right-0 px-6 z-10"
+          style={{ y: cardY, opacity: cardOpacity }}
+        >
+          <div className="max-w-6xl mx-auto">
+            <div className={`max-w-xl ${cardPosition === 'right' ? 'ml-auto' : ''}`}>
+              <div
+                className="rounded-2xl p-8 md:p-10 backdrop-blur-xl border border-white/10"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.85) 100%)',
+                  boxShadow: '0 25px 60px rgba(0,0,0,0.7)'
+                }}
+              >
+                {eyebrow && (
+                  <p className="text-[#83d4c0] text-xs font-black uppercase tracking-[0.32em] mb-4">
+                    {eyebrow}
+                  </p>
+                )}
+                <h3 className="text-white font-hero font-[900] text-4xl sm:text-5xl md:text-6xl uppercase tracking-tighter leading-[0.95] mb-5">
+                  {title}
+                </h3>
+                {subtitle && (
+                  <p className="text-white/80 text-lg sm:text-xl leading-relaxed">
+                    {subtitle}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Mobile: Simple stacked layout */}
+      <div className="md:hidden py-16 px-6">
+        <div className="space-y-8">
+          <div
+            className="rounded-2xl p-6 backdrop-blur-xl border border-white/10"
+            style={{
+              background: 'linear-gradient(135deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.80) 100%)',
+              boxShadow: '0 25px 50px rgba(0,0,0,0.6)'
+            }}
+          >
+            {eyebrow && (
+              <p className="text-[#83d4c0] text-xs font-black uppercase tracking-[0.32em] mb-3">
+                {eyebrow}
+              </p>
+            )}
+            <h3 className="text-white font-hero font-[900] text-3xl sm:text-4xl uppercase tracking-tighter leading-[0.95] mb-4">
+              {title}
+            </h3>
+            {subtitle && (
+              <p className="text-white/80 text-base leading-relaxed">
+                {subtitle}
+              </p>
+            )}
+          </div>
+          <div className="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl opacity-60">
+            <Image
+              src={screenshotSrc}
+              alt={screenshotAlt}
+              width={1200}
+              height={540}
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+// Action-Oriented Feature instance
+const ActionOrientedFeature = () => (
+  <FeatureSection3D
+    eyebrow="Built for Action"
+    title="Action-Oriented"
+    subtitle="Most CRMs dump data on you and leave you to figure out what to do with it. Homeflip.ai guides you with actions rather than simply presenting data."
+    screenshotSrc="/features/homeflip-dashboard.webp"
+    screenshotAlt="Homeflip.ai action-based dashboard"
+    cardPosition="left"
+  />
+);
+
+// Timeline Intelligence Feature instance
+const TimelineIntelligenceFeature = () => (
+  <FeatureSection3D
+    eyebrow="Perfect Timing"
+    title="Timeline Intelligence"
+    subtitle="Know exactly when to act. Your smart timeline shows which leads need attention right now—so you're never too early, never too late, and never miss the moment."
+    screenshotSrc="/features/homeflip-tasks.webp"
+    screenshotAlt="Homeflip.ai task timeline view"
+    cardPosition="right"
+  />
+);
+
+// Daily Case Flow Feature instance
+const DailyCaseFlowFeature = () => (
+  <FeatureSection3D
+    eyebrow="Always Fresh"
+    title="Daily Case Flow"
+    subtitle="No more stale email lists or messy CSV files. Fresh probate cases flow directly into your dashboard every day—verified, organized, and ready to work."
+    screenshotSrc="/features/homeflip-cases.webp"
+    screenshotAlt="Homeflip.ai daily cases calendar view"
+    cardPosition="left"
+  />
 );
 
 // Floating background orbs for depth
@@ -657,61 +835,40 @@ export default function ThankYouVSLPage() {
             >
               <div className="font-serif text-lg sm:text-xl md:text-2xl leading-[1.8] text-white/80 space-y-6">
                 <p>
-                  These are just some of the over <span className="text-white font-bold">2,000 properties</span> we have purchased for ourselves and our customers.
+                  These are some of the houses we have bought over the past 20 years.
                 </p>
                 <p>
-                  We started out in 2008 when the economy was in the tank.
+                  Since we started in 2005, we have over <span className="text-white font-bold">2,000 deals</span> under our belt (and counting).
                 </p>
                 <p>
-                  Everyone said we were crazy.
-                </p>
-                <p>
-                  But here's the thing about building something during tough times.
+                  Well that's great for us, but what does that mean to you?
                 </p>
                 <p className="text-white font-medium">
-                  It makes you stronger.
-                </p>
-                <p>
-                  And when the economy came roaring back we were years ahead of our competitors.
-                </p>
-                <p className="text-white font-medium">
-                  And we dominated our market.
-                </p>
-                <p>
-                  Today we are seeing the same economic signs that we saw back then…but now the opportunity is 10x bigger.
-                </p>
-                <p>
-                  And we want to help serious investors like yourself tap into this hidden inventory of houses.
-                </p>
-                <p>
-                  Because the reality is, it's almost impossible to find a good deal on the market.
-                </p>
-                <p>
-                  Inventory is down 45% and competition is sky high.
-                </p>
-                <p>
-                  Investors all over the country are feeling the squeeze and they don't know what to do.
-                </p>
-                <p>
-                  They are competing in the blood-red ocean against apex predators armed with billions.
-                </p>
-                <p>
-                  Most investors are either sitting it out, or quitting altogether.
-                </p>
-                <p className="text-white font-medium">
-                  But it doesn't have to be like this.
-                </p>
-                <p className="text-white font-medium">
-                  There is a better way.
-                </p>
-                <p>
-                  I'd like to share with you the fastest, simplest and most certain way for you to buy as many houses as you want…
+                  It means that we know a secret that other investors don't know...
                 </p>
                 <p className="text-[#83d4c0] font-bold text-2xl sm:text-3xl">
-                  From 18¢ on the dollar!
+                  And the secret is probate.
                 </p>
                 <p>
-                  And FINALLY create generational wealth through real estate.
+                  Throughout booms and busts, pandemics and crazy election cycles...
+                </p>
+                <p className="text-white font-medium">
+                  Probate has been our most consistent source of properties. And the most profitable.
+                </p>
+                <p className="border-l-2 border-amber-500 pl-6 sm:pl-8 py-2 text-white font-bold">
+                  But this "silver tsunami" of probate properties won't last forever. So the time to take action is now.
+                </p>
+                <p>
+                  If you are finally ready to build a wildly successful real estate investing business,
+                </p>
+                <p className="text-white font-medium">
+                  There is no better time than now.
+                </p>
+                <p>
+                  So book your strategy call today and find out how you can ride the wave of probate properties,
+                </p>
+                <p className="text-white font-medium">
+                  And finally make your real estate investing dreams a reality.
                 </p>
               </div>
 
@@ -1145,9 +1302,276 @@ export default function ThankYouVSLPage() {
               <div className="flex justify-center">
                 <StrategyCallCTA />
               </div>
+            </motion.div>
+          </div>
+        </section>
 
+        {/* ============================================ */}
+        {/* SECTION: The Problem with Probate */}
+        {/* ============================================ */}
+        <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[140px] pointer-events-none" />
+
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="space-y-16"
+            >
+              <div className="text-center">
+                <p className="text-amber-400 text-sm font-black uppercase tracking-[0.4em] mb-4">
+                  The Reality
+                </p>
+                <h2 className="text-white font-hero font-[900] text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tighter leading-[0.85] mb-8">
+                  The Problem<br />
+                  <span className="text-amber-500/60 italic">with Probate</span>
+                </h2>
+                <p className="text-xl sm:text-2xl text-white/60 max-w-2xl mx-auto leading-relaxed">
+                  Probate is an incredible opportunity. But there's a reason most investors never figure it out.
+                </p>
+              </div>
+
+              {/* 5 Pain Points */}
+              <div className="space-y-6">
+                {[
+                  {
+                    num: "01",
+                    title: "Finding the Cases",
+                    desc: "Every county has a different court system. No central database. You're hunting through 3,000+ different portals—all with different layouts, login requirements, and update schedules."
+                  },
+                  {
+                    num: "02",
+                    title: "Verifying Property",
+                    desc: "Most probate filings don't list real estate. You find a case... then spend hours trying to figure out if there's even a house to buy."
+                  },
+                  {
+                    num: "03",
+                    title: "Finding the Right Contact",
+                    desc: "Who do you call? The heir? The executor? The attorney? And once you figure that out—good luck finding a phone number that works."
+                  },
+                  {
+                    num: "04",
+                    title: "Timing the Outreach",
+                    desc: "Call too early, you're insensitive. Call too late, they've already sold or listed with an agent. The window is small and you're flying blind."
+                  },
+                  {
+                    num: "05",
+                    title: "Keeping Up with Volume",
+                    desc: "By the time you manually research one lead, 10 more have been filed. It's a full-time job just to stay current—and you still have deals to close."
+                  }
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ delay: idx * 0.1, duration: 0.5, ease: "easeOut" }}
+                    className="group"
+                  >
+                    <div className="flex items-start gap-5 sm:gap-8 p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-amber-500/20 hover:bg-white/[0.04] transition-all duration-300">
+                      {/* Number */}
+                      <div className="shrink-0">
+                        <span className="text-amber-500/40 font-hero font-[900] text-4xl sm:text-5xl tracking-tighter group-hover:text-amber-500/60 transition-colors">
+                          {item.num}
+                        </span>
+                      </div>
+
+                      {/* Content */}
+                      <div className="space-y-2">
+                        <h4 className="text-white font-bold text-xl sm:text-2xl tracking-tight">
+                          {item.title}
+                        </h4>
+                        <p className="text-white/50 text-base sm:text-lg leading-relaxed">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Transition text */}
+              <div className="text-center pt-8">
+                <p className="text-2xl sm:text-3xl text-white/80 font-medium leading-relaxed max-w-2xl mx-auto">
+                  This is why most investors give up on probate after a few weeks.
+                </p>
+                <p className="text-3xl sm:text-4xl font-hero font-[900] text-[#83d4c0] uppercase tracking-tighter mt-6">
+                  We didn't.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ============================================ */}
+        {/* SECTION: How Homeflip.ai Solves It */}
+        {/* ============================================ */}
+        <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden">
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#83d4c0]/5 rounded-full blur-[140px] pointer-events-none" />
+
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="space-y-16"
+            >
+              <div className="text-center">
+                <p className="text-[#83d4c0] text-sm font-black uppercase tracking-[0.4em] mb-4">
+                  The Solution
+                </p>
+                <h2 className="text-white font-hero font-[900] text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tighter leading-[0.85] mb-8">
+                  Introducing<br />
+                  <span className="text-[#83d4c0]">Homeflip.ai</span>
+                </h2>
+                <p className="text-xl sm:text-2xl text-white/60 max-w-2xl mx-auto leading-relaxed">
+                  Every problem you just read about? We built a system to solve it.
+                </p>
+              </div>
+
+              {/* Problem → Solution Grid */}
+              <div className="space-y-4">
+                {[
+                  {
+                    problem: "Hunting through 3,000+ different court portals",
+                    solution: "We monitor court systems across the country automatically—new cases hit your dashboard daily"
+                  },
+                  {
+                    problem: "No way to know if there's even a house to buy",
+                    solution: "We match every case to property records so you only see leads with real estate"
+                  },
+                  {
+                    problem: "Can't find who to contact or how to reach them",
+                    solution: "We find heirs, executors, and attorneys—plus phone numbers and addresses"
+                  },
+                  {
+                    problem: "Flying blind on timing—too early or too late",
+                    solution: "We track case milestones so you know exactly when families are ready to talk"
+                  },
+                  {
+                    problem: "Can't keep up with the volume manually",
+                    solution: "Fresh, qualified leads delivered to you every day—no research required"
+                  }
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-30px" }}
+                    transition={{ delay: idx * 0.08, duration: 0.4, ease: "easeOut" }}
+                  >
+                    <div className="grid md:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-white/5">
+                      {/* Problem Side */}
+                      <div className="bg-amber-500/[0.03] p-5 sm:p-6 flex items-center gap-4 border-b md:border-b-0 md:border-r border-white/5">
+                        <div className="w-8 h-8 rounded-full bg-amber-500/10 flex items-center justify-center shrink-0">
+                          <span className="text-amber-500 text-xs font-black">✕</span>
+                        </div>
+                        <p className="text-white/50 text-base sm:text-lg leading-snug">
+                          {item.problem}
+                        </p>
+                      </div>
+
+                      {/* Solution Side */}
+                      <div className="bg-[#83d4c0]/[0.03] p-5 sm:p-6 flex items-center gap-4">
+                        <div className="w-8 h-8 rounded-full bg-[#83d4c0]/10 flex items-center justify-center shrink-0">
+                          <CheckCircle className="w-4 h-4 text-[#83d4c0]" />
+                        </div>
+                        <p className="text-white text-base sm:text-lg leading-snug font-medium">
+                          {item.solution}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* CTA */}
+              <div className="pt-8 flex flex-col items-center">
+                <StrategyCallCTA />
+                <p className="mt-6 text-white/40 text-sm sm:text-base">
+                  See how it works for your market →
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ============================================ */}
+        {/* SECTION: All-In-One Platform Features */}
+        {/* ============================================ */}
+        <section className="py-24 sm:py-32 px-6 border-t border-white/5 bg-black">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="space-y-20"
+            >
+              {/* Section Header */}
+              <div className="text-center">
+                <p className="text-[#83d4c0] text-sm font-black uppercase tracking-[0.4em] mb-4">
+                  The All-In-One Probate Investing Platform
+                </p>
+                <h2 className="text-white font-hero font-[900] text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tighter leading-[0.85]">
+                  From Lead to Close
+                </h2>
+              </div>
+
+              {/* Feature 1: Action-Oriented */}
+              <ActionOrientedFeature />
+
+              {/* Feature 2: Timeline Intelligence */}
+              <TimelineIntelligenceFeature />
+
+              {/* Feature 3: Daily Case Flow */}
+              <DailyCaseFlowFeature />
+
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ============================================ */}
+        {/* SECTION: See the Platform in Action */}
+        {/* ============================================ */}
+        <section className="py-12 sm:py-16 px-6 bg-black relative overflow-hidden">
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="space-y-12"
+            >
+              {/* Section Header */}
+              <div className="text-center space-y-4">
+                <h2 className="text-white font-hero font-[900] text-4xl sm:text-5xl md:text-6xl uppercase tracking-tighter leading-[0.9]">
+                  See the Platform in Action
+                </h2>
+                <p className="text-lg text-white/60 max-w-2xl mx-auto">
+                  Select a date below and click "Reveal" to see how it works.
+                </p>
+              </div>
+
+              {/* Interactive Case Claim Demo */}
+              <CaseClaimDemo />
+
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ============================================ */}
+        {/* SECTION: More Customer Properties */}
+        {/* ============================================ */}
+        <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden">
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="space-y-12"
+            >
               {/* More Properties Headline */}
-              <h3 className="text-white font-hero font-[900] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tighter leading-[0.9] text-center pt-12">
+              <h3 className="text-white font-hero font-[900] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tighter leading-[0.9] text-center">
                 Here Are Even More Properties<br />From Our Happy Customers...
               </h3>
 
@@ -1346,9 +1770,6 @@ export default function ThankYouVSLPage() {
                   </GlassCard>
                 ))}
                 </div>
-
-              {/* Interactive Case Claim Demo */}
-              <CaseClaimDemo />
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
                 {["Fresh Daily Leads", "Timeline Tracking", "Property Research", "Enhanced Contacts", "Live Coaching", "Private Community"].map((item, idx) => (

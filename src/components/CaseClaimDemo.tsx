@@ -325,26 +325,8 @@ export const CaseClaimDemo = () => {
   // ============================================================================
 
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-6">
+    <div className="w-full">
       <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <div className="inline-block px-4 py-1 rounded-full bg-white/5 text-[#83d4c0] text-sm font-bold mb-6 tracking-widest uppercase border border-white/10">
-            Experience the Platform
-          </div>
-          <h2 className="font-hero font-[900] text-3xl sm:text-4xl lg:text-5xl text-white uppercase tracking-tighter mb-4">
-            See How Investors Claim Cases
-          </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
-            Click on a date with new cases (amber dots) to experience the reveal animation.
-          </p>
-        </motion.div>
-
         {/* Demo Container */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -458,19 +440,19 @@ export const CaseClaimDemo = () => {
                         disabled={!hasData}
                         className={`
                           relative rounded-xl flex flex-col items-center justify-center transition-all
-                          py-2 lg:py-2.5
+                          py-3 lg:py-3.5
                           ${hasData
-                            ? 'cursor-pointer hover:bg-white/10'
+                            ? 'cursor-pointer hover:bg-white/15 bg-white/5'
                             : 'text-white/30'
                           }
-                          ${isSelected ? 'ring-2 ring-[#83d4c0] bg-white/10' : ''}
-                          ${isToday && !isSelected ? 'ring-1 ring-white/20' : ''}
+                          ${isSelected ? 'ring-2 ring-[#83d4c0] bg-white/15' : ''}
+                          ${isToday && !isSelected ? 'ring-1 ring-white/30' : ''}
                         `}
                       >
-                        <span className={`text-xs lg:text-sm font-medium ${hasData ? 'text-white' : ''}`}>{day}</span>
+                        <span className={`text-sm lg:text-base font-semibold ${hasData ? 'text-white' : ''}`}>{day}</span>
                         {hasData && (
                           <div className={`
-                            w-2 h-2 rounded-full mt-1 ${dotColor}
+                            w-2.5 h-2.5 rounded-full mt-1.5 ${dotColor}
                             ${isSelected ? 'animate-pulse' : ''}
                           `} />
                         )}
@@ -483,17 +465,17 @@ export const CaseClaimDemo = () => {
               </div>
 
               {/* Legend */}
-              <div className="flex flex-wrap items-center gap-3 lg:gap-4 text-[10px] text-white/40">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2 h-2 rounded-full bg-amber-500" />
-                  <span>New</span>
+              <div className="flex flex-wrap items-center gap-4 lg:gap-6 text-xs sm:text-sm text-white/50 pt-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-amber-500" />
+                  <span>New Cases</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2 h-2 rounded-full bg-teal-400" />
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-teal-400" />
                   <span>Unclaimed</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2 h-2 rounded-full bg-purple-500" />
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-purple-500" />
                   <span>Claimed</span>
                 </div>
               </div>
@@ -885,7 +867,7 @@ export const CaseClaimDemo = () => {
           )}
         </AnimatePresence>
       </div>
-    </section>
+    </div>
   );
 };
 
