@@ -744,9 +744,9 @@ export default function ThankYouVSLPage() {
         </section>
 
         {/* ============================================ */}
-        {/* LETTER PART 1 */}
+        {/* SALES LETTER - Problem + Probate Reveal */}
         {/* ============================================ */}
-        <section className="pt-20 sm:pt-28 pb-8 sm:pb-12 px-6 border-t border-white/5 relative overflow-hidden">
+        <section className="pt-20 sm:pt-28 pb-12 sm:pb-16 px-6 border-t border-white/5 relative overflow-hidden">
           <div className="max-w-3xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -789,6 +789,10 @@ export default function ThankYouVSLPage() {
                 </p>
 
                 <p>
+                  But here's the good news...
+                </p>
+
+                <p>
                   <span className="relative inline-block">
                     <span className="relative z-10 text-white">There is an untapped inventory of properties right in front of you.</span>
                     <span className="absolute inset-0 bg-gradient-to-b from-[#83d4c0]/30 to-transparent -rotate-1 translate-y-1 scale-x-105" />
@@ -803,68 +807,24 @@ export default function ThankYouVSLPage() {
                   In fact, over the past 24 months we've bought 97 houses at an average of 38% of ARV…just in our market.
                 </p>
 
-                <p className="text-white font-bold text-2xl sm:text-3xl pt-4">
-                  Houses just like these:
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ============================================ */}
-        {/* PROOF SECTION: 2 Transformation Galleries */}
-        {/* ============================================ */}
-        <StunningTransformation
-          title="Richey Rd"
-          location="Williamsburg, OH"
-          beforeImage="/before-after/richey/before-1.jpg"
-          afterImage="/before-after/richey/after-1.jpg"
-          purchasePrice="$148,000"
-          resoldPrice="$348,000"
-          customerPhoto="/before-after/headshots/joey-sabrina.jpg"
-          customerName="Joey & Sabrina"
-        />
-
-        <StunningTransformation
-          title="Kemper Ln"
-          location="Cincinnati, OH"
-          beforeImage="/before-after/kemper/before-1.jpg"
-          afterImage="/before-after/kemper/after-1.jpg"
-          purchasePrice="$183,000"
-          resoldPrice="$692,000"
-          customerPhoto="/before-after/headshots/kevin.jpg"
-          customerName="Kevin S"
-        />
-
-        {/* ============================================ */}
-        {/* LETTER PART 2 */}
-        {/* ============================================ */}
-        <section className="py-20 sm:py-28 px-6 border-t border-white/5 relative overflow-hidden">
-          <div className="max-w-3xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <div className="font-serif text-lg sm:text-xl md:text-2xl leading-[1.8] text-white/80 space-y-6">
+                {/* Part 2 content merged here */}
                 <p>
                   Since we started in 2005, we have over <span className="text-white font-bold">2,000 deals</span> under our belt (and counting).
                 </p>
                 <p>
-                  Well that's great for us, but what does that mean to you?
+                  Well that's great for us, but what does that mean for you?
                 </p>
                 <p className="text-white font-medium">
-                  It means that we know a secret that other investors don't know...
+                  It means we've discovered the most consistent source of off-market properties that most investors have never heard of.
                 </p>
                 <p className="text-[#83d4c0] font-bold text-2xl sm:text-3xl">
-                  And the secret is probate.
+                  The source? Probate.
                 </p>
                 <p>
                   Throughout booms and busts, pandemics and crazy election cycles...
                 </p>
                 <p className="text-white font-medium">
-                  Probate has been our most consistent source of properties. And the most profitable.
+                  Our probate pipeline has generated consistent, profitable deals.
                 </p>
                 <p className="border-l-2 border-amber-500 pl-6 sm:pl-8 py-2 text-white font-bold">
                   But this "silver tsunami" of probate properties won't last forever. So the time to take action is now.
@@ -879,7 +839,7 @@ export default function ThankYouVSLPage() {
                   So book your strategy call today and find out how you can ride the wave of probate properties,
                 </p>
                 <p className="text-white font-medium">
-                  And finally make your real estate investing dreams a reality.
+                  And start closing more deals at better margins.
                 </p>
               </div>
 
@@ -895,57 +855,7 @@ export default function ThankYouVSLPage() {
         </section>
 
         {/* ============================================ */}
-        {/* SECTION 2: Strategy Call Agenda Overview */}
-        {/* ============================================ */}
-        <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#83d4c0]/5 rounded-full blur-[120px] pointer-events-none" />
-
-          <div className="max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-16"
-            >
-              <div className="text-center max-w-6xl mx-auto">
-                <h2 className="text-white font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tighter leading-[0.85]">
-                  Here's a Brief Outline of<br className="hidden md:block" /> What We'll Cover in Your Free,<br className="hidden md:block" /> 30-Minute Strategy Call
-                </h2>
-              </div>
-
-              <div className="space-y-8 max-w-4xl mx-auto">
-                {[
-                  { icon: AlertTriangle, text: "Warning: Why expensive real estate courses and hours of guru videos won't buy you a single house...and what actually works instead", color: "text-red-500" },
-                  { icon: TrendingUp, text: "The wave of silver tsunami probate houses flooding your market right now...and how to position yourself to buy them", color: "text-[#83d4c0]" },
-                  { icon: AlertCircle, text: "Why the \"tried and true\" ways of buying properties are no longer working, and how you can adjust for the new economy", color: "text-amber-500" },
-                  { icon: Zap, text: "We'll uncover what's actually holding you back from your real estate goals", color: "text-[#83d4c0]" }
-                ].map((item, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, x: -40, scale: 0.95 }}
-                    whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ delay: idx * 0.15, duration: 0.5, ease: "easeOut" }}
-                    className="flex items-start gap-5"
-                  >
-                    <item.icon className={`w-7 h-7 ${item.color} shrink-0 mt-1`} />
-                    <p className="text-xl sm:text-2xl text-white font-bold leading-snug">
-                      {item.text}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* CTA Button */}
-              <div className="pt-8 flex justify-center">
-                <StrategyCallCTA source="agenda-overview" />
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ============================================ */}
-        {/* PROOF SECTION 2: Customer Deals */}
+        {/* PROOF WAVE 1: Early Credibility (3 examples) */}
         {/* ============================================ */}
         <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden">
           <div className="max-w-5xl mx-auto">
@@ -953,17 +863,42 @@ export default function ThankYouVSLPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-8"
+              className="text-center mb-16"
             >
-              <h2 className="text-white font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tighter leading-[0.85]">
-                What Type of Deals<br />Are We Talking About?
+              <h2 className="text-white font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tighter leading-[0.85] mb-6">
+                Don't Take Our Word For It...<br />Here's The Proof
               </h2>
-              <p className="mt-6 text-white/60 text-xl sm:text-2xl font-medium">
-                Here are actual houses our customers have purchased using our system
+              <p className="text-white/60 text-xl sm:text-2xl font-medium">
+                Real deals. Real investors. Real results.
               </p>
             </motion.div>
           </div>
 
+          {/* Richey Rd */}
+          <StunningTransformation
+            title="Richey Rd"
+            location="Williamsburg, OH"
+            beforeImage="/before-after/richey/before-1.jpg"
+            afterImage="/before-after/richey/after-1.jpg"
+            purchasePrice="$148,000"
+            resoldPrice="$348,000"
+            customerPhoto="/before-after/headshots/joey-sabrina.jpg"
+            customerName="Joey & Sabrina"
+          />
+
+          {/* Kemper Ln */}
+          <StunningTransformation
+            title="Kemper Ln"
+            location="Cincinnati, OH"
+            beforeImage="/before-after/kemper/before-1.jpg"
+            afterImage="/before-after/kemper/after-1.jpg"
+            purchasePrice="$183,000"
+            resoldPrice="$692,000"
+            customerPhoto="/before-after/headshots/kevin.jpg"
+            customerName="Kevin S"
+          />
+
+          {/* Blue Rock */}
           <StunningTransformation
             title="Blue Rock"
             location="Cincinnati, OH"
@@ -974,260 +909,6 @@ export default function ThankYouVSLPage() {
             customerPhoto="/before-after/headshots/matt.jpg"
             customerName="Matt O."
           />
-
-          <StunningTransformation
-            title="Gatch"
-            location="Milford, OH"
-            beforeImage="/before-after/gatch/before-1.jpg"
-            afterImage="/before-after/gatch/after-1.jpg"
-            purchasePrice="$160,000"
-            resoldPrice="$350,000"
-            customerPhoto="/before-after/headshots/steph-graem.jpg"
-            customerName="Steph & Graem"
-          />
-        </section>
-
-        {/* ============================================ */}
-        {/* SECTION: Plug-and-Play Platform */}
-        {/* ============================================ */}
-        <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-[#83d4c0]/5 rounded-full blur-[120px] pointer-events-none" />
-
-          <div className="max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-16"
-            >
-              <div className="text-center max-w-6xl mx-auto">
-                <h2 className="text-white font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tighter leading-[0.85]">
-                  Our Plug-and-Play Platform<br className="hidden md:block" /> Will Have You Buying Probate<br className="hidden md:block" /> Properties in Less Than 30 Days
-                </h2>
-              </div>
-
-              <div className="space-y-8 max-w-4xl mx-auto">
-                {[
-                  { icon: Zap, text: "Get immediate access to probate cases and sellers in your market", color: "text-[#83d4c0]" },
-                  { icon: Shield, text: "Avoid competition and bidding wars that needlessly drive the prices up", color: "text-amber-400" },
-                  { icon: TrendingUp, text: "Double your margins on your flips without paying wholesale fees or commissions", color: "text-[#83d4c0]" },
-                  { icon: Lock, text: "Stop depending on other people to bring you houses - control your own pipeline", color: "text-amber-400" },
-                  { icon: Star, text: "Keep the best properties for yourself and wholesale the rest!", color: "text-[#83d4c0]" }
-                ].map((item, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, x: -40, scale: 0.95 }}
-                    whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ delay: idx * 0.15, duration: 0.5, ease: "easeOut" }}
-                    className="flex items-start gap-5"
-                  >
-                    <item.icon className={`w-7 h-7 ${item.color} shrink-0 mt-1`} />
-                    <p className="text-xl sm:text-2xl text-white font-bold leading-snug">
-                      {item.text}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* CTA Button */}
-              <div className="pt-8 flex justify-center">
-                <StrategyCallCTA source="plug-and-play" />
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ============================================ */}
-        {/* SECTION: BRRRR Strategy */}
-        {/* ============================================ */}
-        <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-12"
-            >
-              {/* Headline */}
-              <h2 className="text-white font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tighter leading-[0.85] text-center">
-                Use Homeflip.ai + BRRRR<br />Strategy and Build a Rental<br />Empire in Half the Time
-              </h2>
-
-              {/* Intro text */}
-              <div className="text-xl sm:text-2xl text-white font-bold leading-relaxed space-y-6">
-                <p>The BRRRR method is the most effective way to build a rental portfolio and create true generational wealth.</p>
-                <p><span className="text-[#83d4c0]">Homeflip.ai</span> is the most effective way to buy probate properties from 26¢ on the dollar.</p>
-                <p>When you combine BRRRR + <span className="text-[#83d4c0]">Homeflip.ai</span>, it's like strapping a jet pack to your real estate business.</p>
-                <p>How does it work?</p>
-                <p>The BRRRR method stands for:</p>
-              </div>
-
-              {/* BRRRR Timeline */}
-              <div className="relative">
-                {/* Timeline spine with glow */}
-                <div className="absolute left-[18px] sm:left-[22px] top-0 bottom-0 w-px bg-gradient-to-b from-[#78ffdc]/0 via-[#78ffdc]/35 to-[#78ffdc]/0" />
-                <div className="absolute left-[14px] sm:left-[18px] top-0 bottom-0 w-2 bg-gradient-to-b from-[#78ffdc]/0 via-[#78ffdc]/10 to-[#78ffdc]/0 blur-sm" />
-
-                <div className="space-y-6">
-                  {[
-                    { icon: Home, step: "01", label: "BUY", title: "Acquire Below Market", description: "Find distressed, off-market probate properties at deep discounts using Homeflip.ai.", opacity: "opacity-100" },
-                    { icon: Building, step: "02", label: "RENOVATE", title: "Force Appreciation", description: "Make targeted improvements that maximize ARV without over-renovating.", opacity: "opacity-90" },
-                    { icon: Users, step: "03", label: "RENT", title: "Stabilize Cash Flow", description: "Place a quality tenant to cover debt service and operating expenses.", opacity: "opacity-[0.85]" },
-                    { icon: DollarSign, step: "04", label: "REFINANCE", title: "Recover Capital", description: "Cash-out refinance at 70–80% LTV based on the new appraised value.", opacity: "opacity-75" },
-                    { icon: ArrowRight, step: "05", label: "REPEAT", title: "Scale Intelligently", description: "Redeploy recovered capital into the next acquisition and compound growth.", opacity: "opacity-[0.65]" }
-                  ].map((item, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, y: 8 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: idx * 0.1, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      className={`flex items-start gap-4 sm:gap-6 ${item.opacity}`}
-                    >
-                      {/* Node */}
-                      <div className="relative shrink-0">
-                        <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#83d4c0] flex items-center justify-center shadow-[0_0_0_5px_rgba(120,255,220,0.12),0_0_14px_rgba(120,255,220,0.28)]">
-                          <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white opacity-85" />
-                        </div>
-                      </div>
-
-                      {/* Content Block */}
-                      <div className="flex-1 bg-white/[0.045] backdrop-blur-[18px] border border-white/[0.08] rounded-[14px] px-5 py-4 sm:px-6 sm:py-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-white/50 text-xs sm:text-sm tracking-[0.2em]">{item.step}</span>
-                          <p className="text-white/85 text-xs sm:text-sm font-semibold tracking-[0.04em] uppercase">
-                            {item.label}
-                          </p>
-                        </div>
-                        <h4 className="text-white text-lg sm:text-xl font-medium mb-2">
-                          {item.title}
-                        </h4>
-                        <p className="text-white/70 text-base sm:text-lg whitespace-nowrap">
-                          {item.description}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Explanation text */}
-              <div className="text-xl sm:text-2xl text-white font-bold leading-relaxed space-y-6">
-                <p>The beauty of the BRRRR method is that when you refinance the property into a 20 or 30 year mortgage, you do a <span className="text-[#83d4c0]">"cash out" refinance</span>.</p>
-                <p>This means that you get all of the cash you have invested in the property back when you refinance...</p>
-              </div>
-
-              {/* Free House headline */}
-              <h3 className="text-white font-hero font-[900] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tighter leading-[0.9] text-center">
-                Congrats, You Now Have a Free House
-              </h3>
-
-              {/* Cash out refi GIF */}
-              <div className="flex justify-center py-4">
-                <Image
-                  src="/images/cash-out-refi.gif"
-                  alt="Cash out refinance"
-                  width={500}
-                  height={280}
-                  className="rounded-xl"
-                  unoptimized
-                />
-              </div>
-
-              {/* BRRRR Example */}
-              <div className="pt-6 space-y-4">
-                <p className="text-xl sm:text-2xl text-white/70 leading-relaxed text-center">
-                  Here's an example of a BRRRR property from one of our customers:
-                </p>
-
-                {/* Before/After Images - Photos have text baked in */}
-                <div className="grid grid-cols-2 gap-2 sm:gap-4">
-                  {/* Purchase Image */}
-                  <div className="rounded-md overflow-hidden shadow-2xl">
-                    <Image
-                      src="/before-after/hawk/purchase.jpg"
-                      alt="Property at purchase"
-                      width={800}
-                      height={600}
-                      className="w-full h-auto"
-                    />
-                  </div>
-
-                  {/* Refinance Image */}
-                  <div className="rounded-md overflow-hidden shadow-2xl">
-                    <Image
-                      src="/before-after/hawk/cashout.jpg"
-                      alt="Property after refinance"
-                      width={800}
-                      height={600}
-                      className="w-full h-auto"
-                    />
-                  </div>
-                </div>
-
-                {/* Details Grid - Glassmorphic Boxes */}
-                <div className="grid grid-cols-2 gap-2 sm:gap-4">
-                  {/* Purchase Details */}
-                  <div className="bg-white/[0.045] backdrop-blur-[18px] border border-white/[0.08] rounded-[14px] p-5 sm:p-6 space-y-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]">
-                    <h4 className="text-white text-lg sm:text-xl font-medium">Purchase</h4>
-                    <div className="space-y-3 text-sm sm:text-base">
-                      <div className="flex justify-between">
-                        <span className="text-white/50">Purchase Price:</span>
-                        <span className="text-white font-bold">$94,500</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-white/50">Out of Pocket:</span>
-                        <span className="text-white font-bold">$25,000</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-white/50">Hard Money Loan:</span>
-                        <span className="text-white font-bold">$110,000</span>
-                      </div>
-                      <p className="text-white/40 text-xs italic pt-2 border-t border-white/10">Includes $40,000 in repair funds</p>
-                    </div>
-                  </div>
-
-                  {/* Refinance Details */}
-                  <div className="bg-white/[0.045] backdrop-blur-[18px] border border-white/[0.08] rounded-[14px] p-5 sm:p-6 space-y-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]">
-                    <h4 className="text-white text-lg sm:text-xl font-medium">Refinance</h4>
-                    <div className="space-y-3 text-sm sm:text-base">
-                      <div className="flex justify-between">
-                        <span className="text-white/50">Cash Out Refi:</span>
-                        <span className="text-[#83d4c0] font-bold">$45,000</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-white/50">30 Yr Fixed Loan:</span>
-                        <span className="text-white font-bold">$160,000</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-white/50">Payment (P.I.T.I.):</span>
-                        <span className="text-white font-bold">$1,216</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-white/50">Gross Rent:</span>
-                        <span className="text-white font-bold">$1,915</span>
-                      </div>
-                      <div className="flex justify-between pt-2 border-t border-white/10">
-                        <span className="text-white/70 font-medium">Gross Cashflow:</span>
-                        <span className="text-[#83d4c0] font-bold text-lg">$699/mo</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* First Step Headline */}
-              <h2 className="text-white font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tighter leading-[0.85] text-center pt-12">
-                The First Step to Building a<br />Passive Rental Income with<br />Free Houses Is To...
-              </h2>
-
-              {/* CTA Button */}
-              <div className="pt-8 flex justify-center">
-                <StrategyCallCTA source="brrrr-first-step" />
-              </div>
-            </motion.div>
-          </div>
         </section>
 
         {/* ============================================ */}
@@ -1422,6 +1103,110 @@ export default function ThankYouVSLPage() {
         </section>
 
         {/* ============================================ */}
+        {/* PROOF WAVE 2: Reinforce Solution (2 examples) */}
+        {/* ============================================ */}
+        <StunningTransformation
+          title="Gatch"
+          location="Milford, OH"
+          beforeImage="/before-after/gatch/before-1.jpg"
+          afterImage="/before-after/gatch/after-1.jpg"
+          purchasePrice="$160,000"
+          resoldPrice="$350,000"
+          customerPhoto="/before-after/headshots/steph-graem.jpg"
+          customerName="Steph & Graem"
+        />
+
+        <StunningTransformation
+          title="Chambers Rd"
+          location="Cincinnati, OH"
+          beforeImage="/before-after/chambers/before-1.jpg"
+          afterImage="/before-after/chambers/after-1.jpg"
+          purchasePrice="$63,350"
+          resoldPrice="$244,000"
+          customerPhoto="/before-after/headshots/frank.jpg"
+          customerName="Frank"
+        />
+
+        {/* ============================================ */}
+        {/* SECTION 2: Strategy Call Agenda Overview */}
+        {/* ============================================ */}
+        <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#83d4c0]/5 rounded-full blur-[120px] pointer-events-none" />
+
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="space-y-16"
+            >
+              <div className="text-center max-w-6xl mx-auto">
+                <h2 className="text-white font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tighter leading-[0.85]">
+                  Here's a Brief Outline of<br className="hidden md:block" /> What We'll Cover in Your Free,<br className="hidden md:block" /> 30-Minute Strategy Call
+                </h2>
+              </div>
+
+              <div className="space-y-8 max-w-4xl mx-auto">
+                {[
+                  { icon: AlertTriangle, text: "Warning: Why expensive real estate courses and hours of guru videos won't buy you a single house...and what actually works instead", color: "text-red-500" },
+                  { icon: TrendingUp, text: "The wave of silver tsunami probate houses flooding your market right now...and how to position yourself to buy them", color: "text-[#83d4c0]" },
+                  { icon: AlertCircle, text: "Why the \"tried and true\" ways of buying properties are no longer working, and how you can adjust for the new economy", color: "text-amber-500" },
+                  { icon: Zap, text: "We'll uncover what's actually holding you back from your real estate goals", color: "text-[#83d4c0]" }
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: -40, scale: 0.95 }}
+                    whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ delay: idx * 0.15, duration: 0.5, ease: "easeOut" }}
+                    className="flex items-start gap-5"
+                  >
+                    <item.icon className={`w-7 h-7 ${item.color} shrink-0 mt-1`} />
+                    <p className="text-xl sm:text-2xl text-white font-bold leading-snug">
+                      {item.text}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* CTA Button */}
+              <div className="pt-8 flex justify-center">
+                <StrategyCallCTA source="agenda-overview" />
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ============================================ */}
+        {/* SECTION: BRRRR Strategy (Simplified) */}
+        {/* ============================================ */}
+        <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="space-y-12"
+            >
+              {/* Headline */}
+              <h2 className="text-white font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tighter leading-[0.85] text-center">
+                Building a Rental Portfolio?
+              </h2>
+
+              {/* Brief Intro */}
+              <p className="text-lg sm:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto text-center">
+                Probate properties at 26-38% of ARV are perfect for the BRRRR method (Buy, Renovate, Rent, Refinance, Repeat). Buy below market, force equity, refinance to recover your capital, and build a rental empire <span className="text-[#83d4c0] font-bold">while recouping your initial investment</span>.
+              </p>
+
+              {/* CTA */}
+              <div className="pt-4">
+                <StrategyCallCTA source="brrrr-first-step" />
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ============================================ */}
         {/* SECTION: All-In-One Platform Features */}
         {/* ============================================ */}
         <section className="py-24 sm:py-32 px-6 border-t border-white/5 bg-black">
@@ -1484,129 +1269,29 @@ export default function ThankYouVSLPage() {
         </section>
 
         {/* ============================================ */}
-        {/* SECTION: More Customer Properties */}
+        {/* PROOF WAVE 3: Final Social Proof (2 examples) */}
         {/* ============================================ */}
-        <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden">
-          <div className="max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-12"
-            >
-              {/* More Properties Headline */}
-              <h3 className="text-white font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tighter leading-[0.9] text-center">
-                Here Are Even More Properties<br />From Our Happy Customers...
-              </h3>
+        <StunningTransformation
+          title="Firestone"
+          location="Fairfield, OH"
+          beforeImage="/before-after/firestone/Firestone-before-ext.jpg"
+          afterImage="/before-after/firestone/Firestone-After-ext.jpg"
+          purchasePrice="$175,000"
+          resoldPrice="$360,000"
+          customerPhoto="/before-after/headshots/matt.jpg"
+          customerName="Matt O."
+        />
 
-              {/* Customer Proof with ARV Arrow Layout */}
-              <div className="space-y-16 pt-8">
-                {/* Frank - Northside */}
-                <div className="space-y-4">
-                  <p className="text-white font-bold text-lg">Frank (Northside)</p>
-
-                  {/* MOBILE: Vertical stack */}
-                  <div className="block md:hidden space-y-4">
-                    {/* Before Image */}
-                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-                      <Image
-                        src="/before-after/chambers/before-1.jpg"
-                        alt="Property before"
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-transparent to-transparent" />
-                      <div className="absolute top-3 left-3">
-                        <p className="text-amber-500 text-xs font-black uppercase tracking-[0.15em]">Purchased</p>
-                        <p className="text-amber-500 font-hero font-[900] text-3xl tracking-tighter">$63,350</p>
-                      </div>
-                    </div>
-
-                    {/* After Image */}
-                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-                      <Image
-                        src="/before-after/chambers/after-1.jpg"
-                        alt="Property after"
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-tl from-black/50 via-transparent to-transparent" />
-                      <div className="absolute bottom-3 right-3 text-right">
-                        <p className="text-amber-500 text-xs font-black uppercase tracking-[0.15em]">Resold</p>
-                        <p className="text-amber-500 font-hero font-[900] text-3xl tracking-tighter">$244,000</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* DESKTOP: Side-by-side with ARV arrow */}
-                  <div className="hidden md:flex items-center gap-4">
-                    <div className="relative flex-1 aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-                      <Image
-                        src="/before-after/chambers/before-1.jpg"
-                        alt="Property before"
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-transparent to-transparent" />
-                      <div className="absolute top-3 left-3">
-                        <p className="text-amber-500 text-xs font-black uppercase tracking-[0.15em]">Purchased</p>
-                        <p className="text-amber-500 font-hero font-[900] text-2xl tracking-tighter">$63,350</p>
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-center px-4">
-                      <span className="text-amber-500 font-bold text-2xl italic">26%</span>
-                      <ArrowRight className="w-12 h-12 text-amber-500" />
-                      <span className="text-amber-500 font-bold text-sm italic">of ARV</span>
-                    </div>
-                    <div className="relative flex-1 aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-                      <Image
-                        src="/before-after/chambers/after-1.jpg"
-                        alt="Property after"
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-tl from-black/50 via-transparent to-transparent" />
-                      <div className="absolute bottom-3 right-3 text-right">
-                        <p className="text-amber-500 text-xs font-black uppercase tracking-[0.15em]">Resold</p>
-                        <p className="text-amber-500 font-hero font-[900] text-2xl tracking-tighter">$244,000</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Matt - Firestone */}
-              <StunningTransformation
-                title="Firestone"
-                location="Fairfield, OH"
-                beforeImage="/before-after/firestone/Firestone-before-ext.jpg"
-                afterImage="/before-after/firestone/Firestone-After-ext.jpg"
-                purchasePrice="$175,000"
-                resoldPrice="$360,000"
-                customerPhoto="/before-after/headshots/matt.jpg"
-                customerName="Matt O."
-              />
-
-              {/* Kassie - Kay - Full StunningTransformation style */}
-              <StunningTransformation
-                title="Kay Dr"
-                location="Milford, OH"
-                beforeImage="/before-after/kay/before-1.jpg"
-                afterImage="/before-after/kay/after-1.jpg"
-                purchasePrice="$160,000"
-                resoldPrice="$370,000"
-                customerPhoto="/before-after/headshots/kassie-v2.jpg"
-                customerName="Kassie"
-              />
-
-              {/* CTA Button */}
-              <div className="pt-8 flex justify-center">
-                <StrategyCallCTA source="more-properties" />
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <StunningTransformation
+          title="Kay Dr"
+          location="Milford, OH"
+          beforeImage="/before-after/kay/before-1.jpg"
+          afterImage="/before-after/kay/after-1.jpg"
+          purchasePrice="$160,000"
+          resoldPrice="$370,000"
+          customerPhoto="/before-after/headshots/kassie-v2.jpg"
+          customerName="Kassie"
+        />
 
         {/* ============================================ */}
         {/* SECTION 8: Why I'm Doing These Calls */}
