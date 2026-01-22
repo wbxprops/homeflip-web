@@ -20,7 +20,7 @@ const StrategyCallCTA = ({ className = "", source = "" }: { className?: string; 
     <div className="absolute -inset-1 bg-gradient-to-r from-[#83d4c0] via-[#0891b2] to-[#83d4c0] rounded-[2.2rem] blur-lg opacity-40 group-hover:opacity-100 group-hover:blur-xl transition-all duration-700 group-hover:duration-200 animate-pulse-glow" />
 
   <Link
-    href={`/ppm-pre-strategy-survey${source ? `?cta=${source}` : ''}`}
+    href={`/pre-strategy-survey${source ? `?cta=${source}` : ''}`}
       className="relative flex items-center justify-center gap-3 btn-gradient px-8 sm:px-12 py-5 sm:py-7 rounded-[2rem] font-hero font-[900] text-2xl sm:text-3xl md:text-5xl shadow-2xl transition-all hover:scale-[1.03] active:scale-[0.98] uppercase tracking-tighter"
   >
     Book Your Strategy Call
@@ -1591,7 +1591,7 @@ export default function ThankYouVSLPage() {
                     <div className="pt-4 flex items-center gap-6">
                       <p className="font-serif italic text-3xl text-white/80 select-none">Gary Bailey</p>
                       <Link
-                        href="/ppm-pre-strategy-survey?cta=founder-bio"
+                        href="/pre-strategy-survey?cta=founder-bio"
                         className="px-4 py-2 rounded-full bg-[#83d4c0] text-[#0a1421] text-sm font-bold hover:bg-[#6bc4b0] transition-colors"
                       >
                         Book a Call with Gary

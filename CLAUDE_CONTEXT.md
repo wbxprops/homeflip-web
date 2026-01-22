@@ -2,8 +2,8 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2026-01-21
-**Claude Code Version:** Gemini 3 Flash
+**Last Updated:** 2026-01-21 (Thank You Page Tweaks & CTA Tracking)
+**Claude Code Version:** Claude Opus 4.5
 
 ---
 
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Thank You page now has 5 real customer success stories with actual property photos. Placeholder sections removed. Ready for Vercel deploy.
+**Current Status:** 🚧 IN PROGRESS - Thank You page complete with CTA tracking, consistent pricing (26% low/38% avg), diverse social proof notifications. Deployed to Vercel.
 
 ---
 
@@ -37,6 +37,16 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 **Active Work:** Pivot the Thank You page from "probate education" to "sell the strategy call". Incorporating high-end glassmorphism and stunning before/after property galleries.
 
 ### Session History
+#### 2026-01-21 (Thank You Page Tweaks & CTA Tracking)
+- ✅ **CTA Tracking**: All 10 "Book Your Strategy Call" buttons now include `?cta=<source>` for analytics
+- ✅ **Pricing Consistency**: 26% low (Frank's example), 38% average ARV, 26¢ on the dollar
+- ✅ **Copy Tweaks**: Spelling fixes, grammar fixes, "Challenge" vs "Problem" with Probate
+- ✅ **Social Notifications**: Expanded to 16 diverse notifications (OH, IN, MA, TX, FL, AZ)
+- ✅ **Footer Cleanup**: Real logo, proper /privacy and /terms links, removed Secure Portal
+- ✅ **Discovery Game Plan**: Removed Competitor Analysis, updated Scale Assessment
+- **Git Push**: Commit `91db677`
+- **Session log:** `docs/session-logs/2026-01-21-thank-you-page-tweaks-cta-tracking.md`
+
 #### 2026-01-21 (Real Customer Success Stories)
 - ✅ **Real Customers Added**: Matt O. (Blue Rock, Firestone), Steph & Graem (Gatch), Frank (Chambers), Kassie (Kay)
 - ✅ **Photo Organization**: Created structured directories under `/public/before-after/` for each property
