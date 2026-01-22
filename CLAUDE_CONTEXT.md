@@ -44,7 +44,9 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 - ✅ **Social Notifications**: Expanded to 16 diverse notifications (OH, IN, MA, TX, FL, AZ)
 - ✅ **Footer Cleanup**: Real logo, proper /privacy and /terms links, removed Secure Portal
 - ✅ **Discovery Game Plan**: Removed Competitor Analysis, updated Scale Assessment
-- **Git Push**: Commit `91db677`
+- ✅ **Survey URL Fix**: Changed `/ppm-pre-strategy-survey` to `/pre-strategy-survey`
+- ✅ **Mobile-Friendly Success Stories**: Vertical stack on mobile, ARV meters/arrows hidden
+- **Git Push**: Commits `91db677`, `59b8c2c`, `3509a7f`
 - **Session log:** `docs/session-logs/2026-01-21-thank-you-page-tweaks-cta-tracking.md`
 
 #### 2026-01-21 (Real Customer Success Stories)

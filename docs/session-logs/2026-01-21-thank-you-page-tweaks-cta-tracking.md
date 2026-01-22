@@ -81,6 +81,20 @@ Commit: `91db677`
 
 ---
 
+## Additional Fixes (Same Session)
+
+### Survey URL Fix
+- Changed all CTA links from `/ppm-pre-strategy-survey` to `/pre-strategy-survey` (correct page)
+- Commit: `59b8c2c`
+
+### Mobile-Friendly Success Stories
+- **StunningTransformation component**: Mobile shows vertical stack (Before → Headshot → After), ARV meter hidden
+- **Frank's inline example**: Mobile shows vertical stack, ARV arrow hidden
+- Desktop layouts unchanged
+- Commit: `3509a7f`
+
+---
+
 ## Next Steps
 
 - Monitor CTA tracking in analytics to see which buttons convert best
