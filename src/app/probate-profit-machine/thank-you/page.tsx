@@ -14,19 +14,19 @@ import Link from 'next/link';
 import { CaseClaimDemo } from '@/components/CaseClaimDemo';
 
 // Strategy Call CTA component with enhanced "pop"
-const StrategyCallCTA = ({ className = "" }: { className?: string }) => (
+const StrategyCallCTA = ({ className = "", source = "" }: { className?: string; source?: string }) => (
   <div className={`relative group ${className}`}>
     {/* Animated background glow */}
     <div className="absolute -inset-1 bg-gradient-to-r from-[#83d4c0] via-[#0891b2] to-[#83d4c0] rounded-[2.2rem] blur-lg opacity-40 group-hover:opacity-100 group-hover:blur-xl transition-all duration-700 group-hover:duration-200 animate-pulse-glow" />
-    
+
   <Link
-    href="/ppm-pre-strategy-survey"
+    href={`/ppm-pre-strategy-survey${source ? `?cta=${source}` : ''}`}
       className="relative flex items-center justify-center gap-3 btn-gradient px-8 sm:px-12 py-5 sm:py-7 rounded-[2rem] font-hero font-[900] text-2xl sm:text-3xl md:text-5xl shadow-2xl transition-all hover:scale-[1.03] active:scale-[0.98] uppercase tracking-tighter"
   >
     Book Your Strategy Call
       <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-2 transition-transform" />
   </Link>
-    
+
     {/* Floating highlight */}
     <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-full pointer-events-none" />
   </div>
@@ -38,14 +38,35 @@ const SocialNotification = () => {
   const [notif, setNotif] = React.useState({ name: 'Someone', action: 'claimed a county' });
 
   React.useEffect(() => {
-    const names = ['John D.', 'Sarah W.', 'Mike R.', 'David K.', 'Alex M.', 'Jennifer S.'];
-    const actions = ['just claimed Butler County', 'just claimed Clermont County', 'booked a strategy call', 'just claimed Hamilton County', 'just claimed Marion County'];
-    
+    const notifications = [
+      // Ohio
+      { name: 'John D.', action: 'just claimed Butler County, OH' },
+      { name: 'Sarah W.', action: 'booked a strategy call' },
+      { name: 'Mike R.', action: 'joined the waitlist for Clermont County, OH' },
+      // Indiana
+      { name: 'David K.', action: 'just claimed Marion County, IN' },
+      { name: 'Lisa M.', action: 'booked a strategy call' },
+      { name: 'Chris P.', action: 'joined the waitlist for Hamilton County, IN' },
+      { name: 'Amanda T.', action: 'just claimed Allen County, IN' },
+      // Massachusetts
+      { name: 'Brian S.', action: 'just claimed Middlesex County, MA' },
+      { name: 'Rachel K.', action: 'joined the waitlist for Suffolk County, MA' },
+      { name: 'Kevin L.', action: 'booked a strategy call' },
+      { name: 'Emily R.', action: 'just claimed Worcester County, MA' },
+      // Texas
+      { name: 'Marcus J.', action: 'joined the waitlist for Harris County, TX' },
+      { name: 'Jennifer H.', action: 'just claimed Dallas County, TX' },
+      // Florida
+      { name: 'Robert N.', action: 'booked a strategy call' },
+      { name: 'Stephanie G.', action: 'just claimed Orange County, FL' },
+      // Arizona
+      { name: 'Tony M.', action: 'joined the waitlist for Maricopa County, AZ' },
+    ];
+
+    let index = 0;
     const cycle = () => {
-      setNotif({ 
-        name: names[Math.floor(Math.random() * names.length)], 
-        action: actions[Math.floor(Math.random() * actions.length)] 
-      });
+      setNotif(notifications[index]);
+      index = (index + 1) % notifications.length;
       setVisible(true);
       setTimeout(() => setVisible(false), 4000);
     };
@@ -312,7 +333,7 @@ const InlineCTA = () => (
     <span className="font-hero font-[900] text-2xl sm:text-3xl md:text-4xl text-white/30 uppercase tracking-tighter italic text-center leading-none">
       Stop Chasing. Start Closing.
     </span>
-    <StrategyCallCTA />
+    <StrategyCallCTA source="inline" />
   </div>
 );
 
@@ -656,7 +677,7 @@ export default function ThankYouVSLPage() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="font-hero font-[900] text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-white uppercase tracking-tighter leading-[0.8] mb-10 max-w-6xl mx-auto"
             >
-              HOMEFLIP.AI DELIVERS probate houses on autopilot as low as 19% of the ARV
+              HOMEFLIP.AI DELIVERS probate houses on autopilot as low as 26% of the ARV
             </motion.h1>
 
             <motion.p
@@ -668,55 +689,13 @@ export default function ThankYouVSLPage() {
               The Exact Blueprint We've Used to Buy Over 100 Off-Market Houses in the Past 24 Months
             </motion.p>
 
-            {/* Premium Video Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="relative group max-w-4xl mx-auto"
-            >
-              {/* Outer glow */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-[#83d4c0]/20 to-[#0891b2]/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              
-              <div className="relative bg-black/40 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.6)]">
-                {/* Custom Video Overlay Header */}
-                <div className="absolute top-0 left-0 right-0 p-6 flex items-center justify-between z-20 bg-gradient-to-b from-black/60 to-transparent">
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
-                    <span className="text-xs font-black text-white/80 uppercase tracking-widest">Live Workshop</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs font-bold text-white/60">
-                    <Users className="w-3.5 h-3.5 text-[#83d4c0]" />
-                    <span>{liveViewers} WATCHING</span>
-                  </div>
-                </div>
-
-                <div className="aspect-video relative flex items-center justify-center group/play cursor-pointer">
-                  {/* Video Background Image (if we had one) */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] to-[#1a1a1a]" />
-                  
-                  {/* Play Button - Premium Look */}
-                  <div className="relative z-10 w-28 h-28 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center transition-all duration-500 group-hover/play:scale-110 group-hover/play:bg-white/20">
-                    <div className="absolute inset-0 rounded-full animate-ping bg-[#83d4c0]/20" />
-                    <Play className="w-12 h-12 text-white fill-white ml-2 transition-transform group-hover/play:scale-110" />
-                  </div>
-
-                  {/* Video Label */}
-                  <div className="absolute bottom-10 left-0 right-0 text-center z-20">
-                    <p className="text-xl sm:text-2xl font-bold text-white mb-2 tracking-tight">How Probate Leads Can Transform Your Business</p>
-                    <p className="text-white/40 text-sm uppercase tracking-[0.2em] font-black italic">Click to Play Workshop</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
               className="mt-20"
             >
-              <StrategyCallCTA />
+              <StrategyCallCTA source="hero" />
             </motion.div>
           </div>
         </section>
@@ -724,7 +703,7 @@ export default function ThankYouVSLPage() {
         {/* ============================================ */}
         {/* LETTER PART 1 */}
         {/* ============================================ */}
-        <section className="py-20 sm:py-28 px-6 border-t border-white/5 relative overflow-hidden">
+        <section className="pt-20 sm:pt-28 pb-8 sm:pb-12 px-6 border-t border-white/5 relative overflow-hidden">
           <div className="max-w-3xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -777,16 +756,8 @@ export default function ThankYouVSLPage() {
                   Houses with insane margins…that other investors don't know about.
                 </p>
 
-                <p>
-                  My team and I have been buying these off-market properties for ourselves and our customers for over 15 years.
-                </p>
-
-                <p>
-                  It's been an amazing ride.
-                </p>
-
                 <p className="border-l-2 border-[#83d4c0] pl-6 sm:pl-8 py-2 text-white font-bold">
-                  In fact, over the past 24 months we've bought 97 houses at an average of 47% of ARV…just in our market.
+                  In fact, over the past 24 months we've bought 97 houses at an average of 38% of ARV…just in our market.
                 </p>
 
                 <p className="text-white font-bold text-2xl sm:text-3xl pt-4">
@@ -835,9 +806,6 @@ export default function ThankYouVSLPage() {
             >
               <div className="font-serif text-lg sm:text-xl md:text-2xl leading-[1.8] text-white/80 space-y-6">
                 <p>
-                  These are some of the houses we have bought over the past 20 years.
-                </p>
-                <p>
                   Since we started in 2005, we have over <span className="text-white font-bold">2,000 deals</span> under our belt (and counting).
                 </p>
                 <p>
@@ -874,7 +842,7 @@ export default function ThankYouVSLPage() {
 
               {/* CTA Button */}
               <div className="pt-8 flex flex-col items-center">
-                <StrategyCallCTA />
+                <StrategyCallCTA source="brief-outline" />
                 <p className="mt-6 text-amber-400 font-bold text-sm sm:text-base uppercase tracking-wide">
                   Hurry, Spots Are Filling Up for {new Date().toLocaleString('default', { month: 'long' })}!
                 </p>
@@ -904,11 +872,10 @@ export default function ThankYouVSLPage() {
 
               <div className="space-y-8 max-w-4xl mx-auto">
                 {[
-                  { icon: AlertTriangle, text: "Warning: You could be at serious risk of destroying your entire business because you are paying too much for your houses", color: "text-red-500" },
-                  { icon: TrendingUp, text: "Proven strategies that you can implement today that will double your flip margins and rental cashflows", color: "text-[#83d4c0]" },
+                  { icon: AlertTriangle, text: "Warning: Why expensive real estate courses and hours of guru videos won't buy you a single house...and what actually works instead", color: "text-red-500" },
+                  { icon: TrendingUp, text: "The wave of silver tsunami probate houses flooding your market right now...and how to position yourself to buy them", color: "text-[#83d4c0]" },
                   { icon: AlertCircle, text: "Why the \"tried and true\" ways of buying properties are no longer working, and how you can adjust for the new economy", color: "text-amber-500" },
-                  { icon: Zap, text: "3 simple tips to double your property pipeline in the next 6 months - without looking at 100 houses a week", color: "text-[#83d4c0]" },
-                  { icon: Star, text: "The top 3 overlooked sources of off-market properties we used to buy 97 houses in the last 24 months (#2 alone could make you millions)", color: "text-amber-400" }
+                  { icon: Zap, text: "We'll uncover what's actually holding you back from your real estate goals", color: "text-[#83d4c0]" }
                 ].map((item, idx) => (
                   <motion.div
                     key={idx}
@@ -928,74 +895,7 @@ export default function ThankYouVSLPage() {
 
               {/* CTA Button */}
               <div className="pt-8 flex justify-center">
-                <StrategyCallCTA />
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ============================================ */}
-        {/* SECTION: You Make Your Money When You Buy */}
-        {/* ============================================ */}
-        <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-12"
-            >
-              {/* Headline */}
-              <h2 className="text-white font-hero font-[900] text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tighter leading-[0.85] text-center">
-                You Make Your Money<br />When You Buy the House
-              </h2>
-
-              {/* First half of content */}
-              <div className="text-xl sm:text-2xl text-white font-bold leading-relaxed space-y-6">
-                <p>Any successful real estate investor will tell you that the money is made when you buy the house.</p>
-                <p>But here is where many investors get it wrong…</p>
-                <p>They think that buying houses directly from sellers requires $10,000's a month in marketing, or a team of people out looking at houses all day.</p>
-                <p>You got into this business to create generational wealth through real estate, not start a marketing company.</p>
-                <p>I get it.</p>
-                <p>So you do what most investors do to buy off-market houses:</p>
-                <p>You rely on wholesalers or agents to find deals because you don't know a better way.</p>
-                <p>I did the exact same thing.</p>
-                <p>I convinced myself that paying $30,000 or $40,000 to a wholesaler was just the "cost of doing business" as long the numbers still worked.</p>
-                <p>But these are the little lies we tell ourselves. Stop and do the math on that.</p>
-                <p>If you are an active investor you are probably doing 4-5 deals a year. Let's say the wholesalers are charging you $20,000 on average for each house.</p>
-                <p className="text-[#83d4c0]">That's $100,000 a year in costs that could be money in your pocket.</p>
-                <p className="text-[#83d4c0]">Now multiply that over a 5 or 10 year period.</p>
-              </div>
-
-              {/* Puke GIF */}
-              <div className="flex justify-center py-4">
-                <Image
-                  src="/images/office-puke.gif"
-                  alt="Reaction"
-                  width={400}
-                  height={225}
-                  className="rounded-xl"
-                  unoptimized
-                />
-              </div>
-
-              {/* Second half of content */}
-              <div className="text-xl sm:text-2xl text-white font-bold leading-relaxed space-y-6">
-                <p>That is why I developed <span className="text-[#83d4c0]">Homeflip.ai</span>.</p>
-                <p>It enables investors just like you to buy properties directly from sellers.</p>
-                <p>It puts money in your pocket.</p>
-                <p>And the best part is, you don't have to spend $10,000's a month on marketing…</p>
-                <p>Or hire a team of people to look at 5 houses a day.</p>
-                <p>Even if you are a one-person-army, you can start buying your own off-market properties without working 80 hours a week.</p>
-                <p>For a limited time, I'm offering a free, 30 minute strategy session to find out more about your business.</p>
-                <p className="text-white/60">This isn't a sales call.</p>
-                <p>It's an opportunity to try out <span className="text-[#83d4c0]">Homeflip.ai</span> and see how it can work for your existing business and drastically increase the amount of houses you can buy.</p>
-                <p>But spots are limited, so book your free strategy session now.</p>
-              </div>
-
-              {/* CTA Button */}
-              <div className="pt-4 flex justify-center">
-                <StrategyCallCTA />
+                <StrategyCallCTA source="agenda-overview" />
               </div>
             </motion.div>
           </div>
@@ -1033,14 +933,14 @@ export default function ThankYouVSLPage() {
           />
 
           <StunningTransformation
-            title="Firestone"
-            location="Fairfield, OH"
-            beforeImage="/before-after/firestone/Firestone-before-ext.jpg"
-            afterImage="/before-after/firestone/Firestone-After-ext.jpg"
-            purchasePrice="$175,000"
-            resoldPrice="$360,000"
-            customerPhoto="/before-after/headshots/matt.jpg"
-            customerName="Matt O."
+            title="Gatch"
+            location="Milford, OH"
+            beforeImage="/before-after/gatch/before-1.jpg"
+            afterImage="/before-after/gatch/after-1.jpg"
+            purchasePrice="$160,000"
+            resoldPrice="$350,000"
+            customerPhoto="/before-after/headshots/steph-graem.jpg"
+            customerName="Steph & Graem"
           />
         </section>
 
@@ -1059,13 +959,13 @@ export default function ThankYouVSLPage() {
             >
               <div className="text-center max-w-6xl mx-auto">
                 <h2 className="text-white font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tighter leading-[0.85]">
-                  Our Plug-and-Play Platform<br className="hidden md:block" /> Will Have You Buying Off-Market<br className="hidden md:block" /> Properties in Less Than 30 Days
+                  Our Plug-and-Play Platform<br className="hidden md:block" /> Will Have You Buying Probate<br className="hidden md:block" /> Properties in Less Than 30 Days
                 </h2>
               </div>
 
               <div className="space-y-8 max-w-4xl mx-auto">
                 {[
-                  { icon: Zap, text: "Get immediate access to properties directly from sellers", color: "text-[#83d4c0]" },
+                  { icon: Zap, text: "Get immediate access to probate cases and sellers in your market", color: "text-[#83d4c0]" },
                   { icon: Shield, text: "Avoid competition and bidding wars that needlessly drive the prices up", color: "text-amber-400" },
                   { icon: TrendingUp, text: "Double your margins on your flips without paying wholesale fees or commissions", color: "text-[#83d4c0]" },
                   { icon: Lock, text: "Stop depending on other people to bring you houses - control your own pipeline", color: "text-amber-400" },
@@ -1089,7 +989,7 @@ export default function ThankYouVSLPage() {
 
               {/* CTA Button */}
               <div className="pt-8 flex justify-center">
-                <StrategyCallCTA />
+                <StrategyCallCTA source="plug-and-play" />
               </div>
             </motion.div>
           </div>
@@ -1114,8 +1014,8 @@ export default function ThankYouVSLPage() {
               {/* Intro text */}
               <div className="text-xl sm:text-2xl text-white font-bold leading-relaxed space-y-6">
                 <p>The BRRRR method is the most effective way to build a rental portfolio and create true generational wealth.</p>
-                <p><span className="text-[#83d4c0]">Homeflip.ai</span> is the most effective way to buy off-market properties from 18¢ on the dollar.</p>
-                <p>When you combine the BRRRR + <span className="text-[#83d4c0]">Homeflip.ai</span> is like strapping a jet pack to your real estate business.</p>
+                <p><span className="text-[#83d4c0]">Homeflip.ai</span> is the most effective way to buy probate properties from 26¢ on the dollar.</p>
+                <p>When you combine BRRRR + <span className="text-[#83d4c0]">Homeflip.ai</span>, it's like strapping a jet pack to your real estate business.</p>
                 <p>How does it work?</p>
                 <p>The BRRRR method stands for:</p>
               </div>
@@ -1195,7 +1095,7 @@ export default function ThankYouVSLPage() {
               {/* BRRRR Example */}
               <div className="pt-6 space-y-4">
                 <p className="text-xl sm:text-2xl text-white/70 leading-relaxed text-center">
-                  Here's an example of a single family BRRRR property that one of our customers purchased using <span className="text-[#83d4c0] font-semibold">Homeflip.ai</span>:
+                  Here's an example of a BRRRR property from one of our customers:
                 </p>
 
                 {/* Before/After Images - Photos have text baked in */}
@@ -1274,40 +1174,21 @@ export default function ThankYouVSLPage() {
                 </div>
               </div>
 
-              {/* CTA Button */}
-              <div className="pt-8 flex justify-center">
-                <StrategyCallCTA />
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ============================================ */}
-        {/* SECTION: First Step + More Customer Properties */}
-        {/* ============================================ */}
-        <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden">
-          <div className="max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-12"
-            >
               {/* First Step Headline */}
-              <h2 className="text-white font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tighter leading-[0.85] text-center">
+              <h2 className="text-white font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tighter leading-[0.85] text-center pt-12">
                 The First Step to Building a<br />Passive Rental Income with<br />Free Houses Is To...
               </h2>
 
               {/* CTA Button */}
-              <div className="flex justify-center">
-                <StrategyCallCTA />
+              <div className="pt-8 flex justify-center">
+                <StrategyCallCTA source="brrrr-first-step" />
               </div>
             </motion.div>
           </div>
         </section>
 
         {/* ============================================ */}
-        {/* SECTION: The Problem with Probate */}
+        {/* SECTION: The Challenge with Probate */}
         {/* ============================================ */}
         <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[140px] pointer-events-none" />
@@ -1324,7 +1205,7 @@ export default function ThankYouVSLPage() {
                   The Reality
                 </p>
                 <h2 className="text-white font-hero font-[900] text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tighter leading-[0.85] mb-8">
-                  The Problem<br />
+                  The Challenge<br />
                   <span className="text-amber-500/60 italic">with Probate</span>
                 </h2>
                 <p className="text-xl sm:text-2xl text-white/60 max-w-2xl mx-auto leading-relaxed">
@@ -1396,7 +1277,7 @@ export default function ThankYouVSLPage() {
                 <p className="text-2xl sm:text-3xl text-white/80 font-medium leading-relaxed max-w-2xl mx-auto">
                   This is why most investors give up on probate after a few weeks.
                 </p>
-                <p className="text-3xl sm:text-4xl font-hero font-[900] text-[#83d4c0] uppercase tracking-tighter mt-6">
+                <p className="text-5xl sm:text-6xl md:text-7xl font-hero font-[900] text-[#83d4c0] uppercase tracking-tighter mt-6">
                   We didn't.
                 </p>
               </div>
@@ -1425,8 +1306,8 @@ export default function ThankYouVSLPage() {
                   Introducing<br />
                   <span className="text-[#83d4c0]">Homeflip.ai</span>
                 </h2>
-                <p className="text-xl sm:text-2xl text-white/60 max-w-2xl mx-auto leading-relaxed">
-                  Every problem you just read about? We built a system to solve it.
+                <p className="text-xl sm:text-2xl text-white/60 mx-auto leading-relaxed md:whitespace-nowrap">
+                  Built by investors who've done 2,000+ deals over 20 years...not gurus selling courses.
                 </p>
               </div>
 
@@ -1488,7 +1369,7 @@ export default function ThankYouVSLPage() {
 
               {/* CTA */}
               <div className="pt-8 flex flex-col items-center">
-                <StrategyCallCTA />
+                <StrategyCallCTA source="introducing-homeflip" />
                 <p className="mt-6 text-white/40 text-sm sm:text-base">
                   See how it works for your market →
                 </p>
@@ -1571,50 +1452,12 @@ export default function ThankYouVSLPage() {
               className="space-y-12"
             >
               {/* More Properties Headline */}
-              <h3 className="text-white font-hero font-[900] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tighter leading-[0.9] text-center">
+              <h3 className="text-white font-hero font-[900] text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tighter leading-[0.9] text-center">
                 Here Are Even More Properties<br />From Our Happy Customers...
               </h3>
 
               {/* Customer Proof with ARV Arrow Layout */}
               <div className="space-y-16 pt-8">
-                {/* Steph & Graem - Gatch */}
-                <div className="space-y-4">
-                  <p className="text-white font-bold text-xl">Steph & Graem <span className="text-white/50 font-normal text-base">(Milford)</span></p>
-                  <div className="flex items-center gap-4">
-                    <div className="relative flex-1 aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-                      <Image
-                        src="/before-after/gatch/before-1.jpg"
-                        alt="Property before"
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-transparent to-transparent" />
-                      <div className="absolute top-3 left-3">
-                        <p className="text-amber-500 text-[10px] sm:text-xs font-black uppercase tracking-[0.15em]">Purchased</p>
-                        <p className="text-amber-500 font-hero font-[900] text-xl sm:text-2xl tracking-tighter">$160,000</p>
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-center px-2 sm:px-4">
-                      <span className="text-amber-500 font-bold text-lg sm:text-2xl italic">46%</span>
-                      <ArrowRight className="w-8 h-8 sm:w-12 sm:h-12 text-amber-500" />
-                      <span className="text-amber-500 font-bold text-xs sm:text-sm italic">of ARV</span>
-                    </div>
-                    <div className="relative flex-1 aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-                      <Image
-                        src="/before-after/gatch/after-1.jpg"
-                        alt="Property after"
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-tl from-black/50 via-transparent to-transparent" />
-                      <div className="absolute bottom-3 right-3 text-right">
-                        <p className="text-amber-500 text-[10px] sm:text-xs font-black uppercase tracking-[0.15em]">Resold</p>
-                        <p className="text-amber-500 font-hero font-[900] text-xl sm:text-2xl tracking-tighter">$350,000</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Frank - Northside */}
                 <div className="space-y-4">
                   <p className="text-white font-bold text-lg">Frank (Northside)</p>
@@ -1655,6 +1498,18 @@ export default function ThankYouVSLPage() {
 
               </div>
 
+              {/* Matt - Firestone */}
+              <StunningTransformation
+                title="Firestone"
+                location="Fairfield, OH"
+                beforeImage="/before-after/firestone/Firestone-before-ext.jpg"
+                afterImage="/before-after/firestone/Firestone-After-ext.jpg"
+                purchasePrice="$175,000"
+                resoldPrice="$360,000"
+                customerPhoto="/before-after/headshots/matt.jpg"
+                customerName="Matt O."
+              />
+
               {/* Kassie - Kay - Full StunningTransformation style */}
               <StunningTransformation
                 title="Kay Dr"
@@ -1669,116 +1524,8 @@ export default function ThankYouVSLPage() {
 
               {/* CTA Button */}
               <div className="pt-8 flex justify-center">
-                <StrategyCallCTA />
+                <StrategyCallCTA source="more-properties" />
               </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ============================================ */}
-        {/* SECTION 6: Automating The Data Grind / Call Agenda #4 */}
-        {/* ============================================ */}
-        <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden bg-white/[0.01]">
-          <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
-          
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-16"
-            >
-              <div className="text-center">
-                <p className="text-amber-400 text-sm font-black uppercase tracking-[0.4em] mb-4">
-                  The Friction
-                </p>
-                <h2 className="text-white font-hero font-[900] text-5xl sm:text-7xl md:text-8xl uppercase tracking-tighter leading-[0.85] mb-8">
-                  The Manual <br />
-                  <span className="text-amber-500/40 italic">Data Grind</span>
-              </h2>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-8">
-                <GlassCard className="border-amber-500/10">
-                  <div className="space-y-8">
-                    {[
-                      { icon: Database, text: "Buried in 3,000+ different county court portals." },
-                      { icon: FileSearch, text: "Zero visibility on which cases actually have property." },
-                      { icon: HelpCircle, text: "Impossible to know when heirs are ready to talk." }
-                    ].map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-4 group/item">
-                        <div className="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center shrink-0 border border-amber-500/20 group-hover/item:bg-amber-500/20 transition-colors">
-                          <item.icon className="w-5 h-5 text-amber-500" />
-              </div>
-                        <span className="text-white/70 text-lg leading-tight pt-1">{item.text}</span>
-                      </div>
-                    ))}
-                  </div>
-                </GlassCard>
-
-                <div className="flex flex-col justify-center space-y-8">
-                  <p className="text-2xl text-white/80 leading-relaxed">
-                    Most investors give up after a few weeks of manually searching court websites. They think it requires a <strong className="text-white">massive team</strong> or <strong className="text-white">$10k/mo in marketing</strong>.
-                  </p>
-                  <p className="text-3xl font-hero font-[900] text-[#83d4c0] uppercase tracking-tighter italic">
-                    They're wrong.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ============================================ */}
-        {/* SECTION 7: The AI Advantage / Call Agenda #5 */}
-        {/* ============================================ */}
-        <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden bg-white/[0.02]">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#0891b2]/5 rounded-full blur-[140px] pointer-events-none" />
-          
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-16"
-            >
-              <div className="text-center">
-                <p className="text-[#83d4c0] text-sm font-black uppercase tracking-[0.4em] mb-4">
-                  Agenda Item #5
-              </p>
-                <h2 className="text-white font-hero font-[900] text-5xl sm:text-7xl md:text-8xl uppercase tracking-tighter leading-[0.85] mb-8">
-                  The <span className="text-[#83d4c0] italic">Scale Roadmap</span>
-              </h2>
-                <p className="text-xl sm:text-2xl text-white/60 max-w-2xl mx-auto leading-relaxed mt-8">
-                  The final part of our call is building your <strong className="text-white">Execution Roadmap</strong>. We'll show you how the AI handles the heavy lifting so you can focus on closing.
-                </p>
-                </div>
-
-              <div className="grid md:grid-cols-2 gap-8">
-                {[
-                  { icon: Search, title: "Daily Court Sync", desc: "How we monitor 3,000+ portals 24/7. New deals hit your dashboard in hours—not weeks." },
-                  { icon: TrendingUp, title: "Timeline Intel™", desc: "How we predict who is ready to sell now—not just who is on a list." },
-                  { icon: Zap, title: "PB Scoring", desc: "How AI assigns scores based on filing velocity so you focus on high-potential deals." },
-                  { icon: Shield, title: "Guided Outreach", desc: "The exact, respectful workflows designed specifically for probate families." }
-                ].map((feature, idx) => (
-                  <GlassCard key={idx}>
-                    <div className="w-12 h-12 rounded-xl bg-[#83d4c0]/10 flex items-center justify-center text-[#83d4c0] mb-6">
-                      <feature.icon className="w-6 h-6" />
-                  </div>
-                    <h4 className="text-2xl font-bold text-white uppercase tracking-tight mb-4">{feature.title}</h4>
-                    <p className="text-white/50 leading-relaxed text-lg">{feature.desc}</p>
-                  </GlassCard>
-                ))}
-                </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
-                {["Fresh Daily Leads", "Timeline Tracking", "Property Research", "Enhanced Contacts", "Live Coaching", "Private Community"].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-3 text-white/70 font-bold">
-                    <CheckCircle className="w-5 h-5 text-[#83d4c0]" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-                </div>
             </motion.div>
           </div>
         </section>
@@ -1787,7 +1534,7 @@ export default function ThankYouVSLPage() {
         {/* SECTION 8: Why I'm Doing These Calls */}
         {/* ============================================ */}
         <section className="py-24 sm:py-32 px-6 border-t border-white/5 relative overflow-hidden">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1799,33 +1546,37 @@ export default function ThankYouVSLPage() {
                   The Founder
                 </p>
                 <h2 className="text-white font-hero font-[900] text-5xl sm:text-7xl md:text-8xl uppercase tracking-tighter leading-[0.85] mb-8">
-                  Built By <br />
-                  <span className="text-white/40 italic">Investors.</span>
+                  Built by Investors<br />
+                  <span className="text-white/40 italic">For Investors.</span>
                 </h2>
               </div>
 
               <GlassCard className="!p-0 overflow-hidden">
-                <div className="grid md:grid-cols-5 gap-0 items-stretch">
-                  <div className="md:col-span-2 relative min-h-[300px] group overflow-hidden">
-                    <div className="absolute inset-0 bg-[#83d4c0]/5 z-0" />
-                    <div className="absolute inset-0 flex items-center justify-center text-white/5 font-hero font-[900] text-6xl uppercase tracking-tighter rotate-12 z-0">Gary Bailey</div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
+                <div className="grid md:grid-cols-2 gap-0 items-stretch">
+                  <div className="relative min-h-[400px] md:min-h-[500px] group overflow-hidden">
+                    <Image
+                      src="/images/gary-bailey.jpg"
+                      alt="Gary Bailey"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
                     <div className="absolute bottom-6 left-6 z-20">
                       <h4 className="text-2xl font-hero font-[900] text-white uppercase tracking-tighter">Gary Bailey</h4>
-                      <p className="text-[#83d4c0] text-[10px] font-black uppercase tracking-widest">Founder • 1,000+ Probate Deals</p>
+                      <p className="text-[#83d4c0] text-[10px] font-black uppercase tracking-widest">Founder</p>
                     </div>
                   </div>
 
-                  <div className="md:col-span-3 p-8 sm:p-12 space-y-8 bg-white/[0.01]">
+                  <div className="px-8 sm:px-12 py-6 sm:py-8 space-y-8 bg-white/[0.01] flex flex-col justify-start">
                     <div className="space-y-6">
                       <p className="text-xl sm:text-2xl text-white/90 leading-relaxed font-medium">
-                        "I didn't build HomeFlip.ai because I'm a developer. I built it because I was tired of the manual grind in my own real estate business."
+                        "I built Homeflip.ai because I believe real estate investors don't need to spend thousands of dollars on marketing or coaching to be successful."
                       </p>
                       <p className="text-lg text-white/60 leading-relaxed">
-                        After 15 years and over $50M in transactions, I realized that the best deals aren't found by working harder—they're found by having better systems. I'm doing these deep-dive calls personally because I want to ensure the right investors are using this to dominate their local markets.
+                        During the beta launch of Homeflip.ai, I'm doing these deep-dive calls personally because I want to ensure the right investors are using this to dominate their local markets.
                       </p>
                     </div>
-                    
+
                     <div className="flex flex-wrap gap-4 pt-4 border-t border-white/5">
                       <div className="flex items-center gap-2 text-white/40 text-xs font-black uppercase tracking-widest">
                         <CheckCircle className="w-3.5 h-3.5 text-[#83d4c0]" />
@@ -1833,12 +1584,18 @@ export default function ThankYouVSLPage() {
                       </div>
                       <div className="flex items-center gap-2 text-white/40 text-xs font-black uppercase tracking-widest">
                         <CheckCircle className="w-3.5 h-3.5 text-[#83d4c0]" />
-                        97 Houses in 24 Months
+                        Over 2K Properties Closed
                       </div>
                     </div>
 
-                    <div className="pt-4">
+                    <div className="pt-4 flex items-center gap-6">
                       <p className="font-serif italic text-3xl text-white/80 select-none">Gary Bailey</p>
+                      <Link
+                        href="/ppm-pre-strategy-survey?cta=founder-bio"
+                        className="px-4 py-2 rounded-full bg-[#83d4c0] text-[#0a1421] text-sm font-bold hover:bg-[#6bc4b0] transition-colors"
+                      >
+                        Book a Call with Gary
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -1876,9 +1633,8 @@ export default function ThankYouVSLPage() {
                   {[
                     { title: "County Audit", desc: "We pull the live case volume for your specific county and zip codes to reveal hidden inventory." },
                     { title: "Market Heat Mapping", desc: "Identify the exact neighborhoods where probate activity is peaking and equity is highest." },
-                    { title: "Competitor Analysis", desc: "See exactly who else is working your market and where the gaps in their strategy are." },
                     { title: "Implementation Roadmap", desc: "A tailored plan to reach families at the exact moment they're ready to sell." },
-                    { title: "Scale Assessment", desc: "Review your current team and systems to ensure you can actually close the deals we find." }
+                    { title: "Scale Assessment", desc: "Review your current team and systems to ensure you have the resources to reach your real estate investing goals." }
                   ].map((item, idx) => (
                     <motion.div 
                       key={idx} 
@@ -1909,127 +1665,19 @@ export default function ThankYouVSLPage() {
                   <h3 className="text-4xl font-hero font-[900] text-white uppercase tracking-tighter mb-6 leading-tight">
                     Lock In Your <br />County Deep-Dive
                   </h3>
-                  <p className="text-xl text-white/60 mb-10 italic">
+                  <p className="text-xl text-white/60 italic">
                     "No obligation. No pressure. Just massive clarity on how to dominate your market."
                   </p>
-                  <StrategyCallCTA />
-                  <div className="mt-8 flex items-center justify-center gap-4 text-white/30 text-[10px] font-black uppercase tracking-[0.2em]">
-                    <span className="flex items-center gap-2"><Users className="w-3 h-3" /> Only 3 spots left</span>
-                    <span>•</span>
-                    <span>Free 30-Min Discovery</span>
-                </div>
-                </GlassCard>
-                  </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ============================================ */}
-        {/* SECTION 10: Final CTA */}
-        {/* ============================================ */}
-        <section className="py-24 sm:py-48 px-6 border-t border-white/5 relative overflow-hidden bg-white/[0.01]">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="space-y-12"
-            >
-              <h2 className="text-white font-hero font-[900] text-5xl sm:text-7xl md:text-9xl uppercase tracking-tighter leading-[0.8] mb-8">
-                Ready to <br /><span className="text-[#83d4c0] animate-pulse">Dominate Your Market?</span>
-              </h2>
-
-              <p className="text-2xl sm:text-3xl text-white/60 max-w-2xl mx-auto leading-relaxed font-medium">
-                We're currently in a controlled roll-out. Secure your <strong className="text-white">County Discovery Call</strong> before your competition claims your territory.
-              </p>
-
-              {/* High-Tech Scarcity System */}
-              <div className="max-w-2xl mx-auto">
-                <GlassCard className="border-amber-500/20 bg-amber-500/[0.02] !p-12">
-                  <div className="flex flex-col gap-10">
-                    <div className="flex items-center justify-center gap-4">
-                      <div className="relative">
-                        <div className="absolute inset-0 bg-amber-500 blur-md opacity-20 animate-ping" />
-                        <Lock className="w-6 h-6 text-amber-500 relative" />
-                      </div>
-                      <span className="text-amber-500 font-black uppercase tracking-[0.3em] text-sm">System Access Monitor</span>
-                    </div>
-                    
-                    <div className="grid grid-cols-3 gap-6">
-                      <div className="relative group/item">
-                        <div className="absolute -inset-2 bg-red-500/10 rounded-xl blur-lg opacity-0 group-hover/item:opacity-100 transition-opacity" />
-                        <div className="relative space-y-3">
-                          <div className="px-3 py-1.5 bg-red-500/20 border border-red-500/30 rounded-lg text-[10px] font-black text-red-500 uppercase tracking-widest">Locked</div>
-                          <div className="text-white font-bold text-sm">Hamilton, OH</div>
-                          <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
-                            <div className="w-full h-full bg-red-500/50" />
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="relative group/item">
-                        <div className="absolute -inset-2 bg-amber-500/10 rounded-xl blur-lg opacity-100" />
-                        <div className="relative space-y-3">
-                          <div className="px-3 py-1.5 bg-amber-500/20 border border-amber-500/30 rounded-lg text-[10px] font-black text-amber-500 uppercase tracking-widest animate-pulse">Filling Fast</div>
-                          <div className="text-white font-bold text-sm">Butler, OH</div>
-                          <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
-                            <motion.div 
-                              initial={{ width: "60%" }}
-                              animate={{ width: "85%" }}
-                              transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
-                              className="h-full bg-amber-500/50" 
-                            />
-                </div>
-                  </div>
-                  </div>
-                      
-                      <div className="relative group/item">
-                        <div className="absolute -inset-2 bg-[#10b981]/10 rounded-xl blur-lg opacity-0 group-hover/item:opacity-100 transition-opacity" />
-                        <div className="relative space-y-3">
-                          <div className="px-3 py-1.5 bg-[#10b981]/20 border border-[#10b981]/30 rounded-lg text-[10px] font-black text-[#10b981] uppercase tracking-widest">Available</div>
-                          <div className="text-white/40 font-bold text-sm italic">Your Market?</div>
-                          <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
-                            <div className="w-[10%] h-full bg-[#10b981]/50" />
-                          </div>
-                  </div>
-                </div>
-              </div>
-
-                    <div className="pt-6 border-t border-white/5">
-                      <p className="text-white/40 text-xs font-medium leading-relaxed max-w-sm mx-auto">
-                        We strictly limit beta access to <strong className="text-white">less than 5 investors per market</strong> to ensure individual success.
-                      </p>
-                    </div>
-                  </div>
                 </GlassCard>
               </div>
 
-              <div className="pt-12">
-                <StrategyCallCTA />
-                <div className="mt-10 flex flex-col items-center gap-6">
-                  <div className="inline-flex items-center gap-3 px-8 py-3 bg-[#83d4c0]/10 border border-[#83d4c0]/20 rounded-full shadow-2xl">
-                  <Star className="w-4 h-4 text-[#83d4c0]" />
-                    <span className="text-[#83d4c0] text-sm font-black uppercase tracking-widest">Founder Pricing Active</span>
-                  </div>
-                  <div className="flex items-center gap-8 text-white/20 text-[10px] font-black uppercase tracking-[0.4em]">
-                    <span>Invite-Only Access</span>
-                    <span>•</span>
-                    <span>Q1 2026 Batch</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Final Footer Social Proof */}
-              <div className="max-w-md mx-auto pt-32 opacity-30 hover:opacity-100 transition-all duration-700">
-                <div className="p-8 border border-white/5 rounded-3xl bg-white/[0.01] backdrop-blur-sm">
-                  <div className="flex flex-col items-center gap-6 text-center">
-                    <Mail className="w-8 h-8 text-[#83d4c0]/50" />
-                    <div className="space-y-2">
-                      <h4 className="text-white font-bold tracking-tight">Your guide is in the works</h4>
-                      <p className="text-white/50 text-sm leading-relaxed">
-                        Gary just sent your access link to <strong className="text-white/80">your inbox</strong>. We recommend watching the workshop above before diving in.
-                      </p>
-                    </div>
+              {/* Final CTA */}
+              <div className="pt-12 text-center">
+                <StrategyCallCTA source="final-cta" />
+                <div className="mt-8 flex flex-col items-center gap-4">
+                  <div className="inline-flex items-center gap-3 px-6 py-2 bg-[#83d4c0]/10 border border-[#83d4c0]/20 rounded-full">
+                    <Star className="w-4 h-4 text-[#83d4c0]" />
+                    <span className="text-[#83d4c0] text-xs font-black uppercase tracking-widest">Founder Pricing Active</span>
                   </div>
                 </div>
               </div>
@@ -2038,30 +1686,25 @@ export default function ThankYouVSLPage() {
         </section>
 
         {/* Footer */}
-        <footer className="py-16 px-6 border-t border-white/5 relative z-10 bg-black/50 backdrop-blur-xl">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-            <div className="flex flex-col items-center md:items-start gap-3">
-              <span className="text-white font-hero font-[900] text-2xl uppercase tracking-tighter">
-                HomeFlip<span className="text-[#83d4c0]">.ai</span>
-              </span>
+        <footer className="py-12 px-6 border-t border-white/5 relative z-10 bg-black/50 backdrop-blur-xl">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="flex flex-col items-center md:items-start gap-4">
+              <Image
+                src="/homeflip-logo-dark.png"
+                alt="Homeflip.ai"
+                width={160}
+                height={40}
+                className="h-8 w-auto"
+              />
               <div className="text-white/30 text-[10px] font-black uppercase tracking-widest text-center md:text-left space-y-1">
                 <p>© 2026 WhiteBox Academy, LLC. All rights reserved.</p>
                 <p>7800 Cooper Road, Suite 201, Cincinnati, OH 45242</p>
               </div>
             </div>
-            
+
             <div className="flex gap-8 text-white/40 text-[10px] font-black uppercase tracking-widest">
-              <Link href="#" className="hover:text-[#83d4c0] transition-colors">Privacy Policy</Link>
-              <Link href="#" className="hover:text-[#83d4c0] transition-colors">Terms of Service</Link>
-              <Link href="#" className="hover:text-[#83d4c0] transition-colors">Support</Link>
-            </div>
-            
-            <div className="flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 border border-white/10">
-              <Shield className="w-4 h-4 text-[#83d4c0]" />
-              <div className="flex flex-col">
-                <span className="text-white text-[10px] font-black uppercase tracking-widest">Secure Portal</span>
-                <span className="text-white/30 text-[8px] font-black uppercase tracking-[0.2em]">256-Bit SSL Secured</span>
-              </div>
+              <Link href="/privacy" className="hover:text-[#83d4c0] transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-[#83d4c0] transition-colors">Terms of Service</Link>
             </div>
           </div>
         </footer>
