@@ -379,48 +379,91 @@ const StunningTransformation = ({
         </h3>
       </div>
 
-      {/* Side-by-side Before/After Images */}
-      <div className="relative">
-        <div className="grid grid-cols-2 gap-3 sm:gap-4">
+      {/* MOBILE: Vertical stack with headshot between photos */}
+      <div className="block md:hidden space-y-4">
+        {/* Before Image */}
+        <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+          <Image
+            src={beforeImage}
+            alt={`${title} before`}
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-transparent" />
+          <div className="absolute top-3 left-3">
+            <p className="text-white/80 text-xs font-black uppercase tracking-[0.15em] mb-0.5">Purchased</p>
+            <p className="text-white font-hero font-[900] text-3xl tracking-tighter drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">{purchasePrice}</p>
+          </div>
+        </div>
+
+        {/* Centered Headshot */}
+        {customerPhoto && (
+          <div className="flex justify-center py-2">
+            <div className="relative w-20 h-20 rounded-full overflow-hidden border-4 border-[#050505] shadow-2xl ring-2 ring-[#83d4c0]/60">
+              <Image
+                src={customerPhoto}
+                alt={customerName || "Customer"}
+                fill
+                className="object-cover grayscale"
+              />
+            </div>
+          </div>
+        )}
+
+        {/* After Image */}
+        <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+          <Image
+            src={afterImage}
+            alt={`${title} after`}
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-tl from-black/40 via-transparent to-transparent" />
+          <div className="absolute bottom-3 right-3 text-right">
+            <p className="text-amber-400 text-xs font-black uppercase tracking-[0.15em] mb-0.5">Resold</p>
+            <p className="text-amber-400 font-hero font-[900] text-3xl tracking-tighter drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">{resoldPrice}!</p>
+          </div>
+        </div>
+      </div>
+
+      {/* DESKTOP: Side-by-side Before/After Images */}
+      <div className="relative hidden md:block">
+        <div className="grid grid-cols-2 gap-4">
           {/* Before Image */}
-          <div className="relative aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
+          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
             <Image
               src={beforeImage}
               alt={`${title} before`}
               fill
               className="object-cover"
             />
-            {/* Subtle overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-transparent" />
-            {/* Purchased Price Badge - Upper Left */}
-            <div className="absolute top-3 left-3 sm:top-5 sm:left-5">
-              <p className="text-white/80 text-[10px] sm:text-xs font-black uppercase tracking-[0.15em] mb-0.5">Purchased</p>
-              <p className="text-white font-hero font-[900] text-2xl sm:text-3xl md:text-4xl tracking-tighter drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">{purchasePrice}</p>
+            <div className="absolute top-5 left-5">
+              <p className="text-white/80 text-xs font-black uppercase tracking-[0.15em] mb-0.5">Purchased</p>
+              <p className="text-white font-hero font-[900] text-3xl md:text-4xl tracking-tighter drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">{purchasePrice}</p>
             </div>
           </div>
 
           {/* After Image */}
-          <div className="relative aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
+          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
             <Image
               src={afterImage}
               alt={`${title} after`}
               fill
               className="object-cover"
             />
-            {/* Subtle overlay */}
             <div className="absolute inset-0 bg-gradient-to-tl from-black/40 via-transparent to-transparent" />
-            {/* Resold Price Badge - Lower Right */}
-            <div className="absolute bottom-3 right-3 sm:bottom-5 sm:right-5 text-right">
-              <p className="text-amber-400 text-[10px] sm:text-xs font-black uppercase tracking-[0.15em] mb-0.5">Resold</p>
-              <p className="text-amber-400 font-hero font-[900] text-2xl sm:text-3xl md:text-4xl tracking-tighter drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">{resoldPrice}!</p>
+            <div className="absolute bottom-5 right-5 text-right">
+              <p className="text-amber-400 text-xs font-black uppercase tracking-[0.15em] mb-0.5">Resold</p>
+              <p className="text-amber-400 font-hero font-[900] text-3xl md:text-4xl tracking-tighter drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">{resoldPrice}!</p>
             </div>
           </div>
         </div>
 
-        {/* Centered Circular Customer Headshot (B&W) */}
+        {/* Centered Circular Customer Headshot (B&W) - Desktop only */}
         {customerPhoto && (
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
-            <div className="relative w-16 h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-[#050505] shadow-2xl ring-2 ring-[#83d4c0]/60">
+            <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-[#050505] shadow-2xl ring-2 ring-[#83d4c0]/60">
               <Image
                 src={customerPhoto}
                 alt={customerName || "Customer"}
@@ -432,8 +475,8 @@ const StunningTransformation = ({
         )}
       </div>
 
-      {/* Percent of ARV Meter - Animated Scale */}
-      <div className="mt-12 space-y-3">
+      {/* Percent of ARV Meter - Animated Scale (Hidden on mobile) */}
+      <div className="hidden md:block mt-12 space-y-3">
         {/* Scale Container */}
         <div className="relative">
           {/* Track */}
@@ -1461,7 +1504,42 @@ export default function ThankYouVSLPage() {
                 {/* Frank - Northside */}
                 <div className="space-y-4">
                   <p className="text-white font-bold text-lg">Frank (Northside)</p>
-                  <div className="flex items-center gap-4">
+
+                  {/* MOBILE: Vertical stack */}
+                  <div className="block md:hidden space-y-4">
+                    {/* Before Image */}
+                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+                      <Image
+                        src="/before-after/chambers/before-1.jpg"
+                        alt="Property before"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-transparent to-transparent" />
+                      <div className="absolute top-3 left-3">
+                        <p className="text-amber-500 text-xs font-black uppercase tracking-[0.15em]">Purchased</p>
+                        <p className="text-amber-500 font-hero font-[900] text-3xl tracking-tighter">$63,350</p>
+                      </div>
+                    </div>
+
+                    {/* After Image */}
+                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+                      <Image
+                        src="/before-after/chambers/after-1.jpg"
+                        alt="Property after"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-tl from-black/50 via-transparent to-transparent" />
+                      <div className="absolute bottom-3 right-3 text-right">
+                        <p className="text-amber-500 text-xs font-black uppercase tracking-[0.15em]">Resold</p>
+                        <p className="text-amber-500 font-hero font-[900] text-3xl tracking-tighter">$244,000</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* DESKTOP: Side-by-side with ARV arrow */}
+                  <div className="hidden md:flex items-center gap-4">
                     <div className="relative flex-1 aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
                       <Image
                         src="/before-after/chambers/before-1.jpg"
@@ -1471,14 +1549,14 @@ export default function ThankYouVSLPage() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-transparent to-transparent" />
                       <div className="absolute top-3 left-3">
-                        <p className="text-amber-500 text-[10px] sm:text-xs font-black uppercase tracking-[0.15em]">Purchased</p>
-                        <p className="text-amber-500 font-hero font-[900] text-xl sm:text-2xl tracking-tighter">$63,350</p>
+                        <p className="text-amber-500 text-xs font-black uppercase tracking-[0.15em]">Purchased</p>
+                        <p className="text-amber-500 font-hero font-[900] text-2xl tracking-tighter">$63,350</p>
                       </div>
                     </div>
-                    <div className="flex flex-col items-center px-2 sm:px-4">
-                      <span className="text-amber-500 font-bold text-lg sm:text-2xl italic">26%</span>
-                      <ArrowRight className="w-8 h-8 sm:w-12 sm:h-12 text-amber-500" />
-                      <span className="text-amber-500 font-bold text-xs sm:text-sm italic">of ARV</span>
+                    <div className="flex flex-col items-center px-4">
+                      <span className="text-amber-500 font-bold text-2xl italic">26%</span>
+                      <ArrowRight className="w-12 h-12 text-amber-500" />
+                      <span className="text-amber-500 font-bold text-sm italic">of ARV</span>
                     </div>
                     <div className="relative flex-1 aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
                       <Image
@@ -1489,8 +1567,8 @@ export default function ThankYouVSLPage() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-tl from-black/50 via-transparent to-transparent" />
                       <div className="absolute bottom-3 right-3 text-right">
-                        <p className="text-amber-500 text-[10px] sm:text-xs font-black uppercase tracking-[0.15em]">Resold</p>
-                        <p className="text-amber-500 font-hero font-[900] text-xl sm:text-2xl tracking-tighter">$244,000</p>
+                        <p className="text-amber-500 text-xs font-black uppercase tracking-[0.15em]">Resold</p>
+                        <p className="text-amber-500 font-hero font-[900] text-2xl tracking-tighter">$244,000</p>
                       </div>
                     </div>
                   </div>
