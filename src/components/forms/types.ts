@@ -48,6 +48,8 @@ export interface Question {
   ctaLabel?: string;
   // Custom validation - return error message or null if valid
   validate?: (value: unknown) => string | null;
+  // Conditional display - question only shows if this returns true
+  showIf?: (values: FormValues) => boolean;
 }
 
 export interface ContactInfoValue {

@@ -2,7 +2,7 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2026-01-21 (Thank You Page Tweaks & CTA Tracking)
+**Last Updated:** 2026-01-22 (Survey Reorganization & Probate Branching Logic)
 **Claude Code Version:** Claude Opus 4.5
 
 ---
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Thank You page complete with CTA tracking, consistent pricing (26% low/38% avg), diverse social proof notifications. Deployed to Vercel.
+**Current Status:** 🚧 IN PROGRESS - Strategy call survey reorganized to prioritize business questions. Probate branching logic added. Survey now flows: contact → experience → goals → challenges → probate (conditional) → county selection → booking.
 
 ---
 
@@ -37,6 +37,14 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 **Active Work:** Pivot the Thank You page from "probate education" to "sell the strategy call". Incorporating high-end glassmorphism and stunning before/after property galleries.
 
 ### Session History
+#### 2026-01-22 (Survey Reorganization & Probate Branching Logic)
+- ✅ **Survey Reorganization**: Moved main business questions first (experience, goal, challenge)
+- ✅ **Probate Branching**: Added conditional questions for active probate users (buy/DIY, provider, pain points)
+- ✅ **Conditional Logic**: Added `showIf` support to ConversationForm engine
+- ✅ **County Selection**: Survey now redirects to /claim-your-county before booking
+- ✅ **Updated Copy**: "What are you trying to achieve through real estate investing?"
+- **Session log:** `docs/session-logs/2026-01-22-survey-reorganization-probate-branching.md`
+
 #### 2026-01-21 (Thank You Page Tweaks & CTA Tracking)
 - ✅ **CTA Tracking**: All 10 "Book Your Strategy Call" buttons now include `?cta=<source>` for analytics
 - ✅ **Pricing Consistency**: 26% low (Frank's example), 38% average ARV, 26¢ on the dollar

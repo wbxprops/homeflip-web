@@ -51,7 +51,7 @@ const SURVEY_QUESTIONS: Question[] = [
     ctaLabel: 'Confirm Email',
   },
 
-  // Step 4 — Experience context
+  // Step 4 — Experience Level
   {
     id: 'experience_level',
     type: 'radio',
@@ -67,26 +67,11 @@ const SURVEY_QUESTIONS: Question[] = [
     ctaLabel: 'Continue',
   },
 
-  // Step 5 — Time & focus
-  {
-    id: 'focus_level',
-    type: 'radio',
-    prompt: 'Is real estate your primary focus right now?',
-    required: true,
-    options: [
-      { value: 'full_time', label: 'Yes — this is my full-time focus.' },
-      { value: 'side_hustle', label: 'No — I have a day job and invest on the side.' },
-      { value: 'retired', label: "I'm retired, and invest part-time." },
-    ],
-    acknowledgment: "Understood. We'll keep the discussion realistic for your schedule.",
-    ctaLabel: 'Continue',
-  },
-
-  // Step 6 — Goal (free text)
+  // Step 5 — Primary Goal
   {
     id: 'primary_goal',
     type: 'textarea',
-    prompt: 'What do you want this next phase of investing to do for you?',
+    prompt: 'What are you trying to achieve through real estate investing?',
     subPrompt: 'This helps us steer the strategy discussion.',
     placeholder: 'Tell us in your own words…',
     maxLength: 255,
@@ -98,17 +83,106 @@ const SURVEY_QUESTIONS: Question[] = [
       'Building a repeatable system',
       'Something else',
     ],
-    ctaLabel: 'Lock This In',
+    ctaLabel: 'Continue',
   },
 
-  // Step 7 — Confirmation / Handoff
+  // Step 6 — Biggest Challenge
+  {
+    id: 'biggest_challenge',
+    type: 'textarea',
+    prompt: "What's your biggest challenge in achieving your real estate investing goals?",
+    placeholder: 'Tell us what\'s holding you back...',
+    maxLength: 255,
+    required: false,
+    ctaLabel: 'Continue',
+  },
+
+  // Step 7 — Probate Experience
+  {
+    id: 'probate_experience',
+    type: 'radio',
+    prompt: "What best describes your experience with probate investing?",
+    required: true,
+    options: [
+      { value: 'first_heard', label: "This is the first I've heard of probate investing." },
+      { value: 'heard_no_start', label: "I've heard about probate but never knew how to get started." },
+      { value: 'tried_no_work', label: "I've tried probate before but couldn't make it work." },
+      { value: 'actively_use', label: "Yes, I actively use probate as one of my sources." },
+    ],
+    acknowledgment: 'Got it — this helps us understand where you are.',
+    ctaLabel: 'Continue',
+  },
+
+  // Step 8 — Lead Source Method (conditional: only if actively_use)
+  {
+    id: 'lead_source_method',
+    type: 'radio',
+    prompt: "Do you buy probate leads or source them yourself?",
+    required: true,
+    options: [
+      { value: 'buy_leads', label: 'I buy probate leads from a provider.' },
+      { value: 'diy', label: 'I source them myself (DIY).' },
+    ],
+    acknowledgment: 'Understood.',
+    ctaLabel: 'Continue',
+    showIf: (values) => values.probate_experience === 'actively_use',
+  },
+
+  // Step 9 — Lead Provider (conditional: only if buy_leads)
+  {
+    id: 'lead_provider',
+    type: 'text',
+    prompt: "Where do you currently buy your probate leads from?",
+    placeholder: 'e.g., US Lead List, All The Leads, REDX, etc.',
+    helper: 'Just the name of the company or service.',
+    required: true,
+    ctaLabel: 'Continue',
+    showIf: (values) => values.lead_source_method === 'buy_leads',
+  },
+
+  // Step 10 — What Would You Change (conditional: only if actively_use)
+  {
+    id: 'probate_pain_points',
+    type: 'checkbox',
+    prompt: "What would you change about how you're currently getting probate leads?",
+    subPrompt: 'Select all that apply.',
+    required: false,
+    options: [
+      { value: 'cost_high', label: 'Cost is too high' },
+      { value: 'data_quality', label: 'Data quality or accuracy issues' },
+      { value: 'not_enough_leads', label: 'Not enough leads in my area' },
+      { value: 'too_manual', label: 'Too much manual work required' },
+      { value: 'leads_stale', label: 'Leads are stale or outdated' },
+      { value: 'contact_verification', label: 'Hard to verify contact information' },
+      { value: 'other', label: 'Something else (tell us below)' },
+    ],
+    ctaLabel: 'Continue',
+    showIf: (values) => values.probate_experience === 'actively_use',
+  },
+
+  // Step 11 — Other Pain Point Details (conditional: only if "other" selected)
+  {
+    id: 'probate_pain_other',
+    type: 'textarea',
+    prompt: "What else would you change about your current probate lead source?",
+    placeholder: 'Tell us in your own words...',
+    maxLength: 255,
+    required: false,
+    ctaLabel: 'Continue',
+    showIf: (values) => {
+      const painPoints = values.probate_pain_points as string[] | undefined;
+      return painPoints?.includes('other') || false;
+    },
+  },
+
+  // Step 12 — Confirmation / Handoff
   {
     id: 'confirmation',
     type: 'confirmation',
     header: "You're all set.",
     body: "We'll review this before the call so we can focus on what matters most to you.",
-    subPrompt: 'Next step: pick a time that works for you.',
-    ctaLabel: 'Continue to Scheduling',
+    subPrompt: 'Next step: select your county to activate your account.',
+    ctaLabel: 'Continue to County Selection',
   },
 ];
 
@@ -156,11 +230,16 @@ export const StrategyCallSurvey = () => {
           email: values.email as string,
           name: values.name as string,
           phone: values.phone as string,
-          source: 'strategy_call_setup',
+          source: 'strategy_call_setup_v3',
           survey_data: {
             experience_level: values.experience_level,
-            focus_level: values.focus_level,
             primary_goal: values.primary_goal,
+            biggest_challenge: values.biggest_challenge,
+            probate_experience: values.probate_experience,
+            lead_source_method: values.lead_source_method,
+            lead_provider: values.lead_provider,
+            probate_pain_points: values.probate_pain_points,
+            probate_pain_other: values.probate_pain_other,
           },
           ...(token && { token }),
           ...(Object.keys(trackingParams).length > 0 && { tracking_params: trackingParams }),
@@ -173,7 +252,7 @@ export const StrategyCallSurvey = () => {
           email: values.email as string,
           name: values.name as string,
           phone: values.phone as string,
-          source: 'strategy_call_setup',
+          source: 'strategy_call_setup_v3',
           ...(Object.keys(trackingParams).length > 0 && { tracking_params: trackingParams }),
         }], { onConflict: 'email' });
     } catch (err) {
@@ -181,15 +260,16 @@ export const StrategyCallSurvey = () => {
       // Don't block the redirect on DB errors
     }
 
-    // Redirect to scheduling with contact info
+    // Redirect to Claim Your County, then to booking
     const params = new URLSearchParams({
       name: values.name as string,
       email: values.email as string,
       phone: values.phone as string,
+      redirect_after: 'booking-blueprint',
       ...trackingParams,
     });
 
-    router.push(`/booking-blueprint?${params.toString()}`);
+    router.push(`/claim-your-county?${params.toString()}`);
   };
 
   return (

@@ -96,15 +96,20 @@ export const ConversationForm = ({
   const [errors, setErrors] = useState<{ [questionId: string]: string }>({});
   const [status, setStatus] = useState<'idle' | 'submitting'>('idle');
 
-  const currentQuestion = questions[currentStep];
-  const isLastStep = currentStep === questions.length - 1;
+  // Filter questions based on showIf conditions
+  const visibleQuestions = React.useMemo(() => {
+    return questions.filter(q => !q.showIf || q.showIf(values));
+  }, [questions, values]);
+
+  const currentQuestion = visibleQuestions[currentStep];
+  const isLastStep = currentStep === visibleQuestions.length - 1;
   const isFirstStep = currentStep === 0;
 
   // Track step views
   useEffect(() => {
     track('strategy_call_setup_step_view', { stepId: currentQuestion?.id, step: currentStep });
-    onStepChange?.(currentStep + 1, questions.length);
-  }, [currentStep, currentQuestion?.id, questions.length, onStepChange]);
+    onStepChange?.(currentStep + 1, visibleQuestions.length);
+  }, [currentStep, currentQuestion?.id, visibleQuestions.length, onStepChange]);
 
   // Update value for current question
   const setValue = useCallback((value: FieldValue) => {
@@ -232,7 +237,7 @@ export const ConversationForm = ({
           <motion.div
             className={`h-1 rounded-full ${isDark ? 'bg-gradient-to-r from-[#83d4c0] to-[#0891b2]' : 'bg-gradient-to-r from-[#0891b2] to-[#7c3aed]'}`}
             initial={{ width: 0 }}
-            animate={{ width: `${((currentStep + 1) / questions.length) * 100}%` }}
+            animate={{ width: `${((currentStep + 1) / visibleQuestions.length) * 100}%` }}
             transition={{ duration: 0.3 }}
           />
         </div>
