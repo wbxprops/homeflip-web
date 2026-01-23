@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
 import { logos } from '@/config/hub.config';
 import { X, Phone, Search, TrendingUp, Landmark, Target, Compass } from 'lucide-react';
+import { trackLeadFull } from '@/components/TrackingScripts';
 
 export default function ProbateProfitMachinePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -116,6 +117,14 @@ export default function ProbateProfitMachinePage() {
       if (!response.ok) {
         throw new Error('Failed to create magic link');
       }
+
+      // Track Lead event (both client-side pixel AND server-side Conversions API)
+      trackLeadFull({
+        email: formData.email,
+        firstName: formData.firstName,
+        phone: formData.phone,
+        contentName: 'Probate Profit Machine Guide',
+      });
 
       setStatus('success');
       window.location.href = '/probate-profit-machine/thank-you';

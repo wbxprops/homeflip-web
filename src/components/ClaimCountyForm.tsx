@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, X, MapPin, ArrowRight, ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { trackLeadFull } from './TrackingScripts';
 
 // Helper to split full name into first and last
 function splitName(fullName: string): { firstName: string; lastName: string } {
@@ -291,6 +292,16 @@ export const ClaimCountyForm = () => {
       if (error) {
         console.error('Prospects upsert error:', error);
       }
+
+      // Track Lead event (both client-side pixel AND server-side Conversions API)
+      const { firstName, lastName } = splitName(formData.name);
+      trackLeadFull({
+        email: formData.email,
+        phone: formData.phone,
+        firstName,
+        lastName,
+        contentName: 'Claim Your County Form',
+      });
 
       // Move to confirmation step
       setStep(3);

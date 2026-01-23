@@ -4,6 +4,7 @@ import React from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { ConversationForm, Question, FormValues } from './forms';
+import { fbTrackCompleteRegistration, sendConversionEvent } from './TrackingScripts';
 
 // ==================== QUESTIONS CONFIG (from SPEC) ====================
 
@@ -259,6 +260,20 @@ export const StrategyCallSurvey = () => {
       console.error('Supabase error:', err);
       // Don't block the redirect on DB errors
     }
+
+    // Track CompleteRegistration event (survey completed)
+    fbTrackCompleteRegistration({ content_name: 'Strategy Call Survey' });
+
+    // Also send server-side for better accuracy
+    const nameParts = (values.name as string).split(' ');
+    sendConversionEvent({
+      eventName: 'CompleteRegistration',
+      email: values.email as string,
+      phone: values.phone as string,
+      firstName: nameParts[0],
+      lastName: nameParts.slice(1).join(' '),
+      contentName: 'Strategy Call Survey',
+    });
 
     // Redirect to Claim Your County, then to booking
     const params = new URLSearchParams({

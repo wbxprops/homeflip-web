@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
+import { fbTrackContact } from './TrackingScripts';
 
 // ==================== TRACKING PARAMS ====================
 
@@ -68,6 +69,9 @@ export const CTAForm = ({
       if (error) {
         console.error('Prospects upsert error:', error);
       }
+
+      // Track FB Contact event
+      fbTrackContact({ content_name: 'Hero CTA Form' });
 
       if (onSuccess) onSuccess();
 
