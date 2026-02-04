@@ -122,6 +122,34 @@ export const hubConfig = {
       part4: 'Tying It All Together',
     },
   },
+
+  // Training videos (Wistia)
+  trainingVideos: [
+    {
+      part: 1,
+      wistiaId: 'go9lvej13w',
+      title: 'Why Probate',
+      description: 'Why probate outperforms foreclosures, wholesaler lists, and every other lead source you\'ve tried.',
+    },
+    {
+      part: 2,
+      wistiaId: 't5no3z2sml',
+      title: 'Finding Probate Leads',
+      description: 'The 4-step process to find leads in any county, plus a secret source most investors miss.',
+    },
+    {
+      part: 3,
+      wistiaId: 'n6rwzv0yrl',
+      title: 'Working the Leads',
+      description: 'The follow-up system that turns cold leads into $100k price drops over 6 months.',
+    },
+    {
+      part: 4,
+      wistiaId: 'bhjcu7uqir',
+      title: 'Tying It All Together',
+      description: 'Your roadmap to consistent deal flow, whether you DIY or use Homeflip.ai.',
+    },
+  ],
 } as const;
 
 // Type exports for use elsewhere

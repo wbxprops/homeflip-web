@@ -566,8 +566,8 @@ export default function HubLayout({ children }: HubLayoutProps) {
               )}
             </div>
 
-            {/* Training Videos - Hidden until content is ready */}
-            {/* <Link
+            {/* Training Videos */}
+            <Link
               href={`/hub/${slug}/training`}
               className="group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 transition"
               style={{
@@ -581,7 +581,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
                 strokeWidth={1.25}
               />
               <span className="text-[14px] font-normal">Training Videos</span>
-            </Link> */}
+            </Link>
 
             {/* Community */}
             <Link
@@ -696,8 +696,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
             <TrendingUp className="h-4 w-4" strokeWidth={1.25} />
             Guide
           </Link>
-          {/* Training - Hidden until video content is ready */}
-          {/* <Link
+          <Link
             href={`/hub/${slug}/training`}
             className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] font-medium whitespace-nowrap transition"
             style={{
@@ -707,7 +706,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
           >
             <Play className="h-4 w-4" strokeWidth={1.25} />
             Training
-          </Link> */}
+          </Link>
           <Link
             href={`/hub/${slug}/community`}
             className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] font-medium whitespace-nowrap transition"
