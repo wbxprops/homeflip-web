@@ -75,20 +75,23 @@ export default function HubLayout({ children }: HubLayoutProps) {
           return;
         }
 
-        // Calculate days remaining from hub settings (expiry tracked in token)
-        // The RPC already validated expiry, so we need to get remaining days
-        // For now, we'll query the token directly for expires_at
-        const { data: tokenData } = await supabase
-          .from('mlh_tokens')
-          .select('expires_at')
-          .eq('token', token)
-          .single();
-
+        // Calculate days remaining from hub settings
+        // Use a separate try/catch so a failed table query doesn't invalidate access
         let daysRemaining = 30; // Default
-        if (tokenData?.expires_at) {
-          const expiresAt = new Date(tokenData.expires_at);
-          const now = new Date();
-          daysRemaining = Math.max(0, Math.ceil((expiresAt.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)));
+        try {
+          const { data: tokenData } = await supabase
+            .from('mlh_tokens')
+            .select('expires_at')
+            .eq('token', token)
+            .maybeSingle();
+
+          if (tokenData?.expires_at) {
+            const expiresAt = new Date(tokenData.expires_at);
+            const now = new Date();
+            daysRemaining = Math.max(0, Math.ceil((expiresAt.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)));
+          }
+        } catch {
+          // RLS may block direct table access — fall back to default
         }
 
         setTokenState({ status: 'valid', daysRemaining });
