@@ -230,7 +230,7 @@ export async function sendConversionEvent(data: ConversionEventData) {
  * Track a lead with both client-side pixel AND server-side Conversions API
  * Use this for important conversions like form submissions
  */
-export function trackLeadFull(params: {
+export async function trackLeadFull(params: {
   email?: string;
   phone?: string;
   firstName?: string;
@@ -239,15 +239,15 @@ export function trackLeadFull(params: {
   contentName?: string;
   value?: number;
 }) {
-  // Client-side pixel
+  // Client-side pixel (fires immediately, no await needed)
   fbTrackLead({
     content_name: params.contentName,
     value: params.value,
     currency: 'USD',
   });
 
-  // Server-side Conversions API
-  sendConversionEvent({
+  // Server-side Conversions API (must complete before page navigation)
+  await sendConversionEvent({
     eventName: 'Lead',
     ...params,
     currency: 'USD',

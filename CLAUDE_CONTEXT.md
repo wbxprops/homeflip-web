@@ -2,7 +2,7 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2026-01-22 (Survey Reorganization & Probate Branching Logic)
+**Last Updated:** 2026-01-22 (Facebook Pixel + Conversions API Setup)
 **Claude Code Version:** Claude Opus 4.5
 
 ---
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Strategy call survey reorganized to prioritize business questions. Probate branching logic added. Survey now flows: contact → experience → goals → challenges → probate (conditional) → county selection → booking.
+**Current Status:** 🚧 IN PROGRESS - Facebook Pixel + Conversions API fully integrated. Tracking Lead, Contact, CompleteRegistration events on all forms. Ready for FB ad campaigns.
 
 ---
 
@@ -37,6 +37,17 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 **Active Work:** Pivot the Thank You page from "probate education" to "sell the strategy call". Incorporating high-end glassmorphism and stunning before/after property galleries.
 
 ### Session History
+#### 2026-01-22 (Facebook Pixel + Conversions API)
+- ✅ **Created Facebook Pixel**: "Homeflip Web" (ID: 2645391379150401) in Meta Business Manager
+- ✅ **Conversions API Setup**: Server-side tracking for Lead, Schedule, CompleteRegistration, Contact events
+- ✅ **Environment Config**: Created `.env.local`, added vars to Vercel production
+- ✅ **TrackingScripts.tsx**: Added FB Pixel client-side code + helper functions
+- ✅ **API Route**: Created `/api/fb-conversions` for server-side event tracking
+- ✅ **Form Tracking**: Wired up CTAForm, ClaimCountyForm, PPM page, StrategyCallSurvey
+- ✅ **Verified**: PageView events confirmed in Meta Pixel Helper
+- **Git Push**: Commit `3987065`
+- **Session log:** `docs/session-logs/2026-01-22-facebook-pixel-conversions-api.md`
+
 #### 2026-01-22 (Survey Reorganization & Probate Branching Logic)
 - ✅ **Survey Reorganization**: Moved main business questions first (experience, goal, challenge)
 - ✅ **Probate Branching**: Added conditional questions for active probate users (buy/DIY, provider, pain points)

@@ -1,9 +1,10 @@
 'use client';
 
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Script from 'next/script';
+import { fbTrackSchedule, sendConversionEvent } from '@/components/TrackingScripts';
 
 function BookCallContent() {
   const searchParams = useSearchParams();
@@ -32,6 +33,27 @@ function BookCallContent() {
     ...(phone && { phone_number: phone }),
   });
   const calendlyUrl = `${calendlyBaseUrl}?${calendlyParams.toString()}`;
+
+  // Listen for Calendly booking completion
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data.event === 'calendly.event_scheduled') {
+        // Client-side pixel
+        fbTrackSchedule({ content_name: 'homeflip-activation' });
+        // Server-side Conversions API
+        sendConversionEvent({
+          eventName: 'Schedule',
+          email,
+          phone: phoneRaw,
+          firstName,
+          lastName,
+          contentName: 'homeflip-activation',
+        });
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [email, phoneRaw, firstName, lastName]);
 
   return (
     <>

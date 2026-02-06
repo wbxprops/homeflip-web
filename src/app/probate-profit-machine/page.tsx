@@ -119,7 +119,8 @@ export default function ProbateProfitMachinePage() {
       }
 
       // Track Lead event (both client-side pixel AND server-side Conversions API)
-      trackLeadFull({
+      // Must await so server-side call completes before redirect
+      await trackLeadFull({
         email: formData.email,
         firstName: formData.firstName,
         phone: formData.phone,

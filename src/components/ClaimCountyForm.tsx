@@ -295,7 +295,7 @@ export const ClaimCountyForm = () => {
 
       // Track Lead event (both client-side pixel AND server-side Conversions API)
       const { firstName, lastName } = splitName(formData.name);
-      trackLeadFull({
+      await trackLeadFull({
         email: formData.email,
         phone: formData.phone,
         firstName,
