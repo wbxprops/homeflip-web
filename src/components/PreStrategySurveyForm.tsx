@@ -252,20 +252,21 @@ export const PreStrategySurveyForm = ({ onPageChange }: PreStrategySurveyFormPro
           ...(Object.keys(trackingParams).length > 0 && { tracking_params: trackingParams }),
         }]);
 
-      // Upsert to prospects table (creates or updates based on email)
-      const { error } = await supabase
-        .from('prospects')
-        .upsert([{
+      // Upsert to prospects table via server-side API route (bypasses RLS)
+      const upsertRes = await fetch('/api/prospects/upsert', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           email: contactInfo.email,
           name: contactInfo.name,
           phone: contactInfo.phone,
           source: 'pre_strategy_survey_v1',
-          // Store all tracking params (UTMs, fbclid, campaign, etc.)
           ...(Object.keys(trackingParams).length > 0 && { tracking_params: trackingParams }),
-        }], { onConflict: 'email' });
+        }),
+      });
 
-      if (error) {
-        console.error('Prospects upsert error:', error);
+      if (!upsertRes.ok) {
+        console.error('Prospects upsert error:', await upsertRes.text());
       }
 
       // Redirect to Claim Your County with params
