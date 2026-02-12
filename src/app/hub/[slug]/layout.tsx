@@ -13,7 +13,7 @@ interface HubLayoutProps {
 }
 
 interface TokenState {
-  status: 'loading' | 'valid' | 'expired' | 'invalid' | 'no_token';
+  status: 'loading' | 'valid' | 'expired' | 'invalid' | 'no_token' | 'unavailable';
   daysRemaining?: number;
   errorMessage?: string;
 }
@@ -34,6 +34,14 @@ export default function HubLayout({ children }: HubLayoutProps) {
 
   // Validate token on mount
   useEffect(() => {
+    let didFinish = false;
+
+    const timeoutId = setTimeout(() => {
+      if (!didFinish) {
+        setTokenState({ status: 'unavailable' });
+      }
+    }, 10000);
+
     const validateToken = async () => {
       // Check for token in URL first, then sessionStorage
       const urlToken = searchParams.get('token');
@@ -46,6 +54,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
       }
 
       if (!token) {
+        didFinish = true;
         setTokenState({ status: 'no_token' });
         return;
       }
@@ -56,6 +65,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
 
         if (error) {
           console.error('Token validation error:', error);
+          didFinish = true;
           setTokenState({ status: 'invalid', errorMessage: 'Unable to validate access' });
           return;
         }
@@ -65,6 +75,7 @@ export default function HubLayout({ children }: HubLayoutProps) {
         if (!result || !result.is_valid) {
           // Determine specific error
           const errorMsg = result?.error_message || 'Invalid token';
+          didFinish = true;
           if (errorMsg.includes('expired')) {
             setTokenState({ status: 'expired', errorMessage: 'Your access has expired' });
           } else {
@@ -94,14 +105,18 @@ export default function HubLayout({ children }: HubLayoutProps) {
           // RLS may block direct table access — fall back to default
         }
 
+        didFinish = true;
         setTokenState({ status: 'valid', daysRemaining });
       } catch (err) {
         console.error('Token validation error:', err);
+        didFinish = true;
         setTokenState({ status: 'invalid', errorMessage: 'Unable to validate access' });
       }
     };
 
     validateToken();
+
+    return () => clearTimeout(timeoutId);
   }, [slug, searchParams]);
 
   // Guide sections - matches ebook structure
@@ -154,6 +169,30 @@ export default function HubLayout({ children }: HubLayoutProps) {
         <div className="text-center">
           <RefreshCw className="w-8 h-8 text-[#5fc9ba] animate-spin mx-auto mb-4" />
           <p className="text-white/60 text-sm">Validating access...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Service unavailable - show friendly retry screen
+  if (tokenState.status === 'unavailable') {
+    return (
+      <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center justify-center px-6">
+        <img src={logos.logo.onDark} alt="Homeflip.ai" className="h-8 mb-10" />
+        <div className="text-center max-w-md">
+          <div className="w-14 h-14 rounded-full bg-amber-500/15 flex items-center justify-center mx-auto mb-6">
+            <RefreshCw className="w-7 h-7 text-amber-400" />
+          </div>
+          <h2 className="text-2xl font-semibold text-white mb-3">Temporarily Unavailable</h2>
+          <p className="text-white/50 leading-relaxed mb-8">
+            We're having trouble connecting right now. This is usually resolved within a few minutes.
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="btn-gradient inline-block px-8 py-3.5 rounded-xl font-bold text-sm uppercase tracking-wide transition-all hover:scale-[1.02]"
+          >
+            Try Again
+          </button>
         </div>
       </div>
     );
