@@ -4,7 +4,7 @@ import React from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { ConversationForm, Question, FormValues } from './forms';
-import { fbTrackCompleteRegistration, sendConversionEvent } from './TrackingScripts';
+import { fbTrackCompleteRegistration, sendConversionEvent, generateEventId } from './TrackingScripts';
 
 // ==================== QUESTIONS CONFIG (from SPEC) ====================
 
@@ -261,13 +261,14 @@ export const StrategyCallSurvey = () => {
       // Don't block the redirect on DB errors
     }
 
-    // Track CompleteRegistration event (survey completed)
-    fbTrackCompleteRegistration({ content_name: 'Strategy Call Survey' });
+    // Track CompleteRegistration event (client + server with shared dedup ID)
+    const eventId = generateEventId();
+    fbTrackCompleteRegistration({ content_name: 'Strategy Call Survey' }, eventId);
 
-    // Also send server-side for better accuracy
     const nameParts = (values.name as string).split(' ');
-    sendConversionEvent({
+    await sendConversionEvent({
       eventName: 'CompleteRegistration',
+      eventId,
       email: values.email as string,
       phone: values.phone as string,
       firstName: nameParts[0],

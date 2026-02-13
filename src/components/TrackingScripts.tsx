@@ -122,27 +122,60 @@ export const trackSignUp = () => {
 // Facebook Pixel Event Tracking (Client-side)
 // =============================================================================
 
-// Declare fbq type
+// Declare fbq type (supports optional 4th arg for eventID deduplication)
 declare global {
   interface Window {
     fbq?: (
       action: string,
       event: string,
-      params?: Record<string, unknown>
+      params?: Record<string, unknown>,
+      options?: { eventID?: string }
     ) => void;
   }
 }
 
 /**
+ * Generate a unique event ID for deduplication between Pixel and Conversions API.
+ * Both client-side fbq() and server-side CAPI must use the SAME eventId
+ * so Meta can deduplicate them into a single event.
+ */
+export function generateEventId(): string {
+  return `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+}
+
+/**
+ * Extract Meta cookies (_fbp and _fbc) from the browser.
+ * These are set by the Meta Pixel and improve user matching on the server side.
+ * - _fbp: Facebook Browser ID (always present when pixel loads)
+ * - _fbc: Facebook Click ID (present when user arrived via fb ad click)
+ */
+function getMetaCookies(): { fbp?: string; fbc?: string } {
+  if (typeof document === 'undefined') return {};
+  const cookies: { fbp?: string; fbc?: string } = {};
+  const cookieStr = document.cookie;
+  const fbpMatch = cookieStr.match(/(?:^|;\s*)_fbp=([^;]*)/);
+  const fbcMatch = cookieStr.match(/(?:^|;\s*)_fbc=([^;]*)/);
+  if (fbpMatch) cookies.fbp = fbpMatch[1];
+  if (fbcMatch) cookies.fbc = fbcMatch[1];
+  return cookies;
+}
+
+/**
  * Track a Facebook Pixel event (client-side)
+ * Pass eventId for deduplication with server-side Conversions API
  */
 export function fbTrack(
   eventName: string,
-  params?: Record<string, unknown>
+  params?: Record<string, unknown>,
+  eventId?: string
 ) {
   const consent = getStoredConsent();
   if (consent?.marketing && typeof window !== 'undefined' && window.fbq) {
-    window.fbq('track', eventName, params);
+    if (eventId) {
+      window.fbq('track', eventName, params || {}, { eventID: eventId });
+    } else {
+      window.fbq('track', eventName, params);
+    }
   }
 }
 
@@ -153,9 +186,8 @@ export function fbTrackLead(params?: {
   content_name?: string;
   value?: number;
   currency?: string;
-}) {
-  fbTrack('Lead', params);
-  // Also fire GTM event
+}, eventId?: string) {
+  fbTrack('Lead', params, eventId);
   trackEvent('generate_lead', params);
 }
 
@@ -164,8 +196,8 @@ export function fbTrackLead(params?: {
  */
 export function fbTrackSchedule(params?: {
   content_name?: string;
-}) {
-  fbTrack('Schedule', params);
+}, eventId?: string) {
+  fbTrack('Schedule', params, eventId);
   trackEvent('schedule_call', params);
 }
 
@@ -176,8 +208,8 @@ export function fbTrackCompleteRegistration(params?: {
   content_name?: string;
   value?: number;
   currency?: string;
-}) {
-  fbTrack('CompleteRegistration', params);
+}, eventId?: string) {
+  fbTrack('CompleteRegistration', params, eventId);
   trackEvent('complete_registration', params);
 }
 
@@ -186,8 +218,8 @@ export function fbTrackCompleteRegistration(params?: {
  */
 export function fbTrackContact(params?: {
   content_name?: string;
-}) {
-  fbTrack('Contact', params);
+}, eventId?: string) {
+  fbTrack('Contact', params, eventId);
   trackEvent('contact_form', params);
 }
 
@@ -197,6 +229,7 @@ export function fbTrackContact(params?: {
 
 export interface ConversionEventData {
   eventName: 'Lead' | 'Schedule' | 'CompleteRegistration' | 'Contact';
+  eventId?: string;
   email?: string;
   phone?: string;
   firstName?: string;
@@ -208,15 +241,19 @@ export interface ConversionEventData {
 }
 
 /**
- * Send a conversion event to the server-side Conversions API
- * This provides better tracking accuracy, especially with iOS privacy changes
+ * Send a conversion event to the server-side Conversions API.
+ * Automatically includes _fbp/_fbc cookies for enhanced user matching.
  */
 export async function sendConversionEvent(data: ConversionEventData) {
   try {
+    const metaCookies = getMetaCookies();
     const response = await fetch('/api/fb-conversions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        ...data,
+        ...metaCookies,
+      }),
     });
     if (!response.ok) {
       console.warn('Conversions API error:', await response.text());
@@ -227,8 +264,8 @@ export async function sendConversionEvent(data: ConversionEventData) {
 }
 
 /**
- * Track a lead with both client-side pixel AND server-side Conversions API
- * Use this for important conversions like form submissions
+ * Track a lead with both client-side pixel AND server-side Conversions API.
+ * Uses a shared eventId so Meta deduplicates them into one event.
  */
 export async function trackLeadFull(params: {
   email?: string;
@@ -239,16 +276,19 @@ export async function trackLeadFull(params: {
   contentName?: string;
   value?: number;
 }) {
-  // Client-side pixel (fires immediately, no await needed)
+  const eventId = generateEventId();
+
+  // Client-side pixel with shared event ID (fires immediately, no await needed)
   fbTrackLead({
     content_name: params.contentName,
     value: params.value,
     currency: 'USD',
-  });
+  }, eventId);
 
-  // Server-side Conversions API (must complete before page navigation)
+  // Server-side Conversions API with same event ID (must complete before page navigation)
   await sendConversionEvent({
     eventName: 'Lead',
+    eventId,
     ...params,
     currency: 'USD',
   });

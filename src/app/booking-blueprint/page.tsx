@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import Script from 'next/script';
 import { Phone } from 'lucide-react';
 import { logos } from '@/config/hub.config';
-import { fbTrackSchedule, sendConversionEvent } from '@/components/TrackingScripts';
+import { fbTrackSchedule, sendConversionEvent, generateEventId } from '@/components/TrackingScripts';
 
 function BookingBlueprintContent() {
   const searchParams = useSearchParams();
@@ -51,9 +51,11 @@ function BookingBlueprintContent() {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       if (event.data.event === 'calendly.event_scheduled') {
-        fbTrackSchedule({ content_name: 'homeflip-blueprint' });
+        const eventId = generateEventId();
+        fbTrackSchedule({ content_name: 'homeflip-blueprint' }, eventId);
         sendConversionEvent({
           eventName: 'Schedule',
+          eventId,
           email,
           phone: phoneRaw,
           firstName,

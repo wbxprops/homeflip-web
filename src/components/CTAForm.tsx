@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
-import { fbTrackContact } from './TrackingScripts';
+import { fbTrackContact, sendConversionEvent, generateEventId } from './TrackingScripts';
 
 // ==================== TRACKING PARAMS ====================
 
@@ -71,8 +71,15 @@ export const CTAForm = ({
         console.error('Prospects upsert error:', await upsertRes.text());
       }
 
-      // Track FB Contact event
-      fbTrackContact({ content_name: 'Hero CTA Form' });
+      // Track FB Contact event (client + server with shared dedup ID)
+      const eventId = generateEventId();
+      fbTrackContact({ content_name: 'Hero CTA Form' }, eventId);
+      await sendConversionEvent({
+        eventName: 'Contact',
+        eventId,
+        email: email,
+        contentName: 'Hero CTA Form',
+      });
 
       if (onSuccess) onSuccess();
 

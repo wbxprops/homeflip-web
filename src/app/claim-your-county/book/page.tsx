@@ -4,7 +4,7 @@ import React, { Suspense, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Script from 'next/script';
-import { fbTrackSchedule, sendConversionEvent } from '@/components/TrackingScripts';
+import { fbTrackSchedule, sendConversionEvent, generateEventId } from '@/components/TrackingScripts';
 
 function BookCallContent() {
   const searchParams = useSearchParams();
@@ -38,11 +38,11 @@ function BookCallContent() {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       if (event.data.event === 'calendly.event_scheduled') {
-        // Client-side pixel
-        fbTrackSchedule({ content_name: 'homeflip-activation' });
-        // Server-side Conversions API
+        const eventId = generateEventId();
+        fbTrackSchedule({ content_name: 'homeflip-activation' }, eventId);
         sendConversionEvent({
           eventName: 'Schedule',
+          eventId,
           email,
           phone: phoneRaw,
           firstName,
