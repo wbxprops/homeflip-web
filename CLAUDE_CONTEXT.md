@@ -2,7 +2,7 @@
 
 **Status:** 🚧 **IN PROGRESS**
 **Project:** Marketing website for homeflip.ai SaaS platform
-**Last Updated:** 2026-01-22 (Facebook Pixel + Conversions API Setup)
+**Last Updated:** 2026-02-13 (FB Event Deduplication & Coverage Fix)
 **Claude Code Version:** Claude Opus 4.5
 
 ---
@@ -18,7 +18,7 @@
 - ✅ **COMPLETE** - Finished and deployed
 - 🔧 **MAINTENANCE** - Done but needs occasional updates
 
-**Current Status:** 🚧 IN PROGRESS - Facebook Pixel + Conversions API fully integrated. Tracking Lead, Contact, CompleteRegistration events on all forms. Ready for FB ad campaigns.
+**Current Status:** 🚧 IN PROGRESS - Fixed FB event deduplication (shared eventId between pixel + CAPI), added _fbp/_fbc cookie passthrough, added missing server-side Contact event on CTAForm, added tracking to booking-activation page.
 
 ---
 
@@ -37,6 +37,33 @@ You're working on **homeflip-web-site** - the marketing website for homeflip.ai,
 **Active Work:** Pivot the Thank You page from "probate education" to "sell the strategy call". Incorporating high-end glassmorphism and stunning before/after property galleries.
 
 ### Session History
+#### 2026-02-13 (FB Event Deduplication & Coverage Fix)
+- ✅ **Shared eventId**: All forms now generate one ID passed to both `fbq()` and Conversions API for proper dedup
+- ✅ **_fbp/_fbc cookies**: Auto-extracted from browser and included in every server-side CAPI call
+- ✅ **CTAForm server-side**: Added `sendConversionEvent('Contact')` — was the "1 fewer event" gap
+- ✅ **booking-activation tracking**: Added full Calendly tracking (was completely untracked)
+- ✅ **StrategyCallSurvey**: Now `await`s server call before redirect
+- ✅ **Deployed**: Commit `b12bc83`, 7 files changed
+- **Session log:** `docs/session-logs/2026-02-13-fb-event-deduplication-fix.md`
+
+#### 2026-02-08 (Prospect Upsert RLS Fix)
+- ✅ **Bug Found**: `prospects` table upserts silently failing — RLS blocks anon key, error only console.error'd
+- ✅ **Root Cause**: `prospect_responses` has explicit anon INSERT policy; `prospects` does not. HVCO form works via n8n webhook (server-side)
+- ✅ **Fix**: Created `/api/prospects/upsert` API route with service key, updated ClaimCountyForm, CTAForm, PreStrategySurveyForm
+- ✅ **Backfill**: 6 missing prospects manually inserted (including 2 callers for tomorrow)
+- ✅ **Deployed**: Commit `9fa901b`, `SUPABASE_SERVICE_KEY` added to Vercel env
+- **Session log:** `docs/session-logs/2026-02-08-prospect-upsert-rls-fix.md`
+
+#### 2026-02-06 (FB Pixel Race Condition Fix + AC Automation #59)
+- ✅ **Race Condition Fix**: `trackLeadFull()` now async + awaited before redirect — Lead events were being killed
+- ✅ **Deployed**: Commit `6391b16`, includes Schedule event tracking on booking pages
+- ✅ **Domain Verified**: homeflip.ai verified in Meta Business Manager
+- ✅ **Domains Allowlisted**: Both homeflip.ai and homeflip-web.vercel.app on pixel
+- ✅ **AC Tag Mapping**: Mapped old D2S tags → PPM tags for Automation #59
+- ✅ **README Updated**: Automation #26 → #59
+- **Tomorrow**: Goal condition setup, remaining automations
+- **Session log:** `docs/session-logs/2026-02-06-fb-pixel-race-condition-fix.md`
+
 #### 2026-01-22 (Facebook Pixel + Conversions API)
 - ✅ **Created Facebook Pixel**: "Homeflip Web" (ID: 2645391379150401) in Meta Business Manager
 - ✅ **Conversions API Setup**: Server-side tracking for Lead, Schedule, CompleteRegistration, Contact events
